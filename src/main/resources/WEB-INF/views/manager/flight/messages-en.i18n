@@ -1,0 +1,29 @@
+master.menu.manager = Manager
+master.menu.manager.flights = Flights
+
+manager.flight.list.title = My Flights:
+manager.flight.form.title = Details of Flight:
+
+manager.flight.list.label.tag = Tag:
+manager.flight.list.label.cost = Cost:
+manager.flight.list.label.departure = Origin:
+manager.flight.list.label.arrival = Destination:
+manager.flight.form.label.tag = Tag:
+manager.flight.form.label.selfTransfer = Self Transfer
+manager.flight.form.label.cost = Cost:
+manager.flight.form.label.description = Description:
+manager.flight.form.label.scheduledDeparture = Depature Scheduled:
+manager.flight.form.label.scheduledArrival = Arrival Scheduled:
+manager.flight.form.label.layovers = Layovers:
+manager.flight.form.label.departure = Origin:
+manager.flight.form.label.arrival = Destination:
+manager.flight.form.label.confirmation = Confirmation all data is correct
+
+manager.flight.form.button.legs = Legs lists
+manager.flight.list.button.create = Create
+manager.flight.form.button.create = Create
+manager.flight.form.button.update = Update
+manager.flight.form.button.delete = Delete
+manager.flight.form.button.publish = Publish
+
+manager.leg.form.label.status = Leg Status

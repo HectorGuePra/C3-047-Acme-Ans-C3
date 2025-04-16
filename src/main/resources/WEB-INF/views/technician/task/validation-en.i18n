@@ -1,0 +1,25 @@
+technician.task.list.title = Task list
+technician.task.form.title = Task details
+
+technician.task.list.label.type = Type
+technician.task.list.label.priority = Priority
+technician.task.list.label.duration = Duration (est.)
+technician.task.list.label.key = ID
+
+technician.task.list.button.create = Create
+
+technician.task.form.button.update = Update
+technician.task.form.button.create = Create
+technician.task.form.button.delete = Delete
+technician.task.form.button.publish = Publish
+
+technician.task.form.label.key = ID
+technician.task.form.label.type = Type
+technician.task.form.label.description = Description
+technician.task.form.label.priority = Priority
+technician.task.form.label.duration = Duration (est.)
+
+acme.validation.tasks.type.message = No type has been selected.
+acme.validation.tasks.description.message =  The description must be a string of text up to 255 characters.
+acme.validation.tasks.priority.message = The priority must be an integer greater than or equal to 0, and less than or equal to 10.
+technician.task.form.error.duration = The estimated duration must be an integer greater than or equal to 0, and less than or equal to 700,000.

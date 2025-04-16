@@ -1,0 +1,17 @@
+technician.maintenance-record-task.list.title = Tasks list
+technician.maintenance-record-task.form.title = Association details
+
+technician.maintenance-record-task.list.label.type = Type
+technician.maintenance-record-task.list.label.priority = Priority
+technician.maintenance-record-task.list.label.duration = Duration (est.)
+technician.maintenance-record-task.list.label.key = ID
+
+technician.maintenance-record-task.list.button.create = Create new task
+
+technician.maintenance-record-task.form.button.create = Create
+technician.maintenance-record-task.form.button.delete = Delete
+
+technician.maintenance-record-task.form.label.maintenance-record = Maintenance record
+technician.maintenance-record-task.form.label.task = Task
+
+technician.maintenance-record-task.form.add.task = Add task

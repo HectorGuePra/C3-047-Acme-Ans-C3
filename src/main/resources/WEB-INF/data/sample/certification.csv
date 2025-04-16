@@ -1,0 +1,14 @@
+key,certification,key:technician,draftMode
+certification-00,Grado en Ingeniería Aeroespacial,technician-01,false
+certification-01,a,technician-01,false
+certification-02,ab,technician-01,false
+certification-03,"Aquí estamos todos pa' cantarte tu canción. Estamos apiñados como balas de cañón. Y es que no hay quien pueda con esta afición, que aunque último estuvieras siempre te ven campeón. Beeeeetis, Beeeeeetis, Beeeeeetis. Ahora Betis, ahora, no dejes de atacar",technician-01,false
+certification-04,"Aquí estamos todos pa' cantarte tu canción. Estamos apiñados como balas de cañón. Y es que no hay quien pueda con esta afición, que aunque último estuvieras siempre te ven campeón. Beeeeetis, Beeeeeeetis, Beeeeeetis. Ahora Betis, ahora, no dejes de atacar",technician-01,false
+certification-05,โลเร็ม อิปซัม,technician-01,false
+certification-06,لوريم إيبسوم,technician-01,false
+certification-07,洛伦·伊普森,technician-01,false
+certification-08,<marquee>Hacked</marquee>,technician-01,false
+certification-09,<script>alert(‘Hacked!’);</script>,technician-01,false
+certification-10,' or 'A' = 'A ,technician-01,false
+certification-11,Grado en Ingeniería Aeroespacial,technician-02,false
+certification-12,Grado en Ingeniería Aeroespacial,technician-01,true

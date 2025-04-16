@@ -1,0 +1,20 @@
+key,key:userAccount,identifier,phoneNumber,physicalAddress,city,country,earnedPoints
+customer-01,user-account-customer-01,ABC123456,+123456,Calle Inventada 1 1A,Mérida,España,1
+customer-02,user-account-customer-02,AB123456,123456,Calle Inventada 2 2B,Madrid,España,500000
+customer-04,user-account-customer-04,YYY888888,12345678,لوريم إيبسوم,مراكش,المغرب,0
+customer-05,user-account-customer-05,XXX777777,123456789,洛伦·伊普森,北京,中国,0
+customer-06,user-account-customer-06,WWW666666,1234567890,C,C,E,0
+customer-07,user-account-customer-07,VVV555555,12345678901,Ca,Ci,Es,0
+customer-08,user-account-customer-08,UUU444444,123456789012,Calle Inventada 3 3C,Ciudad Real,España,0
+customer-09,user-account-customer-09,TTT333333,1234567890123,Calle Inventada 4 3C,Ciudad Real,España,0
+customer-10,user-account-customer-10,SSS222222,12345678901234,Calle Inventada 5 3C,Ciudad Real,España,0
+customer-11,user-account-customer-11,RRR111111,123456789012345,Calle Inventada 6 3C,Ciudad Real,España,0
+customer-12,user-account-customer-12,QQQ111111,+123456789012345,Calle Inventada 7 3C,Ciudad Real,España,0
+customer-13,user-account-customer-13,PPP222222,+12345678901234,Calle Inventada 8 3C,Ciudad Real,España,0
+customer-14,user-account-customer-14,OOO333333,+1234567890123,Calle Inventada 9 3C,Ciudad Real,España,0
+customer-15,user-account-customer-15,NNN444444,+123456789012,Calle Inventada 10 3C,Ciudad Real,España,0
+customer-16,user-account-customer-16,MMM555555,+12345678901,Calle Inventada 11 3C,Ciudad Real,España,0
+customer-17,user-account-customer-17,LLL666666,+1234567890,Calle Inventada 12 3C,Ciudad Real,España,0
+customer-18,user-account-customer-18,KKK777777,+123456789,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolo",cincuenta caracteres cincuenta cincuenta cincuen,cincuenta caracteres cincuenta cincuenta cincuen,0
+customer-19,user-account-customer-19,JJJ888888,+12345678,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor",cincuenta caracteres cincuenta cincuenta cincuent,cincuenta caracteres cincuenta cincuenta cincuent,0
+customer-20,user-account-customer-20,III999999,+1234567,"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*",cincuenta caracteres cincuenta cincuenta cincuenta,cincuenta caracteres cincuenta cincuenta cincuent.,499999

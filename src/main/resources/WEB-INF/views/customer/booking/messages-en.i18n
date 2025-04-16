@@ -1,0 +1,26 @@
+customer.booking.list.title = List of bookings
+customer.booking.list.locatorCode = Locator code
+customer.booking.list.purchaseMoment = Purchase moment
+customer.booking.list.price = Price
+customer.booking.list.travelClass = Travel class
+customer.booking.list.draftMode = Draft?
+customer.booking.list.button.create = Create booking
+
+customer.booking.form.title = Booking information
+customer.booking.form.locatorCode = Locator code (pattern = "^[A-Z0-9]{6,8}$")
+customer.booking.form.purchaseMoment = Purchase moment
+customer.booking.form.price = Price
+customer.booking.form.travelClass = Travel class
+customer.booking.form.lastCardNibble = Credit card's last four digits (pattern = "^\\d{4}$")
+customer.booking.form.flight = Flight tag 
+
+customer.booking.form.button.create = Create
+customer.booking.form.button.update = Update
+customer.booking.form.button.publish = Publish
+
+customer.booking.form.show.passengers = View passengers
+
+acme.validation.confirmation.message.lastCardNibble = Booking cannot be published if there is no LastCardNibble set
+acme.validation.confirmation.message.booking.locatorCode = This locatorCode belongs to another Booking
+acme.validation.confirmation.message.update = A booking cannot be modified if it is already published
+acme.validation.confirmation.message.booking.flight = This flight is not valid

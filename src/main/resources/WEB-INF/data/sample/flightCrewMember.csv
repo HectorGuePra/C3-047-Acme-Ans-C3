@@ -1,0 +1,6 @@
+key,key:userAccount,employee_code,phone_number,language_skills,availability_status,key:airline,salary,years_of_experience
+member-01,user-account-member-01,AP123456,+34123456789,Spanish,AVAILABLE,airline-01,45000.00 EUR,5
+member-02,user-account-member-02,DC234567,+491512345678,French,ON_VACATION,airline-02,48000.00 EUR,8
+member-03,user-account-member-03,SA345678,+331234567890,German,ON_LEAVE,airline-03,50000.00 EUR,10
+member-04,user-account-member-04,EL456789,+12125551234,Portuguese,ON_VACATION,airline-04,47000.00 EUR,6
+member,user-account-member,JP567890,+81123456789,English,AVAILABLE,airline-05,1000.00 EUR,0

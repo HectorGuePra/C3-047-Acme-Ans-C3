@@ -1,0 +1,5 @@
+customer.booking-record.list.title = Manage bookings
+customer.booking-record.form.title = Booking
+customer.booking-record.list.button.create = Add passengers 
+customer.booking-record.form.update = Update
+customer.booking-record.form.publish = Publish

@@ -1,0 +1,11 @@
+            ___                                      ___    _  _     ___
+    o O O  /   \    __     _ __     ___      o O O  /   \  | \| |   / __|
+   o       | - |   / _|   | '  \   / -_)    o       | - |  | .` |   \__ \
+  TS__[O]  |_|_|   \__|_  |_|_|_|  \___|   TS__[O]  |_|_|  |_|\_|   |___/
+ {======|_|"""""|_|"""""|_|"""""|_|"""""| {======|_|"""""|_|"""""|_|"""""|
+./o--000'"`-0-0-'"`-0-0-'"`-0-0-'"`-0-0-'./o--000'"`-0-0-'"`-0-0-'"`-0-0-'
+                                                                                                               
+
+Application endpoint: http://localhost:${server.port}${server.servlet.context-path}${server.servlet.initial-query}
+Database endpoint:    ${spring.datasource.url}
+Powered by:           Java EE ${java.version}, Spring Boot ${spring-boot.version}, Acme Framework ${acme.framework.version}

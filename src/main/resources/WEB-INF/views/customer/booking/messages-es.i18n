@@ -1,0 +1,26 @@
+customer.booking.list.title = Listado de reservas
+customer.booking.list.locatorCode = Código de localización
+customer.booking.list.purchaseMoment = Fecha de la compra
+customer.booking.list.price = Precio
+customer.booking.list.travelClass = Clase
+customer.booking.list.draftMode = ¿Borrador?
+customer.booking.list.button.create = Crear reserva
+
+customer.booking.form.title = Información de la reserva
+customer.booking.form.locatorCode = Código de localización (patrón = "^[A-Z0-9]{6,8}$")
+customer.booking.form.purchaseMoment = Fecha de la compra
+customer.booking.form.price = Precio
+customer.booking.form.travelClass = Clase
+customer.booking.form.lastCardNibble = Últimos cuatro dígitos de la tarjeta de crédito (patrón = "^\\d{4}$")
+customer.booking.form.flight = Etiqueta del vuelo
+
+customer.booking.form.button.create = Crear
+customer.booking.form.button.update = Actualizar
+customer.booking.form.button.publish = Publicar
+
+customer.booking.form.show.passengers = Ver pasajeros
+
+acme.validation.confirmation.message.lastCardNibble = La reserva no se puede publicar si no se han indicado los últimos 4 dígitos de la tarjeta de crédito
+acme.validation.confirmation.message.booking.locatorCode = Este localizador está asociado a otra reserva
+acme.validation.confirmation.message.update = La reserva no se puede modificar si ya ha sido publicada
+acme.validation.confirmation.message.booking.flight Este vuelo no es válido

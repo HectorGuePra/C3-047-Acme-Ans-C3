@@ -1,0 +1,22 @@
+customer.passenger.list.title = List of passengers
+customer.passenger.list.fullName = Full name
+customer.passenger.list.email = Email
+customer.passenger.list.passport = Passport number
+customer.passenger.list.birthDate = Birthdate
+customer.passenger.list.specialNeeds = Special needs
+customer.passenger.list.specialNeeds = Draft?
+
+customer.passenger.list.button.create = Create passenger
+
+customer.passenger.form.title = Passenger information
+customer.passenger.form.fullName = Full name
+customer.passenger.form.email = Email
+customer.passenger.form.passport = Passport number (pattern = "^[A-Z0-9]{6,9}$")
+customer.passenger.form.birthDate = Birthdate
+customer.passenger.form.specialNeeds = Special Needs
+
+customer.passenger.form.button.create = Create
+customer.passenger.form.button.update = Update
+customer.passenger.form.button.publish = Publish 
+
+acme.validation.confirmation.passenger.passport = There is another passenger with the same passport number

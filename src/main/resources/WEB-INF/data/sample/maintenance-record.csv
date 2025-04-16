@@ -1,0 +1,38 @@
+key,maintenanceMoment,status,nextInspectionDate,estimatedCost,key:aircraft,key:technician,draftMode,notes
+maintenance-record-00,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-01,2000/01/01 00:00,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-02,2000/01/01 00:01,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-03,2024/12/11 23:58,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-04,2024/12/11 23:59,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-05,2022/04/24 12:05,PENDING,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-06,2022/04/24 12:05,IN_PROGRESS,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-07,2000/01/01 00:00,COMPLETED,2000/01/01 00:01,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-08,2000/01/01 00:00,COMPLETED,2000/01/01 00:02,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-09,2022/04/24 12:05,COMPLETED,2200/12/31 23:58,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-10,2022/04/24 12:05,COMPLETED,2200/12/31 23:59,EUR 33333.33,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-11,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 0.00,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-12,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 0.01,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-13,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 999999.99,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-14,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 1000000.00,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-15,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,USD 0.00,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-16,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,USD 0.01,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-17,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,USD 999999.99,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-18,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,USD 1000000.00,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-19,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,GBP 0.00,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-20,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,GBP 0.01,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-21,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,GBP 999999.99,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-22,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,GBP 1000000.00,aircraft-00,technician-01,false,Viva er beti manquepierda
+maintenance-record-23,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-02,technician-01,false,Viva er beti manquepierda
+maintenance-record-24,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-02,false,Viva er beti manquepierda
+maintenance-record-25,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,true,Viva er beti manquepierda
+maintenance-record-26,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,
+maintenance-record-27,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,a
+maintenance-record-28,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,ab
+maintenance-record-29,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,"Aquí estamos todos pa' cantarte tu canción. Estamos apiñados como balas de cañón. Y es que no hay quien pueda con esta afición, que aunque último estuvieras siempre te ven campeón. Beeeeetis, Beeeeeetis, Beeeeeetis. Ahora Betis, ahora, no dejes de atacar"
+maintenance-record-30,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,"Aquí estamos todos pa' cantarte tu canción. Estamos apiñados como balas de cañón. Y es que no hay quien pueda con esta afición, que aunque último estuvieras siempre te ven campeón. Beeeeeetis, Beeeeeetis, Beeeeeetis. Ahora Betis, ahora, no dejes de atacar"
+maintenance-record-31,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,โลเร็ม อิปซัม
+maintenance-record-32,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,لوريم إيبسوم
+maintenance-record-33,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,洛伦·伊普森
+maintenance-record-34,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,<marquee>Hacked</marquee>
+maintenance-record-35,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,<script>alert(‘Hacked!’);</script>
+maintenance-record-36,2022/04/24 12:05,COMPLETED,2025/05/28 21:00,EUR 33333.33,aircraft-00,technician-01,false,' or 'A' = 'A 

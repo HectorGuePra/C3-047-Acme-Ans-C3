@@ -1,0 +1,25 @@
+key,type,priority,duration,key:technician,draftMode,description
+task-00,MAINTENANCE,3,333,technician-01,false,Viva er beti manquepierda
+task-01,INSPECTION,3,333,technician-01,false,Viva er beti manquepierda
+task-02,REPAIR,3,333,technician-01,false,Viva er beti manquepierda
+task-03,SYSTEM_CHECK,3,333,technician-01,false,Viva er beti manquepierda
+task-04,MAINTENANCE,0,333,technician-01,false,Viva er beti manquepierda
+task-05,MAINTENANCE,1,333,technician-01,false,Viva er beti manquepierda
+task-06,MAINTENANCE,9,333,technician-01,false,Viva er beti manquepierda
+task-07,MAINTENANCE,10,333,technician-01,false,Viva er beti manquepierda
+task-08,MAINTENANCE,3,0,technician-01,false,Viva er beti manquepierda
+task-09,MAINTENANCE,3,1,technician-01,false,Viva er beti manquepierda
+task-10,MAINTENANCE,3,699999,technician-01,false,Viva er beti manquepierda
+task-11,MAINTENANCE,3,700000,technician-01,false,Viva er beti manquepierda
+task-12,MAINTENANCE,3,333,technician-02,false,Viva er beti manquepierda
+task-13,MAINTENANCE,3,333,technician-01,true,Viva er beti manquepierda
+task-14,MAINTENANCE,3,333,technician-01,false,a
+task-15,MAINTENANCE,3,333,technician-01,false,ab
+task-16,MAINTENANCE,3,333,technician-01,false,"Aquí estamos todos pa' cantarte tu canción. Estamos apiñados como balas de cañón. Y es que no hay quien pueda con esta afición, que aunque último estuvieras siempre te ven campeón. Beeeeetis, Beeeeeetis, Beeeeeetis. Ahora Betis, ahora, no dejes de atacar"
+task-17,MAINTENANCE,3,333,technician-01,false,"Aquí estamos todos pa' cantarte tu canción. Estamos apiñados como balas de cañón. Y es que no hay quien pueda con esta afición, que aunque último estuvieras siempre te ven campeón. Beeeeeetis, Beeeeeetis, Beeeeeetis. Ahora Betis, ahora, no dejes de atacar"
+task-18,MAINTENANCE,3,333,technician-01,false,โลเร็ม อิปซัม
+task-19,MAINTENANCE,3,333,technician-01,false,لوريم إيبسوم
+task-20,MAINTENANCE,3,333,technician-01,false,洛伦·伊普森
+task-21,MAINTENANCE,3,333,technician-01,false,<marquee>Hacked</marquee>
+task-22,MAINTENANCE,3,333,technician-01,false,<script>alert(‘Hacked!’);</script>
+task-23,MAINTENANCE,3,333,technician-01,false,' or 'A' = 'A

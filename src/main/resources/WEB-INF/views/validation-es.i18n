@@ -1,0 +1,45 @@
+acme.validation.maintenancerecord.nextinspectiondate.message = La fecha de próxima revisión debe ser posterior a la fecha de última actual.
+acme.validation.review.missing-relation.message = Reseña no válida. Debe estar presente al menos uno de los siguientes: serviceReviewed, airlineReviewed, airportReviewed o flightReviewed.
+
+acme.validation.customer.invalid-identifier.message = Identificador no válido. Debe seguir el patrón ^[A-Z]{2,3}\d{6}$ y coincidir con las iniciales del cliente.
+acme.validation.customer.invalid-phone-number.message = Número de teléfono no válido. Debe seguir el patrón ^\+?\d{6,15}$.
+acme.validation.customer.invalid-address.message = Dirección no válida. Debe tener entre 1 y 255 caracteres.
+acme.validation.customer.invalid-city.message = Ciudad no válida. Debe tener entre 1 y 50 caracteres.
+acme.validation.customer.invalid-country.message = País no válido. Debe tener entre 1 y 50 caracteres.
+acme.validation.customer.invalid-points.message = Puntos no válidos. Debe ser un valor entre 0 y 500,000.
+
+acme.validation.legs.flight-number.message = El número de vuelo debe estar compuesto por el código IATA de la aerolínea seguido de cuatro dígitos.
+acme.validation.legs.departure-arrival-date.message = La fecha de salida del vuelo debe ser mayor a la de llegada.
+acme.validation.legs.current-dates.message = La fecha de salida y de llegada del vuelo deben ser mayores a la actual.
+acme.validation.legs.flight-number.message = El número de vuelo debe ser único.
+acme.validation.legs.aircraft-in-use.message = La aeronave ya está en uso durante esa fecha.
+acme.validation.legs.same-city.error = El vuelo no puede tener la misma ciudad de origen y destino.
+
+acme.validation.manager.identifier.message = El identificador debe contener 2 o 3 letras siendo tus iniciales y 6 dígitos.
+acme.validation.manager.identifier-number.message = El número de identificador debe ser único.
+
+acme.validation.flight.not-null = El vuelo no puede ser nulo.
+
+javax.validation.constraints.NotNull.message = El valor no puede ser nulo.
+javax.validation.constraints.NotBlank.message = El valor no puede estar en blanco.
+
+acme.validation.flightcrewmember.identifier.message = El identificador debe contener 2 o 3 letras siendo tus iniciales y 6 dígitos.
+acme.validation.flightCrewMember.duplicated-employeeCode.message = El "employeeCode" debe ser único.
+
+acme.validation.activityLog.statusLeg.message = La "Leg" no debe estar en estado LANDED.
+
+acme.validation.airport.iata-code.message = El código IATA debe ser único.
+
+acme.validation.length = Longitud de cadena inválida
+acme.validation.phone-number.message = El número de teléfono puede contener el carácter "+" y debe tener entre 6 y 15 dígitos.
+
+acme.validation.iata-code.message = El código IATA debe tener 3 letras.
+
+acme.validation.technician.identifier.message = Identificador no válido
+acme.validation.technician.maintenance-record.noStatus.message = Debes seleccionar un estatus para el registro
+acme.validation.technician.maintenance-record.nextInspectionDate.message =  La fecha y hora de la siguiente inspección debe ser posterior a los actuales
+acme.validation.technician.maintenance-record.estimatedCost.message = El coste estimado debe ser mayor o igual a  0,00 y menor o igual que 1000000,00
+acme.validation.technician.maintenance-record.estimatedCost.currency.message = El coste estimado debe ser expresado en USD, EUR o GBP
+acme.validation.technician.maintenance-record.notes.message = Los detalles no pueden tener más de 255 caracteres
+acme.validation.technician.maintenance-record.aircraft.message = Debes seleccionar un avión válido
+acme.validation.technician.maintenance-record.published.message = Debes crear y publicar las tareas asociadas a este registro antes de publicarlo

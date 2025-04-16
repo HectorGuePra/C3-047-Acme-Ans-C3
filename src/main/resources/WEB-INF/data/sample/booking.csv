@@ -1,0 +1,24 @@
+key,locatorCode,purchaseMoment,travelClass,lastCardNibble,key:flight,key:customer,draftMode
+#locatorCode
+booking-01,AAAZZZ,2012/07/02 0:00,ECONOMY,4998,flight-00,customer-01,true
+booking-02,ZZZAAA,2012/07/02 0:00,ECONOMY,4997,flight-00,customer-01,true
+booking-03,999000,2012/07/02 0:00,ECONOMY,4996,flight-00,customer-01,true
+booking-04,000999,2012/07/02 0:00,ECONOMY,4995,flight-00,customer-01,true
+booking-05,AAA999,2012/07/02 0:00,ECONOMY,4994,flight-00,customer-01,true
+booking-06,000ZZZ,2012/07/02 0:00,ECONOMY,4993,flight-00,customer-01,true
+booking-07,999AAA,2012/07/02 0:00,ECONOMY,4992,flight-00,customer-01,true
+booking-08,ZZZ000,2012/07/02 0:00,ECONOMY,4991,flight-00,customer-01,true
+booking-09,95UJ6K9T,2012/07/02 0:00,ECONOMY,4990,flight-00,customer-01,true
+#purchaseMoment
+booking-10,95UJ6K91,2025/01/01 0:00,ECONOMY,4989,flight-00,customer-01,true
+booking-11,95UJ6K92,2000/01/01 0:00,ECONOMY,4979,flight-00,customer-01,true
+#travelClass
+booking-12,95UJ6K93,2012/07/02 0:00,BUSINESS,4969,flight-00,customer-01,true
+#price
+booking-13,95UJ6K94,2012/07/02 0:00,ECONOMY,4959,flight-00,customer-01,true
+booking-14,95UJ6K95,2012/07/02 0:00,ECONOMY,4949,flight-00,customer-01,true
+booking-15,95UJ6K96,2012/07/02 0:00,ECONOMY,4939,flight-00,customer-01,true
+booking-16,95UJ6K97,2012/07/02 0:00,ECONOMY,4929,flight-00,customer-01,true
+#draftMode
+booking-17,AAAZZA,2012/07/02 0:00,ECONOMY,4198,flight-00,customer-01,true
+booking-18,AAAZZB,2012/07/02 0:00,ECONOMY,4298,flight-00,customer-01,false

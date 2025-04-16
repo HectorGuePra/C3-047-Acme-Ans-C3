@@ -1,0 +1,39 @@
+key,model,regNumber,capacity,cargoWeight,status,key:airline,draftMode,notes
+aircraft-00,Boeing-747,87654321,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-01,Boeing-747Boeing-747Boeing-747Boeing-7,87654322,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-02,B,87654323,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-03,テキスト,87654324,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-04,نص,87654325,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-05,文本,87654326,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-06,<b>BoldText</b>,87654327,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-07,<script>alert(‘Test’);</script>,87654328,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-08,' or 'X' = 'X,87654329,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-09,Boeing-747,87654321876543218765432187654321876543218765432199,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-10,Boeing-747,9,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-11,Boeing-747,テキスト,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-12,Boeing-747,نص,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-13,Boeing-747,文本,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-14,Boeing-747,<b>BoldText</b>,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-15,Boeing-747,<script>alert(‘Test’);</script>,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-16,Boeing-747,' or 'X' = 'X,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-17,Boeing-747,87654330,2,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-18,Boeing-747,87654331,3,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-19,Boeing-747,87654332,280,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-20,Boeing-747,87654333,250,3000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-21,Boeing-747,87654334,250,3100,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-22,Boeing-747,87654335,250,49990,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-23,Boeing-747,87654336,250,47000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-24,Boeing-747,87654337,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-25,Boeing-747,87654338,250,18000,UNDER_MAINTENANCE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-26,Boeing-747,87654339,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes!
+aircraft-27,Boeing-747,87654340,250,18000,IN_SERVICE,airline-02,false,
+aircraft-28,Boeing-747,87654341,250,18000,IN_SERVICE,airline-02,false,B
+aircraft-29,Boeing-747,87654342,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+aircraft-30,Boeing-747,87654343,250,18000,IN_SERVICE,airline-02,false,Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.*
+aircraft-31,Boeing-747,87654344,250,18000,IN_SERVICE,airline-02,false,テキスト
+aircraft-32,Boeing-747,87654345,250,18000,IN_SERVICE,airline-02,false,نص
+aircraft-33,Boeing-747,87654346,250,18000,IN_SERVICE,airline-02,false,文本
+aircraft-34,Boeing-747,87654347,250,18000,IN_SERVICE,airline-02,false,<b>BoldText</b>
+aircraft-35,Boeing-747,87654348,250,18000,IN_SERVICE,airline-02,false,<script>alert(‘Test’);</script>
+aircraft-36,Boeing-747,87654349,250,18000,IN_SERVICE,airline-02,false,' or 'X' = 'X
+aircraft-37,Boeing-747,87654350,250,18000,IN_SERVICE,airline-02,true,

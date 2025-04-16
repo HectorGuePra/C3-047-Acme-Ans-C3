@@ -1,0 +1,23 @@
+customer.passenger.list.title = Listado de pasajeros
+customer.passenger.list.fullName = Nombre completo
+customer.passenger.list.email = Email
+customer.passenger.list.passport = Número de pasaporte
+customer.passenger.list.birthDate = Fecha de nacimiento
+customer.passenger.list.specialNeeds = Necesidades especiales
+customer.passenger.list.draftMode = ¿Borrador?
+
+customer.passenger.list.button.create = Crear pasajero
+
+customer.passenger.form.title = Información del pasajero
+customer.passenger.form.fullName = Nombre completo
+customer.passenger.form.email = Correo electrónico
+customer.passenger.form.passport = Número de pasaporte (patrón = "^[A-Z0-9]{6,9}$")
+customer.passenger.form.birthDate = Fecha de nacimiento
+customer.passenger.form.specialNeeds = Necesidades especiales
+
+customer.passenger.form.button.create = Crear
+customer.passenger.form.button.update = Actualizar
+customer.passenger.form.button.publish = Publicar
+ 
+
+acme.validation.confirmation.passenger.passport = Existe otro pasajero con el mismo número de pasaporte

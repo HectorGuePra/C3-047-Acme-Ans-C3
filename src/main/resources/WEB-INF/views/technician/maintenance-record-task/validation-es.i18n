@@ -1,0 +1,17 @@
+technician.maintenance-record-task.list.title = Lista de tareas
+technician.maintenance-record-task.form.title = Detalles de la asociación
+
+technician.maintenance-record-task.list.label.type = Tipo
+technician.maintenance-record-task.list.label.priority = Prioridad
+technician.maintenance-record-task.list.label.duration = Duración (est.)
+technician.maintenance-record-task.list.label.key = ID
+
+technician.maintenance-record-task.list.button.create = Crear nueva tarea
+
+technician.maintenance-record-task.form.button.create = Crear
+technician.maintenance-record-task.form.button.delete = Eliminar
+
+technician.maintenance-record-task.form.label.maintenance-record = Registro de mantenimiento
+technician.maintenance-record-task.form.label.task = Tarea
+
+technician.maintenance-record-task.form.add.task = Añadir tarea al registro

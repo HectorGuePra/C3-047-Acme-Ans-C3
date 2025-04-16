@@ -1,0 +1,24 @@
+technician.maintenance-record.list.title = Maintenance records list
+technician.maintenance-record.form.title = Maintenance record details
+
+technician.maintenance-record.list.label.moment = Maintenance Moment
+technician.maintenance-record.list.label.status = Status
+technician.maintenance-record.list.label.nextInspectionDate = Next Inspection Date
+technician.maintenance-record.list.label.aircraft = Aircraft
+
+technician.maintenance-record.list.button.create = Create
+
+technician.maintenance-record.form.button.update = Update
+technician.maintenance-record.form.button.create = Create
+technician.maintenance-record.form.button.delete = Delete
+technician.maintenance-record.form.button.publish = Publish
+technician.maintenance-record.form.add.task = Add task
+technician.maintenance-record.form.list.task = List tasks
+
+technician.maintenance-record.form.label.moment = Moment
+technician.maintenance-record.form.label.status = Status
+technician.maintenance-record.form.label.nextInspectionDate = Next Inspection Date
+technician.maintenance-record.form.label.estimatedCost = Estimated Cost
+technician.maintenance-record.form.label.notes = Notes
+technician.maintenance-record.form.label.aircraft = Aircraft
+
