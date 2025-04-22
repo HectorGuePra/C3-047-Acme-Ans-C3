@@ -44,3 +44,4 @@ acme.validation.technician.maintenance-record.estimatedCost.currency.message = T
 acme.validation.technician.maintenance-record.notes.message = The maximum length of notes is 255 characters
 acme.validation.technician.maintenance-record.aircraft.message = The selected aircraft does not exist
 acme.validation.technician.maintenance-record.published.message = You need to have all your task created and published prior to publish this record
+acme.validation.technician.maintenance-record.can-not-patch.message = Patch feature is for published records only

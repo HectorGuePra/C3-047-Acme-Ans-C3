@@ -25,10 +25,12 @@
 		</jstl:when>
 		<jstl:when test="${acme:anyOf(_command,'show|update|delete|publish') && draftMode == false}">
 			<jstl:if test="${_command != 'create'}">
-				<acme:button code="technician.maintenance-record.form.list.task" action="/technician/maintenance-record-task/list?id=${id}"/>				
+				<acme:button code="technician.maintenance-record.form.list.task" action="/technician/maintenance-record-task/list?id=${id}"/>
+				<acme:button code="technician.maintenance-record.form.set-status-pending" action="/technician/maintenance-record/set-status-pending"/>
+				<acme:button code="technician.maintenance-record.form.set-status-in-progress" action="/technician/maintenance-record/set-status-in-progress"/>
+				<acme:button code="technician.maintenance-record.form.set-status-completed" action="/technician/maintenance-record/set-status-completed"/>
 			</jstl:if>
 		</jstl:when>
-		
 		<jstl:when  test="${acme:anyOf(_command,'create')}">
 			<acme:submit code="technician.maintenance-record.form.button.create" action="/technician/maintenance-record/create"/>
 		</jstl:when>
