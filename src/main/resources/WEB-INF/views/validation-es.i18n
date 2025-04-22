@@ -1,3 +1,5 @@
+acme.validation.confirmation.message = Necesitas confirmar esta acción
+
 acme.validation.maintenancerecord.nextinspectiondate.message = La fecha de próxima revisión debe ser posterior a la fecha de última actual.
 acme.validation.review.missing-relation.message = Reseña no válida. Debe estar presente al menos uno de los siguientes: serviceReviewed, airlineReviewed, airportReviewed o flightReviewed.
 
