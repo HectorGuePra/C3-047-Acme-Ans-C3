@@ -1,4 +1,3 @@
-
 package acme.entities.flightassignment;
 
 import java.util.Date;
@@ -7,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
@@ -61,4 +61,13 @@ public class FlightAssignment extends AbstractEntity {
 	@Valid
 	@Automapped
 	private Boolean				draftMode;
+
+
+	@Transient
+	public String getDescription() {
+		String res = "";
+		if (this.leg != null && this.allocatedFlightCrewMember != null)
+			res = String.format("%s: %s", this.allocatedFlightCrewMember.getEmployeeCode(), this.leg.getDescription());
+		return res;
+	}
 }

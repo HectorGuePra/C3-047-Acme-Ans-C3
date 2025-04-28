@@ -77,7 +77,7 @@ public class FlightAssignmentsCreateService extends AbstractGuiService<FlightCre
 
 		//todo cambiar para que la leg sea de las pendings
 		legs = this.repository.findAllLegs();
-		legChoice = SelectChoices.from(legs, "id", assignment.getLeg());
+		legChoice = SelectChoices.from(legs, "description", assignment.getLeg());
 
 		//todo cambiar para que los crew members esten en available
 		flightCrewMembers = this.repository.findAllCrewMembersAvailables(available);

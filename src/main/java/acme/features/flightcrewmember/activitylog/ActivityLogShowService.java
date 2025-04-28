@@ -43,7 +43,7 @@ public class ActivityLogShowService extends AbstractGuiService<FlightCrewMember,
 		assignments = this.repository.findAllFlightAssignments();
 
 		SelectChoices assignmentChoices;
-		assignmentChoices = SelectChoices.from(assignments, "leg.flightNumber", activityLog.getFlightAssignment());
+		assignmentChoices = SelectChoices.from(assignments, "description", activityLog.getFlightAssignment());
 
 		dataset = super.unbindObject(activityLog, "registrationMoment", "incidentType", "description", "severityLevel", "draftMode", "flightAssignment");
 		dataset.put("assignmentChoices", assignmentChoices);

@@ -87,4 +87,11 @@ public class Leg extends AbstractEntity {
 		return 0;
 	}
 
+	@Transient
+	public String getDescription() {
+		String res = "";
+		if (this.scheduledDeparture != null && this.scheduledArrival != null)
+			res = String.format("%s %s -> %s %s", this.scheduledDeparture.toLocaleString(), this.departureAirport.getCity(), this.scheduledArrival.toLocaleString(), this.arrivalAirport.getCity());
+		return res;
+	}
 }
