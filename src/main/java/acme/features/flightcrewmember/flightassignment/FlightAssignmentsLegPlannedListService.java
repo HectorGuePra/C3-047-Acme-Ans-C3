@@ -42,7 +42,7 @@ public class FlightAssignmentsLegPlannedListService extends AbstractGuiService<F
 		Dataset dataset;
 
 		dataset = super.unbindObject(assignments, "duty", "momentLastUpdate", "currentStatus");
-		//Revisarlo 
+
 		super.addPayload(dataset, assignments, "leg.status", "draftMode", "allocatedFlightCrewMember.identity.fullName", "remarks");
 		super.getResponse().addData(dataset);
 	}
