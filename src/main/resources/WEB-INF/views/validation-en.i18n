@@ -28,7 +28,7 @@ javax.validation.constraints.NotBlank.message = The value cannot be blank.
 acme.validation.flightcrewmember.identifier.message = The identifier must have 2 or 3 letters correspond to your initials and 6 digits.
 acme.validation.flightCrewMember.duplicated-employeeCode.message = The employeeCode must be unique.
 
-acme.validation.activityLog.statusLeg.message = The leg must not be in LANDED status
+acme.validation.activityLog.statusLeg.message = The leg must be in LANDED status
 
 acme.validation.airport.iata-code.message = The Iata Code must be unique.
 

@@ -3,21 +3,14 @@ package acme.constraints;
 
 import javax.validation.ConstraintValidatorContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
 import acme.entities.activityLog.ActivityLog;
-import acme.entities.activityLog.ActivityLogRepository;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
 
 @Validator
 public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, ActivityLog> {
-
-	@Autowired
-	private ActivityLogRepository repository;
-
 
 	@Override
 	protected void initialise(final ValidActivityLog annotation) {
@@ -35,10 +28,10 @@ public class ActivityLogValidator extends AbstractValidator<ValidActivityLog, Ac
 		else {
 			Leg existingLeg;
 			boolean isLegLanded;
-			existingLeg = this.repository.findLegByActivityLogId(activityLog.getId());
+			existingLeg = activityLog.getFlightAssignment().getLeg();
 
 			isLegLanded = existingLeg.getStatus().equals(LegStatus.LANDED);
-			super.state(context, !isLegLanded, "leg", "acme.validation.ActivityLog.statusLeg.message");
+			super.state(context, isLegLanded, "leg", "acme.validation.activityLog.statusLeg.message");
 		}
 
 		result = !super.hasErrors(context);
