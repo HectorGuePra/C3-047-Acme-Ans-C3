@@ -35,7 +35,7 @@ public class FlightCrewMemberValidator extends AbstractValidator<ValidFlightCrew
 		else if (StringHelper.isBlank(flightCrewMember.getEmployeeCode()))
 			super.state(context, false, "identifier", "javax.validation.constraints.NotBlank.message");
 		else {
-			// ------------- ponerlo en el servicio ----------------------------
+
 			{
 				boolean uniqueFlightCrewMember;
 				FlightCrewMember existingFlightCrewMember;
@@ -45,7 +45,7 @@ public class FlightCrewMemberValidator extends AbstractValidator<ValidFlightCrew
 
 				super.state(context, uniqueFlightCrewMember, "employeeCode", "acme.validation.flightCrewMember.duplicated-employeeCode.message");
 			}
-			// -----------------------------------------------------------------
+
 			{
 				boolean correctEmployeeCode;
 

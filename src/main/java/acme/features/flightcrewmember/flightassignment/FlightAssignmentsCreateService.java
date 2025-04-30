@@ -14,7 +14,6 @@ import acme.entities.flightassignment.AssigmentStatus;
 import acme.entities.flightassignment.CrewsDuty;
 import acme.entities.flightassignment.FlightAssignment;
 import acme.entities.legs.Leg;
-import acme.realms.flightcrewmember.AvailabilityStatus;
 import acme.realms.flightcrewmember.FlightCrewMember;
 
 @GuiService
@@ -49,7 +48,7 @@ public class FlightAssignmentsCreateService extends AbstractGuiService<FlightCre
 
 	@Override
 	public void bind(final FlightAssignment assignment) {
-		super.bindObject(assignment, "duty", "currentStatus", "remarks", "allocatedFlightCrewMember", "leg");
+		super.bindObject(assignment, "duty", "currentStatus", "remarks", "leg");
 	}
 
 	@Override
@@ -63,8 +62,6 @@ public class FlightAssignmentsCreateService extends AbstractGuiService<FlightCre
 		Dataset dataset;
 		SelectChoices dutyChoice;
 		SelectChoices currentStatusChoice;
-		AvailabilityStatus available;
-		available = AvailabilityStatus.AVAILABLE;
 
 		SelectChoices legChoice;
 		Collection<Leg> legs;
@@ -75,13 +72,11 @@ public class FlightAssignmentsCreateService extends AbstractGuiService<FlightCre
 		dutyChoice = SelectChoices.from(CrewsDuty.class, assignment.getDuty());
 		currentStatusChoice = SelectChoices.from(AssigmentStatus.class, assignment.getCurrentStatus());
 
-		//todo cambiar para que la leg sea de las pendings
 		legs = this.repository.findAllLegs();
 		legChoice = SelectChoices.from(legs, "description", assignment.getLeg());
 
-		//todo cambiar para que los crew members esten en available
-		flightCrewMembers = this.repository.findAllCrewMembersAvailables(available);
-		flightCrewMemberChoice = SelectChoices.from(flightCrewMembers, "id", assignment.getAllocatedFlightCrewMember());
+		flightCrewMembers = this.repository.findAllFlightCrewMembers();
+		flightCrewMemberChoice = SelectChoices.from(flightCrewMembers, "employeeCode", assignment.getAllocatedFlightCrewMember());
 
 		dataset = super.unbindObject(assignment, "duty", "momentLastUpdate", "currentStatus", "remarks", "allocatedFlightCrewMember", "leg", "draftMode");
 		dataset.put("dutyChoice", dutyChoice);

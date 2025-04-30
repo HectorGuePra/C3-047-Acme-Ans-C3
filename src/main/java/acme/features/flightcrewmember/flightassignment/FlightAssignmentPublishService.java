@@ -2,6 +2,7 @@
 package acme.features.flightcrewmember.flightassignment;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -56,6 +57,36 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 
 	@Override
 	public void validate(final FlightAssignment flightAssignment) {
+		Leg leg;
+		FlightCrewMember member;
+		List<FlightAssignment> OverlappingFlightAssignments;
+		boolean isCompleted;
+		boolean alreadyHasPilot;
+		boolean alreadyHasCoPilot;
+		boolean availableMember;
+		boolean alreadyOccupied;
+		boolean validStatus;
+
+		member = super.getRequest().getData("allocatedFlightCrewMember", FlightCrewMember.class);
+		leg = super.getRequest().getData("leg", Leg.class);
+		OverlappingFlightAssignments = this.repository.findFlightAssignmentsByFlightCrewMemberDuring(member.getId(), leg.getScheduledDeparture(), leg.getScheduledArrival());
+		CrewsDuty duty = super.getRequest().getData("duty", CrewsDuty.class);
+		List<FlightAssignment> flightsWithPilots = this.repository.findFlightAssignmentByLegAndPilotDuty(leg.getId());
+		List<FlightAssignment> flightsWithCoPilots = this.repository.findFlightAssignmentByLegAndCoPilotDuty(leg.getId());
+
+		isCompleted = leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment());
+		alreadyOccupied = OverlappingFlightAssignments.isEmpty();
+		availableMember = member.getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
+		alreadyHasPilot = flightsWithPilots.isEmpty() && duty.equals(CrewsDuty.PILOT);
+		alreadyHasCoPilot = flightsWithCoPilots.isEmpty() && duty.equals(CrewsDuty.CO_PILOT);
+		validStatus = flightAssignment.getCurrentStatus().equals(AssigmentStatus.CONFIRMED) || flightAssignment.getCurrentStatus().equals(AssigmentStatus.CANCELLED);
+
+		super.state(!alreadyHasPilot, "duty", "acme.validation.pilot.message");
+		super.state(!alreadyHasCoPilot, "duty", "acme.validation.co-pilot.message");
+		super.state(validStatus, "currentStatus", "acme.validation.currentStatus");
+		super.state(alreadyOccupied, "leg", "acme.validation.overlapping.message");
+		super.state(availableMember, "flightCrewMember", "acme.validation.member-available.message");
+		super.state(isCompleted, "leg", "acme.validation.leg-complete.message");
 		;
 	}
 
@@ -71,8 +102,6 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 		Dataset dataset;
 		SelectChoices dutyChoice;
 		SelectChoices currentStatusChoice;
-		AvailabilityStatus available;
-		available = AvailabilityStatus.AVAILABLE;
 
 		SelectChoices legChoice;
 		Collection<Leg> legs;
@@ -86,7 +115,7 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 		legs = this.repository.findAllLegs();
 		legChoice = SelectChoices.from(legs, "description", flightAssignment.getLeg());
 
-		flightCrewMembers = this.repository.findAllCrewMembersAvailables(available);
+		flightCrewMembers = this.repository.findAllFlightCrewMembers();
 		flightCrewMemberChoice = SelectChoices.from(flightCrewMembers, "id", flightAssignment.getAllocatedFlightCrewMember());
 
 		dataset = super.unbindObject(flightAssignment, "duty", "momentLastUpdate", "currentStatus", "remarks", "leg", "allocatedFlightCrewMember", "draftMode");

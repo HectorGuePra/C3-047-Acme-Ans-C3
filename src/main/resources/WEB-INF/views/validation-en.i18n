@@ -30,6 +30,12 @@ acme.validation.flightCrewMember.duplicated-employeeCode.message = The employeeC
 
 acme.validation.activityLog.statusLeg.message = The leg must be in LANDED status
 
+acme.validation.pilot.message = Only one pilot per Leg.
+acme.validation.co-pilot.message = Only one co_pilot per Leg.
+acme.validation.overlapping.message = This leg overlaps with other assignments.
+acme.validation.member-available.message = Your status is not AVAIDABLE.
+acme.validation.currentStatus = The current status must be CANCELLED or CONFIRMED
+
 acme.validation.airport.iata-code.message = The Iata Code must be unique.
 
 acme.validation.length = Invalid string length

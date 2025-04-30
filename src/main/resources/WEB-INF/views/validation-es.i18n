@@ -30,6 +30,13 @@ acme.validation.flightCrewMember.duplicated-employeeCode.message = El "employeeC
 
 acme.validation.activityLog.statusLeg.message = El estado del tramo debe ser LANDED.
 
+acme.validation.pilot.message = La escala ya tiene un piloto.
+acme.validation.co-pilot.message = La escala ya tiene un copiloto.
+acme.validation.overlapping.message = Ya tiene una asignación durante las fechas de esta escala.
+acme.validation.member-available.message = Este miembro no está disponible.
+acme.validation.currentStatus = El estado actual debe ser cancelado o confirmado.
+
+
 acme.validation.airport.iata-code.message = El código IATA debe ser único.
 
 acme.validation.length = Longitud de cadena inválida
