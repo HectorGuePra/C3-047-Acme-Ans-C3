@@ -56,6 +56,9 @@ public class TechnicianTaskDeleteService extends AbstractGuiService<Technician, 
 
 	@Override
 	public void validate(final Task task) {
+		
+//		if (!this.getBuffer().getErrors().hasErrors() && this.repository.findMaintenanceRecordTasksByTaskId(task.getId()).size() > 0)
+			super.state(this.repository.findMaintenanceRecordTasksByTaskId(task.getId()).size() < 0, "description", "acme.validation.tasks.linkedTask.message", task);
 
 	}
 

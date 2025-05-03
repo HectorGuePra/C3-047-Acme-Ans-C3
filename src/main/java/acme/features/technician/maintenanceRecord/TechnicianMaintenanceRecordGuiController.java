@@ -46,8 +46,8 @@ public class TechnicianMaintenanceRecordGuiController extends AbstractGuiControl
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
 
-		super.addCustomCommand("publish", "update", this.publishService);
 		super.addCustomCommand("set-status-pending", "update", this.setStatusPendingService);
+		super.addCustomCommand("publish", "update", this.publishService);
 	}
 
 }
