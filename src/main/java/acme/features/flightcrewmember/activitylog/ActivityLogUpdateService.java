@@ -45,7 +45,7 @@ public class ActivityLogUpdateService extends AbstractGuiService<FlightCrewMembe
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		super.bindObject(activityLog, "registrationMoment", "incidentType", "description", "severityLevel", "flightAssignment");
+		super.bindObject(activityLog, "incidentType", "description", "severityLevel", "flightAssignment");
 	}
 
 	@Override

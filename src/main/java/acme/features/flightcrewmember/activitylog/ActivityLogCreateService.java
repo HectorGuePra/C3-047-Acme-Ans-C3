@@ -64,7 +64,7 @@ public class ActivityLogCreateService extends AbstractGuiService<FlightCrewMembe
 
 	@Override
 	public void perform(final ActivityLog activityLog) {
-
+		assert activityLog != null;
 		this.repository.save(activityLog);
 	}
 

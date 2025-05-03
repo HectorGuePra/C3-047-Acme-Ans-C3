@@ -61,6 +61,7 @@ public class FlightAssignmentUpdateService extends AbstractGuiService<FlightCrew
 
 	@Override
 	public void perform(final FlightAssignment assignment) {
+		assert assignment != null;
 		assignment.setMomentLastUpdate(MomentHelper.getCurrentMoment());
 		this.repository.save(assignment);
 	}
