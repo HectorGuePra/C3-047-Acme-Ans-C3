@@ -15,6 +15,7 @@ import acme.entities.flightassignment.AssigmentStatus;
 import acme.entities.flightassignment.CrewsDuty;
 import acme.entities.flightassignment.FlightAssignment;
 import acme.entities.legs.Leg;
+import acme.entities.legs.LegStatus;
 import acme.realms.flightcrewmember.AvailabilityStatus;
 import acme.realms.flightcrewmember.FlightCrewMember;
 
@@ -29,13 +30,18 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 	public void authorise() {
 
 		boolean status;
-		int masterId;
+		int assignmentId;
+		int userId;
+		int memberId;
 		FlightAssignment flightAssignment;
 
-		masterId = super.getRequest().getData("id", int.class);
-		flightAssignment = this.repository.findFlightAssignmentById(masterId);
+		assignmentId = super.getRequest().getData("id", int.class);
+		flightAssignment = this.repository.findFlightAssignmentById(assignmentId);
 
-		status = flightAssignment.getDraftMode() && MomentHelper.isFuture(flightAssignment.getLeg().getScheduledDeparture());
+		memberId = flightAssignment.getAllocatedFlightCrewMember().getId();
+		userId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+		status = flightAssignment.getDraftMode() && MomentHelper.isFuture(flightAssignment.getLeg().getScheduledDeparture()) && userId == memberId;
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -66,27 +72,31 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 		boolean availableMember;
 		boolean alreadyOccupied;
 		boolean validStatus;
+		CrewsDuty pilot = CrewsDuty.PILOT;
+		CrewsDuty coPilot = CrewsDuty.CO_PILOT;
 
 		member = super.getRequest().getData("allocatedFlightCrewMember", FlightCrewMember.class);
 		leg = super.getRequest().getData("leg", Leg.class);
 		OverlappingFlightAssignments = this.repository.findFlightAssignmentsByFlightCrewMemberDuring(member.getId(), leg.getScheduledDeparture(), leg.getScheduledArrival());
 		CrewsDuty duty = super.getRequest().getData("duty", CrewsDuty.class);
-		List<FlightAssignment> flightsWithPilots = this.repository.findFlightAssignmentByLegAndPilotDuty(leg.getId());
-		List<FlightAssignment> flightsWithCoPilots = this.repository.findFlightAssignmentByLegAndCoPilotDuty(leg.getId());
+		List<FlightAssignment> flightsWithPilots = this.repository.findFlightAssignmentByLegAndPilotDuty(leg.getId(), pilot);
+		List<FlightAssignment> flightsWithCoPilots = this.repository.findFlightAssignmentByLegAndCoPilotDuty(leg.getId(), coPilot);
 
-		isCompleted = leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment());
+		isCompleted = leg.getStatus() == LegStatus.LANDED;
 		alreadyOccupied = OverlappingFlightAssignments.isEmpty();
 		availableMember = member.getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
+
 		alreadyHasPilot = flightsWithPilots.isEmpty() && duty.equals(CrewsDuty.PILOT);
 		alreadyHasCoPilot = flightsWithCoPilots.isEmpty() && duty.equals(CrewsDuty.CO_PILOT);
-		validStatus = flightAssignment.getCurrentStatus().equals(AssigmentStatus.CONFIRMED) || flightAssignment.getCurrentStatus().equals(AssigmentStatus.CANCELLED);
 
+		validStatus = flightAssignment.getCurrentStatus().equals(AssigmentStatus.CONFIRMED) || flightAssignment.getCurrentStatus().equals(AssigmentStatus.CANCELLED);
+		//TODO corregir el validador pq no se pq a la segunda no funciona
 		super.state(!alreadyHasPilot, "duty", "acme.validation.pilot.message");
 		super.state(!alreadyHasCoPilot, "duty", "acme.validation.co-pilot.message");
 		super.state(validStatus, "currentStatus", "acme.validation.currentStatus");
 		super.state(alreadyOccupied, "leg", "acme.validation.overlapping.message");
 		super.state(availableMember, "flightCrewMember", "acme.validation.member-available.message");
-		super.state(isCompleted, "leg", "acme.validation.leg-complete.message");
+		super.state(!isCompleted, "leg", "acme.validation.leg-complete.message");
 		;
 	}
 
@@ -123,6 +133,8 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 		dataset.put("currentStatusChoice", currentStatusChoice);
 		dataset.put("legChoice", legChoice);
 		dataset.put("flightCrewMemberChoice", flightCrewMemberChoice);
+
+		dataset.put("memberId", flightAssignment.getAllocatedFlightCrewMember().getId());
 
 		super.getResponse().addData(dataset);
 	}

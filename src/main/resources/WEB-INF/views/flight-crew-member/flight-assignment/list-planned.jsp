@@ -23,4 +23,4 @@
 </acme:list>
 
 
-	<acme:button code="flight-crew-member.flight-assignment.form.button.create" action="/flight-crew-member/flight-assignment/create"/>
+	<acme:button code="flight-crew-member.flight-assignment.form.button.create" action="/flight-crew-member/flight-assignment/create?memberId=${memberId}"/>

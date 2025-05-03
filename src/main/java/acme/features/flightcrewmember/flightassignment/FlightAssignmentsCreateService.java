@@ -25,7 +25,16 @@ public class FlightAssignmentsCreateService extends AbstractGuiService<FlightCre
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		int userId;
+		int assignmentMemberId;
+		boolean status;
+
+		userId = super.getRequest().getPrincipal().getActiveRealm().getId();
+		assignmentMemberId = super.getRequest().getData("memberId", int.class);
+
+		status = userId == assignmentMemberId;
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -76,13 +85,14 @@ public class FlightAssignmentsCreateService extends AbstractGuiService<FlightCre
 		legChoice = SelectChoices.from(legs, "description", assignment.getLeg());
 
 		flightCrewMembers = this.repository.findAllFlightCrewMembers();
-		flightCrewMemberChoice = SelectChoices.from(flightCrewMembers, "employeeCode", assignment.getAllocatedFlightCrewMember());
+		flightCrewMemberChoice = SelectChoices.from(flightCrewMembers, "id", assignment.getAllocatedFlightCrewMember());
 
 		dataset = super.unbindObject(assignment, "duty", "momentLastUpdate", "currentStatus", "remarks", "allocatedFlightCrewMember", "leg", "draftMode");
 		dataset.put("dutyChoice", dutyChoice);
 		dataset.put("currentStatusChoice", currentStatusChoice);
 		dataset.put("legChoice", legChoice);
 		dataset.put("flightCrewMemberChoice", flightCrewMemberChoice);
+		dataset.put("memberId", super.getRequest().getData("memberId", int.class));
 
 		super.getResponse().addData(dataset);
 

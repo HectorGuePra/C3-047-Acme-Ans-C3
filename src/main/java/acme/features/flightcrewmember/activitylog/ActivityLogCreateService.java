@@ -58,6 +58,7 @@ public class ActivityLogCreateService extends AbstractGuiService<FlightCrewMembe
 
 	@Override
 	public void validate(final ActivityLog activityLog) {
+
 		;
 	}
 
