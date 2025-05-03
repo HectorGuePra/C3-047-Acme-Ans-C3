@@ -3,6 +3,7 @@ package acme.features.flightcrewmember.flightassignment;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -77,24 +78,28 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 
 		member = super.getRequest().getData("allocatedFlightCrewMember", FlightCrewMember.class);
 		leg = super.getRequest().getData("leg", Leg.class);
-		OverlappingFlightAssignments = this.repository.findFlightAssignmentsByFlightCrewMemberDuring(member.getId(), leg.getScheduledDeparture(), leg.getScheduledArrival());
+
+		OverlappingFlightAssignments = this.repository.findFlightAssignmentsByFlightCrewMemberDuring(member.getId(), leg.getScheduledDeparture(), leg.getScheduledArrival()).stream().filter(fa -> fa.getId() != flightAssignment.getId())
+			.collect(Collectors.toList());
+
 		CrewsDuty duty = super.getRequest().getData("duty", CrewsDuty.class);
 		List<FlightAssignment> flightsWithPilots = this.repository.findFlightAssignmentByLegAndPilotDuty(leg.getId(), pilot);
 		List<FlightAssignment> flightsWithCoPilots = this.repository.findFlightAssignmentByLegAndCoPilotDuty(leg.getId(), coPilot);
 
 		isCompleted = leg.getStatus() == LegStatus.LANDED;
-		alreadyOccupied = OverlappingFlightAssignments.isEmpty();
+		alreadyOccupied = !OverlappingFlightAssignments.isEmpty();
 		availableMember = member.getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
 
-		alreadyHasPilot = flightsWithPilots.isEmpty() && duty.equals(CrewsDuty.PILOT);
-		alreadyHasCoPilot = flightsWithCoPilots.isEmpty() && duty.equals(CrewsDuty.CO_PILOT);
+		alreadyHasPilot = flightsWithPilots.stream().anyMatch(fa -> fa.getId() != flightAssignment.getId()) && duty.equals(CrewsDuty.PILOT);
+
+		alreadyHasCoPilot = flightsWithCoPilots.stream().anyMatch(fa -> fa.getId() != flightAssignment.getId()) && duty.equals(CrewsDuty.CO_PILOT);
 
 		validStatus = flightAssignment.getCurrentStatus().equals(AssigmentStatus.CONFIRMED) || flightAssignment.getCurrentStatus().equals(AssigmentStatus.CANCELLED);
-		//TODO corregir el validador pq no se pq a la segunda no funciona
+
 		super.state(!alreadyHasPilot, "duty", "acme.validation.pilot.message");
 		super.state(!alreadyHasCoPilot, "duty", "acme.validation.co-pilot.message");
 		super.state(validStatus, "currentStatus", "acme.validation.currentStatus");
-		super.state(alreadyOccupied, "leg", "acme.validation.overlapping.message");
+		super.state(!alreadyOccupied, "leg", "acme.validation.overlapping.message");
 		super.state(availableMember, "flightCrewMember", "acme.validation.member-available.message");
 		super.state(!isCompleted, "leg", "acme.validation.leg-complete.message");
 		;
