@@ -18,7 +18,7 @@
 <acme:list>
 <acme:list-column code="flight-crew-member.activity-log.list.label.severityLevel" path="severityLevel" width="20%"/>
 	<acme:list-column code="flight-crew-member.activity-log.list.label.incidentType" path="incidentType" width="20%"/>
-	<acme:list-column code="flight-crew-member.activity-log.list.label.incidentDescription" path="incidentDescription" width="20%"/>
+	<acme:list-column code="flight-crew-member.activity-log.list.label.registrationMoment" path="registrationMoment" width="20%"/>
 	<acme:list-payload path="payload"/>	
 </acme:list>
 

@@ -2,7 +2,7 @@ flight-crew-member.activity-log.list.title = List Activity Logs
 
 flight-crew-member.flight-assignment.form.button.list-logs = View Activity Logs
 flight-crew-member.activity-log.list.label.incidentType = Incident Type
-flight-crew-member.activity-log.list.label.incidentDescription = Description
+flight-crew-member.activity-log.list.label.registrationMoment = Registration Moment
 flight-crew-member.activity-log.list.label.severityLevel =Severity Level
 
 flight-crew-member.activity-log.list.button.create = Create
