@@ -17,6 +17,7 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidString;
 import acme.entities.legs.Leg;
+import acme.entities.legs.LegStatus;
 import acme.realms.flightcrewmember.FlightCrewMember;
 import lombok.Getter;
 import lombok.Setter;
@@ -70,5 +71,10 @@ public class FlightAssignment extends AbstractEntity {
 		if (this.leg != null && this.allocatedFlightCrewMember != null)
 			res = String.format("%s: %s", this.allocatedFlightCrewMember.getEmployeeCode(), this.leg.getDescription());
 		return res;
+	}
+
+	@Transient
+	public Boolean getIsLegLanded() {
+		return this.leg != null && LegStatus.LANDED.equals(this.leg.getStatus());
 	}
 }

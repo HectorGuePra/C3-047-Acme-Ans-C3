@@ -12,6 +12,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activityLog.ActivityLog;
 import acme.entities.flightassignment.FlightAssignment;
+import acme.entities.legs.LegStatus;
 import acme.realms.flightcrewmember.FlightCrewMember;
 
 @GuiService
@@ -26,10 +27,13 @@ public class ActivityLogCreateService extends AbstractGuiService<FlightCrewMembe
 		boolean status;
 		int masterId;
 		int memberId;
+		boolean isLegLanded;
 
 		masterId = super.getRequest().getData("masterId", int.class);
 		memberId = this.repository.findFlightAssignmentById(masterId).getAllocatedFlightCrewMember().getId();
-		status = memberId == super.getRequest().getPrincipal().getActiveRealm().getId();
+		isLegLanded = this.repository.findFlightAssignmentById(masterId).getLeg().equals(LegStatus.LANDED);
+
+		status = memberId == super.getRequest().getPrincipal().getActiveRealm().getId() && !isLegLanded;
 		super.getResponse().setAuthorised(status);
 
 	}
@@ -58,7 +62,6 @@ public class ActivityLogCreateService extends AbstractGuiService<FlightCrewMembe
 
 	@Override
 	public void validate(final ActivityLog activityLog) {
-
 		;
 	}
 
