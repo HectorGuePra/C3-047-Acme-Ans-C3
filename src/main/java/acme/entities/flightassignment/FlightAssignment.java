@@ -1,3 +1,4 @@
+
 package acme.entities.flightassignment;
 
 import java.util.Date;
@@ -43,7 +44,7 @@ public class FlightAssignment extends AbstractEntity {
 	private CrewsDuty			duty;
 
 	@Mandatory
-	@ValidMoment(min = "2000/01/01 00:00", past = true)
+	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				momentLastUpdate;
 
