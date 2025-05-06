@@ -22,7 +22,14 @@ public class ActivityLogShowService extends AbstractGuiService<FlightCrewMember,
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int logId;
+		int memberId;
+
+		logId = super.getRequest().getData("id", int.class);
+		memberId = this.repository.findActivityLogById(logId).getFlightAssignment().getAllocatedFlightCrewMember().getId();
+		status = memberId == super.getRequest().getPrincipal().getActiveRealm().getId();
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -43,7 +50,7 @@ public class ActivityLogShowService extends AbstractGuiService<FlightCrewMember,
 		assignments = this.repository.findAllFlightAssignments();
 
 		SelectChoices assignmentChoices;
-		assignmentChoices = SelectChoices.from(assignments, "leg.flightNumber", activityLog.getFlightAssignment());
+		assignmentChoices = SelectChoices.from(assignments, "description", activityLog.getFlightAssignment());
 
 		dataset = super.unbindObject(activityLog, "registrationMoment", "incidentType", "description", "severityLevel", "draftMode", "flightAssignment");
 		dataset.put("assignmentChoices", assignmentChoices);
