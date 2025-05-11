@@ -28,7 +28,14 @@ javax.validation.constraints.NotBlank.message = El valor no puede estar en blanc
 acme.validation.flightcrewmember.identifier.message = El identificador debe contener 2 o 3 letras siendo tus iniciales y 6 dígitos.
 acme.validation.flightCrewMember.duplicated-employeeCode.message = El "employeeCode" debe ser único.
 
-acme.validation.activityLog.statusLeg.message = La "Leg" no debe estar en estado LANDED.
+acme.validation.activityLog.statusLeg.message = El estado del tramo debe ser LANDED.
+
+acme.validation.pilot.message = La escala ya tiene un piloto.
+acme.validation.co-pilot.message = La escala ya tiene un copiloto.
+acme.validation.overlapping.message = Ya tiene una asignación durante las fechas de esta escala.
+acme.validation.member-available.message = Este miembro no está disponible.
+acme.validation.currentStatus = El estado actual debe ser cancelado o confirmado.
+
 
 acme.validation.airport.iata-code.message = El código IATA debe ser único.
 

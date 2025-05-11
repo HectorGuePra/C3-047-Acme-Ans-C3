@@ -19,9 +19,8 @@
 	<acme:list-column code="flightCrewMember.assignment.list.label.duty" path="duty" width="30%"/>
 	<acme:list-column code="flightCrewMember.assignment.list.label.lastUpdate" path="momentLastUpdate" width="30%"/>
 	<acme:list-column code="flightCrewMember.assignment.list.label.status" path="currentStatus" width="40%"/>	
-	
 	<acme:list-payload path="payload"/>
 </acme:list>
 
 
-	<acme:button code="flight-crew-member.flight-assignment.form.button.create" action="/flight-crew-member/flight-assignment/create"/>
+	<acme:button code="flight-crew-member.flight-assignment.form.button.create" action="/flight-crew-member/flight-assignment/create?memberId=${memberId}"/>

@@ -1,5 +1,5 @@
 key,currentStatus,duty,momentLastUpdate,remarks,draftMode,key:allocatedFlightCrewMember,key:leg
-flight-assignment-01,CONFIRMED,PILOT,2010/03/03 10:00,"mensaje1",true,member-01,leg-01
+flight-assignment-01,CONFIRMED,PILOT,2010/03/03 10:00,"mensaje1",false,member-01,leg-12
 flight-assignment-02,CONFIRMED,CO_PILOT,2010/02/16 12:45,"mensaje2",true,member-02,leg-02
 flight-assignment-03,PENDING,LEAD_ATTENDANT,2010/02/10 01:00,"mensaje3",true,member-03,leg-03
 flight-assignment-04,CANCELLED,CABIN_ATTENDANT,2010/01/06 15:15,"mensaje4",true,member-04,leg-04
