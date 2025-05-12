@@ -54,17 +54,16 @@ public class TechnicianMaintenanceRecordSetStatusPendingService extends Abstract
 
 	@Override
 	public void bind(final MaintenanceRecord maintenanceRecord) {
-		super.bindObject(maintenanceRecord, "status", "nextInspectionDate", "estimatedCost", "notes", "aircraft");
+		super.bindObject(maintenanceRecord, "status");
 	}
 
 	@Override
 	public void validate(final MaintenanceRecord maintenanceRecord) {
-		super.state(!maintenanceRecord.getDraftMode(),"aircraft", "acme.validation.technician.maintenance-record.can-not-patch.message", maintenanceRecord);
+		super.state(!(maintenanceRecord.getDraftMode()),"aircraft", "acme.validation.technician.maintenance-record.can-not-patch.message", maintenanceRecord);
 	}
 
 	@Override
 	public void perform(final MaintenanceRecord maintenanceRecord) {
-		assert maintenanceRecord != null;
 		MaintenanceRecordStatus newStatus = MaintenanceRecordStatus.PENDING;
 		maintenanceRecord.setStatus(newStatus);
 		this.repository.save(maintenanceRecord);
