@@ -14,6 +14,9 @@ technician.maintenance-record.form.button.delete = Eliminar
 technician.maintenance-record.form.button.publish = Publicar
 technician.maintenance-record.form.add.task = Crear tarea
 technician.maintenance-record.form.list.task = Listar tareas
+technician.maintenance-record.form.set-status-pending = Marcar como pendiente
+technician.maintenance-record.form.set-status-in-progress = Marcar como en progreso
+technician.maintenance-record.form.set-status-completed = Marcar como completado
 
 technician.maintenance-record.form.label.moment = Fecha y hora de mantenimiento
 technician.maintenance-record.form.label.status = Estatus
