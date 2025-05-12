@@ -4,7 +4,7 @@ customer.passenger.list.email = Email
 customer.passenger.list.passport = Passport number
 customer.passenger.list.birthDate = Birthdate
 customer.passenger.list.specialNeeds = Special needs
-customer.passenger.list.specialNeeds = Draft?
+customer.passenger.list.draftMode = Draft?
 
 customer.passenger.list.button.create = Create passenger
 

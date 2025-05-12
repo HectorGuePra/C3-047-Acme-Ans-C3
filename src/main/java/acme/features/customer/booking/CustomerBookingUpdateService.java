@@ -74,8 +74,8 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		if (b != null && b.getId() != booking.getId())
 			super.state(false, "locatorCode", "acme.validation.confirmation.message.booking.locatorCode");
 
-		Collection<Flight> validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment())))
-			.collect(Collectors.toList());
+		Collection<Flight> validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
+			.filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
 
 		if (booking.getFlight() != null && !validFlights.contains(booking.getFlight()))
 			super.state(false, "flight", "acme.validation.confirmation.message.booking.flight");
@@ -88,13 +88,15 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void unbind(final Booking booking) {
-		Collection<Flight> flights;
+		Collection<Flight> validFlights;
 		SelectChoices flightChoices;
 		SelectChoices classChoices;
 		Dataset dataset;
 
-		flights = this.repository.findAllPublishedFlights();
-		flightChoices = SelectChoices.from(flights, "tag", booking.getFlight());
+		validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
+			.filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
+
+		flightChoices = SelectChoices.from(validFlights, "description", booking.getFlight());
 		classChoices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "draftMode");

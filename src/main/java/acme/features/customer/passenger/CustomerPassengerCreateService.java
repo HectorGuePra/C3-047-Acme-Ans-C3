@@ -47,7 +47,9 @@ public class CustomerPassengerCreateService extends AbstractGuiService<Customer,
 		boolean existsDuplicatedPassport;
 
 		passengerId = super.getRequest().getData("id", int.class);
-		existsDuplicatedPassport = this.repository.existsPassengerWithDuplicatedPassport(passenger.getPassport(), passengerId);
+		//existsDuplicatedPassport = this.repository.existsPassengerWithDuplicatedPassport(passenger.getPassport(), passengerId);
+		int customerId = passenger.getCustomer().getId();
+		existsDuplicatedPassport = this.repository.existsPassengerWithDuplicatedPassport(passenger.getPassport(), customerId, passengerId);
 		super.state(!existsDuplicatedPassport, "passport", "acme.validation.confirmation.passenger.passport");
 	}
 
