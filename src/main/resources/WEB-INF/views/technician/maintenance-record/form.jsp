@@ -3,9 +3,7 @@
 <%@taglib prefix="jstl" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
-
-<acme:form>
-	
+<acme:form>	
 	<acme:input-moment code = "technician.maintenance-record.form.label.moment" path = "maintenanceMoment"  readonly = "true" />
 	<acme:input-select code = "technician.maintenance-record.form.label.status" path = "status" choices="${status}"/>
 	<acme:input-moment code = "technician.maintenance-record.form.label.nextInspectionDate" path = "nextInspectionDate"/>
