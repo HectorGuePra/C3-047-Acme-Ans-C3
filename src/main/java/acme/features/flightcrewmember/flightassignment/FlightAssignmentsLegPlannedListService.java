@@ -34,6 +34,7 @@ public class FlightAssignmentsLegPlannedListService extends AbstractGuiService<F
 		memberId = super.getRequest().getPrincipal().getActiveRealm().getId();
 		assignments = this.repository.assignmentsPlannedLegs(legStatus, memberId);
 
+		super.getResponse().addGlobal("memberId", memberId);
 		super.getBuffer().addData(assignments);
 
 	}
@@ -42,8 +43,9 @@ public class FlightAssignmentsLegPlannedListService extends AbstractGuiService<F
 		Dataset dataset;
 
 		dataset = super.unbindObject(assignments, "duty", "momentLastUpdate", "currentStatus");
-		//Revisarlo 
+
 		super.addPayload(dataset, assignments, "leg.status", "draftMode", "allocatedFlightCrewMember.identity.fullName", "remarks");
+
 		super.getResponse().addData(dataset);
 	}
 }

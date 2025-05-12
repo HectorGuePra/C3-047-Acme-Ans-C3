@@ -25,10 +25,14 @@ public class ActivityLogPublishService extends AbstractGuiService<FlightCrewMemb
 		boolean status;
 		ActivityLog log;
 		int logId;
+		int memberId;
 
 		logId = super.getRequest().getData("id", int.class);
 		log = this.repository.findActivityLogById(logId);
-		status = log.getDraftMode();
+		memberId = log.getFlightAssignment().getAllocatedFlightCrewMember().getId();
+
+		status = log.getDraftMode() && memberId == super.getRequest().getPrincipal().getActiveRealm().getId();
+		;
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -45,7 +49,7 @@ public class ActivityLogPublishService extends AbstractGuiService<FlightCrewMemb
 
 	@Override
 	public void bind(final ActivityLog activityLog) {
-		super.bindObject(activityLog, "registrationMoment", "incidentType", "description", "severityLevel", "flightAssignment");
+		super.bindObject(activityLog, "incidentType", "description", "severityLevel");
 	}
 
 	@Override
@@ -66,7 +70,7 @@ public class ActivityLogPublishService extends AbstractGuiService<FlightCrewMemb
 		assignments = this.repository.findAllFlightAssignments();
 
 		SelectChoices assignmentChoices;
-		assignmentChoices = SelectChoices.from(assignments, "leg.flightNumber", activityLog.getFlightAssignment());
+		assignmentChoices = SelectChoices.from(assignments, "description", activityLog.getFlightAssignment());
 
 		dataset = super.unbindObject(activityLog, "registrationMoment", "incidentType", "description", "severityLevel", "draftMode", "flightAssignment");
 		dataset.put("assignmentChoices", assignmentChoices);

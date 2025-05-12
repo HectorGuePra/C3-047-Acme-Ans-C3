@@ -2,16 +2,18 @@
 package acme.features.flightcrewmember.flightassignment;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import acme.client.repositories.AbstractRepository;
 import acme.entities.activityLog.ActivityLog;
+import acme.entities.flightassignment.CrewsDuty;
 import acme.entities.flightassignment.FlightAssignment;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
-import acme.realms.flightcrewmember.AvailabilityStatus;
 import acme.realms.flightcrewmember.FlightCrewMember;
 
 @Repository
@@ -25,9 +27,6 @@ public interface CrewMemberFlightAssignmentRepository extends AbstractRepository
 
 	@Query("select f from FlightAssignment f where f.id = ?1")
 	FlightAssignment findFlightAssignmentById(int id);
-
-	@Query("select m from FlightCrewMember m where m.availabilityStatus = ?1")
-	Collection<FlightCrewMember> findAllCrewMembersAvailables(AvailabilityStatus status);
 
 	@Query("select f from FlightAssignment f where f.allocatedFlightCrewMember.id= ?1")
 	Collection<FlightAssignment> findFlightAssignmentByCrewMemberId(int id);
@@ -46,4 +45,13 @@ public interface CrewMemberFlightAssignmentRepository extends AbstractRepository
 
 	@Query("select al from ActivityLog al where al.flightAssignment.id = ?1")
 	Collection<ActivityLog> findActivityLogsByAssignmentId(int id);
+
+	@Query("select l from FlightAssignment l where l.leg.id = ?1 and l.duty = ?2")
+	List<FlightAssignment> findFlightAssignmentByLegAndPilotDuty(int id, CrewsDuty pilot);
+
+	@Query("select l from FlightAssignment l where l.leg.id = ?1 and l.duty = ?2")
+	List<FlightAssignment> findFlightAssignmentByLegAndCoPilotDuty(int id, CrewsDuty copilot);
+
+	@Query("select a from FlightAssignment a where a.allocatedFlightCrewMember.id = :id and a.leg.scheduledDeparture< :arrival and a.leg.scheduledArrival> :departure and a.draftMode = false")
+	List<FlightAssignment> findFlightAssignmentsByFlightCrewMemberDuring(int id, Date departure, Date arrival);
 }
