@@ -31,9 +31,6 @@ public class TechnicianMaintenanceRecordGuiController extends AbstractGuiControl
 
 	@Autowired
 	private TechnicianMaintenanceRecordPublishService	publishService;
-	
-	@Autowired
-	private TechnicianMaintenanceRecordSetStatusPendingService	setStatusPendingService;
 
 	//Constructors ----------------------------------------------------------------
 
@@ -45,8 +42,7 @@ public class TechnicianMaintenanceRecordGuiController extends AbstractGuiControl
 		super.addBasicCommand("create", this.createService);
 		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
-
-		super.addCustomCommand("set-status-pending", "update", this.setStatusPendingService);
+		
 		super.addCustomCommand("publish", "update", this.publishService);
 	}
 

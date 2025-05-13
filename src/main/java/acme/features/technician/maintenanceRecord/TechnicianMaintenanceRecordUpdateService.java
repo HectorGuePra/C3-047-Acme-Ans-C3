@@ -55,7 +55,11 @@ public class TechnicianMaintenanceRecordUpdateService extends AbstractGuiService
 
 	@Override
 	public void bind(final MaintenanceRecord maintenanceRecord) {
-		super.bindObject(maintenanceRecord, "status", "nextInspectionDate", "estimatedCost", "notes", "aircraft");
+		if(maintenanceRecord.getDraftMode()) {
+			super.bindObject(maintenanceRecord, "status", "nextInspectionDate", "estimatedCost", "notes", "aircraft");
+		} else {
+			super.bindObject(maintenanceRecord, "status");
+		}
 	}
 
 	@Override
