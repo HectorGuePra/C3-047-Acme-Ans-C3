@@ -73,19 +73,19 @@ public class TechnicianMaintenanceRecordSetStatusPendingService extends Abstract
 	public void unbind(final MaintenanceRecord maintenanceRecord) {
 		SelectChoices choices;
 		Collection<Aircraft> aircrafts;
-		SelectChoices aircraft;
+		SelectChoices choichesAircrafts;
 
 		Dataset dataset;
 		aircrafts = this.repository.findAllAircrafts();
 		choices = SelectChoices.from(MaintenanceRecordStatus.class, maintenanceRecord.getStatus());
-		aircraft = SelectChoices.from(aircrafts, "regNumber", maintenanceRecord.getAircraft());
+		choichesAircrafts = SelectChoices.from(aircrafts, "regNumber", maintenanceRecord.getAircraft());
 
 		dataset = super.unbindObject(maintenanceRecord, "status", "nextInspectionDate", "estimatedCost", "notes", "aircraft");
 
 		dataset.put("status", choices.getSelected().getKey());
-		dataset.put("status", choices);
-		dataset.put("aircraft", aircraft.getSelected().getLabel());
-		dataset.put("aircraft", aircraft);
+		dataset.put("statuses", choices);
+		dataset.put("aircraft", choichesAircrafts.getSelected().getLabel());
+		dataset.put("aircrafts", choichesAircrafts);
 
 		super.getResponse().addData(dataset);
 	}

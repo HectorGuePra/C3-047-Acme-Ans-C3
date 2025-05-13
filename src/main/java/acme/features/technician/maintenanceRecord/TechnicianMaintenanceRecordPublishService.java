@@ -80,19 +80,19 @@ public class TechnicianMaintenanceRecordPublishService extends AbstractGuiServic
 	public void unbind(final MaintenanceRecord maintenanceRecord) {
 		SelectChoices choices;
 		Collection<Aircraft> aircrafts;
-		SelectChoices aircraft;
+		SelectChoices choicesAircraft;
 
 		Dataset dataset;
 		aircrafts = this.repository.findAllAircrafts();
 		choices = SelectChoices.from(MaintenanceRecordStatus.class, maintenanceRecord.getStatus());
-		aircraft = SelectChoices.from(aircrafts, "id", maintenanceRecord.getAircraft());
+		choicesAircraft = SelectChoices.from(aircrafts, "id", maintenanceRecord.getAircraft());
 
 		dataset = super.unbindObject(maintenanceRecord, "status", "nextInspectionDate", "estimatedCost", "notes", "aircraft", "draftMode");
 
 		dataset.put("status", choices.getSelected().getKey());
-		dataset.put("status", choices);
-		dataset.put("aircraft", aircraft.getSelected().getKey());
-		dataset.put("aircraft", aircraft);
+		dataset.put("statuses", choices);
+		dataset.put("aircraft", choicesAircraft.getSelected().getKey());
+		dataset.put("aircrafts", choicesAircraft);
 
 		super.getResponse().addData(dataset);
 	}

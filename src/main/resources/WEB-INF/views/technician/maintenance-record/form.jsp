@@ -5,11 +5,11 @@
 
 <acme:form>	
 	<acme:input-moment code = "technician.maintenance-record.form.label.moment" path = "maintenanceMoment"  readonly = "true" />
-	<acme:input-select code = "technician.maintenance-record.form.label.status" path = "status" choices="${status}"/>
+	<acme:input-select code = "technician.maintenance-record.form.label.status" path = "status" choices="${statuses}"/>
 	<acme:input-moment code = "technician.maintenance-record.form.label.nextInspectionDate" path = "nextInspectionDate"/>
 	<acme:input-money code = "technician.maintenance-record.form.label.estimatedCost" path = "estimatedCost"/>
 	<acme:input-textbox code = "technician.maintenance-record.form.label.notes" path = "notes"/>
-	<acme:input-select code = "technician.maintenance-record.form.label.aircraft" path = "aircraft" choices="${aircraft}"/>
+	<acme:input-select code = "technician.maintenance-record.form.label.aircraft" path = "aircraft" choices="${aircrafts}"/>
 	
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command,'show|update|delete|publish') && draftMode == true}">
@@ -24,9 +24,15 @@
 		<jstl:when test="${acme:anyOf(_command,'show|update|delete|publish') && draftMode == false}">
 			<jstl:if test="${_command != 'create'}">
 				<acme:button code="technician.maintenance-record.form.list.task" action="/technician/maintenance-record-task/list?id=${id}"/>
-				<acme:button code="technician.maintenance-record.form.set-status-pending" action="/technician/maintenance-record/set-status-pending"/>
-				<acme:button code="technician.maintenance-record.form.set-status-in-progress" action="/technician/maintenance-record/set-status-in-progress"/>
-				<acme:button code="technician.maintenance-record.form.set-status-completed" action="/technician/maintenance-record/set-status-completed"/>
+				<jstl:if test="${status != 'PENDING'}">
+					<acme:button code="technician.maintenance-record.form.set-status-pending" action="/technician/maintenance-record/set-status-pending"/>
+				</jstl:if>
+				<jstl:if test="${status != 'IN_PROGRESS'}">
+					<acme:button code="technician.maintenance-record.form.set-status-in-progress" action="/technician/maintenance-record/set-status-in-progress"/>
+				</jstl:if>
+				<jstl:if test="${status != 'COMPLETED'}">
+					<acme:button code="technician.maintenance-record.form.set-status-completed" action="/technician/maintenance-record/set-status-completed"/>
+				</jstl:if>
 			</jstl:if>
 		</jstl:when>
 		<jstl:when  test="${acme:anyOf(_command,'create')}">
