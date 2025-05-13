@@ -1,0 +1,13 @@
+key,name,picture,avgDwellTime,promotionCode,discountedMoney
+
+service-00,Lorem ipsum dolor sit ame,https://i.imgur.com/8YcXhS0.png,50.00,WWHM-25,EUR 25.00
+service-01,洛伦·伊普森,https://i.imgur.com/MtBRoNP.png,50.00,WWHP-25,EUR 25.00
+service-02,Lorem ipsum dolor sit ame,https://i.imgur.com/8YcXhS0.png,50.00,AAAA-25,EUR 25.00
+service-03,Lorem ipsum dolor sit ame,https://i.imgur.com/MtBRoNP.png,50.00,AAAB-25,EUR 25.00
+service-04,Lorem ipsum dolor sit ame,https://i.imgur.com/NGLSjk6.png,50.00,AAAC-25,EUR 25.00
+service-05,Lorem ipsum dolor sit ame,https://i.imgur.com/fihihcF.png,50.00,AAAD-25,EUR 25.00
+service-06,Lorem ipsum dolor sit ame,https://i.imgur.com/2eVF1HG.png,50.00,AAAE-25,EUR 25.00
+service-07,Lorem ipsum dolor sit ame,https://i.imgur.com/CqtMSmM.png,50.00,AAAF-25,EUR 25.00
+service-08,Lorem ipsum dolor sit ame,https://i.imgur.com/sgx1bFo.png,50.00,AAAG-25,EUR 25.00
+service-09,Lorem ipsum dolor sit ame,https://i.imgur.com/qu5SrLN.png,50.00,AAAH-25,EUR 25.00
+service-10,Lorem ipsum dolor sit ame,https://i.imgur.com/8n7KfX1.png,50.00,AAAI-25,EUR 25.00
