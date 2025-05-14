@@ -29,7 +29,7 @@ agent-22,user-account-agent-01,AA000019,inglés,2010/01/02 00:00,biografía,EUR 
 agent-23,user-account-agent-01,AA000020,inglés,2010/01/02 00:00,biografía,EUR 1200.00,http://photo.jpg,airline-01
 # photo
 agent-24,user-account-agent-01,AA000021,inglés,2010/01/02 00:00,biografía,EUR 1200.00,http://lorem.com/ipsum,airline-01
-agent-25,user-account-agent-01,AA000022,inglés,2010/01/02 00:00,biografía,EUR 1200.00,ftp://a.b,airline-01
+agent-25,user-account-agent-01,AA000022,inglés,2010/01/02 00:00,biografía,EUR 1200.00,http://a.b,airline-01
 agent-26,user-account-agent-01,AA000023,inglés,2010/01/02 00:00,biografía,EUR 1200.00,https://www.lorem-ipsum.org,airline-01
 agent-27,user-account-agent-01,AA000024,inglés,2010/01/02 00:00,biografía,EUR 1200.00,http://www.lorem-ipsum.org/dolor/sit.html,airline-01
 agent-28,user-account-agent-01,AA000025,inglés,2010/01/02 00:00,biografía,EUR 1200.00,http://example.org/a/b?,airline-01
