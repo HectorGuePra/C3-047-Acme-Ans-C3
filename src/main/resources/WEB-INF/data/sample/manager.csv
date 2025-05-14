@@ -10,12 +10,12 @@ manager-07,user-account-manager-07,JH234567,25,2001/04/15 00:03,airline-01,http:
 manager-08,user-account-manager-08,CL876543,25,2001/08/08 18:27,airline-01,http://lorem.com/ipsum
 manager-09,user-account-manager-09,HV567890,25,2000/06/05 20:15,airline-01,http://lorem.com/ipsum
 manager-10,user-account-manager-10,AC123789,25,2001/02/28 07:44,airline-01,http://lorem.com/ipsum
-manager-11,user-account-manager-11,LO987123,25,2000/10/12 16:32,airline-01,ftp://a
-manager-12,user-account-manager-12,SD456789,25,2001/11/03 13:56,airline-01,ftp://a.b
+manager-11,user-account-manager-11,LO987123,25,2000/10/12 16:32,airline-01,http://a.es
+manager-12,user-account-manager-12,SD456789,25,2001/11/03 13:56,airline-01,http://a.b
 manager-13,user-account-manager-13,MR321654,25,2000/07/19 05:09,airline-01,http://www.lorem-ipsum.org/dolor/sit/amet/consectetur/adipiscing/elit/sed/do/eiusmod/tempor/incididunt/ut/labore/et/dolore/magna/aliqua/Ut/enim/ad/minim/veniam/quis/nostrud/exercitation/ullamco/laboris/nisi/ut/aliquip/ex/ea/commodo/consequat/duis/aute/
 manager-14,user-account-manager-14,PF654321,25,2001/04/04 21:30,airline-01,http://www.lorem-ipsum.org/dolor/sit/amet/consectetur/adipiscing/elit/sed/do/eiusmod/tempor/incididunt/ut/labore/et/dolore/magna/aliqua/Ut/enim/ad/minim/veniam/quis/nostrud/exercitation/ullamco/laboris/nisi/ut/aliquip/ex/ea/commodo/consequat/duis/aute/X
 manager-15,user-account-manager-15,RM765432,25,2000/09/09 12:10,airline-01,https://www.lorem-ipsum.org
-manager-16,user-account-manager-16,IM102938,25,2001/03/03 08:07,airline-01,ftp://www.lorem-ipsum.org
+manager-16,user-account-manager-16,IM102938,25,2001/03/03 08:07,airline-01,https://www.lorem-ipsum.org
 manager-17,user-account-manager-17,FS564123,25,2000/12/17 19:55,airline-01,http://www.lorem-ipsum.org/dolor/sit.html
 manager-18,user-account-manager-18,CP876901,25,2001/05/30 04:21,airline-01,http://www.lorem-ipsum.org/dolor/sit.html#dolor
 manager-19,user-account-manager-19,AM345012,25,2000/08/22 23:15,airline-01,http://example.org?a=1&b=2
