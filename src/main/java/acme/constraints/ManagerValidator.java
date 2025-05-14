@@ -3,12 +3,10 @@ package acme.constraints;
 
 import javax.validation.ConstraintValidatorContext;
 
-import acme.client.components.principals.DefaultUserIdentity;
 import acme.client.components.validation.AbstractValidator;
-import acme.client.components.validation.Validator;
+import acme.client.helpers.StringHelper;
 import acme.realms.manager.Manager;
 
-@Validator
 public class ManagerValidator extends AbstractValidator<ValidManager, Manager> {
 
 	@Override
@@ -19,31 +17,39 @@ public class ManagerValidator extends AbstractValidator<ValidManager, Manager> {
 	@Override
 	public boolean isValid(final Manager manager, final ConstraintValidatorContext context) {
 		assert context != null;
+		String initials = "";
 
 		boolean result;
 
 		if (manager == null)
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 		else {
-			DefaultUserIdentity identity = manager.getIdentity();
-			String nombreInicial = identity.getName().substring(0, 1);
-			String surname = identity.getSurname();
-			String[] palabras = surname.split("\\s");
-			String surnameIniciales = "";
-			int limite = Math.min(palabras.length, 2);
-			for (int i = 0; i < limite; i++)
-				if (!palabras[i].isEmpty())
-					surnameIniciales += palabras[i].substring(0, 1);
-			surnameIniciales = surnameIniciales.toUpperCase();
-			String iniciales = nombreInicial + surnameIniciales;
-			String identifier = manager.getIdentifierNumber();
+			String fullName = manager.getUserAccount().getIdentity().getFullName();
+			String[] nameParts = fullName.split(", ");
 
-			Boolean esCorrectoIdentificador = identifier.startsWith(iniciales);
-			super.state(context, esCorrectoIdentificador, "identifierNumber", "Initials Error");
+			String[] surnameParts = nameParts[0].split(" ");
+			initials = nameParts[1].substring(0, 1);
+			initials += surnameParts[0].substring(0, 1);
+
+			if (surnameParts.length > 1)
+				initials += surnameParts[1].substring(0, 1);
+
+			boolean validIdentifier;
+
+			String managerIdentifier = manager.getIdentifierNumber();
+
+			boolean validLength = managerIdentifier.length() >= 8 && managerIdentifier.length() <= 9;
+			String initialsFromIdentifier = managerIdentifier.subSequence(0, initials.length()).toString();
+			boolean validPattern = StringHelper.isEqual(initialsFromIdentifier, initials, true) && managerIdentifier.matches("^[A-Z]{2,3}\\d{6}$");
+
+			validIdentifier = validLength && validPattern;
+
+			super.state(context, validIdentifier, "managerIdentifier", "acme.validation.manager.identifier.message");
 		}
 
 		result = !super.hasErrors(context);
 
 		return result;
 	}
+
 }
