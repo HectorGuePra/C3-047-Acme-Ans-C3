@@ -37,18 +37,8 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			return false;
 		}
 
-		if (leg == null || leg.getAircraft() == null || leg.getScheduledArrival() == null || leg.getScheduledDeparture() == null) {
-			super.state(context, false, "Aircraft", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
-		if (leg.getScheduledDeparture() == null) {
-			super.state(context, false, "scheduledDeparture", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
-		if (leg.getScheduledArrival() == null || leg.getScheduledDeparture() == null) {
-			super.state(context, false, "scheduledArrival", "javax.validation.constraints.NotNull.message");
+		if (leg.getAircraft() == null || leg.getScheduledDeparture() == null || leg.getScheduledArrival() == null) {
+			super.state(context, false, "leg", "javax.validation.constraints.NotNull.message");
 			return false;
 		}
 

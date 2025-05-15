@@ -13,3 +13,4 @@ leg-10,2026/07/03 01:00,2026/07/03 03:00,airport-01,airport-02,CANCELLED,aircraf
 leg-11,2026/07/03 03:10,2026/07/03 05:10,airport-01,airport-02,DELAYED,aircraft-00,flight-11,BBC4282,false
 leg-12,2026/07/03 05:20,2026/07/03 07:20,airport-01,airport-02,LANDED,aircraft-00,flight-12,BBC9536,false
 leg-13,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-01,flight-01,BBC1283,false
+leg-14,2023/07/02 12:01,2023/07/02 15:01,airport-01,airport-02,ON_TIME,aircraft-01,flight-01,BBC1285,false
