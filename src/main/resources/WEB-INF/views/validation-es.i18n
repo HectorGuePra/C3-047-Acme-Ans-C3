@@ -10,17 +10,19 @@ acme.validation.customer.invalid-city.message = Ciudad no válida. Debe tener en
 acme.validation.customer.invalid-country.message = País no válido. Debe tener entre 1 y 50 caracteres.
 acme.validation.customer.invalid-points.message = Puntos no válidos. Debe ser un valor entre 0 y 500,000.
 
-acme.validation.legs.flight-number.message = El número de vuelo debe estar compuesto por el código IATA de la aerolínea seguido de cuatro dígitos.
-acme.validation.legs.departure-arrival-date.message = La fecha de salida del vuelo debe ser mayor a la de llegada.
-acme.validation.legs.current-dates.message = La fecha de salida y de llegada del vuelo deben ser mayores a la actual.
-acme.validation.legs.flight-number.message = El número de vuelo debe ser único.
-acme.validation.legs.aircraft-in-use.message = La aeronave ya está en uso durante esa fecha.
-acme.validation.legs.same-city.error = El vuelo no puede tener la misma ciudad de origen y destino.
+acme.validation.leg.flight-number.message = El número de vuelo debe estar compuesto por el código IATA de la aerolínea seguido de cuatro dígitos.
+acme.validation.leg.flight-number-in-use.message = El número de vuelo está en uso.
+acme.validation.leg.date.message = La fecha de salida del vuelo debe ser anterior a la de llegada.
+acme.validation.leg.flight-number-incorrect.message = Incorrecto Iata Code.
+acme.validation.leg.overlapping-legs.message = Este tramo solapa a otro tramo.
+acme.validation.leg.same-airport.error = El vuelo no puede tener el mismo aeropuerto de origen y destino.
 
 acme.validation.manager.identifier.message = El identificador debe contener 2 o 3 letras siendo tus iniciales y 6 dígitos.
 acme.validation.manager.identifier-number.message = El número de identificador debe ser único.
 
 acme.validation.flight.not-null = El vuelo no puede ser nulo.
+acme.validation.flight.cant-be-publish.message = Todas las escalas deben estar publicadas.
+acme.validation.flight.zero-legs.message = Debe haber al menos una escala para poder publicar.
 
 javax.validation.constraints.NotNull.message = El valor no puede ser nulo.
 javax.validation.constraints.NotBlank.message = El valor no puede estar en blanco.
