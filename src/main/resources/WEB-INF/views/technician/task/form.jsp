@@ -5,8 +5,10 @@
 
 
 <acme:form>
-	<acme:input-integer code ="technician.task.form.label.key" path = "id" readonly = "true" />
-	<acme:input-select code = "technician.task.form.label.type" path = "type" choices= "${type}" />
+	<jstl:if test="${acme:anyOf(_command, 'show|update|delete|publish')}">
+		<acme:input-integer code ="technician.task.form.label.key" path = "id" readonly = "true" />
+	</jstl:if>
+	<acme:input-select code = "technician.task.form.label.type" path = "type" choices= "${types}" />
 	<acme:input-integer code = "technician.task.form.label.priority" path = "priority" />
 	<acme:input-integer code = "technician.task.form.label.duration" path = "duration" />
 	<acme:input-textarea code ="technician.task.form.label.description" path = "description" />

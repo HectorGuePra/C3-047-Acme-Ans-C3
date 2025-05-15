@@ -22,6 +22,7 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 	// AbstractGuiService interface -------------------------------------------
 	@Override
 	public void authorise() {
+		Boolean authorised = true;
 		boolean exist;
 		Task task;
 		Technician technician;
@@ -33,9 +34,18 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 		exist = task != null;
 		if (exist) {
 			technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
-			if (technician.equals(task.getTechnician()))
-				super.getResponse().setAuthorised(true);
+			if (!technician.equals(task.getTechnician()))
+				authorised = false;
 		}
+
+		if (authorised && super.getRequest().getMethod().equals("POST")) {
+			if (super.getRequest().hasData("type")) {
+				String type = super.getRequest().getData("type", String.class);
+				authorised = type.equals("0") || type.equals("MAINTENANCE") || type.equals("INSPECTION") || 
+						type.equals("REPAIR") || type.equals("SYSTEM_CHECK");
+			}
+		}
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
@@ -85,7 +95,7 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 		dataset = super.unbindObject(task, "type", "description", "priority", "duration", "draftMode");
 
 		dataset.put("type", choices.getSelected().getKey());
-		dataset.put("type", choices);
+		dataset.put("types", choices);
 
 		super.getResponse().addData(dataset);
 	}

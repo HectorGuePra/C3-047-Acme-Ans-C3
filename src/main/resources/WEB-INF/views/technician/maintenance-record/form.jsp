@@ -4,7 +4,9 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form>
-	<acme:input-moment code = "technician.maintenance-record.form.label.moment" path = "maintenanceMoment"  readonly = "true" />
+	<jstl:if test="${acme:anyOf(_command,'show|update|delete|publish')}">
+		<acme:input-moment code = "technician.maintenance-record.form.label.moment" path = "maintenanceMoment"  readonly = "true" />
+	</jstl:if>
 	<acme:input-select code = "technician.maintenance-record.form.label.status" path = "status" choices="${statuses}"/>
 	<jstl:choose>
 		<jstl:when test="${draftMode != false}">

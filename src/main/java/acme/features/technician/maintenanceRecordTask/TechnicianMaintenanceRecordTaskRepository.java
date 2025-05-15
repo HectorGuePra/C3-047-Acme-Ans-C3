@@ -19,8 +19,11 @@ public interface TechnicianMaintenanceRecordTaskRepository extends AbstractRepos
 	@Query("SELECT mrt FROM MaintenanceRecordTask mrt WHERE mrt.id = :id")
 	MaintenanceRecordTask findById(int id);
 	
-	@Query("SELECT t FROM Task t")
-	Collection<Task> findAllTasks();
+	@Query("SELECT t FROM Task t WHERE t.technician.id = :technicianId")
+	Collection<Task> findTasksByTechnicianId(int technicianId);	
+	
+	@Query("SELECT t FROM Task t WHERE t.technician.id = :technicianId AND t.draftMode = false")
+	Collection<Task> findPublishedTasksByTechnicianId(int technicianId);
 	
 	@Query("SELECT t FROM Task t JOIN MaintenanceRecordTask rt ON t.id = rt.task.id WHERE rt.maintenanceRecord.id = :id")
 	Collection<Task> findTasksByMaintenanceRecordId(int id);
@@ -30,5 +33,11 @@ public interface TechnicianMaintenanceRecordTaskRepository extends AbstractRepos
 	
 	@Query("SELECT mr FROM MaintenanceRecord mr WHERE mr.technician.id = :technicianId")
 	Collection<MaintenanceRecord> findMaintenanceRecordsByTechnicianId(int technicianId);
+	
+	@Query("SELECT t FROM Task t WHERE t.id = :taskId")
+	Task findTaskById(int taskId);
+	
+	@Query("SELECT mrt FROM MaintenanceRecordTask mrt WHERE mrt.maintenanceRecord.id = :maintenanceRecordId AND mrt.task.id = :taskId")
+	MaintenanceRecordTask findMaintenanceRecordTaskByMaintenanceRecordIdAndTaskId(int maintenanceRecordId, int taskId);
 	
 }

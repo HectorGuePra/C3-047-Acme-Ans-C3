@@ -27,6 +27,7 @@ public class TechnicianMaintenanceRecordUpdateService extends AbstractGuiService
 	@Override
 	public void authorise() {
 		boolean exist;
+		Boolean authorised = true;
 		MaintenanceRecord maintenanceRecord;
 		Technician technician;
 		int id;
@@ -34,12 +35,24 @@ public class TechnicianMaintenanceRecordUpdateService extends AbstractGuiService
 		id = super.getRequest().getData("id", int.class);
 		maintenanceRecord = this.repository.findById(id);
 
-		exist = maintenanceRecord != null;
+		exist = maintenanceRecord != null ;
 		if (exist) {
 			technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
-			if (technician.equals(maintenanceRecord.getTechnician()))
-				super.getResponse().setAuthorised(true);
+			if (!technician.equals(maintenanceRecord.getTechnician()))
+				authorised = false;
+		} else authorised = false;
+		if (authorised && super.getRequest().getMethod().equals("POST")) {
+			if (super.getRequest().hasData("aircraft")) {
+				Integer aircraftId = super.getRequest().getData("aircraft", int.class);
+				authorised = aircraftId == 0 || this.repository.findAircraftByAircraftId(aircraftId) != null;
+			} 
+			if (authorised && super.getRequest().hasData("status")) {
+				String status = super.getRequest().getData("status", String.class);
+				authorised = status.equals("0") || status.equals("PENDING") || status.equals("IN_PROGRESS") || 
+						status.equals("COMPLETED");
+			}
 		}
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
