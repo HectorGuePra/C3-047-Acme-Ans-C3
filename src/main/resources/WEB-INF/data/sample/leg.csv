@@ -1,5 +1,8 @@
 key,scheduledDeparture,scheduledArrival,key:departureAirport,key:arrivalAirport,status,key:aircraft,key:flight,flightNumber,draftMode
+# Base entity
 leg-00,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-00,BBC1234,false
+
+# Variations
 leg-01,2025/01/01 00:01,2025/01/01 02:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-03,BBC9234,false
 leg-02,2025/01/01 02:10,2025/01/01 04:10,airport-01,airport-02,ON_TIME,aircraft-00,flight-04,BBC2342,false
 leg-03,2028/01/01 00:00,2028/01/01 02:00,airport-01,airport-02,ON_TIME,aircraft-00,flight-32,BBC1654,false
@@ -13,3 +16,23 @@ leg-10,2026/07/03 01:00,2026/07/03 03:00,airport-01,airport-02,CANCELLED,aircraf
 leg-11,2026/07/03 03:10,2026/07/03 05:10,airport-01,airport-02,DELAYED,aircraft-00,flight-11,BBC4282,false
 leg-12,2026/07/03 05:20,2026/07/03 07:20,airport-01,airport-02,LANDED,aircraft-00,flight-12,BBC9536,false
 leg-13,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-01,flight-01,BBC1283,false
+leg-14,2023/07/02 12:01,2023/07/02 15:01,airport-01,airport-02,ON_TIME,aircraft-01,flight-01,BBC1285,false
+leg-15,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-13,BBC1300,false
+leg-16,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-14,BBC1400,false
+leg-17,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-15,BBC1500,false
+leg-18,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-02,flight-16,BBC1600,false
+leg-19,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-03,flight-17,BBC1700,false
+leg-20,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-04,flight-18,BBC1800,false
+leg-21,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-05,flight-19,BBC1900,false
+leg-22,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-06,flight-20,BBC2000,false
+leg-23,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-07,flight-21,BBC2100,false
+leg-24,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-22,BBC2200,false
+leg-25,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-23,BBC2300,false
+leg-26,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-24,BBC2400,false
+leg-27,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-25,BBC2500,false
+leg-28,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-26,BBC2600,false
+leg-29,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-27,BBC2700,false
+leg-30,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-28,BBC2800,false
+leg-31,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-29,BBC2900,false
+leg-32,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-30,BBC3000,false
+leg-33,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-31,BBC3100,false
