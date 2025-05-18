@@ -49,12 +49,9 @@ public class FlightValidator extends AbstractValidator<ValidFlight, Flight> {
 				}
 		}
 
-<<<<<<< HEAD
-=======
 		if (flight.getCost() != null)
 			super.state(context, flight.getCost().getCurrency().equals("EUR"), "cost", "acme.validation.flight.cost-euro.message");
 
->>>>>>> 59f37b926541d364dc67bb8bb8396922fa92ded8
 		result = !super.hasErrors(context);
 		return result;
 	}
