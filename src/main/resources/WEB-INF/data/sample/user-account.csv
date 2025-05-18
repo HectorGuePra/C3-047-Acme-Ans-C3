@@ -6,7 +6,7 @@ user-account-provider-01,true,"UserIdentity{name: 'Laurel', surname: 'Provider',
 user-account-provider-02,true,"UserIdentity{name: 'Martina', surname: 'коза თხა', email: 'martina@acme.com'}",provider2,provider2
 user-account-provider-03,true,"UserIdentity{name: 'Antonia', surname: 'אבטיח Æløzå', email: 'antonia@acme.com'}",provider3,provider3
 
-
+user-account-member-00,true,"UserIdentity{name: 'Pruebas', surname: 'Prueba', email: 'prueba.pilot@acme.com'}",prueba1,prueba1
 user-account-member-01,true,"UserIdentity{name: 'Ana', surname: 'Pilot', email: 'ana.pilot@acme.com'}",pilot1,pilot1
 user-account-member-02,true,"UserIdentity{name: 'David', surname: 'CoPilot', email: 'david.copilot@acme.com'}",copilot1,copilot1
 user-account-member-03,true,"UserIdentity{name: 'Sofia', surname: 'Attendant', email: 'sofia.attendant@acme.com'}",attendant1,attendant1
