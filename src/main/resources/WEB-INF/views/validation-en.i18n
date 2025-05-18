@@ -23,6 +23,10 @@ acme.validation.manager.identifier-number.message = The identifier number must b
 acme.validation.flight.not-null = The flight cannot be null.
 acme.validation.flight.cant-be-publish.message= All legs must be published.
 acme.validation.flight.zero-legs.message = For publishing must have at least one leg.
+<<<<<<< HEAD
+=======
+acme.validation.flight.cost-euro.message = Cost currency must be euros.
+>>>>>>> 59f37b926541d364dc67bb8bb8396922fa92ded8
 
 
 javax.validation.constraints.NotNull.message = The value cannot be null.
