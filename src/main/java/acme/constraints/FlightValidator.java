@@ -27,32 +27,27 @@ public class FlightValidator extends AbstractValidator<ValidFlight, Flight> {
 
 	@Override
 	public boolean isValid(final Flight flight, final ConstraintValidatorContext context) {
-
 		assert context != null;
-
-		boolean result = true;
 
 		if (flight == null)
 			return true;
 
 		List<Leg> legs = this.repository.legsDuringFlight(flight.getId());
-
 		boolean hasLegs = legs != null && !legs.isEmpty();
-		if (flight.getDraftMode() != null) {
-			if (!flight.getDraftMode())
-				super.state(context, hasLegs, "flightTag", "acme.validation.flight.zero-legs.message");
-
-			if (!flight.getDraftMode())
-				for (Leg leg : legs) {
-					boolean isPublished = !leg.isDraftMode();
-					super.state(context, isPublished, "flightTag", "acme.validation.flight.cant-be-publish.message");
-				}
+		if (flight.getDraftMode() != null && !flight.getDraftMode()) {
+			super.state(context, hasLegs, "flightTag", "acme.validation.flight.zero-legs.message");
+			for (Leg leg : legs) {
+				boolean isPublished = !leg.isDraftMode();
+				super.state(context, isPublished, "flightTag", "acme.validation.flight.cant-be-publish.message");
+			}
 		}
 
-		if (flight.getCost() != null)
-			super.state(context, flight.getCost().getCurrency().equals("EUR"), "cost", "acme.validation.flight.cost-euro.message");
+		if (flight.getCost() != null) {
+			String currency = flight.getCost().getCurrency();
+			boolean validCurrency = "EUR".equalsIgnoreCase(currency) || "GBP".equalsIgnoreCase(currency) || "USD".equalsIgnoreCase(currency);
+			super.state(context, validCurrency, "cost", "acme.validation.flight.cost-currency.message");
+		}
 
-		result = !super.hasErrors(context);
-		return result;
+		return !super.hasErrors(context);
 	}
 }
