@@ -36,10 +36,10 @@ flight-24,"Lorem ipsum dolor sit ame",true,EUR 1000.00,"<marquee>Hacked</marquee
 flight-25,"Lorem ipsum dolor sit ame",true,EUR 1000.00,"<script>alert('Hacked!');</script>",false,manager-23
 flight-26,"Lorem ipsum dolor sit ame",true,EUR 1000.00,"'or 'A' = 'A",false,manager-24
 
-#extra
-flight-27,Lorem ipsum dolor sit ame,true,EUR 1000.00,null,false,manager-25
-flight-28,Lorem ipsum dolor sit ame,true,EUR 1000.00,Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,false,manager-26
+#cost
+flight-27,Lorem ipsum dolor sit ame,true,GBP 1000.00,null,false,manager-25
+flight-28,Lorem ipsum dolor sit ame,true,USD 1000.00,Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,false,manager-26
 flight-29,Lorem ipsum dolor sit ame,true,EUR 1000.00,Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,false,manager-27
-flight-30,Lorem ipsum dolor sit ame,true,EUR 1000.00,Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,false,manager-02
+flight-30,Lorem ipsum dolor sit ame,true,GBP 1000.00,Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,false,manager-02
 flight-31,Lorem ipsum dolor sit ame,true,EUR 1000.00,Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,false,manager-03
-flight-32,Lorem ipsum dolor sit ame,true,EUR 1000.00,Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,false,manager-00
+flight-32,Lorem ipsum dolor sit ame,true,USD 1000.00,Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,false,manager-00
