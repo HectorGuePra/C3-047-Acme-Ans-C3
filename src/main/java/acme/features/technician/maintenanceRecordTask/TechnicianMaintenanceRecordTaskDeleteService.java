@@ -68,22 +68,22 @@ public class TechnicianMaintenanceRecordTaskDeleteService extends AbstractGuiSer
 	@Override
 	public void unbind(final MaintenanceRecordTask mrt) {
 
-		SelectChoices task;
-		SelectChoices mr;
+		Technician technician;
+		SelectChoices choichesTasks;
+		MaintenanceRecord mr;
 		Collection<Task> tasks;
-		Collection<MaintenanceRecord> mrs;
 
 		Dataset dataset;
-		
-		tasks = this.repository.findAllTasks();
-		mrs = this.repository.findMaintenanceRecordsByTechnicianId(super.getRequest().getPrincipal().getActiveRealm().getId());
-		task = SelectChoices.from(tasks, "id", mrt.getTask());
-		mr = SelectChoices.from(mrs, "id", mrt.getMaintenanceRecord());
+		technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
+		mr = mrt.getMaintenanceRecord();
+		tasks = mr.getDraftMode() ? this.repository.findTasksByTechnicianId(technician.getId()) 
+				: this.repository.findPublishedTasksByTechnicianId(technician.getId());
+		choichesTasks = SelectChoices.from(tasks, "id", mrt.getTask());
 
 		dataset = super.unbindObject(mrt, "task");
-		dataset.put("tasks", task);
-		dataset.put("task", task.getSelected().getKey());
-		dataset.put("maintenanceRecord", mr.getSelected().getKey());
+		dataset.put("tasks", choichesTasks);
+		dataset.put("task", choichesTasks.getSelected().getKey());
+		dataset.put("maintenanceRecord", mr);
 
 		super.getResponse().addData(dataset);
 	}

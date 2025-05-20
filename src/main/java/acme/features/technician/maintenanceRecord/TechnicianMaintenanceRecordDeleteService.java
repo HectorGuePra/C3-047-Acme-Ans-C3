@@ -11,6 +11,7 @@ import acme.client.services.GuiService;
 import acme.entities.aircraft.Aircraft;
 import acme.entities.maintenancerecord.MaintenanceRecord;
 import acme.entities.maintenancerecord.MaintenanceRecordStatus;
+import acme.features.technician.maintenanceRecordTask.TechnicianMaintenanceRecordTaskRepository;
 import acme.realms.technician.Technician;
 
 @GuiService
@@ -20,6 +21,9 @@ public class TechnicianMaintenanceRecordDeleteService extends AbstractGuiService
 
 	@Autowired
 	private TechnicianMaintenanceRecordRepository repository;
+	
+	@Autowired
+	private TechnicianMaintenanceRecordTaskRepository mrtRepository; 
 
 
 	// AbstractGuiService interface -------------------------------------------
@@ -64,6 +68,7 @@ public class TechnicianMaintenanceRecordDeleteService extends AbstractGuiService
 
 	@Override
 	public void perform(final MaintenanceRecord maintenanceRecord) {
+		this.mrtRepository.deleteAll(this.repository.findMaintenanceRecordTasksByMaintenanceRecordId(maintenanceRecord.getId()));
 		this.repository.delete(maintenanceRecord);
 	}
 

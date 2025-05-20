@@ -8,6 +8,7 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.tasks.Task;
 import acme.entities.tasks.TaskType;
+import acme.features.technician.maintenanceRecordTask.TechnicianMaintenanceRecordTaskRepository;
 import acme.realms.technician.Technician;
 
 @GuiService
@@ -17,6 +18,9 @@ public class TechnicianTaskDeleteService extends AbstractGuiService<Technician, 
 
 	@Autowired
 	private TechnicianTaskRepository repository;
+	
+	@Autowired
+	private TechnicianMaintenanceRecordTaskRepository mrtRepository;
 
 
 	// AbstractGuiService interface -------------------------------------------
@@ -56,11 +60,11 @@ public class TechnicianTaskDeleteService extends AbstractGuiService<Technician, 
 
 	@Override
 	public void validate(final Task task) {
-
 	}
 
 	@Override
 	public void perform(final Task task) {
+		this.mrtRepository.deleteAll(this.repository.findMaintenanceRecordTasksByTaskId(task.getId()));
 		this.repository.delete(task);
 	}
 
@@ -76,5 +80,4 @@ public class TechnicianTaskDeleteService extends AbstractGuiService<Technician, 
 
 		super.getResponse().addData(dataset);
 	}
-
 }

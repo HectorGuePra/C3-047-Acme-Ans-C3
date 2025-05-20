@@ -55,3 +55,4 @@ acme.validation.technician.maintenance-record.estimatedCost.currency.message = E
 acme.validation.technician.maintenance-record.notes.message = Los detalles no pueden tener más de 255 caracteres
 acme.validation.technician.maintenance-record.aircraft.message = Debes seleccionar un avión válido
 acme.validation.technician.maintenance-record.published.message = Debes crear y publicar las tareas asociadas a este registro antes de publicarlo
+acme.validation.technician.maintenance-record.can-not-patch.message = La función de actualizar el estatus es exclusiva para registros publicados
