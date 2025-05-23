@@ -29,7 +29,7 @@ public class TechnicianMaintenanceRecordDeleteService extends AbstractGuiService
 	// AbstractGuiService interface -------------------------------------------
 	@Override
 	public void authorise() {
-		boolean exist;
+		boolean exist, published;
 		MaintenanceRecord maintenanceRecord;
 		Technician technician;
 		int id;
@@ -39,8 +39,9 @@ public class TechnicianMaintenanceRecordDeleteService extends AbstractGuiService
 
 		exist = maintenanceRecord != null;
 		if (exist) {
+			published = !maintenanceRecord.getDraftMode();
 			technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
-			if (technician.equals(maintenanceRecord.getTechnician()))
+			if (!published && technician.equals(maintenanceRecord.getTechnician()))
 				super.getResponse().setAuthorised(true);
 		}
 	}

@@ -26,7 +26,7 @@ public class TechnicianTaskDeleteService extends AbstractGuiService<Technician, 
 	// AbstractGuiService interface -------------------------------------------
 	@Override
 	public void authorise() {
-		boolean exist;
+		boolean exist, published;
 		Task task;
 		Technician technician;
 		int id;
@@ -36,8 +36,9 @@ public class TechnicianTaskDeleteService extends AbstractGuiService<Technician, 
 
 		exist = task != null;
 		if (exist) {
+			published = !task.getDraftMode();
 			technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
-			if (technician.equals(task.getTechnician()))
+			if (!published && technician.equals(task.getTechnician()))
 				super.getResponse().setAuthorised(true);
 		}
 	}
