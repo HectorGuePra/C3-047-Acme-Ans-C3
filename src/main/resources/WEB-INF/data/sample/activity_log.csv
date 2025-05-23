@@ -15,15 +15,16 @@ activityLog-06,2024/03/10 05:30,Fallo eléctrico,Sin impacto en operación.,1,fa
 activityLog-07,2021/08/22 18:00,Incidente menor,Fuga leve de aceite.,0,true,flight-assignment-01
 activityLog-08,2022/09/01 10:10,Incendio,Fuego en compartimento de carga extinguido.,10,false,flight-assignment-01
 
-# Description
-activityLog-09,2022/10/11 13:45,Fallo eléctrico,"l",1,true,flight-assignment-01
-activityLog-10,2022/10/11 13:45,Fallo eléctrico,L,1,false,flight-assignment-01
-activityLog-11,2023/01/01 00:00,Fallo eléctrico,"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",3,false,flight-assignment-01
-activityLog-12,2023/01/02 00:00,Fallo eléctrico,"<script>alert('Hack');</script>",4,false,flight-assignment-01
-activityLog-13,2023/01/03 00:00,Fallo eléctrico,"' OR '1'='1",2,false,flight-assignment-01
-activityLog-14,2023/01/04 00:00,Fallo eléctrico,"这是一个测试。",3,false,flight-assignment-01
-activityLog-15,2023/01/05 00:00,Fallo eléctrico, "وريم إيبسوم" , 1,false,flight-assignment-01
-activityLog-16,2023/01/06 00:00,Fallo eléctrico,"ทดสอบระบบความปลอดภัย",4,false,flight-assignment-01
-activityLog-17,2023/01/07 00:00,Fallo eléctrico,"<marquee>Malicioso</marquee>",1,false,flight-assignment-01
-activityLog-18,2023/01/08 00:00,Fallo eléctrico,"Descripción con caracteres especiales: #, %, &, @, *",3,false,flight-assignment-01
-activityLog-19,2023/01/09 00:00,Fallo eléctrico,"Texto extremadamente largo: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam...",4,false,flight-assignment-01
+# Description y incident type
+activityLog-09,2022/10/11 13:45,"l","l",1,true,flight-assignment-01
+activityLog-10,2022/10/11 13:45,L,L,1,false,flight-assignment-01
+activityLog-11,2023/01/01 00:00,Texto de cincuenta caracteres aaaaaaaaaaaaaaaaaaaa,"Lorem ipsum dolor sit amet, consectetur adipiscing elit.",3,false,flight-assignment-01
+activityLog-12,2023/01/02 00:00,"<script>alert('Hack');</script>","<script>alert('Hack');</script>",4,false,flight-assignment-01
+activityLog-13,2023/01/03 00:00,"' OR '1'='1","' OR '1'='1",2,false,flight-assignment-01
+activityLog-14,2023/01/04 00:00,"这是一个测试。","这是一个测试。",3,false,flight-assignment-01
+activityLog-15,2023/01/05 00:00,"وريم إيبسوم", "وريم إيبسوم" ,1,false,flight-assignment-01
+activityLog-16,2023/01/06 00:00,"ทดสอบระบบความปลอดภัย","ทดสอบระบบความปลอดภัย",4,false,flight-assignment-01
+activityLog-17,2023/01/07 00:00,"<marquee>Malicioso</marquee>","<marquee>Malicioso</marquee>",1,false,flight-assignment-01
+activityLog-18,2023/01/08 00:00,Texto de cincuenta caracteres aaaaaaaaaaaaaaaaaaa*,Lorem ipsum dolor sit amet- consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*,3,false,flight-assignment-01
+activityLog-19,2023/01/09 00:00,Texto de cincuenta caracteres aaaaaaaaaaaaaaaaaaaa,Lorem ipsum dolor sit amet- consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor,4,false,flight-assignment-01
+
