@@ -6,7 +6,9 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
@@ -28,6 +30,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @ValidFlight
+@Table(indexes = {
+	@Index(columnList = "manager_id")
+})
 public class Flight extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
