@@ -2,10 +2,12 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acme.client.components.datatypes.Money;
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
@@ -26,7 +28,7 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void authorise() {
-		boolean status;
+		boolean authorised = true;
 		int bookingId;
 		Booking booking;
 		Customer customer;
@@ -34,9 +36,52 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		bookingId = super.getRequest().getData("id", int.class);
 		booking = this.repository.findBookingById(bookingId);
 		customer = booking == null ? null : booking.getCustomer();
-		status = booking != null && booking.isDraftMode() && super.getRequest().getPrincipal().hasRealm(customer);
+		authorised = booking != null && booking.isDraftMode() && super.getRequest().getPrincipal().hasRealm(customer);
 
-		super.getResponse().setAuthorised(status);
+		if (authorised && super.getRequest().getMethod().equals("POST")) {
+			if (super.getRequest().hasData("flight", int.class)) {
+				int flightId = super.getRequest().getData("flight", int.class);
+				Flight flight = this.repository.findFlightById(flightId);
+
+				Collection<Flight> validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
+					.filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
+
+				authorised = flightId == 0 || flight != null && validFlights.contains(flight);
+			}
+			if (authorised && super.getRequest().hasData("travelClass")) {
+				String travelClass = super.getRequest().getData("travelClass", String.class);
+				authorised = travelClass.equals("0") || travelClass.equals("") || travelClass.equals("ECONOMY") || travelClass.equals("BUSINESS");
+			}
+			if (authorised && super.getRequest().hasData("locatorCode", String.class)) {
+				String locatorCode = super.getRequest().getData("locatorCode", String.class);
+				authorised = locatorCode != null && locatorCode.equals(booking.getLocatorCode());
+			}
+			if (authorised && super.getRequest().hasData("purchaseMoment", Date.class)) {
+				Date purchaseMoment = super.getRequest().getData("purchaseMoment", Date.class);
+				authorised = purchaseMoment != null && purchaseMoment.equals(booking.getPurchaseMoment());
+			}
+			if (authorised && super.getRequest().hasData("price", Money.class)) {
+				Money price = super.getRequest().getData("price", Money.class);
+				Money priceB = booking.getPrice();
+
+				int flightId = super.getRequest().getData("flight", int.class);
+				Money priceF = new Money();
+				if (flightId == 0) {
+					priceF.setAmount(0.0);
+					priceF.setCurrency("EUR");
+				} else
+					priceF = this.repository.findCostByFlight(flightId);
+				Money res = priceF;
+				Integer nPassengers = this.repository.findPassengersByBooking(bookingId).size();
+				double amount = priceF.getAmount() * nPassengers;
+				res.setAmount(amount);
+
+				authorised = price != null && (price.getAmount().equals(priceB.getAmount()) && price.getCurrency().equals(priceB.getCurrency()) || priceB.getAmount().equals(res.getAmount()) && priceB.getCurrency().equals(res.getCurrency()));
+			}
+
+		}
+
+		super.getResponse().setAuthorised(authorised);
 
 	}
 
@@ -67,18 +112,20 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void validate(final Booking booking) {
-		if (booking.isDraftMode() == false)
-			super.state(false, "draftMode", "acme.validation.confirmation.message.update");
-
-		Booking b = this.repository.findBookingByLocatorCode(booking.getLocatorCode());
-		if (b != null && b.getId() != booking.getId())
-			super.state(false, "locatorCode", "acme.validation.confirmation.message.booking.locatorCode");
-
-		Collection<Flight> validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
-			.filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
-
-		if (booking.getFlight() != null && !validFlights.contains(booking.getFlight()))
-			super.state(false, "flight", "acme.validation.confirmation.message.booking.flight");
+		/*
+		 * if (booking.isDraftMode() == false)
+		 * super.state(false, "draftMode", "acme.validation.confirmation.message.update");
+		 * 
+		 * Booking b = this.repository.findBookingByLocatorCode(booking.getLocatorCode());
+		 * if (b != null && b.getId() != booking.getId())
+		 * super.state(false, "locatorCode", "acme.validation.confirmation.message.booking.locatorCode");
+		 * 
+		 * Collection<Flight> validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
+		 * .filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
+		 * 
+		 * if (booking.getFlight() != null && !validFlights.contains(booking.getFlight()))
+		 * super.state(false, "flight", "acme.validation.confirmation.message.booking.flight");
+		 */
 	}
 
 	@Override

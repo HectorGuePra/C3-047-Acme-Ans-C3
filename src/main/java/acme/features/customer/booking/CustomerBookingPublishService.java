@@ -11,6 +11,7 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.Passenger;
 import acme.entities.booking.Booking;
 import acme.entities.booking.TravelClass;
 import acme.entities.flight.Flight;
@@ -29,7 +30,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 	@Override
 	public void authorise() {
-		boolean status;
+		boolean authorised = true;
 		int bookingId;
 		Booking booking;
 		Customer customer;
@@ -37,9 +38,24 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		bookingId = super.getRequest().getData("id", int.class);
 		booking = this.repository.findBookingById(bookingId);
 		customer = booking == null ? null : booking.getCustomer();
-		status = booking != null && booking.isDraftMode() && super.getRequest().getPrincipal().hasRealm(customer);
+		Collection<Passenger> passengers = this.repository.findPassengersByBooking(bookingId);
+		Collection<Passenger> pInDraftMode = this.repository.findPassengersInDraftMode(bookingId);
+		authorised = booking != null && booking.isDraftMode() && !passengers.isEmpty() && pInDraftMode.isEmpty() && super.getRequest().getPrincipal().hasRealm(customer);
 
-		super.getResponse().setAuthorised(status);
+		/*
+		 * if (super.getRequest().hasData("lastCardNibble", String.class)) {
+		 * String lastCardNibble = super.getRequest().getData("lastCardNibble", String.class);
+		 * if (lastCardNibble == null || lastCardNibble.isBlank() || lastCardNibble.isEmpty()) {
+		 * String lastCardNibbleStored = this.repository.findBookingById(booking.getId()).getLastCardNibble();
+		 * if (lastCardNibbleStored == null || lastCardNibbleStored.isBlank() || lastCardNibbleStored.isEmpty())
+		 * authorised = false;
+		 * }
+		 * }
+		 * 
+		 * if (super.getRequest().hasData("lastCardNibble", String.class))
+		 * authorised = false;
+		 */
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
@@ -70,8 +86,8 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 	public void validate(final Booking booking) {
 		if (booking.getLastCardNibble() == null || booking.getLastCardNibble().isBlank() || booking.getLastCardNibble().isEmpty()) {
 			String lastCardNibbleStored = this.repository.findBookingById(booking.getId()).getLastCardNibble();
-			if (lastCardNibbleStored == null || lastCardNibbleStored.isBlank() || lastCardNibbleStored.isEmpty())
-				super.state(false, "lastNibble", "acme.validation.confirmation.message.lastCardNibble");
+			//if (lastCardNibbleStored == null || lastCardNibbleStored.isBlank() || lastCardNibbleStored.isEmpty())
+			super.state(false, "lastCardNibble", "acme.validation.confirmation.message.lastCardNibble");
 		}
 
 		Booking b = this.repository.findBookingByLocatorCode(booking.getLocatorCode());
@@ -88,8 +104,10 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 	@Override
 	public void perform(final Booking booking) {
-		if (booking.getLastCardNibble() == null || booking.getLastCardNibble().isBlank() || booking.getLastCardNibble().isEmpty())
-			booking.setLastCardNibble(this.repository.findBookingById(booking.getId()).getLastCardNibble());
+		/*
+		 * if (booking.getLastCardNibble() == null || booking.getLastCardNibble().isBlank() || booking.getLastCardNibble().isEmpty())
+		 * booking.setLastCardNibble(this.repository.findBookingById(booking.getId()).getLastCardNibble());
+		 */
 
 		booking.setDraftMode(false);
 		this.repository.save(booking);
@@ -104,7 +122,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		Collection<Flight> flights;
 
 		flights = this.repository.findAllPublishedFlights();
-		flightChoices = SelectChoices.from(flights, "tag", booking.getFlight());
+		flightChoices = SelectChoices.from(flights, "description", booking.getFlight());
 		classChoices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "draftMode");

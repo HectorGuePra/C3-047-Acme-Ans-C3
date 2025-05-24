@@ -4,10 +4,12 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:form> 
-	<acme:input-textbox code="customer.booking.form.locatorCode" path="locatorCode" readonly="true"/>
-	<acme:input-moment code="customer.booking.form.purchaseMoment" path="purchaseMoment" readonly="true"/>
+	<jstl:if test="${acme:anyOf(_command, 'show|update|publish')}">
+		<acme:input-textbox code="customer.booking.form.locatorCode" path="locatorCode" readonly="true"/>
+		<acme:input-moment code="customer.booking.form.purchaseMoment" path="purchaseMoment" readonly="true"/>
+		<acme:input-money code="customer.booking.form.price" path="price" readonly="true"/>
+	</jstl:if>
 	<acme:input-select code="customer.booking.form.travelClass" path="travelClass" choices="${classes}"/>	
-	<acme:input-money code="customer.booking.form.price" path="price" readonly="true"/>
 	<acme:input-textbox code="customer.booking.form.lastCardNibble" path="lastCardNibble"/>
 	<acme:input-select code="customer.booking.form.flight" path="flight" choices="${flights}"/>	
 
