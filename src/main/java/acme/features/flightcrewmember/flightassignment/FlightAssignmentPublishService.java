@@ -38,11 +38,30 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 
 		assignmentId = super.getRequest().getData("id", int.class);
 		flightAssignment = this.repository.findFlightAssignmentById(assignmentId);
-
 		memberId = flightAssignment.getAllocatedFlightCrewMember().getId();
 		userId = super.getRequest().getPrincipal().getActiveRealm().getId();
-
 		status = flightAssignment.getDraftMode() && MomentHelper.isFuture(flightAssignment.getLeg().getScheduledDeparture()) && userId == memberId;
+
+		if (status && super.getRequest().getMethod().equals("POST")) {
+			if (super.getRequest().hasData("leg")) {
+				Integer legId = super.getRequest().getData("leg", int.class);
+				Leg leg = this.repository.findLegById(legId);
+				Collection<LegStatus> legStatus = List.of(LegStatus.ON_TIME, LegStatus.DELAYED);
+				Collection<Leg> availableLegs = this.repository.findAllLegsAvailables(legStatus);
+				boolean legIsAvailable = availableLegs.contains(leg);
+				status = legId == 0 || legIsAvailable;
+			}
+
+			if (status && super.getRequest().hasData("duty")) {
+				String duty = super.getRequest().getData("duty", String.class);
+				status = duty.equals("0") || duty.equals("PILOT") || duty.equals("CO_PILOT") || duty.equals("LEAD_ATTENDANT") || duty.equals("CABIN_ATTENDANT");
+			}
+
+			if (status && super.getRequest().hasData("currentStatus")) {
+				String currentStatus = super.getRequest().getData("currentStatus", String.class);
+				status = currentStatus.equals("0") || currentStatus.equals("CONFIRMED") || currentStatus.equals("PENDING") || currentStatus.equals("CANCELLED");
+			}
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -66,42 +85,49 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 	public void validate(final FlightAssignment flightAssignment) {
 		Leg leg;
 		FlightCrewMember member;
-		List<FlightAssignment> OverlappingFlightAssignments;
 		boolean isCompleted;
-		boolean alreadyHasPilot;
-		boolean alreadyHasCoPilot;
 		boolean availableMember;
 		boolean alreadyOccupied;
 		boolean validStatus;
-		CrewsDuty pilot = CrewsDuty.PILOT;
-		CrewsDuty coPilot = CrewsDuty.CO_PILOT;
 
 		member = super.getRequest().getData("allocatedFlightCrewMember", FlightCrewMember.class);
 		leg = super.getRequest().getData("leg", Leg.class);
 
-		OverlappingFlightAssignments = this.repository.findFlightAssignmentsByFlightCrewMemberDuring(member.getId(), leg.getScheduledDeparture(), leg.getScheduledArrival()).stream().filter(fa -> fa.getId() != flightAssignment.getId())
-			.collect(Collectors.toList());
-
-		CrewsDuty duty = super.getRequest().getData("duty", CrewsDuty.class);
-		List<FlightAssignment> flightsWithPilots = this.repository.findFlightAssignmentByLegAndPilotDuty(leg.getId(), pilot);
-		List<FlightAssignment> flightsWithCoPilots = this.repository.findFlightAssignmentByLegAndCoPilotDuty(leg.getId(), coPilot);
+		List<FlightAssignment> OverlappingFlightAssignments = this.repository.findFlightAssignmentsByFlightCrewMemberDuring(member.getId(), leg.getScheduledDeparture(), leg.getScheduledArrival()).stream()
+			.filter(fa -> fa.getId() != flightAssignment.getId()).collect(Collectors.toList());
 
 		isCompleted = leg.getStatus() == LegStatus.LANDED;
+		super.state(!isCompleted, "leg", "acme.validation.member.leg-complete.message");
+
 		alreadyOccupied = !OverlappingFlightAssignments.isEmpty();
+		super.state(!alreadyOccupied, "leg", "acme.validation.member.overlapping.message");
+
 		availableMember = member.getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
+		super.state(availableMember, "flightCrewMember", "acme.validation.member.member-available.message");
 
-		alreadyHasPilot = flightsWithPilots.stream().anyMatch(fa -> fa.getId() != flightAssignment.getId()) && duty.equals(CrewsDuty.PILOT);
-
-		alreadyHasCoPilot = flightsWithCoPilots.stream().anyMatch(fa -> fa.getId() != flightAssignment.getId()) && duty.equals(CrewsDuty.CO_PILOT);
+		if (flightAssignment.getDuty() == CrewsDuty.PILOT) {
+			boolean alreadyHasPilot = !this.repository.findFlightAssignmentByLegAndPilotDuty(leg.getId(), CrewsDuty.PILOT).isEmpty();
+			super.state(!alreadyHasPilot, "duty", "acme.validation.member.pilot.message");
+		}
+		if (flightAssignment.getDuty() == CrewsDuty.CO_PILOT) {
+			boolean alreadyHasCoPilot = !this.repository.findFlightAssignmentByLegAndCoPilotDuty(leg.getId(), CrewsDuty.CO_PILOT).isEmpty();
+			super.state(!alreadyHasCoPilot, "duty", "acme.validation.member.co-pilot.message");
+		}
 
 		validStatus = flightAssignment.getCurrentStatus().equals(AssigmentStatus.CONFIRMED) || flightAssignment.getCurrentStatus().equals(AssigmentStatus.CANCELLED);
+		super.state(validStatus, "currentStatus", "acme.validation.member.currentStatus");
 
-		super.state(!alreadyHasPilot, "duty", "acme.validation.pilot.message");
-		super.state(!alreadyHasCoPilot, "duty", "acme.validation.co-pilot.message");
-		super.state(validStatus, "currentStatus", "acme.validation.currentStatus");
-		super.state(!alreadyOccupied, "leg", "acme.validation.overlapping.message");
-		super.state(availableMember, "flightCrewMember", "acme.validation.member-available.message");
-		super.state(!isCompleted, "leg", "acme.validation.leg-complete.message");
+		if (this.getBuffer().getErrors().hasErrors("duty"))
+			super.state(flightAssignment.getDuty() != null, "duty", "acme.validation.member.noDuty.message");
+
+		if (this.getBuffer().getErrors().hasErrors("currentStatus"))
+			super.state(flightAssignment.getCurrentStatus() != null, "currentStatus", "acme.validation.member.noStatus.message");
+
+		if (this.getBuffer().getErrors().hasErrors("leg"))
+			super.state(flightAssignment.getLeg() != null, "leg", "acme.validation.member.noLeg.message");
+
+		if (this.getBuffer().getErrors().hasErrors("remarks"))
+			super.state(flightAssignment.getRemarks().length() <= 255, "remarks", "acme.validation.member.remarks.message");
 		;
 	}
 
@@ -127,7 +153,8 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 		dutyChoice = SelectChoices.from(CrewsDuty.class, flightAssignment.getDuty());
 		currentStatusChoice = SelectChoices.from(AssigmentStatus.class, flightAssignment.getCurrentStatus());
 
-		legs = this.repository.findAllLegs();
+		Collection<LegStatus> legStatus = List.of(LegStatus.ON_TIME, LegStatus.DELAYED);
+		legs = this.repository.findAllLegsAvailables(legStatus);
 		legChoice = SelectChoices.from(legs, "description", flightAssignment.getLeg());
 
 		flightCrewMembers = this.repository.findAllFlightCrewMembers();

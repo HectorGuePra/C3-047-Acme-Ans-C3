@@ -6,12 +6,12 @@ user-account-provider-01,true,"UserIdentity{name: 'Laurel', surname: 'Provider',
 user-account-provider-02,true,"UserIdentity{name: 'Martina', surname: 'коза თხა', email: 'martina@acme.com'}",provider2,provider2
 user-account-provider-03,true,"UserIdentity{name: 'Antonia', surname: 'אבטיח Æløzå', email: 'antonia@acme.com'}",provider3,provider3
 
-
-user-account-member-01,true,"UserIdentity{name: 'Ana', surname: 'Pilot', email: 'ana.pilot@acme.com'}",pilot1,pilot1
-user-account-member-02,true,"UserIdentity{name: 'David', surname: 'CoPilot', email: 'david.copilot@acme.com'}",copilot1,copilot1
-user-account-member-03,true,"UserIdentity{name: 'Sofia', surname: 'Attendant', email: 'sofia.attendant@acme.com'}",attendant1,attendant1
-user-account-member-04,true,"UserIdentity{name: 'Esteban', surname: 'Lopez', email: 'esteban@acme.com'}",attendant2,attendant2
-user-account-member,true,"UserIdentity{name: 'Jesus', surname: 'Pons', email: 'jesus.attendant@acme.com'}",attendant3,attendant3
+user-account-member-00,true,"UserIdentity{name: 'Pruebas', surname: 'Prueba', email: 'prueba.pilot@acme.com'}",member0,member0
+user-account-member-01,true,"UserIdentity{name: 'Ana', surname: 'Pilot', email: 'ana.pilot@acme.com'}",member1,member1
+user-account-member-02,true,"UserIdentity{name: 'David', surname: 'CoPilot', email: 'david.copilot@acme.com'}",member2,member2
+user-account-member-03,true,"UserIdentity{name: 'Sofia', surname: 'Attendant', email: 'sofia.attendant@acme.com'}",member3,member3
+user-account-member-04,true,"UserIdentity{name: 'Esteban', surname: 'Lopez', email: 'esteban@acme.com'}",member4,member4
+user-account-member,true,"UserIdentity{name: 'Jesus', surname: 'Pons', email: 'jesus.attendant@acme.com'}",member5,member5
 
 user-account-agent-01,true,"UserIdentity{name: 'Alberto', surname: 'Aznar', email: 'alberto@acme.com'}",agent1,agent1
 user-account-agent-02,true,"UserIdentity{name: 'Zaida', surname: 'Zamora', email: 'juancarlos@acme.com'}",agent2,agent2

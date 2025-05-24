@@ -49,7 +49,6 @@ public class MaintenanceRecord extends AbstractEntity {
 	@Automapped
 	private Money estimatedCost;
 
-
 	@Optional
 	@ValidString(min=1, max = 255)
 	@Automapped

@@ -22,7 +22,7 @@ import javax.validation.constraints.Pattern;
 
 public @interface ValidFlightNumber {
 
-	String message() default "El número de vuelo debe ser un código de 2 o 3 letras seguidas de 4 dígitos.";
+	String message() default "{acme.validation.leg.flight-number.message}";
 
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};

@@ -11,6 +11,7 @@ import acme.client.services.GuiService;
 import acme.entities.aircraft.Aircraft;
 import acme.entities.maintenancerecord.MaintenanceRecord;
 import acme.entities.maintenancerecord.MaintenanceRecordStatus;
+import acme.features.technician.maintenanceRecordTask.TechnicianMaintenanceRecordTaskRepository;
 import acme.realms.technician.Technician;
 
 @GuiService
@@ -20,12 +21,15 @@ public class TechnicianMaintenanceRecordDeleteService extends AbstractGuiService
 
 	@Autowired
 	private TechnicianMaintenanceRecordRepository repository;
+	
+	@Autowired
+	private TechnicianMaintenanceRecordTaskRepository mrtRepository; 
 
 
 	// AbstractGuiService interface -------------------------------------------
 	@Override
 	public void authorise() {
-		boolean exist;
+		boolean exist, published;
 		MaintenanceRecord maintenanceRecord;
 		Technician technician;
 		int id;
@@ -35,8 +39,9 @@ public class TechnicianMaintenanceRecordDeleteService extends AbstractGuiService
 
 		exist = maintenanceRecord != null;
 		if (exist) {
+			published = !maintenanceRecord.getDraftMode();
 			technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
-			if (technician.equals(maintenanceRecord.getTechnician()))
+			if (!published && technician.equals(maintenanceRecord.getTechnician()))
 				super.getResponse().setAuthorised(true);
 		}
 	}
@@ -64,6 +69,7 @@ public class TechnicianMaintenanceRecordDeleteService extends AbstractGuiService
 
 	@Override
 	public void perform(final MaintenanceRecord maintenanceRecord) {
+		this.mrtRepository.deleteAll(this.repository.findMaintenanceRecordTasksByMaintenanceRecordId(maintenanceRecord.getId()));
 		this.repository.delete(maintenanceRecord);
 	}
 
