@@ -93,7 +93,7 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 	public void unbind(final Flight flight) {
 		Dataset dataset;
 
-		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "drafMode");
+		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
 
 		dataset.put("departure", flight.getDeparture() != null ? flight.getDeparture().getName() : flight.getDeparture());
 		dataset.put("arrival", flight.getArrival() != null ? flight.getArrival().getName() : flight.getArrival());
