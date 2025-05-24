@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.airline.Airline;
 import acme.entities.flight.Flight;
 import acme.entities.legs.Leg;
 import acme.realms.manager.Manager;
@@ -22,29 +21,19 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 
 	@Override
 	public void authorise() {
-		Integer flightId = super.getRequest().getData("id", Integer.class);
-		if (flightId == null) {
-			super.getResponse().setAuthorised(false);
-			return;
+		boolean status;
+		int flightId;
+		Flight flight;
+		Manager manager;
+		if (!super.getRequest().hasData("id"))
+			status = false;
+		else {
+			flightId = super.getRequest().getData("id", int.class);
+			flight = this.repository.findFlightById(flightId);
+			manager = flight == null ? null : flight.getManager();
+			status = flight != null && flight.getDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
+			super.getResponse().setAuthorised(status);
 		}
-
-		Flight flight = this.repository.findFlightById(flightId);
-		if (flight == null || !flight.getDraftMode()) {
-			super.getResponse().setAuthorised(false);
-			return;
-		}
-
-		Manager manager = this.repository.findManagerByFlightManagerId(flightId);
-		boolean status = super.getRequest().getPrincipal().hasRealm(manager);
-
-		if (status && super.getRequest().hasData("airline")) {
-			int airlineId = super.getRequest().getData("airline", int.class);
-			Airline airline = this.repository.findAirlineByManager(manager.getId());
-			if (airline != null)
-				status = manager.getAirline().getId() == airlineId && status;
-		}
-
-		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
