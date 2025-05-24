@@ -34,12 +34,21 @@ acme.validation.flightCrewMember.duplicated-employeeCode.message = The employeeC
 
 acme.validation.activityLog.statusLeg.message = The leg must be in LANDED status
 
-acme.validation.pilot.message = Only one pilot per Leg.
-acme.validation.co-pilot.message = Only one co_pilot per Leg.
-acme.validation.overlapping.message = This leg overlaps with other assignments.
-acme.validation.member-available.message = Your status is not AVAIDABLE.
-acme.validation.currentStatus = The current status must be CANCELLED or CONFIRMED
-acme.validation.leg-complete.message = The leg status must not be LANDED.
+acme.validation.member.pilot.message = Only one pilot per Leg
+acme.validation.member.co-pilot.message = Only one co_pilot per Leg
+acme.validation.member.overlapping.message = This leg overlaps with other assignments
+acme.validation.member.member-available.message = Your status is not AVAIDABLE
+acme.validation.member.currentStatus = The current status must be CANCELLED or CONFIRMED
+acme.validation.member.leg-complete.message = The leg status must not be LANDED
+acme.validation.member.noDuty.message = No duty has been selected
+acme.validation.member.noStatus.message = No Assignment Status has been selected
+acme.validation.member.noLeg.message = No Leg has been selected
+acme.validation.member.remarks.message = The maximum length of remarks is 255 characters
+
+acme.validation.member.assignment.incidentType.message = The length of the incident type must be between 1 and 50 characters
+acme.validation.member.assignment.description.message = The length of the description must be between 1 and 255 characters
+acme.validation.member.assignment.severityLevel.message = Severity level must be between 0 and 10
+
 
 acme.validation.airport.iata-code.message = The Iata Code must be unique.
 

@@ -62,7 +62,15 @@ public class ActivityLogCreateService extends AbstractGuiService<FlightCrewMembe
 
 	@Override
 	public void validate(final ActivityLog activityLog) {
-		;
+		if (this.getBuffer().getErrors().hasErrors("incidentType"))
+			super.state(activityLog.getIncidentType() != null, "incidentType", "acme.validation.member.assignment.incidentType.message");
+
+		if (this.getBuffer().getErrors().hasErrors("description"))
+			super.state(activityLog.getDescription() != null, "description", "acme.validation.member.assignment.description.message");
+
+		if (this.getBuffer().getErrors().hasErrors("severityLevel"))
+			super.state(activityLog.getSeverityLevel() != null, "severityLevel", "acme.validation.member.assignment.severityLevel.message");
+
 	}
 
 	@Override

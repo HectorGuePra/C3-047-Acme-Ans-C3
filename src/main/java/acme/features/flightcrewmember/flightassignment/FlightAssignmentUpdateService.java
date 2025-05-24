@@ -2,6 +2,7 @@
 package acme.features.flightcrewmember.flightassignment;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +15,7 @@ import acme.entities.flightassignment.AssigmentStatus;
 import acme.entities.flightassignment.CrewsDuty;
 import acme.entities.flightassignment.FlightAssignment;
 import acme.entities.legs.Leg;
+import acme.entities.legs.LegStatus;
 import acme.realms.flightcrewmember.FlightCrewMember;
 
 @GuiService
@@ -35,6 +37,26 @@ public class FlightAssignmentUpdateService extends AbstractGuiService<FlightCrew
 		memberId = flightAssignment == null ? null : super.getRequest().getPrincipal().getActiveRealm().getId();
 		status = flightAssignment != null && flightAssignment.getAllocatedFlightCrewMember().getId() == memberId && flightAssignment.getDraftMode();
 
+		if (status && super.getRequest().getMethod().equals("POST")) {
+			if (super.getRequest().hasData("leg")) {
+				Integer legId = super.getRequest().getData("leg", int.class);
+				Leg leg = this.repository.findLegById(legId);
+				Collection<LegStatus> legStatus = List.of(LegStatus.ON_TIME, LegStatus.DELAYED);
+				Collection<Leg> availableLegs = this.repository.findAllLegsAvailables(legStatus);
+				boolean legIsAvailable = availableLegs.contains(leg);
+				status = legId == 0 || legIsAvailable;
+			}
+
+			if (status && super.getRequest().hasData("duty")) {
+				String duty = super.getRequest().getData("duty", String.class);
+				status = duty.equals("0") || duty.equals("PILOT") || duty.equals("CO_PILOT") || duty.equals("LEAD_ATTENDANT") || duty.equals("CABIN_ATTENDANT");
+			}
+
+			if (status && super.getRequest().hasData("currentStatus")) {
+				String currentStatus = super.getRequest().getData("currentStatus", String.class);
+				status = currentStatus.equals("0") || currentStatus.equals("CONFIRMED") || currentStatus.equals("PENDING") || currentStatus.equals("CANCELLED");
+			}
+		}
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -56,6 +78,18 @@ public class FlightAssignmentUpdateService extends AbstractGuiService<FlightCrew
 
 	@Override
 	public void validate(final FlightAssignment assignment) {
+
+		if (this.getBuffer().getErrors().hasErrors("duty"))
+			super.state(assignment.getDuty() != null, "duty", "acme.validation.member.noDuty.message");
+
+		if (this.getBuffer().getErrors().hasErrors("currentStatus"))
+			super.state(assignment.getCurrentStatus() != null, "currentStatus", "acme.validation.member.noStatus.message");
+
+		if (this.getBuffer().getErrors().hasErrors("leg"))
+			super.state(assignment.getLeg() != null, "leg", "acme.validation.member.noLeg.message");
+
+		if (this.getBuffer().getErrors().hasErrors("remarks"))
+			super.state(assignment.getRemarks().length() <= 255, "remarks", "acme.validation.member.remarks.message");
 		;
 	}
 
@@ -81,7 +115,8 @@ public class FlightAssignmentUpdateService extends AbstractGuiService<FlightCrew
 		dutyChoice = SelectChoices.from(CrewsDuty.class, assignment.getDuty());
 		currentStatusChoice = SelectChoices.from(AssigmentStatus.class, assignment.getCurrentStatus());
 
-		legs = this.repository.findAllLegs();
+		Collection<LegStatus> legStatus = List.of(LegStatus.ON_TIME, LegStatus.DELAYED);
+		legs = this.repository.findAllLegsAvailables(legStatus);
 		legChoice = SelectChoices.from(legs, "description", assignment.getLeg());
 
 		flightCrewMembers = this.repository.findAllFlightCrewMembers();
