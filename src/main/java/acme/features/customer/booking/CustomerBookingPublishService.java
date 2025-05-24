@@ -42,19 +42,21 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		Collection<Passenger> pInDraftMode = this.repository.findPassengersInDraftMode(bookingId);
 		authorised = booking != null && booking.isDraftMode() && !passengers.isEmpty() && pInDraftMode.isEmpty() && super.getRequest().getPrincipal().hasRealm(customer);
 
-		/*
-		 * if (super.getRequest().hasData("lastCardNibble", String.class)) {
-		 * String lastCardNibble = super.getRequest().getData("lastCardNibble", String.class);
-		 * if (lastCardNibble == null || lastCardNibble.isBlank() || lastCardNibble.isEmpty()) {
-		 * String lastCardNibbleStored = this.repository.findBookingById(booking.getId()).getLastCardNibble();
-		 * if (lastCardNibbleStored == null || lastCardNibbleStored.isBlank() || lastCardNibbleStored.isEmpty())
-		 * authorised = false;
-		 * }
-		 * }
-		 * 
-		 * if (super.getRequest().hasData("lastCardNibble", String.class))
-		 * authorised = false;
-		 */
+		if (authorised && super.getRequest().getMethod().equals("POST")) {
+			if (super.getRequest().hasData("flight", int.class)) {
+				int flightId = super.getRequest().getData("flight", int.class);
+				Flight flight = this.repository.findFlightById(flightId);
+
+				Collection<Flight> validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
+					.filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
+
+				authorised = flightId == 0 || flight != null && validFlights.contains(flight);
+			}
+			if (authorised && super.getRequest().hasData("travelClass")) {
+				String travelClass = super.getRequest().getData("travelClass", String.class);
+				authorised = travelClass.equals("0") || travelClass.equals("") || travelClass.equals("ECONOMY") || travelClass.equals("BUSINESS");
+			}
+		}
 		super.getResponse().setAuthorised(authorised);
 	}
 
@@ -84,31 +86,12 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 	@Override
 	public void validate(final Booking booking) {
-		if (booking.getLastCardNibble() == null || booking.getLastCardNibble().isBlank() || booking.getLastCardNibble().isEmpty()) {
-			String lastCardNibbleStored = this.repository.findBookingById(booking.getId()).getLastCardNibble();
-			//if (lastCardNibbleStored == null || lastCardNibbleStored.isBlank() || lastCardNibbleStored.isEmpty())
+		if (booking.getLastCardNibble() == null || booking.getLastCardNibble().isBlank() || booking.getLastCardNibble().isEmpty())
 			super.state(false, "lastCardNibble", "acme.validation.confirmation.message.lastCardNibble");
-		}
-
-		Booking b = this.repository.findBookingByLocatorCode(booking.getLocatorCode());
-		if (b != null && b.getId() != booking.getId())
-			super.state(false, "locatorCode", "acme.validation.confirmation.message.booking.locatorCode");
-
-		Collection<Flight> validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment())))
-			.collect(Collectors.toList());
-
-		if (booking.getFlight() != null && !validFlights.contains(booking.getFlight()))
-			super.state(false, "flight", "acme.validation.confirmation.message.booking.flight");
-		;
 	}
 
 	@Override
 	public void perform(final Booking booking) {
-		/*
-		 * if (booking.getLastCardNibble() == null || booking.getLastCardNibble().isBlank() || booking.getLastCardNibble().isEmpty())
-		 * booking.setLastCardNibble(this.repository.findBookingById(booking.getId()).getLastCardNibble());
-		 */
-
 		booking.setDraftMode(false);
 		this.repository.save(booking);
 	}

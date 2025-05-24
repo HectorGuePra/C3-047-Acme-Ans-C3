@@ -91,17 +91,6 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	@Override
 	public void validate(final Booking booking) {
-		/*
-		 * Booking b = this.repository.findBookingByLocatorCode(booking.getLocatorCode());
-		 * if (b != null)
-		 * super.state(false, "locatorCode", "acme.validation.confirmation.message.booking.locatorCode");
-		 * 
-		 * Collection<Flight> validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
-		 * .filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
-		 * 
-		 * if (booking.getFlight() != null && !validFlights.contains(booking.getFlight()))
-		 * super.state(false, "flight", "acme.validation.confirmation.message.booking.flight");
-		 */
 	}
 
 	@Override
