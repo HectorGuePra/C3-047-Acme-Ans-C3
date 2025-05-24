@@ -14,6 +14,9 @@ technician.maintenance-record.form.button.delete = Delete
 technician.maintenance-record.form.button.publish = Publish
 technician.maintenance-record.form.add.task = Add task
 technician.maintenance-record.form.list.task = List tasks
+technician.maintenance-record.form.set-status-pending = Set as pending
+technician.maintenance-record.form.set-status-in-progress = Set as in progress
+technician.maintenance-record.form.set-status-completed = Set as completed
 
 technician.maintenance-record.form.label.moment = Moment
 technician.maintenance-record.form.label.status = Status

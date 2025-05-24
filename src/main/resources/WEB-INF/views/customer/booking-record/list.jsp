@@ -9,5 +9,5 @@
 </acme:list>
 
 <jstl:if test="${_command == 'list'}">
-	<acme:button code="customer.booking-record.list.button.create" action="/customer/booking-record/create"/>
+	<acme:list-column code="customer.passenger.list.passport" path="passenger.passport"/>
 </jstl:if>	

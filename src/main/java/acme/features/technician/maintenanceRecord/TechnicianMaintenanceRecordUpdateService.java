@@ -27,6 +27,7 @@ public class TechnicianMaintenanceRecordUpdateService extends AbstractGuiService
 	@Override
 	public void authorise() {
 		boolean exist;
+		Boolean authorised = true;
 		MaintenanceRecord maintenanceRecord;
 		Technician technician;
 		int id;
@@ -34,12 +35,24 @@ public class TechnicianMaintenanceRecordUpdateService extends AbstractGuiService
 		id = super.getRequest().getData("id", int.class);
 		maintenanceRecord = this.repository.findById(id);
 
-		exist = maintenanceRecord != null;
+		exist = maintenanceRecord != null ;
 		if (exist) {
 			technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
-			if (technician.equals(maintenanceRecord.getTechnician()))
-				super.getResponse().setAuthorised(true);
+			if (!technician.equals(maintenanceRecord.getTechnician()))
+				authorised = false;
+		} else authorised = false;
+		if (authorised && super.getRequest().getMethod().equals("POST")) {
+			if (super.getRequest().hasData("aircraft")) {
+				Integer aircraftId = super.getRequest().getData("aircraft", int.class);
+				authorised = aircraftId == 0 || this.repository.findAircraftByAircraftId(aircraftId) != null;
+			} 
+			if (authorised && super.getRequest().hasData("status")) {
+				String status = super.getRequest().getData("status", String.class);
+				authorised = status.equals("0") || status.equals("PENDING") || status.equals("IN_PROGRESS") || 
+						status.equals("COMPLETED");
+			}
 		}
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
@@ -55,7 +68,11 @@ public class TechnicianMaintenanceRecordUpdateService extends AbstractGuiService
 
 	@Override
 	public void bind(final MaintenanceRecord maintenanceRecord) {
-		super.bindObject(maintenanceRecord, "status", "nextInspectionDate", "estimatedCost", "notes", "aircraft");
+		if(maintenanceRecord.getDraftMode()) {
+			super.bindObject(maintenanceRecord, "status", "nextInspectionDate", "estimatedCost", "notes", "aircraft");
+		} else {
+			super.bindObject(maintenanceRecord, "status");
+		}
 	}
 
 	@Override
@@ -91,19 +108,19 @@ public class TechnicianMaintenanceRecordUpdateService extends AbstractGuiService
 	public void unbind(final MaintenanceRecord maintenanceRecord) {
 		SelectChoices choices;
 		Collection<Aircraft> aircrafts;
-		SelectChoices aircraft;
+		SelectChoices choicesAircraft;
 
 		Dataset dataset;
 		aircrafts = this.repository.findAllAircrafts();
 		choices = SelectChoices.from(MaintenanceRecordStatus.class, maintenanceRecord.getStatus());
-		aircraft = SelectChoices.from(aircrafts, "regNumber", maintenanceRecord.getAircraft());
+		choicesAircraft = SelectChoices.from(aircrafts, "regNumber", maintenanceRecord.getAircraft());
 
 		dataset = super.unbindObject(maintenanceRecord, "status", "nextInspectionDate", "estimatedCost", "notes", "aircraft");
 
 		dataset.put("status", choices.getSelected().getKey());
-		dataset.put("status", choices);
-		dataset.put("aircraft", aircraft.getSelected().getLabel());
-		dataset.put("aircraft", aircraft);
+		dataset.put("statuses", choices);
+		dataset.put("aircraft", choicesAircraft.getSelected().getLabel());
+		dataset.put("aircrafts", choicesAircraft);
 
 		super.getResponse().addData(dataset);
 	}

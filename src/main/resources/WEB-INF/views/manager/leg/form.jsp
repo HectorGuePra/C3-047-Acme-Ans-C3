@@ -10,9 +10,9 @@
 	<acme:input-double code="manager.leg.form.label.duration" path="duration" readonly="true"/>
 	<acme:input-select code="manager.leg.form.label.status" path="status" choices="${statuses}"/>
 	<acme:input-select code="manager.leg.form.label.aircraft" path="aircraft" choices="${aircrafts}"/>
-	<acme:input-select code="manager.leg.form.label.airportDeparture" path="airportDeparture" choices="${airportDepartures}"/>
-	<acme:input-select code="manager.leg.form.label.airportArrival" path="airportArrival" choices="${airportArrivals}"/>
-	
+	<acme:input-select code="manager.leg.form.label.departureAirport" path="departureAirport" choices="${departureAirports}"/>
+	<acme:input-select code="manager.leg.form.label.arrivalAirport" path="arrivalAirport" choices="${arrivalAirports}"/>
+
 	<jstl:choose>
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && draftMode == true}">
 			<acme:submit code="manager.leg.form.button.update" action="/manager/leg/update"/>

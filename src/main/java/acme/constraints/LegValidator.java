@@ -1,8 +1,6 @@
 
 package acme.constraints;
 
-import java.util.List;
-
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,77 +30,45 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 		assert context != null;
 
 		boolean result;
+
 		if (leg == null) {
-			super.state(context, false, "leg", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
-		if (leg == null || leg.getAircraft() == null || leg.getScheduledArrival() == null || leg.getScheduledDeparture() == null) {
-			super.state(context, false, "Aircraft", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
-		if (leg.getScheduledDeparture() == null) {
-			super.state(context, false, "scheduledDeparture", "javax.validation.constraints.NotNull.message");
-			return false;
-		}
-
-		if (leg.getScheduledArrival() == null || leg.getScheduledDeparture() == null) {
-			super.state(context, false, "scheduledArrival", "javax.validation.constraints.NotNull.message");
+			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
 			return false;
 		}
 
 		else {
-			{
-
-				Leg existingLeg = this.repository.getLegFromFlightNumber(leg.getFlightNumber());
-
-				boolean uniqueLeg = existingLeg == null || existingLeg.equals(leg);
-
-				super.state(context, uniqueLeg, "flightNumber", "acme.validation.legs.flight-number.message");
+			if (leg.getFlightNumber() != null) {
+				boolean uniqueLeg;
+				Leg existingLeg;
+				existingLeg = this.repository.getLegFromFlightNumber(leg.getFlightNumber());
+				uniqueLeg = existingLeg == null || existingLeg.equals(leg);
+				super.state(context, uniqueLeg, "flightNumber", "acme.validation.leg.flight-number-in-use.message");
 			}
-			{
+
+			if (leg.getScheduledDeparture() != null && leg.getScheduledArrival() != null)
 				if (MomentHelper.isAfterOrEqual(leg.getScheduledDeparture(), leg.getScheduledArrival()))
-					super.state(context, false, "scheduledDeparture", "acme.validation.legs.departure-arrival-date.message");
+					super.state(context, false, "scheduledDeparture", "acme.validation.leg.date.message");
 
-			}
-			{
-
+			if (leg.getAircraft() != null && leg.getFlightNumber() != null && leg.getFlightNumber().length() >= 3) {
 				String legFlightNumber = leg.getFlightNumber();
-
-				if (StringHelper.isBlank(legFlightNumber))
-					super.state(context, false, "flightNumber", "javax.validation.constraints.NotBlank.message");
-
-				String iataFlightNumberCode = legFlightNumber.substring(0, 3);
-
-				String iatairlineCode = leg.getAircraft().getAirline().getIataCode();
-
-				boolean validLeg = StringHelper.isEqual(iataFlightNumberCode, iatairlineCode, true);
-
-				super.state(context, validLeg, "flightNumber", "acme.validation.legs.flight-number.message");
-
+				String IataFlight = legFlightNumber.substring(0, 3);
+				String IataAirline = leg.getAircraft().getAirline().getIataCode();
+				boolean validLeg = StringHelper.isEqual(IataFlight, IataAirline, true);
+				super.state(context, validLeg, "flightNumber", "acme.validation.leg.flight-number-incorrect.message");
 			}
-			List<Leg> allLegs = this.repository.findAllLegs();
-			for (Leg otherLeg : allLegs)
-				if (!otherLeg.equals(leg) && otherLeg.getAircraft() != null && otherLeg.getAircraft().equals(leg.getAircraft()))
-					if (leg.getScheduledDeparture().before(otherLeg.getScheduledArrival()) && leg.getScheduledArrival().after(otherLeg.getScheduledDeparture())) {
-						super.state(context, false, "aircraft", "acme.validation.legs.aircraft-in-use.message");
-						break;
-					}
-		}
 
-		{
+			if (leg.getFlight() != null && leg.getScheduledDeparture() != null && leg.getScheduledArrival() != null) {
+				boolean isLegOverlapping = this.repository.isLegOverlapping(leg.getId(), leg.getFlight().getId(), leg.getScheduledDeparture(), leg.getScheduledArrival());
+				super.state(context, !isLegOverlapping, "scheduledDeparture", "acme.validation.leg.overlapping-legs.message");
+			}
 			if (leg.getDepartureAirport() != null && leg.getArrivalAirport() != null) {
-				String originCity = leg.getDepartureAirport().getCity();
-				String destinationCity = leg.getArrivalAirport().getCity();
-				if (originCity != null && destinationCity != null)
-					if (originCity.equalsIgnoreCase(destinationCity))
-						super.state(context, false, "arrivalAirport", "acme.validation.legs.same-city.error");
+				boolean sameAirport = leg.getDepartureAirport().getId() == leg.getArrivalAirport().getId();
+				super.state(context, !sameAirport, "departureAirport", "acme.validation.leg.same-airport.error");
 			}
+
+			result = !super.hasErrors(context);
+
+			return result;
 		}
-
-		result = !super.hasErrors(context);
-
-		return result;
 	}
 }

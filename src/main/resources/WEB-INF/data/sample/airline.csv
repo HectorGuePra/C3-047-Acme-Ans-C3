@@ -14,7 +14,7 @@ airline-10,'' or 'A' = 'A ,BBK,http://lorem.com/ipsum,LUXURY,2012/07/02 0:00,acm
 airline-11,Lorem ipsum dolor sit ame,AAA,http://lorem.com/ipsum,LUXURY,2012/07/02 0:00,acme@lorem-ipsum.org,650788393
 airline-12,Lorem ipsum dolor sit ame,ZZZ,http://lorem.com/ipsum,LUXURY,2012/07/02 0:00,acme@lorem-ipsum.org,650788393
 # websiteUrl
-airline-13,Lorem ipsum dolor sit ame,BBL,http://a,LUXURY,2012/07/02 0:00,acme@lorem-ipsum.org,650788393
+airline-13,Lorem ipsum dolor sit ame,BBL,http://a.com,LUXURY,2012/07/02 0:00,acme@lorem-ipsum.org,650788393
 airline-14,Lorem ipsum dolor sit ame,BBM,http://a.b,LUXURY,2012/07/02 0:00,acme@lorem-ipsum.org,650788393
 airline-15,Lorem ipsum dolor sit ame,BBN,"http://www.lorem-ipsum.org/dolor/sit/amet,/consectetur/adipiscing/elit,/sed/do/eiusmod/tempor/incididunt/ut/labore/et/dolore/magna/aliqua/Ut/enim/ad/minim/veniam/quis/nostrud/exercitation/ullamco/laboris/nisi/ut/aliquip/ex/ea/commodo/consequat/duis/aute/",LUXURY,2012/07/02 0:00,acme@lorem-ipsum.org,650788393
 airline-16,Lorem ipsum dolor sit ame,BBO,"http://www.lorem-ipsum.org/dolor/sit/amet,/consectetur/adipiscing/elit,/sed/do/eiusmod/tempor/incididunt/ut/labore/et/dolore/magna/aliqua/Ut/enim/ad/minim/veniam/quis/nostrud/exercitation/ullamco/laboris/nisi/ut/aliquip/ex/ea/commodo/consequat/duis/aute/X",LUXURY,2012/07/02 0:00,acme@lorem-ipsum.org,650788393

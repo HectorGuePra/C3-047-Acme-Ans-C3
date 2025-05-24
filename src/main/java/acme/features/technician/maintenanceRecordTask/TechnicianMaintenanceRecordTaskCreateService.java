@@ -25,15 +25,34 @@ public class TechnicianMaintenanceRecordTaskCreateService extends AbstractGuiSer
 	public void authorise() {
 		boolean authorised = false;
 		Technician technician;
-		int maintenanceRecordId;
+		int maintenanceRecordId, taskId;
 		MaintenanceRecord mr;
+		Task task;
 		
 		technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
 		maintenanceRecordId = super.getRequest().getData("id", int.class);
 		mr = this.repository.findMaintenanceRecordById(maintenanceRecordId);
-
-		if (mr.getTechnician().equals(technician))
-			authorised = true;
+		
+		if (super.getRequest().getMethod().equals("POST")) {
+			taskId = super.getRequest().getData("task", int.class);
+			task = this.repository.findTaskById(taskId);
+			if (task == null) {
+				authorised = false;
+			} else {
+				MaintenanceRecordTask mrt = this.repository.findMaintenanceRecordTaskByMaintenanceRecordIdAndTaskId(
+						maintenanceRecordId, taskId);
+				if (mrt != null) {
+					authorised = false;
+				} else if (mr.getTechnician().equals(technician) && task.getTechnician().equals(technician)) {
+					if (!mr.getDraftMode()) {
+						authorised = !task.getDraftMode();
+					} else authorised = true;
+				}
+			}
+		} else {
+			if (mr.getTechnician().equals(technician))
+				authorised = true;
+		}
 
 		super.getResponse().setAuthorised(authorised);
 	}
@@ -70,19 +89,25 @@ public class TechnicianMaintenanceRecordTaskCreateService extends AbstractGuiSer
 	@Override
 	public void unbind(final MaintenanceRecordTask mrt) {
 
+		Technician technician;
 		int mrId;
-		SelectChoices task;
+		SelectChoices choichesTasks;
 		Collection<Task> tasks;
+		MaintenanceRecord mr;
 
 		Dataset dataset;
+		technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
 		mrId = super.getRequest().getData("id", int.class);
-		tasks = this.repository.findAllTasks();
-		task = SelectChoices.from(tasks, "id", mrt.getTask());
+		mr = this.repository.findMaintenanceRecordById(mrId);
+		tasks = mr.getDraftMode() ? this.repository.findTasksByTechnicianId(technician.getId()) 
+				: this.repository.findPublishedTasksByTechnicianId(technician.getId());
+		tasks.removeAll(this.repository.findTasksByMaintenanceRecordId(mrId));
+		choichesTasks = SelectChoices.from(tasks, "id", mrt.getTask());
 
 		dataset = super.unbindObject(mrt, "task");
 		dataset.put("maintenanceRecord", mrId);
-		dataset.put("tasks", task);
-		dataset.put("task", task.getSelected().getKey());
+		dataset.put("tasks", choichesTasks);
+		dataset.put("task", choichesTasks.getSelected().getKey());
 
 		super.getResponse().addData(dataset);
 	}

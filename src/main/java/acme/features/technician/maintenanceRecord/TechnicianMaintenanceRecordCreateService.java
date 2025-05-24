@@ -28,7 +28,20 @@ public class TechnicianMaintenanceRecordCreateService extends AbstractGuiService
 	// AbstractGuiService interface -------------------------------------------
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Boolean authorised = true;
+		
+		if (super.getRequest().getMethod().equals("POST")) {
+			if (super.getRequest().hasData("aircraft")) {
+				Integer aircraftId = super.getRequest().getData("aircraft", int.class);
+				authorised = aircraftId == 0 || this.repository.findAircraftByAircraftId(aircraftId) != null;
+			} 
+			if (authorised && super.getRequest().hasData("status")) {
+				String status = super.getRequest().getData("status", String.class);
+				authorised = status.equals("0") || status.equals("PENDING") || status.equals("IN_PROGRESS") || 
+						status.equals("COMPLETED");
+			}
+		}
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
@@ -83,19 +96,17 @@ public class TechnicianMaintenanceRecordCreateService extends AbstractGuiService
 	public void unbind(final MaintenanceRecord maintenanceRecord) {
 		SelectChoices choices;
 		Collection<Aircraft> aircrafts;
-		SelectChoices aircraft;
+		SelectChoices choicesAircraft;
 
 		Dataset dataset;
 		aircrafts = this.repository.findAllAircrafts();
 		choices = SelectChoices.from(MaintenanceRecordStatus.class, maintenanceRecord.getStatus());
-		aircraft = SelectChoices.from(aircrafts, "regNumber", maintenanceRecord.getAircraft());
+		choicesAircraft = SelectChoices.from(aircrafts, "regNumber", maintenanceRecord.getAircraft());
 
 		dataset = super.unbindObject(maintenanceRecord, "status", "nextInspectionDate", "estimatedCost", "notes", "aircraft");
 
-		dataset.put("status", choices.getSelected().getKey());
-		dataset.put("status", choices);
-		dataset.put("aircraft", aircraft.getSelected().getKey());
-		dataset.put("aircraft", aircraft);
+		dataset.put("statuses", choices);
+		dataset.put("aircrafts", choicesAircraft);
 
 		super.getResponse().addData(dataset);
 	}

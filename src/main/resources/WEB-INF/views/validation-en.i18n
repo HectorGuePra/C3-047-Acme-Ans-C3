@@ -10,17 +10,22 @@ acme.validation.customer.invalid-city.message=Invalid city. It must be between 1
 acme.validation.customer.invalid-country.message=Invalid country. It must be between 1 and 50 characters.
 acme.validation.customer.invalid-points.message=Invalid points. It must be between 0 and 500,000.
 
-acme.validation.legs.flight-number.message = The flight number must be composed by the airline IATA code followed by four digits.
-acme.validation.legs.current-dates.message = The date of departure and arrival of the flight must be greater than the current one.
-acme.validation.legs.departure-arrival-date.message = The flight departure date must be greater than the arrival date.
-acme.validation.legs.flight-number.message = The flight number must be unique.
-acme.validation.legs.aircraft-in-use.message = The aircraft is already in use during those dates.
-acme.validation.legs.same-city.error = The flight cannot have the same origin and destination city.
+acme.validation.leg.flight-number.message = The flight number must be composed by the airline IATA code followed by four digits.
+acme.validation.leg.flight-number-in-use.message = The flight number is already in use.
+acme.validation.leg.date.message = The flight departure date must be before than the arrival date.
+acme.validation.leg.flight-number-incorrect.message = Incorrect Iata Code.
+acme.validation.leg.overlapping-legs.message = This leg overlapps other legs.
+acme.validation.leg.same-airport.error = The flight cannot have the same origin and destination airport.
+acme.validation.flight.aircraft-under-maintenance.message = Aircraft under maintenance.
 
 acme.validation.manager.identifier.message = The identifier must have 2 or 3 letters correspond to your initials and 6 digits.
 acme.validation.manager.identifier-number.message = The identifier number must be unique.
 
 acme.validation.flight.not-null = The flight cannot be null.
+acme.validation.flight.cant-be-publish.message= All legs must be published.
+acme.validation.flight.zero-legs.message = For publishing must have at least one leg.
+acme.validation.flight.unable-to-delete-flight-published-leg.message = Flights with published legs cannot be deleted.
+
 
 javax.validation.constraints.NotNull.message = The value cannot be null.
 javax.validation.constraints.NotBlank.message = The value cannot be blank.
@@ -30,20 +35,27 @@ acme.validation.flightCrewMember.duplicated-employeeCode.message = The employeeC
 
 acme.validation.activityLog.statusLeg.message = The leg must be in LANDED status
 
-acme.validation.pilot.message = Only one pilot per Leg.
-acme.validation.co-pilot.message = Only one co_pilot per Leg.
-acme.validation.overlapping.message = This leg overlaps with other assignments.
-acme.validation.member-available.message = Your status is not AVAIDABLE.
-acme.validation.currentStatus = The current status must be CANCELLED or CONFIRMED
-acme.validation.leg-complete.message = The leg status must not be LANDED.
+acme.validation.member.pilot.message = Only one pilot per Leg
+acme.validation.member.co-pilot.message = Only one co_pilot per Leg
+acme.validation.member.overlapping.message = This leg overlaps with other assignments
+acme.validation.member.member-available.message = Your status is not AVAIDABLE
+acme.validation.member.currentStatus = The current status must be CANCELLED or CONFIRMED
+acme.validation.member.leg-complete.message = The leg status must not be LANDED
+acme.validation.member.noDuty.message = No duty has been selected
+acme.validation.member.noStatus.message = No Assignment Status has been selected
+acme.validation.member.noLeg.message = No Leg has been selected
+acme.validation.member.remarks.message = The maximum length of remarks is 255 characters
+
+acme.validation.member.assignment.incidentType.message = The length of the incident type must be between 1 and 50 characters
+acme.validation.member.assignment.description.message = The length of the description must be between 1 and 255 characters
+acme.validation.member.assignment.severityLevel.message = Severity level must be between 0 and 10
+
 
 acme.validation.airport.iata-code.message = The Iata Code must be unique.
-
 acme.validation.length = Invalid string length
-
 acme.validation.phone-number.message = The phone number could be the character + and must have between 6 and 15 digits.
-
 acme.validation.iata-code.message = The IATA code must be 3 letters
+acme.validation.invalid-currency.message = Unsupported currency
 
 acme.validation.technician.identifier.message = Invalid identifier
 acme.validation.technician.maintenance-record.noStatus.message = No status has been selected
@@ -53,3 +65,4 @@ acme.validation.technician.maintenance-record.estimatedCost.currency.message = T
 acme.validation.technician.maintenance-record.notes.message = The maximum length of notes is 255 characters
 acme.validation.technician.maintenance-record.aircraft.message = The selected aircraft does not exist
 acme.validation.technician.maintenance-record.published.message = You need to have all your task created and published prior to publish this record
+acme.validation.technician.maintenance-record.can-not-patch.message = Patch feature is for published records only

@@ -21,6 +21,7 @@ master.menu.administrator.populate-db-initial = Poblar BD (inicial)
 master.menu.administrator.populate-db-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-system-down = Parar el sistema
 master.menu.administrator.aircraft = Aeronaves
+master.menu.administrator.list-airport = Listado de aeropuertos
 
 # master.menu.provider ########################################################
 
@@ -63,3 +64,4 @@ master.menu.user-account.consumer-profile = Perfil de consumidor
 master.menu.manager = Gerente
 master.menu.manager.flights = Listado de vuelos
 master.menu.manager.legs = Listado de tramos
+master.menu.manager.show-dashboard = Mostrar panel

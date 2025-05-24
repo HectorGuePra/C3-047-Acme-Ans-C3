@@ -11,5 +11,5 @@
 	<acme:list-payload path="payload"/>
 </acme:list>
 
-<acme:button code="technician.maintenance-record-task.list.button.create" action ="/technician/tasks/create"/>
+<acme:button code="technician.maintenance-record-task.list.button.create" action ="/technician/task/create"/>
 <acme:button code="technician.maintenance-record-task.form.add.task" action="/technician/maintenance-record-task/create?id=${$request.data.id}"/>

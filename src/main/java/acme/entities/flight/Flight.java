@@ -2,13 +2,19 @@
 package acme.entities.flight;
 
 import java.beans.Transient;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
+
+import org.springframework.context.i18n.LocaleContextHolder;
 
 import acme.client.components.basis.AbstractEntity;
 import acme.client.components.datatypes.Money;
@@ -17,6 +23,7 @@ import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoney;
 import acme.client.helpers.SpringHelper;
+import acme.constraints.ValidFlight;
 import acme.entities.airport.Airport;
 import acme.entities.legs.Leg;
 import acme.realms.manager.Manager;
@@ -26,12 +33,16 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@ValidFlight
+@Table(indexes = {
+	@Index(columnList = "manager_id")
+})
 public class Flight extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@Size(max = 50)
+	@Size(min = 1, max = 50)
 	@Automapped
 	private String				tag;
 
@@ -41,7 +52,7 @@ public class Flight extends AbstractEntity {
 	private Boolean				requiresSelfTransfer;
 
 	@Mandatory
-	@ValidMoney(min = 0)
+	@ValidMoney(min = 0.01)
 	@Automapped
 	private Money				cost;
 
@@ -50,6 +61,7 @@ public class Flight extends AbstractEntity {
 	@Automapped
 	private String				description;
 
+	@Mandatory
 	@Valid
 	@Automapped
 	private Boolean				draftMode;
@@ -121,6 +133,24 @@ public class Flight extends AbstractEntity {
 				if (lastLeg == null || leg.getScheduledArrival().after(lastLeg.getScheduledArrival()))
 					lastLeg = leg;
 		return lastLeg != null ? lastLeg.getArrivalAirport() : null;
+	}
+
+	@Transient
+	public String getDescription() {
+		String res = "-";
+		Date depDate = this.getFlightDeparture();
+		Date arrDate = this.getFlightArrival();
+		Airport depAirport = this.getDeparture();
+		Airport arrAirport = this.getArrival();
+
+		Locale locale = LocaleContextHolder.getLocale();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, locale);
+		String formattedDep = dateFormat.format(depDate);
+		String formattedArr = dateFormat.format(arrDate);
+
+		if (formattedDep != null && formattedArr != null && depAirport != null && arrAirport != null)
+			res = String.format("%s %s -> %s %s", formattedDep, depAirport.getCity(), formattedArr, arrAirport.getCity());
+		return res;
 	}
 
 }

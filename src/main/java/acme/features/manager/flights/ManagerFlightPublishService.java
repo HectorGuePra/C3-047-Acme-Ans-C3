@@ -25,12 +25,15 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		int flightId;
 		Flight flight;
 		Manager manager;
-
-		flightId = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(flightId);
-		manager = flight == null ? null : flight.getManager();
-		status = flight != null && super.getRequest().getPrincipal().hasRealm(manager);
-		super.getResponse().setAuthorised(status);
+		if (!super.getRequest().hasData("id"))
+			status = false;
+		else {
+			flightId = super.getRequest().getData("id", int.class);
+			flight = this.repository.findFlightById(flightId);
+			manager = flight == null ? null : flight.getManager();
+			status = flight != null && flight.getDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
+			super.getResponse().setAuthorised(status);
+		}
 	}
 
 	@Override
@@ -47,6 +50,7 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 	@Override
 	public void bind(final Flight flight) {
 		super.bindObject(flight, "tag", "requiresSelfTransfer", "cost", "description");
+		flight.setDraftMode(false);
 
 	}
 
@@ -56,7 +60,7 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		List<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
 		if (!legs.isEmpty())
 			canBePublish = legs.stream().allMatch(l -> !l.isDraftMode());
-		super.state(canBePublish, "tag", "acme.validation.flight.cant-be-publish.message");
+		super.state(canBePublish, "*", "acme.validation.flight.cant-be-publish.message");
 	}
 
 	@Override

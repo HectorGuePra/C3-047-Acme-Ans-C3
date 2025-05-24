@@ -12,7 +12,7 @@ customer.booking.form.purchaseMoment = Purchase moment
 customer.booking.form.price = Price
 customer.booking.form.travelClass = Travel class
 customer.booking.form.lastCardNibble = Credit card's last four digits (pattern = "^\\d{4}$")
-customer.booking.form.flight = Flight tag 
+customer.booking.form.flight = Flight
 
 customer.booking.form.button.create = Create
 customer.booking.form.button.update = Update
