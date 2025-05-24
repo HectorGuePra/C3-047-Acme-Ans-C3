@@ -33,7 +33,7 @@ public class Flight extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@Size(max = 50)
+	@Size(min = 1, max = 50)
 	@Automapped
 	private String				tag;
 
@@ -43,7 +43,7 @@ public class Flight extends AbstractEntity {
 	private Boolean				requiresSelfTransfer;
 
 	@Mandatory
-	@ValidMoney(min = 0)
+	@ValidMoney(min = 0.01)
 	@Automapped
 	private Money				cost;
 
@@ -52,6 +52,7 @@ public class Flight extends AbstractEntity {
 	@Automapped
 	private String				description;
 
+	@Mandatory
 	@Valid
 	@Automapped
 	private Boolean				draftMode;

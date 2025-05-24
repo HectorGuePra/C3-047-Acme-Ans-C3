@@ -18,17 +18,23 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 
 	@Override
 	public void authorise() {
-		boolean status;
+		boolean status = false;
 		int flightId;
 		Flight flight;
 		Manager manager;
 
-		flightId = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(flightId);
-		manager = flight == null ? null : flight.getManager();
-		status = super.getRequest().getPrincipal().hasRealm(manager) && flight != null;
+		if (super.getRequest().hasData("id")) {
+			flightId = super.getRequest().getData("id", int.class);
+			flight = this.repository.findFlightById(flightId);
+
+			if (flight != null) {
+				manager = flight.getManager();
+				status = super.getRequest().getPrincipal().hasRealm(manager);
+			}
+		}
 
 		super.getResponse().setAuthorised(status);
+
 	}
 
 	@Override
@@ -45,9 +51,6 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 	@Override
 	public void unbind(final Flight flight) {
 		Dataset dataset;
-		int managerId;
-
-		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
 		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
 		dataset.put("departure", flight.getDeparture() != null ? flight.getDeparture().getName() : flight.getDeparture());

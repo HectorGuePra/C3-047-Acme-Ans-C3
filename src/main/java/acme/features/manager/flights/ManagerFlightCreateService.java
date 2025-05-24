@@ -1,11 +1,14 @@
 
 package acme.features.manager.flights;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.airline.Airline;
 import acme.entities.flight.Flight;
 import acme.realms.manager.Manager;
 
@@ -18,7 +21,16 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status = true;
+		if ("POST".equalsIgnoreCase(super.getRequest().getMethod())) {
+			int airlineId = super.getRequest().getData("airline", int.class);
+			int managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
+			Airline airline = this.repository.findAirlineByManager(managerId);
+			if (airline != null)
+				status = airline.getId() == airlineId;
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -43,9 +55,16 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-		;
-	}
+		boolean availableCurrency;
+		List<String> currencies;
+		currencies = this.repository.findAllCurrencies();
+		String currency;
+		currency = super.getRequest().getData("cost", String.class);
+		currency = currency.length() >= 3 ? currency.substring(0, 3).toUpperCase() : currency;
+		availableCurrency = currencies.contains(currency);
 
+		super.state(availableCurrency, "cost", "acme.validation.invalid-currency.message");
+	}
 	@Override
 	public void perform(final Flight flight) {
 		this.repository.save(flight);
