@@ -2,11 +2,13 @@
 package acme.features.customer.booking;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.Passenger;
@@ -58,7 +60,7 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		SelectChoices classChoices;
 		SelectChoices flightChoices;
 
-		Collection<Flight> flights;
+		Collection<Flight> validFlights;
 		Collection<Passenger> passengersInDraftMode;
 		Collection<Passenger> passengers;
 
@@ -66,8 +68,10 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		boolean anyPassengerInDraftMode = true;
 		boolean atLeastOnePassenger = true;
 
-		flights = this.repository.findAllPublishedFlights();
-		flightChoices = SelectChoices.from(flights, "tag", booking.getFlight());
+		validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
+			.filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
+
+		flightChoices = SelectChoices.from(validFlights, "description", booking.getFlight());
 		classChoices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 		passengersInDraftMode = this.repository.findPassengersInDraftMode(booking.getId());
 		passengers = this.repository.findPassengersByBooking(booking.getId());

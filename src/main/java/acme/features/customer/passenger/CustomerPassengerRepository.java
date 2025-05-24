@@ -26,8 +26,13 @@ public interface CustomerPassengerRepository extends AbstractRepository {
 	@Query("select p from Passenger p where p.customer.id = :customerId")
 	Collection<Passenger> findPassengersByCustomerId(int customerId);
 
-	@Query("select count(p) > 0 from Passenger p where p.passport = :passport and p.id != :passengerId")
-	boolean existsPassengerWithDuplicatedPassport(String passport, int passengerId);
+	/*
+	 * @Query("select count(p) > 0 from Passenger p where p.passport = :passport and p.id != :passengerId")
+	 * boolean existsPassengerWithDuplicatedPassport(String passport, int passengerId);
+	 */
+
+	@Query("select count(p) > 0 from Passenger p where p.passport = :passport and p.customer.id = :customerId and p.id != :passengerId")
+	boolean existsPassengerWithDuplicatedPassport(String passport, int customerId, int passengerId);
 
 	@Query("select b from Booking b where b.id = :bookingId")
 	Booking findBookingById(int bookingId);

@@ -10,4 +10,11 @@
 	<acme:list-payload path="payload"/>
 </acme:list>
 
-<acme:button code="customer.booking-record.list.button.create" action="/customer/booking-record/create?bookingId=${bookingId}"/>
+<jstl:choose>
+	<jstl:when test="${empty bookingId}">
+		<acme:button code="customer.passenger.list.button.create" action="/customer/passenger/create"/>
+	</jstl:when>
+	<jstl:when test="${not empty bookingId}">
+		<acme:button code="customer.booking-record.list.button.create" action="/customer/booking-record/create?bookingId=${bookingId}"/>
+	</jstl:when>
+</jstl:choose>
