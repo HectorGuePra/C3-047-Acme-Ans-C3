@@ -31,12 +31,22 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 		Flight flight;
 		Manager manager;
 
-		flightId = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(flightId);
-		manager = flight == null ? null : flight.getManager();
-		//status = flight != null && flight.isDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
-		status = flight != null && super.getRequest().getPrincipal().hasRealm(manager);
-		super.getResponse().setAuthorised(status);
+		Integer nullValue = super.getRequest().getData("id", Integer.class);
+		if (nullValue == null)
+			super.getResponse().setAuthorised(false);
+		else {
+			flightId = super.getRequest().getData("id", int.class);
+			flight = this.repository.findFlightById(flightId);
+
+			if (flight == null)
+				status = false;
+			else {
+				manager = flight.getManager();
+				status = super.getRequest().getPrincipal().hasRealm(manager) && flight.getDraftMode();
+			}
+
+			super.getResponse().setAuthorised(status);
+		}
 	}
 
 	@Override
@@ -58,7 +68,11 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-		;
+		List<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
+		for (Leg leg : legs) {
+			boolean isPublished = leg.isDraftMode();
+			super.state(isPublished, "flightTag", "acme.validation.flight.unable-to-delete-flight-published-leg.message");
+		}
 	}
 
 	@Override

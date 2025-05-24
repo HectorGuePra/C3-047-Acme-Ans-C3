@@ -44,4 +44,10 @@ public interface ManagerFlightRepository extends AbstractRepository {
 	@Query("select i from BookingRecord i where i.booking.id = :id")
 	public List<BookingRecord> findBookingRecordByBookingId(int id);
 
+	@Query("select sc.currency from SystemCurrencies sc")
+	List<String> findAllCurrencies();
+
+	@Query("select a from Airline a where a.id = :airlineId")
+	Airline findAirlineById(int airlineId);
+
 }
