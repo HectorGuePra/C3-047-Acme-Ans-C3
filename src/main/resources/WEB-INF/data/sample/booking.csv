@@ -15,10 +15,10 @@ booking-11,95UJ6K92,2000/01/01 0:00,ECONOMY,4979,flight-00,customer-01,true
 #travelClass
 booking-12,95UJ6K93,2012/07/02 0:00,BUSINESS,4969,flight-00,customer-02,true
 #price
-booking-13,95UJ6K94,2012/07/02 0:00,ECONOMY,4959,flight-00,customer-02,true
-booking-14,95UJ6K95,2012/07/02 0:00,ECONOMY,4949,flight-00,customer-02,true
-booking-15,95UJ6K96,2012/07/02 0:00,ECONOMY,4939,flight-00,customer-02,true
-booking-16,95UJ6K97,2012/07/02 0:00,ECONOMY,4929,flight-00,customer-02,true
+booking-13,95UJ6K94,2012/07/02 0:00,ECONOMY,4959,flight-13,customer-02,true
+booking-14,95UJ6K95,2012/07/02 0:00,ECONOMY,4949,flight-13,customer-02,true
+booking-15,95UJ6K96,2012/07/02 0:00,ECONOMY,4939,flight-13,customer-02,true
+booking-16,95UJ6K97,2012/07/02 0:00,ECONOMY,4929,flight-13,customer-02,true
 #draftMode
 booking-17,AAAZZA,2012/07/02 0:00,ECONOMY,4198,flight-00,customer-04,true
 booking-18,AAAZZB,2012/07/02 0:00,ECONOMY,4298,flight-00,customer-04,false
