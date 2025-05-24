@@ -16,6 +16,7 @@ acme.validation.leg.date.message = La fecha de salida del vuelo debe ser anterio
 acme.validation.leg.flight-number-incorrect.message = Incorrecto Iata Code.
 acme.validation.leg.overlapping-legs.message = Este tramo solapa a otro tramo.
 acme.validation.leg.same-airport.error = El vuelo no puede tener el mismo aeropuerto de origen y destino.
+acme.validation.flight.aircraft-under-maintenance.message = Areonave inoperativa.
 
 acme.validation.manager.identifier.message = El identificador debe contener 2 o 3 letras siendo tus iniciales y 6 dígitos.
 acme.validation.manager.identifier-number.message = El número de identificador debe ser único.
@@ -23,7 +24,7 @@ acme.validation.manager.identifier-number.message = El número de identificador 
 acme.validation.flight.not-null = El vuelo no puede ser nulo.
 acme.validation.flight.cant-be-publish.message = Todas las escalas deben estar publicadas.
 acme.validation.flight.zero-legs.message = Debe haber al menos una escala para poder publicar.
-acme.validation.flight.cost-currency.message=El precio debe estar en EUR, GBP o USD.
+acme.validation.flight.unable-to-delete-flight-published-leg.message = Vuelos con escalas publicadas no pueden ser borrados.
 
 javax.validation.constraints.NotNull.message = El valor no puede ser nulo.
 javax.validation.constraints.NotBlank.message = El valor no puede estar en blanco.
@@ -50,11 +51,10 @@ acme.validation.member.assignment.severityLevel.message = El nivel de severidad 
 
 
 acme.validation.airport.iata-code.message = El código IATA debe ser único.
-
 acme.validation.length = Longitud de cadena inválida
 acme.validation.phone-number.message = El número de teléfono puede contener el carácter "+" y debe tener entre 6 y 15 dígitos.
-
 acme.validation.iata-code.message = El código IATA debe tener 3 letras.
+acme.validation.invalid-currency.message = Moneda no soportada
 
 acme.validation.technician.identifier.message = Identificador no válido
 acme.validation.technician.maintenance-record.noStatus.message = Debes seleccionar un estatus para el registro

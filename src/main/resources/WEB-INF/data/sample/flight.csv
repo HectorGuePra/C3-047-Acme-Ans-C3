@@ -1,6 +1,6 @@
 key,tag,requiresSelfTransfer,cost,description,draftMode,key:manager
 # base entity
-flight-00,"Lorem ipsum dolor sit ame",true,EUR 1000.00,"Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",false,manager-00
+flight-00,"Lorem ipsum dolor sit ame",true,EUR 1000.00,"Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",true,manager-00
 
 # flightTag
 flight-01,"L",true,EUR 1000.00,"Lorem ipsum dolor sit amet consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*",false,manager-01

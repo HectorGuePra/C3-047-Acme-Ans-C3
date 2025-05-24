@@ -5,7 +5,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -17,10 +19,9 @@ import acme.client.components.validation.Optional;
 import acme.client.components.validation.ValidMoment;
 import acme.client.components.validation.ValidNumber;
 import acme.client.components.validation.ValidUrl;
-import acme.constraints.ValidManager;
 import acme.constraints.ValidIdentifierNumber;
+import acme.constraints.ValidManager;
 import acme.entities.airline.Airline;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,7 +29,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @ValidManager
-@EqualsAndHashCode(callSuper = true)
+@Table(indexes = {
+	@Index(columnList = "identifierNumber", unique = true)
+})
 public class Manager extends AbstractRole {
 
 	private static final long	serialVersionUID	= 1L;

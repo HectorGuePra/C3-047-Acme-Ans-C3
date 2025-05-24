@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 
@@ -32,12 +34,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @ValidFlight
+@Table(indexes = {
+	@Index(columnList = "manager_id")
+})
 public class Flight extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@Size(max = 50)
+	@Size(min = 1, max = 50)
 	@Automapped
 	private String				tag;
 
@@ -47,7 +52,7 @@ public class Flight extends AbstractEntity {
 	private Boolean				requiresSelfTransfer;
 
 	@Mandatory
-	@ValidMoney(min = 0)
+	@ValidMoney(min = 0.01)
 	@Automapped
 	private Money				cost;
 
@@ -56,6 +61,7 @@ public class Flight extends AbstractEntity {
 	@Automapped
 	private String				description;
 
+	@Mandatory
 	@Valid
 	@Automapped
 	private Boolean				draftMode;

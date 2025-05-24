@@ -16,6 +16,7 @@ acme.validation.leg.date.message = The flight departure date must be before than
 acme.validation.leg.flight-number-incorrect.message = Incorrect Iata Code.
 acme.validation.leg.overlapping-legs.message = This leg overlapps other legs.
 acme.validation.leg.same-airport.error = The flight cannot have the same origin and destination airport.
+acme.validation.flight.aircraft-under-maintenance.message = Aircraft under maintenance.
 
 acme.validation.manager.identifier.message = The identifier must have 2 or 3 letters correspond to your initials and 6 digits.
 acme.validation.manager.identifier-number.message = The identifier number must be unique.
@@ -23,7 +24,7 @@ acme.validation.manager.identifier-number.message = The identifier number must b
 acme.validation.flight.not-null = The flight cannot be null.
 acme.validation.flight.cant-be-publish.message= All legs must be published.
 acme.validation.flight.zero-legs.message = For publishing must have at least one leg.
-acme.validation.flight.cost-currency.message= Cost must be in EUR, GBP o USD.
+acme.validation.flight.unable-to-delete-flight-published-leg.message = Flights with published legs cannot be deleted.
 
 
 javax.validation.constraints.NotNull.message = The value cannot be null.
@@ -51,12 +52,10 @@ acme.validation.member.assignment.severityLevel.message = Severity level must be
 
 
 acme.validation.airport.iata-code.message = The Iata Code must be unique.
-
 acme.validation.length = Invalid string length
-
 acme.validation.phone-number.message = The phone number could be the character + and must have between 6 and 15 digits.
-
 acme.validation.iata-code.message = The IATA code must be 3 letters
+acme.validation.invalid-currency.message = Unsupported currency
 
 acme.validation.technician.identifier.message = Invalid identifier
 acme.validation.technician.maintenance-record.noStatus.message = No status has been selected

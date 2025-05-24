@@ -1,6 +1,8 @@
 
 package acme.features.manager.flights;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -18,7 +20,12 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean authorized = true;
+		if (super.getRequest().hasData("id", boolean.class)) {
+			int flightId = super.getRequest().getData("id", int.class);
+			authorized &= flightId == 0;
+		}
+		super.getResponse().setAuthorised(authorized);
 	}
 
 	@Override
@@ -43,9 +50,16 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-		;
-	}
+		boolean availableCurrency;
+		List<String> currencies;
+		currencies = this.repository.findAllCurrencies();
+		String currency;
+		currency = super.getRequest().getData("cost", String.class);
+		currency = currency.length() >= 3 ? currency.substring(0, 3).toUpperCase() : currency;
+		availableCurrency = currencies.contains(currency);
 
+		super.state(availableCurrency, "cost", "acme.validation.invalid-currency.message");
+	}
 	@Override
 	public void perform(final Flight flight) {
 		this.repository.save(flight);
