@@ -2,6 +2,7 @@
 package acme.features.manager.legs;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,15 +30,29 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void authorise() {
-		boolean status;
+		int managerId;
 		int legId;
-		Leg leg;
-		Manager manager;
+		boolean status = true;
 
-		legId = super.getRequest().getData("id", int.class);
-		leg = this.repository.findLegByLegId(legId);
-		manager = leg == null ? null : leg.getFlight().getManager();
-		status = super.getRequest().getPrincipal().hasRealm(manager) && leg != null;
+		if (!super.getRequest().hasData("id"))
+			status = false;
+		else {
+			managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+			legId = super.getRequest().getData("id", int.class);
+
+			if (!this.repository.findByLegId(legId).isPresent())
+				status = false;
+
+			Optional<Leg> optionalLeg = this.repository.findByLegId(legId);
+
+			if (optionalLeg.isPresent()) {
+				Leg leg = optionalLeg.get();
+				Optional<Flight> flight = this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId);
+
+				if (flight.isEmpty())
+					status = false;
+			}
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -48,6 +63,8 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		int id;
 
 		id = super.getRequest().getData("id", int.class);
+		if (!this.repository.findByLegId(id).isPresent())
+			throw new RuntimeException("No leg with id: " + id);
 		leg = this.repository.findLegByLegId(id);
 
 		super.getBuffer().addData(leg);
@@ -91,10 +108,10 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 		dataset.put("flights", flightsChoices);
 		dataset.put("aircraft", aircraftChoices.getSelected().getKey());
 		dataset.put("aircrafts", aircraftChoices);
-		dataset.put("airportDeparture", departureChoices.getSelected().getKey());
-		dataset.put("airportDepartures", departureChoices);
-		dataset.put("airportArrival", arrivalChoices.getSelected().getKey());
-		dataset.put("airportArrivals", arrivalChoices);
+		dataset.put("departureAirport", departureChoices.getSelected().getKey());
+		dataset.put("departureAirports", departureChoices);
+		dataset.put("arrivalAiport", arrivalChoices.getSelected().getKey());
+		dataset.put("arrivalAirports", arrivalChoices);
 
 		super.getResponse().addData(dataset);
 	}

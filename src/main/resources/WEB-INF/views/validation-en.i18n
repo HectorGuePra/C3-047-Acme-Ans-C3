@@ -16,6 +16,7 @@ acme.validation.leg.date.message = The flight departure date must be before than
 acme.validation.leg.flight-number-incorrect.message = Incorrect Iata Code.
 acme.validation.leg.overlapping-legs.message = This leg overlapps other legs.
 acme.validation.leg.same-airport.error = The flight cannot have the same origin and destination airport.
+acme.validation.flight.aircraft-under-maintenance.message = Aircraft under maintenance.
 
 acme.validation.manager.identifier.message = The identifier must have 2 or 3 letters correspond to your initials and 6 digits.
 acme.validation.manager.identifier-number.message = The identifier number must be unique.

@@ -63,7 +63,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 			}
 			if (leg.getDepartureAirport() != null && leg.getArrivalAirport() != null) {
 				boolean sameAirport = leg.getDepartureAirport().getId() == leg.getArrivalAirport().getId();
-				super.state(context, !sameAirport, "airportDeparture", "acme.validation.leg.same-airport.error");
+				super.state(context, !sameAirport, "departureAirport", "acme.validation.leg.same-airport.error");
 			}
 
 			result = !super.hasErrors(context);
