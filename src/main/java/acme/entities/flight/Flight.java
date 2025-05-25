@@ -136,7 +136,7 @@ public class Flight extends AbstractEntity {
 	}
 
 	@Transient
-	public String getDescription() {
+	public String getDescription1() {
 		String res = "-";
 		Date depDate = this.getFlightDeparture();
 		Date arrDate = this.getFlightArrival();
