@@ -60,11 +60,15 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-		List<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
-		for (Leg leg : legs) {
-			boolean isPublished = leg.isDraftMode();
-			super.state(isPublished, "flightTag", "acme.validation.flight.unable-to-delete-flight-published-leg.message");
+		boolean isPublished;
+		isPublished = true;
+		if (this.repository.findLegsByFlightId(flight.getId()).size() > 0) {
+			List<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
+			for (Leg leg : legs)
+				if (!leg.isDraftMode())
+					isPublished = leg.isDraftMode();
 		}
+		super.state(isPublished, "tag", "acme.validation.flight.unable-to-delete-flight-published-leg.message");
 	}
 
 	@Override
@@ -87,8 +91,8 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
 
-		dataset.put("departure", flight.getDeparture() != null ? flight.getDeparture().getName() : flight.getDeparture());
-		dataset.put("arrival", flight.getArrival() != null ? flight.getArrival().getName() : flight.getArrival());
+		dataset.put("departure", flight.getDeparture());
+		dataset.put("arrival", flight.getArrival());
 		dataset.put("scheduledDeparture", flight.getFlightDeparture());
 		dataset.put("scheduledArrival", flight.getFlightArrival());
 		dataset.put("layovers", flight.getLayovers());

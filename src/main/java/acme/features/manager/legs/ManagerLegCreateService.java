@@ -44,57 +44,58 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		List<Airport> airports;
 		String metodo = super.getRequest().getMethod();
 
-		Integer flightId = super.getRequest().getData("flightId", int.class);
-
-		if (this.flightRepository.findFlightById(flightId) == null)
+		if (!super.getRequest().hasData("flightId", int.class))
 			authorized = false;
+		else {
 
-		Flight flight = this.flightRepository.findFlightById(flightId);
-		if (this.flightRepository.findFlightById(flightId) != null)
-			if (!flight.getDraftMode())
+			Integer flightId = super.getRequest().getData("flightId", int.class);
+
+			Flight flight = this.flightRepository.findFlightById(flightId);
+			if (this.flightRepository.findFlightById(flightId) != null)
+				if (!flight.getDraftMode())
+					authorized = false;
+			Integer managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+			Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(flightId, managerId);
+
+			if (super.getRequest().hasData("id", boolean.class)) {
+				int legId = super.getRequest().getData("id", int.class);
+				authorized &= legId == 0;
+			}
+
+			if (optionalFlight.isEmpty())
 				authorized = false;
-		Integer managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(flightId, managerId);
+			else if (metodo.equals("POST")) {
+				aircraftId = super.getRequest().getData("aircraft", int.class);
+				aircraft = this.repository.findAircraftByAircraftId(aircraftId);
+				aircrafts = this.repository.findAllAircraftsByManagerId(managerId);
 
-		if (super.getRequest().hasData("id", boolean.class)) {
-			int legId = super.getRequest().getData("id", int.class);
-			authorized &= legId == 0;
-		}
-		super.getResponse().setAuthorised(authorized);
+				if (aircraft == null && aircraftId != 0)
+					authorized = false;
 
-		if (optionalFlight.isEmpty())
-			authorized = false;
-		else if (metodo.equals("POST")) {
-			aircraftId = super.getRequest().getData("aircraft", int.class);
-			aircraft = this.repository.findAircraftByAircraftId(aircraftId);
-			aircrafts = this.repository.findAllAircraftsByManagerId(managerId);
+				if (aircraft != null && !aircrafts.contains(aircraft))
+					authorized = false;
 
-			if (aircraft == null && aircraftId != 0)
-				authorized = false;
+				departureId = super.getRequest().getData("departureAirport", int.class);
+				departure = this.repository.findAirportByAirportId(departureId);
 
-			if (aircraft != null && !aircrafts.contains(aircraft))
-				authorized = false;
+				arrivalId = super.getRequest().getData("arrivalAirport", int.class);
+				arrival = this.repository.findAirportByAirportId(arrivalId);
 
-			departureId = super.getRequest().getData("departureAirport", int.class);
-			departure = this.repository.findAirportByAirportId(departureId);
+				airports = this.repository.findAllAirports();
 
-			arrivalId = super.getRequest().getData("arrivalAirport", int.class);
-			arrival = this.repository.findAirportByAirportId(arrivalId);
+				if (departure == null && departureId != 0)
+					authorized = false;
 
-			airports = this.repository.findAllAirports();
+				if (departure != null && !airports.contains(departure))
+					authorized = false;
 
-			if (departure == null && departureId != 0)
-				authorized = false;
+				if (arrival == null && arrivalId != 0)
+					authorized = false;
 
-			if (departure != null && !airports.contains(departure))
-				authorized = false;
+				if (arrival != null && !airports.contains(arrival))
+					authorized = false;
 
-			if (arrival == null && arrivalId != 0)
-				authorized = false;
-
-			if (arrival != null && !airports.contains(arrival))
-				authorized = false;
-
+			}
 		}
 
 		super.getResponse().setAuthorised(authorized);
