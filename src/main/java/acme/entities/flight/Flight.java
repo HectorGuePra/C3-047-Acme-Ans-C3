@@ -62,9 +62,8 @@ public class Flight extends AbstractEntity {
 	private String				description;
 
 	@Mandatory
-	@Valid
 	@Automapped
-	private Boolean				draftMode;
+	private boolean				draftMode;
 
 	@Mandatory
 	@Valid

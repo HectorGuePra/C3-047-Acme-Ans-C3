@@ -52,7 +52,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 			Flight flight = this.flightRepository.findFlightById(flightId);
 			if (this.flightRepository.findFlightById(flightId) != null)
-				if (!flight.getDraftMode())
+				if (!flight.isDraftMode())
 					authorized = false;
 			Integer managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 			Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(flightId, managerId);
@@ -144,11 +144,23 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 			super.state(isAircraftActive, "aircraft", "acme.validation.flight.aircraft-under-maintenance.message");
 		}
 
-		if (leg.getScheduledArrival() != null && leg.getScheduledDeparture() != null) {
-			Date currentDate = MomentHelper.getCurrentMoment();
-			super.state(currentDate.before(leg.getScheduledDeparture()), "scheduledDeparture", "acme.validation.leg.past-date.message");
-			super.state(currentDate.before(leg.getScheduledArrival()), "scheduledArrival", "acme.validation.leg.past-date.message");
+		Date now = MomentHelper.getCurrentMoment();
+		boolean departureInFuture;
+		boolean arrivalAfterDeparture;
+
+		if (leg.getScheduledDeparture() != null && leg.getScheduledArrival() != null) {
+			if (leg.getScheduledDeparture().after(now))
+				departureInFuture = true;
+			else
+				departureInFuture = false;
+			if (leg.getScheduledArrival().after(leg.getScheduledDeparture()))
+				arrivalAfterDeparture = true;
+			else
+				arrivalAfterDeparture = false;
+			super.state(departureInFuture, "scheduledDeparture", "acme.validation.leg.scheduledDeparture");
+			super.state(arrivalAfterDeparture, "scheduledArrival", "acme.validation.leg.scheduledArrival");
 		}
+
 	}
 
 	@Override

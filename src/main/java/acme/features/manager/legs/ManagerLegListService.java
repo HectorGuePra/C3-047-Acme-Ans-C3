@@ -74,7 +74,7 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 		super.getResponse().addGlobal("flightId", flightId);
 
 		Flight flight = this.repository.findFlightByFlightId(flightId);
-		super.getResponse().addGlobal("flightDraftMode", flight.getDraftMode());
+		super.getResponse().addGlobal("flightDraftMode", flight.isDraftMode());
 	}
 
 }

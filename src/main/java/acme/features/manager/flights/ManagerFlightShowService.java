@@ -28,7 +28,7 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 			Flight flight = this.repository.findFlightById(flightId);
 
 			if (flight != null)
-				if (flight.getDraftMode()) {
+				if (flight.isDraftMode()) {
 					Manager manager = flight.getManager();
 					status = super.getRequest().getPrincipal().hasRealm(manager);
 				} else
