@@ -20,7 +20,7 @@ manager.flight.form.label.arrival = Destino:
 manager.flight.form.label.confirmation = Confirma que todos los datos son correctos
 
 manager.flight.form.button.legs = Lista de escalas
-manager.flight.list.button.create = Crear
+manager.flight.form.button.create = Crear
 manager.flight.list.button.create = Crear
 manager.flight.form.button.update = Actualizar
 manager.flight.form.button.delete = Borrar

@@ -26,19 +26,19 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int flightId;
-		Flight flight;
-		Manager manager;
-		if (!super.getRequest().hasData("id"))
-			status = false;
-		else {
-			flightId = super.getRequest().getData("id", int.class);
-			flight = this.repository.findFlightById(flightId);
-			manager = flight == null ? null : flight.getManager();
-			status = flight != null && flight.getDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
-			super.getResponse().setAuthorised(status);
+		boolean status = false;
+
+		if (super.getRequest().hasData("id")) {
+			int flightId = super.getRequest().getData("id", int.class);
+			Flight flight = this.repository.findFlightById(flightId);
+
+			if (flight != null) {
+				Manager manager = flight.getManager();
+				status = flight.isDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
+			}
 		}
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -60,11 +60,15 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-		List<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
-		for (Leg leg : legs) {
-			boolean isPublished = leg.isDraftMode();
-			super.state(isPublished, "flightTag", "acme.validation.flight.unable-to-delete-flight-published-leg.message");
+		boolean isPublished;
+		isPublished = true;
+		if (this.repository.findLegsByFlightId(flight.getId()).size() > 0) {
+			List<Leg> legs = this.repository.findLegsByFlightId(flight.getId());
+			for (Leg leg : legs)
+				if (!leg.isDraftMode())
+					isPublished = leg.isDraftMode();
 		}
+		super.state(isPublished, "tag", "acme.validation.flight.unable-to-delete-flight-published-leg.message");
 	}
 
 	@Override
@@ -87,8 +91,8 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
 
-		dataset.put("departure", flight.getDeparture() != null ? flight.getDeparture().getName() : flight.getDeparture());
-		dataset.put("arrival", flight.getArrival() != null ? flight.getArrival().getName() : flight.getArrival());
+		dataset.put("departure", flight.getDeparture());
+		dataset.put("arrival", flight.getArrival());
 		dataset.put("scheduledDeparture", flight.getFlightDeparture());
 		dataset.put("scheduledArrival", flight.getFlightArrival());
 		dataset.put("layovers", flight.getLayovers());
