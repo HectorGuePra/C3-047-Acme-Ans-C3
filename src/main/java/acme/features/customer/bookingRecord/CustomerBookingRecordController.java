@@ -16,26 +16,14 @@ public class CustomerBookingRecordController extends AbstractGuiController<Custo
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private CustomerBookingRecordListService	listService;
-	//
-	@Autowired
-	private CustomerBookingRecordCreateService	createService;
-	//
-	@Autowired
-	private CustomerBookingRecordShowService	showService;
-	//
-	@Autowired
-	private CustomerBookingRecordUpdateService	updateService;
+	private CustomerBookingRecordCreateService createService;
 
 	// Constructors -----------------------------------------------------------
 
 
 	@PostConstruct
 	protected void initialise() {
-		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("create", this.createService);
-		super.addBasicCommand("show", this.showService);
-		super.addBasicCommand("update", this.updateService);
 	}
 
 }
