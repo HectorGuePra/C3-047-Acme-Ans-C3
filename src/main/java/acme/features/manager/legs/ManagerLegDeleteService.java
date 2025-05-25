@@ -12,7 +12,6 @@ import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.aircraft.Aircraft;
 import acme.entities.airport.Airport;
-import acme.entities.flight.Flight;
 import acme.entities.legs.Leg;
 import acme.entities.legs.LegStatus;
 import acme.realms.manager.Manager;
@@ -26,80 +25,50 @@ public class ManagerLegDeleteService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void authorise() {
-		int managerId;
-		int legId;
-		boolean status = true;
-		int aircraftId;
-		int departureId;
-		int arrivalId;
-		Aircraft aircraft;
-		Airport departure;
-		Airport arrival;
-		List<Aircraft> aircrafts;
-		List<Airport> airports;
+		boolean status = false;
 
-		if (!super.getRequest().hasData("id"))
-			status = false;
-		else {
-
-			managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			legId = super.getRequest().getData("id", int.class);
-
-			if (!this.repository.findByLegId(legId).isPresent())
-				status = false;
+		if (super.getRequest().hasData("id")) {
+			int legId = super.getRequest().getData("id", int.class);
+			int managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
 			Optional<Leg> optionalLeg = this.repository.findByLegId(legId);
 
-			if (optionalLeg.isEmpty())
-				status = false;
-			else {
+			if (optionalLeg.isPresent()) {
 				Leg leg = optionalLeg.get();
 
-				if (!leg.isDraftMode())
-					status = false;
-				else {
-					Optional<Flight> flight = this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId);
-					if (flight.isEmpty())
-						status = false;
+				if (leg.isDraftMode() && this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId).isPresent()) {
+					status = true;
 
 					if (super.getRequest().hasData("aircraft")) {
-						aircraftId = super.getRequest().getData("aircraft", int.class);
-						aircraft = this.repository.findAircraftByAircraftId(aircraftId);
-						aircrafts = this.repository.findAllAircraftsByManagerId(managerId);
+						int aircraftId = super.getRequest().getData("aircraft", int.class);
+						Aircraft aircraft = this.repository.findAircraftByAircraftId(aircraftId);
+						List<Aircraft> aircrafts = this.repository.findAllAircraftsByManagerId(managerId);
 
-						if (aircraft == null && aircraftId != 0)
-							status = false;
-
-						if (aircraft != null && !aircrafts.contains(aircraft))
+						if (aircraftId != 0 && aircraft == null || aircraft != null && !aircrafts.contains(aircraft))
 							status = false;
 					}
 
-					airports = this.repository.findAllAirports();
+					List<Airport> airports = this.repository.findAllAirports();
 
 					if (super.getRequest().hasData("departureAirport")) {
-						departureId = super.getRequest().getData("departureAirport", int.class);
-						departure = this.repository.findAirportByAirportId(departureId);
+						int departureId = super.getRequest().getData("departureAirport", int.class);
+						Airport departure = this.repository.findAirportByAirportId(departureId);
 
-						if (departure == null && departureId != 0)
-							status = false;
-
-						if (departure != null && !airports.contains(departure))
+						if (departureId != 0 && departure == null || departure != null && !airports.contains(departure))
 							status = false;
 					}
 
 					if (super.getRequest().hasData("arrivalAirport")) {
-						arrivalId = super.getRequest().getData("arrivalAirport", int.class);
-						arrival = this.repository.findAirportByAirportId(arrivalId);
+						int arrivalId = super.getRequest().getData("arrivalAirport", int.class);
+						Airport arrival = this.repository.findAirportByAirportId(arrivalId);
 
-						if (arrival == null && arrivalId != 0)
-							status = false;
-
-						if (arrival != null && !airports.contains(arrival))
+						if (arrivalId != 0 && arrival == null || arrival != null && !airports.contains(arrival))
 							status = false;
 					}
 				}
 			}
 		}
+
 		super.getResponse().setAuthorised(status);
 	}
 

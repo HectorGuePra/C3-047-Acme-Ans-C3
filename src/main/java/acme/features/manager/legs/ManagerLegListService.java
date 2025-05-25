@@ -4,7 +4,6 @@ package acme.features.manager.legs;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -28,20 +27,16 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void authorise() {
-		boolean status = true;
+		boolean status = false;
 
-		if (!super.getRequest().hasData("flightId", int.class))
+		if (super.getRequest().hasData("flightId", int.class)) {
+			int flightId = super.getRequest().getData("flightId", int.class);
+			int managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-			status = false;
-		else {
-			Integer flightId = super.getRequest().getData("flightId", int.class);
-			if (this.flightRepository.findFlightById(flightId) == null)
-				status = false;
-			Integer managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(flightId, managerId);
-			if (optionalFlight.isEmpty())
-				status = false;
+			if (this.flightRepository.findFlightById(flightId) != null && this.repository.findByIdAndManagerId(flightId, managerId).isPresent())
+				status = true;
 		}
+
 		super.getResponse().setAuthorised(status);
 	}
 
