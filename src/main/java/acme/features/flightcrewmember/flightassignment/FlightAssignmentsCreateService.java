@@ -31,10 +31,11 @@ public class FlightAssignmentsCreateService extends AbstractGuiService<FlightCre
 		int assignmentMemberId;
 		boolean status = true;
 
-		userId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		assignmentMemberId = super.getRequest().getData("memberId", int.class);
-		status = userId == assignmentMemberId;
-
+		if (super.getRequest().hasData("memberId")) {
+			userId = super.getRequest().getPrincipal().getActiveRealm().getId();
+			assignmentMemberId = super.getRequest().getData("memberId", int.class);
+			status = userId == assignmentMemberId;
+		}
 		if (super.getRequest().getMethod().equals("POST")) {
 			if (super.getRequest().hasData("leg")) {
 				Integer legId = super.getRequest().getData("leg", int.class);
@@ -124,7 +125,8 @@ public class FlightAssignmentsCreateService extends AbstractGuiService<FlightCre
 		dataset.put("currentStatusChoice", currentStatusChoice);
 		dataset.put("legChoice", legChoice);
 		dataset.put("flightCrewMemberChoice", flightCrewMemberChoice);
-		dataset.put("memberId", super.getRequest().getData("memberId", int.class));
+		if (super.getRequest().hasData("memberId"))
+			dataset.put("memberId", super.getRequest().getData("memberId", int.class));
 
 		super.getResponse().addData(dataset);
 
