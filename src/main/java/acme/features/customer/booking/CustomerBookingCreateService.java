@@ -108,7 +108,7 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
 			.filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
 
-		flightChoices = SelectChoices.from(validFlights, "description", booking.getFlight());
+		flightChoices = SelectChoices.from(validFlights, "info", booking.getFlight());
 		classChoices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 
 		dataset = super.unbindObject(booking, "locatorCode", "purchaseMoment", "travelClass", "price", "lastCardNibble", "draftMode");
