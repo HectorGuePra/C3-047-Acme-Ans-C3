@@ -1,8 +1,10 @@
 
 package acme.features.manager.legs;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,6 +40,8 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 		Airport arrival;
 		List<Aircraft> aircrafts;
 		List<Airport> airports;
+		String statusString;
+		List<String> validStatuses;
 
 		if (!super.getRequest().hasData("id"))
 			status = false;
@@ -63,40 +67,48 @@ public class ManagerLegUpdateService extends AbstractGuiService<Manager, Leg> {
 					if (flight.isEmpty())
 						status = false;
 
-					if (super.getRequest().hasData("aircraft")) {
-						aircraftId = super.getRequest().getData("aircraft", int.class);
-						aircraft = this.repository.findAircraftByAircraftId(aircraftId);
-						aircrafts = this.repository.findAllAircraftsByManagerId(managerId);
+					if (super.getRequest().hasData("status")) {
+						statusString = super.getRequest().getData("status", String.class);
+						validStatuses = Arrays.stream(LegStatus.values()).map(LegStatus::name).collect(Collectors.toList());
 
-						if (aircraft == null && aircraftId != 0)
+						if (!validStatuses.contains(statusString))
 							status = false;
 
-						if (aircraft != null && !aircrafts.contains(aircraft))
-							status = false;
-					}
+						if (super.getRequest().hasData("aircraft")) {
+							aircraftId = super.getRequest().getData("aircraft", int.class);
+							aircraft = this.repository.findAircraftByAircraftId(aircraftId);
+							aircrafts = this.repository.findAllAircraftsByManagerId(managerId);
 
-					airports = this.repository.findAllAirports();
+							if (aircraft == null && aircraftId != 0)
+								status = false;
 
-					if (super.getRequest().hasData("departureAirport")) {
-						departureId = super.getRequest().getData("departureAirport", int.class);
-						departure = this.repository.findAirportByAirportId(departureId);
+							if (aircraft != null && !aircrafts.contains(aircraft))
+								status = false;
+						}
 
-						if (departure == null && departureId != 0)
-							status = false;
+						airports = this.repository.findAllAirports();
 
-						if (departure != null && !airports.contains(departure))
-							status = false;
-					}
+						if (super.getRequest().hasData("departureAirport")) {
+							departureId = super.getRequest().getData("departureAirport", int.class);
+							departure = this.repository.findAirportByAirportId(departureId);
 
-					if (super.getRequest().hasData("arrivalAirport")) {
-						arrivalId = super.getRequest().getData("arrivalAirport", int.class);
-						arrival = this.repository.findAirportByAirportId(arrivalId);
+							if (departure == null && departureId != 0)
+								status = false;
 
-						if (arrival == null && arrivalId != 0)
-							status = false;
+							if (departure != null && !airports.contains(departure))
+								status = false;
+						}
 
-						if (arrival != null && !airports.contains(arrival))
-							status = false;
+						if (super.getRequest().hasData("arrivalAirport")) {
+							arrivalId = super.getRequest().getData("arrivalAirport", int.class);
+							arrival = this.repository.findAirportByAirportId(arrivalId);
+
+							if (arrival == null && arrivalId != 0)
+								status = false;
+
+							if (arrival != null && !airports.contains(arrival))
+								status = false;
+						}
 					}
 				}
 			}
