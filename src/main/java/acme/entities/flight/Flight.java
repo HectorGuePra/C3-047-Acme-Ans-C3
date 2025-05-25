@@ -135,8 +135,9 @@ public class Flight extends AbstractEntity {
 		return lastLeg != null ? lastLeg.getArrivalAirport() : null;
 	}
 
+	//Método creado por Ariel
 	@Transient
-	public String getDescription() {
+	public String info() {
 		String res = "-";
 		Date depDate = this.getFlightDeparture();
 		Date arrDate = this.getFlightArrival();
