@@ -12,7 +12,7 @@
 	<acme:list-column code="administrator.airline.list.label.phoneNumber" path="phoneNumber" width="20%"/>
 	<acme:list-payload path="payload"/>	
 </acme:list>
-�
+
 <jstl:if test="${_command == 'list'}">
 	<acme:button code="administrator.airline.list.button.create" action="/administrator/airline/create"/>
 </jstl:if>	

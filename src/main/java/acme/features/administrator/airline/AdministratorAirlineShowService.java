@@ -20,7 +20,15 @@ public class AdministratorAirlineShowService extends AbstractGuiService<Administ
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean authorise = true;
+		if (super.getRequest().hasData("id")) {
+			int id = super.getRequest().getData("id", int.class);
+			Airline airline = this.repository.findAirlineById(id);
+			if (airline == null)
+				authorise = false;
+		} else
+			authorise = false;
+		super.getResponse().setAuthorised(authorise);
 	}
 
 	@Override
@@ -39,7 +47,7 @@ public class AdministratorAirlineShowService extends AbstractGuiService<Administ
 		SelectChoices typeChoices;
 		typeChoices = SelectChoices.from(AirlineType.class, airline.getType());
 
-		dataset = super.unbindObject(airline, "name", "iataCode", "websiteUrl", "type", "phoneNumber", "email");
+		dataset = super.unbindObject(airline, "name", "iataCode", "websiteUrl", "type", "phoneNumber", "email", "foundationMoment");
 		dataset.put("types", typeChoices);
 
 		super.getResponse().addData(dataset);
