@@ -2,12 +2,14 @@
 package acme.features.manager.flights;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.airport.Airport;
 import acme.entities.flight.Flight;
 import acme.realms.manager.Manager;
 
@@ -40,8 +42,8 @@ public class ManagerFlightListService extends AbstractGuiService<Manager, Flight
 		Dataset dataset;
 
 		dataset = super.unbindObject(flight, "tag");
-		dataset.put("departure", flight.getDeparture() != null ? flight.getDeparture().getName() : flight.getDeparture());
-		dataset.put("arrival", flight.getArrival() != null ? flight.getArrival().getName() : flight.getArrival());
+		dataset.put("departure", Optional.ofNullable(flight.getDeparture()).map(Airport::getName).orElse(null));
+		dataset.put("arrival", Optional.ofNullable(flight.getArrival()).map(Airport::getName).orElse(null));
 
 		super.getResponse().addData(dataset);
 	}
