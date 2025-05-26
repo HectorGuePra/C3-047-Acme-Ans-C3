@@ -2,9 +2,7 @@
 package acme.entities.tasks;
 
 import javax.persistence.Entity;
-import javax.persistence.Index;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.Valid;
 
 import acme.client.components.basis.AbstractEntity;
@@ -19,9 +17,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(indexes = {
-		@Index(columnList = "technician_id"), @Index(columnList = "draftMode"), @Index(columnList = "technician_id, draftMode")
-	})
+//@Table(indexes = {
+//		@Index(columnList = "technician_id"), @Index(columnList = "draftMode"), @Index(columnList = "technician_id, draftMode")
+//	})
 public class Task extends AbstractEntity {
 
 	private static final long	serialVersionUID	= 1L;
@@ -29,31 +27,31 @@ public class Task extends AbstractEntity {
 	@Mandatory
 	@Valid
 	@Automapped
-	private TaskType type;
+	private TaskType			type;
 
 	@Mandatory
-	@ValidString(min =1, max = 255)
+	@ValidString(min = 1, max = 255)
 	@Automapped
-	private String description;
+	private String				description;
 
 	@Mandatory
-	@ValidNumber(min = 0, max =10)
+	@ValidNumber(min = 0, max = 10)
 	@Automapped
-	private Integer	priority;
+	private Integer				priority;
 
 	@Mandatory
 	@ValidNumber(min = 0, max = 700000)
 	@Automapped
-	private Integer	duration;
+	private Integer				duration;
 
 	@ManyToOne
 	@Mandatory
 	@Automapped
-	private Technician technician;
-	
+	private Technician			technician;
+
 	@Mandatory
 	@Valid
 	@Automapped
-	private Boolean draftMode;
+	private Boolean				draftMode;
 
 }
