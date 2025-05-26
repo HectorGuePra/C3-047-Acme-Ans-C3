@@ -28,28 +28,20 @@ public class AdministratorAircraftPublishService extends AbstractGuiService<Admi
 
 	@Override
 	public void authorise() {
-		boolean status = true;
-		String metodo = super.getRequest().getMethod();
-		if (!super.getRequest().hasData("id"))
-			status = false;
-		else {
-			int id = super.getRequest().getData("id", int.class);
-			Aircraft aircraft = this.repository.findById(id);
-			if (aircraft == null)
-				status = false;
-			if (metodo.equals("POST")) {
-				int airlineId = super.getRequest().getData("airline", int.class);
-				String aStatus = super.getRequest().getData("status", String.class);
-				if (aStatus == null || aStatus.trim().isEmpty() || Arrays.stream(AircraftStatus.values()).noneMatch(s -> s.name().equals(aStatus)) && !aStatus.equals("0"))
-					status = false;
-				Airline airline = this.repository.findAirlineById(airlineId);
-				if (airline == null && airlineId != 0)
-					status = false;
-				if (!aircraft.getDraftMode())
-					status = false;
-			}
+		Boolean authorised = true;
+		boolean exist, published;
+		Aircraft aircraft;
+		int id;
+
+		id = super.getRequest().getData("id", int.class);
+		aircraft = this.repository.findById(id);
+
+		exist = aircraft != null;
+		published = !aircraft.getDraftMode();
+		if (exist && published) {
+			authorised = false;
 		}
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override

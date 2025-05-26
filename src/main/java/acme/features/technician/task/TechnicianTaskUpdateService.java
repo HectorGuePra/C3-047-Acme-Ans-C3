@@ -23,7 +23,7 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 	@Override
 	public void authorise() {
 		Boolean authorised = true;
-		boolean exist;
+		boolean exist, published;
 		Task task;
 		Technician technician;
 		int id;
@@ -32,9 +32,10 @@ public class TechnicianTaskUpdateService extends AbstractGuiService<Technician, 
 		task = this.repository.findById(id);
 
 		exist = task != null;
+		published = !task.getDraftMode();
 		if (exist) {
 			technician = (Technician) super.getRequest().getPrincipal().getActiveRealm();
-			if (!technician.equals(task.getTechnician()))
+			if (published || !technician.equals(task.getTechnician()))
 				authorised = false;
 		}
 
