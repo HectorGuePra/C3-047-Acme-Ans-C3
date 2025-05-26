@@ -29,18 +29,22 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 	public void authorise() {
 		boolean authorised = true;
 		int customerId = this.getRequest().getPrincipal().getActiveRealm().getId();
-		int bookingId = super.getRequest().getData("bookingId", int.class);
-		Booking booking = this.repository.findBookingById(bookingId);
-		if (booking == null || booking.getCustomer().getId() != customerId/* || !booking.isDraftMode() */)
+
+		if (super.getRequest().hasData("bookingId")) {
+			int bookingId = super.getRequest().getData("bookingId", int.class);
+			Booking booking = this.repository.findBookingById(bookingId);
+			if (booking == null || booking.getCustomer().getId() != customerId)
+				authorised = false;
+			else if (super.getRequest().getMethod().equals("POST")) {
+				int pId = super.getRequest().getData("passenger", int.class);
+				Passenger passenger = this.repository.findPassengerById(pId);
+				Collection<Passenger> myValidPassengers = this.repository.findPassengersByCustomerIdNotInBooking(customerId, bookingId);
+				if (passenger == null && pId != 0 || passenger != null && !myValidPassengers.contains(passenger))
+					authorised = false;
+			}
+		} else
 			authorised = false;
-		else if (super.getRequest().getMethod().equals("POST")) {
-			int pId = super.getRequest().getData("passenger", int.class);
-			Passenger passenger = this.repository.findPassengerById(pId);
-			Collection<Passenger> myValidPassengers = this.repository.findPassengersByCustomerIdNotInBooking(customerId, bookingId);
-			if (passenger == null && pId != 0 || passenger != null && !myValidPassengers.contains(passenger))
-				;
-			authorised = false;
-		}
+
 		super.getResponse().setAuthorised(authorised);
 	}
 
@@ -74,11 +78,7 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 
 	@Override
 	public void validate(final BookingRecord BookingRecord) {
-		boolean notPublished = true;
-		Booking booking = BookingRecord.getBooking();
-		if (booking != null && !booking.isDraftMode())
-			notPublished = false;
-		super.state(notPublished, "booking", "acme.validation.booking.invalid-booking-publish.message");
+
 	}
 
 	@Override

@@ -31,10 +31,13 @@ public class CustomerBookingUpdateService extends AbstractGuiService<Customer, B
 		Booking booking;
 		Customer customer;
 
-		bookingId = super.getRequest().getData("id", int.class);
-		booking = this.repository.findBookingById(bookingId);
-		customer = booking == null ? null : booking.getCustomer();
-		authorised = booking != null && booking.isDraftMode() && super.getRequest().getPrincipal().hasRealm(customer);
+		if (super.getRequest().hasData("id")) {
+			bookingId = super.getRequest().getData("id", int.class);
+			booking = this.repository.findBookingById(bookingId);
+			customer = booking == null ? null : booking.getCustomer();
+			authorised = booking != null && booking.isDraftMode() && super.getRequest().getPrincipal().hasRealm(customer);
+		} else
+			authorised = false;
 
 		if (authorised && super.getRequest().getMethod().equals("POST")) {
 			if (super.getRequest().hasData("flight", int.class)) {
