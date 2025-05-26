@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-import acme.entities.booking.Booking;
 import acme.entities.flight.Flight;
 import acme.entities.legs.Leg;
 import acme.features.manager.legs.ManagerLegDeleteService;
@@ -73,12 +72,7 @@ public class ManagerFlightDeleteService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void perform(final Flight flight) {
-		List<Booking> bookings;
 		List<Leg> legs;
-
-		bookings = this.repository.findBookingsByFlightId(flight.getId());
-		bookings.stream().forEach(b -> this.repository.deleteAll(this.repository.findBookingRecordByBookingId(b.getId())));
-		this.repository.deleteAll(bookings);
 
 		legs = this.repository.findLegsByFlightId(flight.getId());
 		legs.stream().forEach(l -> this.legsDeleteService.perform(l));
