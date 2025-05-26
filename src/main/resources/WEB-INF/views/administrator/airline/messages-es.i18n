@@ -15,3 +15,7 @@ administrator.airline.list.button.create = Crear aerolínea
 
 administrator.airline.form.button.update = Actualizar
 administrator.airline.form.button.create = Crear
+
+administrator.airline.form.label.confirmation = Confirmar
+
+acme.validation.airline.duplicated-iataCode.message = Ya existe una Aerolínea con el mismo código IATA
