@@ -34,11 +34,11 @@ public class FlightValidator extends AbstractValidator<ValidFlight, Flight> {
 
 		List<Leg> legs = this.repository.legsDuringFlight(flight.getId());
 		boolean hasLegs = legs != null && !legs.isEmpty();
-		if (flight.getDraftMode() != null && !flight.getDraftMode()) {
-			super.state(context, hasLegs, "flightTag", "acme.validation.flight.zero-legs.message");
+		if (!flight.isDraftMode()) {
+			super.state(context, hasLegs, "tag", "acme.validation.flight.zero-legs.message");
 			for (Leg leg : legs) {
 				boolean isPublished = !leg.isDraftMode();
-				super.state(context, isPublished, "flightTag", "acme.validation.flight.cant-be-publish.message");
+				super.state(context, isPublished, "tag", "acme.validation.flight.cant-be-publish.message");
 			}
 		}
 
