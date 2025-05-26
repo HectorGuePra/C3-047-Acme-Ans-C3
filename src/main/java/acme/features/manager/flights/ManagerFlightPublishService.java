@@ -21,19 +21,19 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int flightId;
-		Flight flight;
-		Manager manager;
-		if (!super.getRequest().hasData("id"))
-			status = false;
-		else {
-			flightId = super.getRequest().getData("id", int.class);
-			flight = this.repository.findFlightById(flightId);
-			manager = flight == null ? null : flight.getManager();
-			status = flight != null && flight.getDraftMode() && super.getRequest().getPrincipal().hasRealm(manager);
-			super.getResponse().setAuthorised(status);
+		boolean status = false;
+
+		if (super.getRequest().hasData("id")) {
+			int flightId = super.getRequest().getData("id", int.class);
+			Flight flight = this.repository.findFlightById(flightId);
+
+			if (flight != null) {
+				Manager manager = flight.getManager();
+				status = super.getRequest().getPrincipal().hasRealm(manager) && flight.isDraftMode();
+			}
 		}
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -50,7 +50,6 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 	@Override
 	public void bind(final Flight flight) {
 		super.bindObject(flight, "tag", "requiresSelfTransfer", "cost", "description");
-		flight.setDraftMode(false);
 
 	}
 
@@ -61,6 +60,16 @@ public class ManagerFlightPublishService extends AbstractGuiService<Manager, Fli
 		if (!legs.isEmpty())
 			canBePublish = legs.stream().allMatch(l -> !l.isDraftMode());
 		super.state(canBePublish, "*", "acme.validation.flight.cant-be-publish.message");
+
+		boolean availableCurrency;
+		List<String> currencies;
+		currencies = this.repository.findAllCurrencies();
+		String currency;
+		currency = super.getRequest().getData("cost", String.class);
+		currency = currency.length() >= 3 ? currency.substring(0, 3).toUpperCase() : currency;
+		availableCurrency = currencies.contains(currency);
+
+		super.state(availableCurrency, "cost", "acme.validation.invalid-currency.message");
 	}
 
 	@Override

@@ -10,8 +10,8 @@ manager.leg.list.label.departureAirport = Aeropuerto de salida
 manager.leg.list.label.arrivalAirport = Aeropuerto de llegada
 
 manager.leg.form.label.flightNumber = Número de vuelo:
-manager.leg.form.label.scheduledDeparture = Hora de salida:
-manager.leg.form.label.scheduledArrival = Hora de llegada:
+manager.leg.form.label.scheduledDeparture = Fecha y hora de salida:
+manager.leg.form.label.scheduledArrival = Fecha y hora de llegada:
 manager.leg.form.label.duration = Duración:
 manager.leg.form.label.status = Estado del vuelo:
 manager.leg.form.label.flight = Vuelo:
