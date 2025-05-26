@@ -38,8 +38,8 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 			if (booking == null)
 				authorised = false;
 			else {
-				Customer customer = booking == null ? null : booking.getCustomer();
-				authorised = super.getRequest().getPrincipal().hasRealm(customer) && booking != null;
+				Customer customer = booking.getCustomer();
+				authorised = super.getRequest().getPrincipal().hasRealm(customer);
 			}
 		} else
 			authorised = false;
