@@ -36,8 +36,10 @@ public class TechnicianMaintenanceRecordTaskCreateService extends AbstractGuiSer
 		if (super.getRequest().getMethod().equals("POST")) {
 			taskId = super.getRequest().getData("task", int.class);
 			task = this.repository.findTaskById(taskId);
-			if (task == null) {
+			if (taskId != 0 && task == null) {
 				authorised = false;
+			} else if (taskId==0) {
+				authorised = mr.getTechnician().equals(technician);
 			} else {
 				MaintenanceRecordTask mrt = this.repository.findMaintenanceRecordTaskByMaintenanceRecordIdAndTaskId(
 						maintenanceRecordId, taskId);
