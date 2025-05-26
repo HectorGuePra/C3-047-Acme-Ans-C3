@@ -1,5 +1,7 @@
+
 package acme.features.administrator.aircraft;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,10 @@ public class AdministratorAircraftPublishService extends AbstractGuiService<Admi
 
 	// AbstractGuiService interface -----------------------------------------------------
 
+
 	@Override
 	public void authorise() {
-a		Boolean authorised = true;
+		Boolean authorised = true;
 		boolean exist, published;
 		Aircraft aircraft;
 		int id;
@@ -59,7 +62,7 @@ a		Boolean authorised = true;
 
 	@Override
 	public void validate(final Aircraft aircraft) {
-		
+
 	}
 
 	@Override

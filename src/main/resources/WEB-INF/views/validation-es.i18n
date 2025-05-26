@@ -17,6 +17,7 @@ acme.validation.leg.flight-number-incorrect.message = Incorrecto Iata Code.
 acme.validation.leg.overlapping-legs.message = Este tramo solapa a otro tramo.
 acme.validation.leg.same-airport.error = El vuelo no puede tener el mismo aeropuerto de origen y destino.
 acme.validation.flight.aircraft-under-maintenance.message = Areonave inoperativa.
+acme.validation.leg.past-date.message = La fecha tiene que ser futura.
 
 acme.validation.manager.identifier.message = El identificador debe contener 2 o 3 letras siendo tus iniciales y 6 dígitos.
 acme.validation.manager.identifier-number.message = El número de identificador debe ser único.

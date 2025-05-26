@@ -32,8 +32,8 @@ import lombok.Setter;
 @Setter
 @Table(indexes = {
 	@Index(columnList = "flightNumber", unique = true), @Index(columnList = "flight_id, scheduledDeparture, scheduledArrival"), // 
-	@Index(columnList = "scheduledDeparture"), @Index(columnList = "scheduledArrival"), @Index(columnList = "flight_id"), //
-	@Index(columnList = "aircraft_id"), @Index(columnList = "status")
+	@Index(columnList = "scheduledDeparture"), @Index(columnList = "flight_id"), @Index(columnList = "aircraft_id"),//
+	@Index(columnList = "status"), @Index(columnList = "scheduledArrival") //Esta ultima linea de indices ha sido incluida para el S03
 })
 @ValidLeg
 public class Leg extends AbstractEntity {
