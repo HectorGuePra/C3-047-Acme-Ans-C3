@@ -52,7 +52,4 @@ public class Customer extends AbstractRole {
 	@Automapped
 	private Integer				earnedPoints;
 
-	@Mandatory
-	@Automapped
-	private boolean				draftMode;
 }
