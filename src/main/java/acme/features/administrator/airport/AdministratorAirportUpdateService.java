@@ -1,6 +1,8 @@
 
 package acme.features.administrator.airport;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -28,6 +30,11 @@ public class AdministratorAirportUpdateService extends AbstractGuiService<Admini
 			Airport airport = this.repository.findAirportById(id);
 			if (airport == null)
 				status = false;
+			if (super.getRequest().getMethod().equals("POST")) {
+				String scope = super.getRequest().getData("operationalScope", String.class);
+				if (scope == null || scope.trim().isEmpty() || Arrays.stream(AirportType.values()).noneMatch(s -> s.name().equals(scope)) && !scope.equals("0"))
+					status = false;
+			}
 		}
 		super.getResponse().setAuthorised(status);
 	}
