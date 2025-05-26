@@ -47,13 +47,6 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 				String travelClass = super.getRequest().getData("travelClass", String.class);
 				authorised = travelClass.equals("0") || travelClass.equals("") || travelClass.equals("ECONOMY") || travelClass.equals("BUSINESS");
 			}
-			/*
-			 * if (authorised && super.getRequest().hasData("locatorCode", String.class)) {
-			 * String locatorCode = super.getRequest().getData("locatorCode", String.class);
-			 * Booking b = this.repository.findBookingByLocatorCode(locatorCode);
-			 * authorised = locatorCode.equals("") || b == null;
-			 * }
-			 */
 
 		}
 
