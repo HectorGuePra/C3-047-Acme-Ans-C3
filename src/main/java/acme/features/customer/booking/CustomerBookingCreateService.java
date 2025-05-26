@@ -1,7 +1,6 @@
 
 package acme.features.customer.booking;
 
-import java.security.SecureRandom;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
+import acme.client.helpers.RandomHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.booking.Booking;
@@ -47,11 +47,13 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 				String travelClass = super.getRequest().getData("travelClass", String.class);
 				authorised = travelClass.equals("0") || travelClass.equals("") || travelClass.equals("ECONOMY") || travelClass.equals("BUSINESS");
 			}
-			if (authorised && super.getRequest().hasData("locatorCode", String.class)) {
-				String locatorCode = super.getRequest().getData("locatorCode", String.class);
-				Booking b = this.repository.findBookingByLocatorCode(locatorCode);
-				authorised = locatorCode.equals("") || b == null;
-			}
+			/*
+			 * if (authorised && super.getRequest().hasData("locatorCode", String.class)) {
+			 * String locatorCode = super.getRequest().getData("locatorCode", String.class);
+			 * Booking b = this.repository.findBookingByLocatorCode(locatorCode);
+			 * authorised = locatorCode.equals("") || b == null;
+			 * }
+			 */
 
 		}
 
@@ -63,10 +65,15 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 		Booking booking;
 		Customer customer;
 
+		Date moment = MomentHelper.getCurrentMoment();
+
 		customer = (Customer) super.getRequest().getPrincipal().getActiveRealm();
 
 		booking = new Booking();
 		booking.setCustomer(customer);
+		booking.setPurchaseMoment(moment);
+		booking.setLocatorCode(this.generateUniqueLocatorCode());
+		booking.setDraftMode(true);
 
 		super.getBuffer().addData(booking);
 	}
@@ -75,18 +82,12 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 	public void bind(final Booking booking) {
 		int flightId;
 		Flight flight;
-		Date moment = MomentHelper.getCurrentMoment();
 
 		flightId = super.getRequest().getData("flight", int.class);
 		flight = this.repository.findFlightById(flightId);
+		booking.setFlight(flight);
 
 		super.bindObject(booking, "travelClass", "lastCardNibble");
-
-		booking.setFlight(flight);
-		booking.setPurchaseMoment(moment);
-		booking.setLocatorCode(this.randomLocatorCode());
-		booking.setDraftMode(true);
-
 	}
 
 	@Override
@@ -123,14 +124,25 @@ public class CustomerBookingCreateService extends AbstractGuiService<Customer, B
 
 	private String randomLocatorCode() {
 		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-		SecureRandom random = new SecureRandom();
-		int length = 6 + random.nextInt(2);
-		StringBuilder codigo = new StringBuilder(length);
+		int length = RandomHelper.nextInt(6, 8);
+		StringBuilder code = new StringBuilder(length);
 
-		for (int i = 0; i < length; i++)
-			codigo.append(characters.charAt(random.nextInt(characters.length())));
+		for (int i = 0; i < length; i++) {
+			int index = RandomHelper.nextInt(characters.length());
+			code.append(characters.charAt(index));
+		}
 
-		return codigo.toString();
+		return code.toString();
+	}
+
+	private String generateUniqueLocatorCode() {
+		String code;
+
+		do
+			code = this.randomLocatorCode();
+		while (this.repository.findBookingByLocatorCode(code) != null);
+
+		return code;
 	}
 
 }
