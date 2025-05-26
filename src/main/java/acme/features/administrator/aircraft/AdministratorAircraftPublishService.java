@@ -25,7 +25,20 @@ public class AdministratorAircraftPublishService extends AbstractGuiService<Admi
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+a		Boolean authorised = true;
+		boolean exist, published;
+		Aircraft aircraft;
+		int id;
+
+		id = super.getRequest().getData("id", int.class);
+		aircraft = this.repository.findById(id);
+
+		exist = aircraft != null;
+		published = !aircraft.getDraftMode();
+		if (exist && published) {
+			authorised = false;
+		}
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
