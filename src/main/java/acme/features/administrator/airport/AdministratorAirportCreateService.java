@@ -1,6 +1,8 @@
 
 package acme.features.administrator.airport;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -24,6 +26,11 @@ public class AdministratorAirportCreateService extends AbstractGuiService<Admini
 		if (super.getRequest().hasData("id")) {
 			int id = super.getRequest().getData("id", int.class);
 			if (id != 0)
+				status = false;
+		}
+		if (super.getRequest().getMethod().equals("POST")) {
+			String scope = super.getRequest().getData("operationalScope", String.class);
+			if (scope == null || scope.trim().isEmpty() || Arrays.stream(AirportType.values()).noneMatch(s -> s.name().equals(scope)) && !scope.equals("0"))
 				status = false;
 		}
 		super.getResponse().setAuthorised(status);

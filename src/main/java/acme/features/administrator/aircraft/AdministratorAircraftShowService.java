@@ -1,3 +1,4 @@
+
 package acme.features.administrator.aircraft;
 
 import java.util.Collection;
@@ -23,9 +24,19 @@ public class AdministratorAircraftShowService extends AbstractGuiService<Adminis
 
 	// AbstractGuiService interface -----------------------------------------------------
 
+
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status = true;
+		if (!super.getRequest().hasData("id"))
+			status = false;
+		else {
+			int id = super.getRequest().getData("id", int.class);
+			Aircraft aircraft = this.repository.findById(id);
+			if (aircraft == null)
+				status = false;
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
