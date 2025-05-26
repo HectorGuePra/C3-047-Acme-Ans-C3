@@ -4,7 +4,6 @@ package acme.features.manager.legs;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,15 +29,13 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 	public void authorise() {
 		boolean status = false;
 
-		Integer flightId = super.getRequest().getData("flightId", int.class);
+		if (super.getRequest().hasData("flightId", int.class)) {
+			int flightId = super.getRequest().getData("flightId", int.class);
+			int managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		if (this.flightRepository.findFlightById(flightId) == null)
-			status = false;
-		Integer managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-		Optional<Flight> optionalFlight = this.repository.findByIdAndManagerId(flightId, managerId);
-
-		if (optionalFlight.isPresent())
-			status = true;
+			if (this.flightRepository.findFlightById(flightId) != null && this.repository.findByIdAndManagerId(flightId, managerId).isPresent())
+				status = true;
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -72,7 +69,7 @@ public class ManagerLegListService extends AbstractGuiService<Manager, Leg> {
 		super.getResponse().addGlobal("flightId", flightId);
 
 		Flight flight = this.repository.findFlightByFlightId(flightId);
-		super.getResponse().addGlobal("flightDraftMode", flight.getDraftMode());
+		super.getResponse().addGlobal("flightDraftMode", flight.isDraftMode());
 	}
 
 }

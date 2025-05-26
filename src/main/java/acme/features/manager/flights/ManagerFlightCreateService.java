@@ -20,12 +20,7 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void authorise() {
-		boolean authorized = true;
-		if (super.getRequest().hasData("id", boolean.class)) {
-			int flightId = super.getRequest().getData("id", int.class);
-			authorized &= flightId == 0;
-		}
-		super.getResponse().setAuthorised(authorized);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
@@ -50,13 +45,18 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void validate(final Flight flight) {
-		boolean availableCurrency;
+		boolean availableCurrency = true;
 		List<String> currencies;
 		currencies = this.repository.findAllCurrencies();
 		String currency;
+		String currencyName;
 		currency = super.getRequest().getData("cost", String.class);
-		currency = currency.length() >= 3 ? currency.substring(0, 3).toUpperCase() : currency;
-		availableCurrency = currencies.contains(currency);
+		if (currency.length() >= 3)
+			currencyName = currency.substring(0, 3).toUpperCase();
+		else
+			currencyName = currency;
+
+		availableCurrency = currencies.contains(currencyName);
 
 		super.state(availableCurrency, "cost", "acme.validation.invalid-currency.message");
 	}
@@ -71,8 +71,8 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
 
-		dataset.put("origin", flight.getDeparture() != null ? flight.getDeparture().getName() : flight.getDeparture());
-		dataset.put("destination", flight.getArrival() != null ? flight.getArrival().getName() : flight.getArrival());
+		dataset.put("origin", flight.getDeparture());
+		dataset.put("destination", flight.getArrival());
 		dataset.put("scheduledDeparture", flight.getFlightDeparture());
 		dataset.put("scheduledArrival", flight.getFlightArrival());
 		dataset.put("layovers", flight.getLayovers());

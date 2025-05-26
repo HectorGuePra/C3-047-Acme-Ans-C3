@@ -30,18 +30,11 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void authorise() {
-		int managerId;
-		int legId;
-		boolean status = true;
+		boolean status = false;
 
-		if (!super.getRequest().hasData("id"))
-			status = false;
-		else {
-			managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
-			legId = super.getRequest().getData("id", int.class);
-
-			if (!this.repository.findByLegId(legId).isPresent())
-				status = false;
+		if (super.getRequest().hasData("id")) {
+			int legId = super.getRequest().getData("id", int.class);
+			int managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
 			Optional<Leg> optionalLeg = this.repository.findByLegId(legId);
 
@@ -49,8 +42,7 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 				Leg leg = optionalLeg.get();
 				Optional<Flight> flight = this.repository.findByIdAndManagerId(leg.getFlight().getId(), managerId);
 
-				if (flight.isEmpty())
-					status = false;
+				status = flight.isPresent();
 			}
 		}
 
@@ -85,11 +77,12 @@ public class ManagerLegShowService extends AbstractGuiService<Manager, Leg> {
 
 		statusChoices = SelectChoices.from(LegStatus.class, leg.getStatus());
 
+		managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
+
 		if (!leg.isDraftMode()) {
 			flights = this.flightRepository.findAllFlights();
 			aircrafts = this.repository.findAllAircrafts();
 		} else {
-			managerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 			flights = this.flightRepository.findManagerFlightsByManagerId(managerId);
 			aircrafts = this.repository.findAllAircraftsByManagerId(managerId);
 		}
