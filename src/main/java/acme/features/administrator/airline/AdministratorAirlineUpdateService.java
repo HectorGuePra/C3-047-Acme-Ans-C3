@@ -21,7 +21,8 @@ public class AdministratorAirlineUpdateService extends AbstractGuiService<Admini
 	@Override
 	public void authorise() {
 		boolean authorised = true;
-
+		if (!super.getRequest().hasData("id"))
+			authorised = false;
 		if (super.getRequest().getMethod().equals("POST"))
 			if (authorised && super.getRequest().hasData("type")) {
 				String type = super.getRequest().getData("type", String.class);
