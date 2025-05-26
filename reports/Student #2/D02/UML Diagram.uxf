@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>6</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>708</x>
+      <y>336</y>
+      <w>324</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Role&gt;&gt;
+Passenger
+--
++ fullName: String {Mandatory, ValidString(min = 1, max = 255), Automapped}
++ email: String {Mandatory, ValidEmail, Automapped}
++ passport: String {Mandatory, ValidString(min = 6, max = 9, pattern = "^[A-Z0-9]{6,9}$"), Automapped}
++ birthDate: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.TIMESTAMP)}
++ specialNeeds: String {Optional, ValidString(min = 0, max = 50), Automapped}
++ draftMode: boolean {Mandatory, Automapped}
++ customer: Customer {Mandatory, Valid, ManyToOne(optional = false)}
+
+bg=PINK</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>444</x>
+      <y>366</y>
+      <w>216</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+BookingRecord
+bg=MAGENTA</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>24</x>
+      <y>336</y>
+      <w>360</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+Booking
+--
++ locatorCode: String {Mandatory, ValidString(min = 6, max = 8, pattern"^[A-Z0-9]{6,8}$”), Column(unique = true)}
++ purchaseMoment: Date {Mandatory, ValidMoment(past = true), Temporal(TemporalType.TIMESTAMP)}
++ travelClass: TravelClass {Mandatory, Valid, Automapped}
++ lastCardNibble: String {Optional, ValidString(min = 4, max=4, pattern = "^\\d{4}$"), Automapped}
++ draftMode: boolean {Mandatory, Automapped}
+/+ price: Money {Transient}
+
+bg=GREEN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>654</x>
+      <y>366</y>
+      <w>66</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=*
+m2=1
+ refersTo &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;90.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>378</x>
+      <y>366</y>
+      <w>78</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=*
+m2=1
+&lt; belongsTo</panel_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>312</x>
+      <y>426</y>
+      <w>72</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Enum&gt;&gt;
+TravelClass
+--
+ECONOMY
+BUSINESS
+bg=YELLOW</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>24</x>
+      <y>168</y>
+      <w>360</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Role&gt;&gt;
+Customer {ValidCustomer}
+--
++ identifier: String {Mandatory, ValidString(min = 8, max = 9, pattern = "^[A-Z]{2,3}\\d{6}$"), Column(unique = true)}
++ phoneNumber: String {Mandatory, ValidString(min = 6, max = 16, pattern = "^\\+?\\d{6,15}$"), Automapped}
++ physicalAddress: String {Mandatory, ValidString(min = 1, max = 255), Automapped}
++ country: String {Mandatory, ValidString(min=1, max = 50), Automapped}
++ city: String {Mandatory, ValidString(min=1, max = 50), Automapped}
++ earnedPoints: Integer {Optional, ValidString(min = 0, max = 500000), Automapped}
+bg=PINK</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>258</y>
+      <w>72</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=*
+&lt; reservedBy</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+</diagram>

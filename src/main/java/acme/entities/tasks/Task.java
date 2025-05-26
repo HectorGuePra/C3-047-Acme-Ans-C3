@@ -22,7 +22,7 @@ import lombok.Setter;
 //	})
 public class Task extends AbstractEntity {
 
-	private static final long	serialVersionUID	= 1L;
+	private static final long	serialVersionUID	=  1L;
 
 	@Mandatory
 	@Valid
