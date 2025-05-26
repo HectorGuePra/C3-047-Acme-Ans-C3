@@ -1,5 +1,7 @@
+
 package acme.features.administrator.aircraft;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +25,31 @@ public class AdministratorAircraftDisableService extends AbstractGuiService<Admi
 
 	// AbstractGuiService interface -----------------------------------------------------
 
+
 	@Override
 	public void authorise() {
-		boolean exists;
-		int aircraftId;
-		Aircraft aircraft;
-
-		aircraftId = super.getRequest().getData("id", int.class);
-		aircraft = this.repository.findById(aircraftId);
-		exists = aircraft != null;
-		super.getResponse().setAuthorised(exists);
+		boolean status = true;
+		String metodo = super.getRequest().getMethod();
+		if (!super.getRequest().hasData("id"))
+			status = false;
+		else {
+			int id = super.getRequest().getData("id", int.class);
+			Aircraft aircraft = this.repository.findById(id);
+			if (aircraft == null)
+				status = false;
+			if (metodo.equals("POST")) {
+				int airlineId = super.getRequest().getData("airline", int.class);
+				String aStatus = super.getRequest().getData("status", String.class);
+				if (aStatus == null || aStatus.trim().isEmpty() || Arrays.stream(AircraftStatus.values()).noneMatch(s -> s.name().equals(aStatus)) && !aStatus.equals("0"))
+					status = false;
+				Airline airline = this.repository.findAirlineById(airlineId);
+				if (airline == null && airlineId != 0)
+					status = false;
+				if (aircraft.getDraftMode())
+					status = false;
+			}
+		}
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
