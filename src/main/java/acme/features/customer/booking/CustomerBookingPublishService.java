@@ -35,12 +35,16 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 		Booking booking;
 		Customer customer;
 
-		bookingId = super.getRequest().getData("id", int.class);
-		booking = this.repository.findBookingById(bookingId);
-		customer = booking == null ? null : booking.getCustomer();
-		Collection<Passenger> passengers = this.repository.findPassengersByBooking(bookingId);
-		Collection<Passenger> pInDraftMode = this.repository.findPassengersInDraftMode(bookingId);
-		authorised = booking != null && booking.isDraftMode() && !passengers.isEmpty() && pInDraftMode.isEmpty() && super.getRequest().getPrincipal().hasRealm(customer);
+		if (super.getRequest().hasData("id")) {
+			bookingId = super.getRequest().getData("id", int.class);
+			booking = this.repository.findBookingById(bookingId);
+			customer = booking == null ? null : booking.getCustomer();
+			Collection<Passenger> passengers = this.repository.findPassengersByBooking(bookingId);
+			Collection<Passenger> pInDraftMode = this.repository.findPassengersInDraftMode(bookingId);
+			authorised = booking != null && booking.isDraftMode() && !passengers.isEmpty() && pInDraftMode.isEmpty() && super.getRequest().getPrincipal().hasRealm(customer);
+
+		} else
+			authorised = false;
 
 		if (authorised && super.getRequest().getMethod().equals("POST")) {
 			if (super.getRequest().hasData("flight", int.class)) {
@@ -86,7 +90,7 @@ public class CustomerBookingPublishService extends AbstractGuiService<Customer, 
 
 	@Override
 	public void validate(final Booking booking) {
-		if (booking.getLastCardNibble() == null || booking.getLastCardNibble().isBlank() || booking.getLastCardNibble().isEmpty())
+		if (booking.getLastCardNibble() == null || booking.getLastCardNibble().isBlank())
 			super.state(false, "lastCardNibble", "acme.validation.confirmation.message.lastCardNibble");
 	}
 
