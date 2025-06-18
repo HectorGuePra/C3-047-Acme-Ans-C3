@@ -78,7 +78,7 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 
 	@Override
 	public void bind(final FlightAssignment flightAssignment) {
-		super.bindObject(flightAssignment, "duty", "currentStatus", "remarks", "leg", "allocatedFlightCrewMember");
+		super.bindObject(flightAssignment, "duty", "currentStatus", "remarks", "leg");
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 		boolean availableMember;
 		boolean alreadyOccupied;
 
-		member = super.getRequest().getData("allocatedFlightCrewMember", FlightCrewMember.class);
+		member = flightAssignment.getAllocatedFlightCrewMember();
 		leg = flightAssignment.getLeg();
 
 		availableMember = member.getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
@@ -152,8 +152,8 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 		SelectChoices legChoice;
 		Collection<Leg> legs;
 
-		SelectChoices flightCrewMemberChoice;
-		Collection<FlightCrewMember> flightCrewMembers;
+		FlightCrewMember member;
+		member = (FlightCrewMember) super.getRequest().getPrincipal().getActiveRealm();
 
 		dutyChoice = SelectChoices.from(CrewsDuty.class, flightAssignment.getDuty());
 		currentStatusChoice = SelectChoices.from(AssigmentStatus.class, flightAssignment.getCurrentStatus());
@@ -162,14 +162,11 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 		legs = this.repository.findAllLegsAvailables(legStatus);
 		legChoice = SelectChoices.from(legs, "description", flightAssignment.getLeg());
 
-		flightCrewMembers = this.repository.findAllFlightCrewMembers();
-		flightCrewMemberChoice = SelectChoices.from(flightCrewMembers, "id", flightAssignment.getAllocatedFlightCrewMember());
-
 		dataset = super.unbindObject(flightAssignment, "duty", "momentLastUpdate", "currentStatus", "remarks", "leg", "allocatedFlightCrewMember", "draftMode");
 		dataset.put("dutyChoice", dutyChoice);
 		dataset.put("currentStatusChoice", currentStatusChoice);
 		dataset.put("legChoice", legChoice);
-		dataset.put("flightCrewMemberChoice", flightCrewMemberChoice);
+		dataset.put("allocatedFlightCrewMember", member.getId());
 
 		dataset.put("memberId", flightAssignment.getAllocatedFlightCrewMember().getId());
 
