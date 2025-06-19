@@ -20,7 +20,11 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+
+		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -34,6 +38,7 @@ public class ManagerFlightCreateService extends AbstractGuiService<Manager, Flig
 		flight.setDraftMode(true);
 		flight.setManager(manager);
 		super.getBuffer().addData(flight);
+
 	}
 
 	@Override
