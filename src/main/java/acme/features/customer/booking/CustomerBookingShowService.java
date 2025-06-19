@@ -30,17 +30,21 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int bookingId;
-		Booking booking;
-		Customer customer;
+		boolean authorised = true;
 
-		bookingId = super.getRequest().getData("id", int.class);
-		booking = this.repository.findBookingById(bookingId);
-		customer = booking == null ? null : booking.getCustomer();
-		status = super.getRequest().getPrincipal().hasRealm(customer) && booking != null;
+		if (super.getRequest().hasData("id")) {
+			int bookingId = super.getRequest().getData("id", int.class);
+			Booking booking = this.repository.findBookingById(bookingId);
+			if (booking == null)
+				authorised = false;
+			else {
+				Customer customer = booking.getCustomer();
+				authorised = super.getRequest().getPrincipal().hasRealm(customer);
+			}
+		} else
+			authorised = false;
 
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
@@ -71,7 +75,7 @@ public class CustomerBookingShowService extends AbstractGuiService<Customer, Boo
 		validFlights = this.repository.findAllPublishedFlights().stream().filter(f -> f.getFlightDeparture() != null && f.getFlightArrival() != null && f.getDeparture() != null && f.getArrival() != null)
 			.filter(f -> this.repository.legsByFlightId(f.getId()).stream().allMatch(leg -> leg.getScheduledDeparture().after(MomentHelper.getCurrentMoment()))).collect(Collectors.toList());
 
-		flightChoices = SelectChoices.from(validFlights, "description", booking.getFlight());
+		flightChoices = SelectChoices.from(validFlights, "info", booking.getFlight());
 		classChoices = SelectChoices.from(TravelClass.class, booking.getTravelClass());
 		passengersInDraftMode = this.repository.findPassengersInDraftMode(booking.getId());
 		passengers = this.repository.findPassengersByBooking(booking.getId());

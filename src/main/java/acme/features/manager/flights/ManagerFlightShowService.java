@@ -1,11 +1,14 @@
 
 package acme.features.manager.flights;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.airport.Airport;
 import acme.entities.flight.Flight;
 import acme.realms.manager.Manager;
 
@@ -18,21 +21,10 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 
 	@Override
 	public void authorise() {
-		boolean status = false;
-		int flightId;
-		Flight flight;
-		Manager manager;
-
-		if (super.getRequest().hasData("id")) {
-			flightId = super.getRequest().getData("id", int.class);
-			flight = this.repository.findFlightById(flightId);
-
-			if (flight != null) {
-				manager = flight.getManager();
-				status = super.getRequest().getPrincipal().hasRealm(manager);
-			}
-		}
-
+		boolean status;
+		int flightId = super.getRequest().getData("id", int.class);
+		Flight flight = this.repository.findFlightById(flightId);
+		status = flight != null && super.getRequest().getPrincipal().getActiveRealm().getId() == flight.getManager().getId();
 		super.getResponse().setAuthorised(status);
 
 	}
@@ -53,8 +45,8 @@ public class ManagerFlightShowService extends AbstractGuiService<Manager, Flight
 		Dataset dataset;
 
 		dataset = super.unbindObject(flight, "tag", "requiresSelfTransfer", "cost", "description", "draftMode");
-		dataset.put("departure", flight.getDeparture() != null ? flight.getDeparture().getName() : flight.getDeparture());
-		dataset.put("arrival", flight.getArrival() != null ? flight.getArrival().getName() : flight.getArrival());
+		dataset.put("departure", Optional.ofNullable(flight.getDeparture()).map(Airport::getName).orElse(null));
+		dataset.put("arrival", Optional.ofNullable(flight.getArrival()).map(Airport::getName).orElse(null));
 		dataset.put("scheduledDeparture", flight.getFlightDeparture());
 		dataset.put("scheduledArrival", flight.getFlightArrival());
 		dataset.put("layovers", flight.getLayovers());

@@ -27,7 +27,25 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean authorised = true;
+		int customerId = this.getRequest().getPrincipal().getActiveRealm().getId();
+
+		if (super.getRequest().hasData("bookingId")) {
+			int bookingId = super.getRequest().getData("bookingId", int.class);
+			Booking booking = this.repository.findBookingById(bookingId);
+			if (booking == null || booking.getCustomer().getId() != customerId)
+				authorised = false;
+			else if (super.getRequest().getMethod().equals("POST")) {
+				int pId = super.getRequest().getData("passenger", int.class);
+				Passenger passenger = this.repository.findPassengerById(pId);
+				Collection<Passenger> myValidPassengers = this.repository.findPassengersByCustomerIdNotInBooking(customerId, bookingId);
+				if (passenger == null && pId != 0 || passenger != null && !myValidPassengers.contains(passenger))
+					authorised = false;
+			}
+		} else
+			authorised = false;
+
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
@@ -60,11 +78,7 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 
 	@Override
 	public void validate(final BookingRecord BookingRecord) {
-		boolean notPublished = true;
-		Booking booking = BookingRecord.getBooking();
-		if (booking != null && !booking.isDraftMode())
-			notPublished = false;
-		super.state(notPublished, "booking", "acme.validation.booking.invalid-booking-publish.message");
+
 	}
 
 	@Override
@@ -74,16 +88,17 @@ public class CustomerBookingRecordCreateService extends AbstractGuiService<Custo
 
 	@Override
 	public void unbind(final BookingRecord BookingRecord) {
-		Collection<Passenger> passengers;
-		SelectChoices passs;
+		Collection<Passenger> validPassengers;
+		SelectChoices pass;
 		Dataset dataset;
+		int bookingId = super.getRequest().getData("bookingId", int.class);
 		int customerId = super.getRequest().getPrincipal().getActiveRealm().getId();
 
-		passengers = this.repository.findPassengersByCustomerId(customerId);
-		passs = SelectChoices.from(passengers, "passport", BookingRecord.getPassenger());
+		validPassengers = this.repository.findPassengersByCustomerIdNotInBooking(customerId, bookingId);
+		pass = SelectChoices.from(validPassengers, "passport", BookingRecord.getPassenger());
 		dataset = super.unbindObject(BookingRecord);
-		dataset.put("passenger", passs.getSelected().getKey());
-		dataset.put("passengers", passs);
+		dataset.put("passenger", pass.getSelected().getKey());
+		dataset.put("passengers", pass);
 		dataset.put("booking", BookingRecord.getBooking());
 		dataset.put("bookingId", BookingRecord.getBooking().getId());
 		dataset.put("bDraftMode", BookingRecord.getBooking().isDraftMode());

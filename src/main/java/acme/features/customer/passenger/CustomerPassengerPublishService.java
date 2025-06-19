@@ -18,17 +18,20 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 
 	@Override
 	public void authorise() {
-		boolean status;
+		boolean authorised;
 		int passengerId;
 		Passenger passenger;
 		Customer customer;
 
-		passengerId = super.getRequest().getData("id", int.class);
-		passenger = this.repository.findPassengerById(passengerId);
-		customer = passenger == null ? null : passenger.getCustomer();
-		status = customer != null && passenger.isDraftMode() && super.getRequest().getPrincipal().hasRealm(customer);
+		if (super.getRequest().hasData("id")) {
+			passengerId = super.getRequest().getData("id", int.class);
+			passenger = this.repository.findPassengerById(passengerId);
+			customer = passenger == null ? null : passenger.getCustomer();
+			authorised = customer != null && passenger.isDraftMode() && super.getRequest().getPrincipal().hasRealm(customer);
+		} else
+			authorised = false;
 
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
@@ -60,7 +63,6 @@ public class CustomerPassengerPublishService extends AbstractGuiService<Customer
 		boolean existsDuplicatedPassport;
 
 		passengerId = super.getRequest().getData("id", int.class);
-		//existsDuplicatedPassport = this.repository.existsPassengerWithDuplicatedPassport(passenger.getPassport(), passengerId);
 		int customerId = passenger.getCustomer().getId();
 		existsDuplicatedPassport = this.repository.existsPassengerWithDuplicatedPassport(passenger.getPassport(), customerId, passengerId);
 		super.state(!existsDuplicatedPassport, "passport", "acme.validation.confirmation.passenger.passport");

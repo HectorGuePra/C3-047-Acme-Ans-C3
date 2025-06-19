@@ -62,9 +62,8 @@ public class Flight extends AbstractEntity {
 	private String				description;
 
 	@Mandatory
-	@Valid
 	@Automapped
-	private Boolean				draftMode;
+	private boolean				draftMode;
 
 	@Mandatory
 	@Valid
@@ -136,7 +135,7 @@ public class Flight extends AbstractEntity {
 	}
 
 	@Transient
-	public String getDescription() {
+	public String getInfo() {
 		String res = "-";
 		Date depDate = this.getFlightDeparture();
 		Date arrDate = this.getFlightArrival();

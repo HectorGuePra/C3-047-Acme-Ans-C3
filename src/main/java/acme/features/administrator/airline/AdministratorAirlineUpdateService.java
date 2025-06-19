@@ -20,7 +20,18 @@ public class AdministratorAirlineUpdateService extends AbstractGuiService<Admini
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean authorised = true;
+
+		if (super.getRequest().hasData("id")) {
+			if (super.getRequest().getMethod().equals("POST"))
+				if (authorised && super.getRequest().hasData("type")) {
+					String type = super.getRequest().getData("type", String.class);
+					authorised = type.equals("0") || type.equals("") || type.equals("LUXURY") || type.equals("STANDARD") || type.equals("LOW_COST");
+				}
+		} else
+			authorised = false;
+
+		super.getResponse().setAuthorised(authorised);
 	}
 
 	@Override
@@ -36,12 +47,21 @@ public class AdministratorAirlineUpdateService extends AbstractGuiService<Admini
 
 	@Override
 	public void bind(final Airline airline) {
-		super.unbindObject(airline, "name", "iataCode", "websiteUrl", "type", "phoneNumber", "email");
+		super.bindObject(airline, "name", "iataCode", "websiteUrl", "type", "phoneNumber", "email", "foundationMoment");
 	}
 
 	@Override
 	public void validate(final Airline airline) {
-		;
+		boolean confirmation;
+		boolean uniqueIataCode;
+		Airline existingAirline;
+
+		existingAirline = this.repository.findAirlineByIataCode(airline.getIataCode());
+		uniqueIataCode = existingAirline == null || existingAirline.equals(airline);
+		super.state(uniqueIataCode, "iataCode", "acme.validation.airline.duplicated-iataCode.message");
+
+		confirmation = super.getRequest().getData("confirmation", boolean.class);
+		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
 	}
 
 	@Override
@@ -56,7 +76,7 @@ public class AdministratorAirlineUpdateService extends AbstractGuiService<Admini
 
 		typeChoices = SelectChoices.from(AirlineType.class, airline.getType());
 
-		dataset = super.unbindObject(airline, "name", "iataCode", "websiteUrl", "type", "phoneNumber", "email");
+		dataset = super.unbindObject(airline, "name", "iataCode", "websiteUrl", "type", "phoneNumber", "email", "foundationMoment");
 		dataset.put("types", typeChoices);
 
 		super.getResponse().addData(dataset);

@@ -7,25 +7,25 @@ flight-assignment-03,PENDING,LEAD_ATTENDANT,2010/02/10 01:00,"mensaje3",true,mem
 flight-assignment-04,CANCELLED,CABIN_ATTENDANT,2010/01/06 15:15,"mensaje4",true,member-04,leg-04
 
 #momentLastUpdate
-flight-assignment-05,CONFIRMED,PILOT,2025/01/01 0:00,"mensaje1",false,member-01,leg-01
-flight-assignment-06,CONFIRMED,PILOT,2000/01/01 0:00,"mensaje1",false,member-01,leg-01
-flight-assignment-07,CONFIRMED,PILOT,2024/12/31 23:59,"mensaje1",false,member-01,leg-01
-flight-assignment-08,CONFIRMED,PILOT,2000/01/01 0:01,"mensaje1",false,member-01,leg-01
+flight-assignment-05,CONFIRMED,PILOT,2025/01/01 0:00,"mensaje1",true,member-01,leg-01
+flight-assignment-06,CONFIRMED,PILOT,2000/01/01 0:00,"mensaje1",true,member-01,leg-01
+flight-assignment-07,CONFIRMED,PILOT,2024/12/31 23:59,"mensaje1",true,member-01,leg-01
+flight-assignment-08,CONFIRMED,PILOT,2000/01/01 0:01,"mensaje1",true,member-01,leg-01
 
 #status
-flight-assignment-09,CONFIRMED,PILOT,2000/01/01 0:01,"mensaje1",false,member-01,leg-01
-flight-assignment-10,PENDING,PILOT,2000/01/01 0:01,"mensaje1",false,member-01,leg-01
-flight-assignment-11,CANCELLED,PILOT,2000/01/01 0:01,"mensaje1",false,member-01,leg-01
+flight-assignment-09,CONFIRMED,PILOT,2000/01/01 0:01,"mensaje1",true,member-01,leg-01
+flight-assignment-10,PENDING,PILOT,2000/01/01 0:01,"mensaje1",true,member-01,leg-01
+flight-assignment-11,CANCELLED,PILOT,2000/01/01 0:01,"mensaje1",true,member-01,leg-01
 
 #remarks
-flight-assignment-12,CANCELLED,PILOT,2000/01/01 0:01,,false,member-01,leg-01
-flight-assignment-13,CANCELLED,PILOT,2000/01/01 0:01,L,false,member-01,leg-01
-flight-assignment-14,CANCELLED,PILOT,2000/01/01 0:01,Lorem ipsum dolor sit amet- consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,false,member-01,leg-01
-flight-assignment-15,CANCELLED,PILOT,2000/01/01 0:01,Lorem ipsum dolor sit amet- consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor,false,member-01,leg-01
-flight-assignment-16,CANCELLED,PILOT,2000/01/01 0:01,Lorem ipsum dolor sit amet- consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*,false,member-01,leg-01
-flight-assignment-17,CANCELLED,PILOT,2000/01/01 0:01,โลเร็ม อิปซัม,false,member-01,leg-01
-flight-assignment-18,CANCELLED,PILOT,2000/01/01 0:01,لوريم إيبسوم,false,member-01,leg-01
-flight-assignment-19,CANCELLED,PILOT,2000/01/01 0:01,洛伦·伊普森,false,member-01,leg-01
-flight-assignment-20,CANCELLED,PILOT,2000/01/01 0:01,<marquee>Hacked</marquee>,false,member-01,leg-01
-flight-assignment-21,CANCELLED,PILOT,2000/01/01 0:01,<script>alert(‘Hacked!’);</script>,false,member-01,leg-01
-flight-assignment-22,CANCELLED,PILOT,2000/01/01 0:01,' or 'A' = 'A,false,member-01,leg-01
+flight-assignment-12,CANCELLED,PILOT,2000/01/01 0:01,,true,member-01,leg-01
+flight-assignment-13,CANCELLED,PILOT,2000/01/01 0:01,L,true,member-01,leg-01
+flight-assignment-14,CANCELLED,PILOT,2000/01/01 0:01,Lorem ipsum dolor sit amet- consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut*,true,member-01,leg-01
+flight-assignment-15,CANCELLED,PILOT,2000/01/01 0:01,Lorem ipsum dolor sit amet- consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor,true,member-01,leg-01
+flight-assignment-16,CANCELLED,PILOT,2000/01/01 0:01,Lorem ipsum dolor sit amet- consectetur adipiscing elit. Sed do: eiusmod tempor incididunt ut labore et dolore magna aliqua! Ut enim ad minim veniam? Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor*,true,member-01,leg-01
+flight-assignment-17,CANCELLED,PILOT,2000/01/01 0:01,โลเร็ม อิปซัม,true,member-01,leg-01
+flight-assignment-18,CANCELLED,PILOT,2000/01/01 0:01,لوريم إيبسوم,true,member-01,leg-01
+flight-assignment-19,CANCELLED,PILOT,2000/01/01 0:01,洛伦·伊普森,true,member-01,leg-01
+flight-assignment-20,CANCELLED,PILOT,2000/01/01 0:01,<marquee>Hacked</marquee>,true,member-01,leg-01
+flight-assignment-21,CANCELLED,PILOT,2000/01/01 0:01,<script>alert(‘Hacked!’);</script>,true,member-01,leg-01
+flight-assignment-22,CANCELLED,PILOT,2000/01/01 0:01,' or 'A' = 'A,true,member-01,leg-01
