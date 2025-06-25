@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>153</x>
+      <y>36</y>
+      <w>666</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Role&gt;&gt;
+FlightCrewMember
+--
++ employeeCode: String{Mandatory, ValidString(min=8, max=9, pattern="^[A-Z]{2,3}\\d{6}$"), Column(unique=true)}
++ phoneNumber: String {Mandatory, ValidString(min=6, max=16, pattern="^\\+?\\d{6,15}$"), Column(unique=true)}
++ languageSkills: String {Mandatory, ValidString, Automapped}
++ availabilityStatus: AvailabilityStatus {Mandatory, Valid, Automapped}
++ airline: Airline {Mandatory, Valid, ManyToOne(optional=false)}
++ salary: Money {Mandatory, ValidMoney, Automapped}
++ yearsOfExperience: Integer {Optional, ValidNumber(min=0, max=120), Automapped}
+bg=PINK</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>153</x>
+      <y>270</y>
+      <w>576</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+FlightAssignment
+--
++ leg: Leg {Mandatory, Valid, ManyToOne(optional=false)}
++ allocatedFlightCrewMember: FlightCrewMember {Mandatory, Valid, ManyToOne(optional=false)}
++ duty: CrewsDuty {Mandatory, Valid, Automapped}
++ momentLastUpdate: Date {Mandatory, ValidMoment(past=true), Temporal(TIMESTAMP)}
++ currentStatus: AssigmentStatus {Mandatory, Valid, Automapped}
++ remarks: String {Optional, ValidString(0-255), Automapped}
++ draftMode: boolean {Mandatory, Automapped}
+/+ getDescription(): String {Transient}
+/+ getIsLegLanded(): Boolean {Transient}
+bg=GREEN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>153</x>
+      <y>531</y>
+      <w>558</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Entity&gt;&gt;
+ActivityLog
+--
++ flightAssignment: FlightAssignment {Mandatory, Valid, ManyToOne(optional=false)}
++ registrationMoment: Date {Mandatory, ValidMoment(past=true), Temporal(TIMESTAMP)}
++ incidentType: String {Mandatory, ValidString(1-50), Automapped}
++ description: String {Mandatory, ValidString(1-255), Automapped}
++ severityLevel: Integer {Mandatory, ValidNumber(0-10), Automapped}
++ draftMode: boolean {Mandatory, Automapped}
+bg=ORANGE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>189</y>
+      <w>90</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=*
+assignedTo</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>450</y>
+      <w>63</w>
+      <h>99</h>
+    </coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=*
+hasLog</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+</diagram>
