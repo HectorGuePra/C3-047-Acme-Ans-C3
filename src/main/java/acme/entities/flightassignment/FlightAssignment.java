@@ -71,14 +71,6 @@ public class FlightAssignment extends AbstractEntity {
 
 
 	@Transient
-	public String getDescription() {
-		String res = "";
-		if (this.leg != null && this.allocatedFlightCrewMember != null)
-			res = String.format("%s: %s", this.allocatedFlightCrewMember.getEmployeeCode(), this.leg.getDescription());
-		return res;
-	}
-
-	@Transient
 	public Boolean getIsLegLanded() {
 		return this.leg != null && LegStatus.LANDED.equals(this.leg.getStatus());
 	}

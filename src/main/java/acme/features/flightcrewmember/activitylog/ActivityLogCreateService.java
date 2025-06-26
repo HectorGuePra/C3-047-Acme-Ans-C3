@@ -1,12 +1,9 @@
 
 package acme.features.flightcrewmember.activitylog;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.views.SelectChoices;
 import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
@@ -30,10 +27,12 @@ public class ActivityLogCreateService extends AbstractGuiService<FlightCrewMembe
 		boolean isLegLanded;
 
 		masterId = super.getRequest().getData("masterId", int.class);
-		memberId = this.repository.findFlightAssignmentById(masterId).getAllocatedFlightCrewMember().getId();
-		isLegLanded = this.repository.findFlightAssignmentById(masterId).getLeg().equals(LegStatus.LANDED);
+		FlightAssignment assignment = this.repository.findFlightAssignmentById(masterId);
+		memberId = assignment.getAllocatedFlightCrewMember().getId();
 
-		status = memberId == super.getRequest().getPrincipal().getActiveRealm().getId() && !isLegLanded;
+		isLegLanded = assignment.getLeg().equals(LegStatus.LANDED);
+
+		status = memberId == super.getRequest().getPrincipal().getActiveRealm().getId() && !isLegLanded && !assignment.getDraftMode();
 		super.getResponse().setAuthorised(status);
 
 	}
@@ -83,15 +82,9 @@ public class ActivityLogCreateService extends AbstractGuiService<FlightCrewMembe
 	public void unbind(final ActivityLog activityLog) {
 		Dataset dataset = null;
 
-		List<FlightAssignment> assignments;
-		assignments = this.repository.findAllFlightAssignments();
-
-		SelectChoices assignmentChoices;
-		assignmentChoices = SelectChoices.from(assignments, "description", activityLog.getFlightAssignment());
-
+		int masterId = super.getRequest().getData("masterId", int.class);
 		dataset = super.unbindObject(activityLog, "registrationMoment", "incidentType", "description", "severityLevel", "draftMode", "flightAssignment");
-		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
-		dataset.put("assignmentChoices", assignmentChoices);
+		dataset.put("masterId", masterId);
 
 		super.getResponse().addData(dataset);
 	}

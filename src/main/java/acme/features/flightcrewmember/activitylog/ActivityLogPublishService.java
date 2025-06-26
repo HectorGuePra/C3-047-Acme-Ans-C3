@@ -1,16 +1,14 @@
 
 package acme.features.flightcrewmember.activitylog;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
-import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
 import acme.entities.activityLog.ActivityLog;
 import acme.entities.flightassignment.FlightAssignment;
+import acme.entities.legs.LegStatus;
 import acme.realms.flightcrewmember.FlightCrewMember;
 
 @GuiService
@@ -26,12 +24,17 @@ public class ActivityLogPublishService extends AbstractGuiService<FlightCrewMemb
 		ActivityLog log;
 		int logId;
 		int memberId;
+		boolean isLegLanded;
+		FlightAssignment assignment;
 
 		logId = super.getRequest().getData("id", int.class);
 		log = this.repository.findActivityLogById(logId);
-		memberId = log.getFlightAssignment().getAllocatedFlightCrewMember().getId();
+		assignment = log.getFlightAssignment();
+		memberId = assignment.getAllocatedFlightCrewMember().getId();
 
-		status = log.getDraftMode() && memberId == super.getRequest().getPrincipal().getActiveRealm().getId();
+		isLegLanded = assignment.getLeg().equals(LegStatus.LANDED);
+
+		status = log.getDraftMode() && memberId == super.getRequest().getPrincipal().getActiveRealm().getId() && !isLegLanded && !assignment.getDraftMode();
 		;
 		super.getResponse().setAuthorised(status);
 	}
@@ -66,14 +69,8 @@ public class ActivityLogPublishService extends AbstractGuiService<FlightCrewMemb
 	@Override
 	public void unbind(final ActivityLog activityLog) {
 		Dataset dataset;
-		List<FlightAssignment> assignments;
-		assignments = this.repository.findAllFlightAssignments();
-
-		SelectChoices assignmentChoices;
-		assignmentChoices = SelectChoices.from(assignments, "description", activityLog.getFlightAssignment());
 
 		dataset = super.unbindObject(activityLog, "registrationMoment", "incidentType", "description", "severityLevel", "draftMode", "flightAssignment");
-		dataset.put("assignmentChoices", assignmentChoices);
 		dataset.put("masterId", activityLog.getFlightAssignment().getId());
 		dataset.put("masterDraftMode", activityLog.getFlightAssignment().getDraftMode());
 
