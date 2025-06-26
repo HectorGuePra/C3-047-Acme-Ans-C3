@@ -1,5 +1,5 @@
 
-package acme.forms.member;
+package acme.forms.flightcrewmember;
 
 import java.util.List;
 
@@ -17,15 +17,15 @@ public class Dashboard extends AbstractForm {
 
 	List<String>				lastFiveDestinations;
 
-	Integer						numberOfLegsWithIncidentSeverity_0_to_3;
-	Integer						numberOfLegsWithIncidentSeverity_4_to_7;
-	Integer						numberOfLegsWithIncidentSeverity_8_to_10;
+	Integer						numberOfLegsWithIncidentSeverity0To3;
+	Integer						numberOfLegsWithIncidentSeverity4To7;
+	Integer						numberOfLegsWithIncidentSeverity8To10;
 
 	List<FlightCrewMember>		crewMembersInLastLeg;
 
 	List<FlightAssignment>		assignmentsConfirmed;
 	List<FlightAssignment>		assignmentsPending;
-	List<FlightAssignment>		assignmentsLanded;
+	List<FlightAssignment>		assignmentsCancelled;
 
 	Double						averageAssignmentsLastMonth;
 	Integer						minimumAssignmentsLastMonth;
