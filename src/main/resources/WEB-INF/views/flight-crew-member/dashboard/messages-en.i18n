@@ -1,0 +1,32 @@
+# messages-en.i18n
+#
+# Copyright (C) 2012-2025 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+flight-crew-member.dashboard.form.title = Flight Crew Member Dashboard
+flight-crew-member.dashboard.form.title.general-indicators = General Indicators
+
+# Incident Severity Labels
+flight-crew-member.dashboard.form.label.number-of-legs-incident-0-3 = Legs with Low Severity Incidents (0-3)
+flight-crew-member.dashboard.form.label.number-of-legs-incident-4-7 = Legs with Medium Severity Incidents (4-7)
+flight-crew-member.dashboard.form.label.number-of-legs-incident-8-10 = Legs with High Severity Incidents (8-10)
+
+# Recent Activity Labels
+flight-crew-member.dashboard.form.label.last-five-destinations = Last Five Destinations
+flight-crew-member.dashboard.form.label.crew-in-last-leg = Crew Members in Last Leg
+
+# Assignment Status Labels
+flight-crew-member.dashboard.form.label.assignments-confirmed = Confirmed Assignments
+flight-crew-member.dashboard.form.label.assignments-pending = Pending Assignments
+flight-crew-member.dashboard.form.label.assignments-cancelled = Cancelled Assignments
+
+# Statistics Labels
+flight-crew-member.dashboard.form.label.average-assignments = Average Assignments (Last Month)
+flight-crew-member.dashboard.form.label.minimum-assignments = Minimum Assignments (Last Month)
+flight-crew-member.dashboard.form.label.maximum-assignments = Maximum Assignments (Last Month)
+flight-crew-member.dashboard.form.label.deviation-assignments = Standard Deviation Assignments (Last Month)

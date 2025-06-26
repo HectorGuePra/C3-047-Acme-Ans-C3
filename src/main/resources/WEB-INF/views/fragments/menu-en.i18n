@@ -49,6 +49,7 @@ master.menu.customer.passenger = Passengers
  master.menu.flightCrewMember = FlightCrewMember
  master.menu.flightCrewMember.listLanded = Completed assignments
  master.menu.flightCrewMember.listPlanned = Planned assignments
+ master.menu.flightCrewMember.show-dashboard = Show dashboard
 
 # master.menu.user-account ####################################################
 

@@ -49,6 +49,7 @@ master.menu.customer.passenger = Pasajeros
  master.menu.flightCrewMember = Tripulante de vuelo
  master.menu.flightCrewMember.listLanded = Asignaciones completadas
  master.menu.flightCrewMember.listPlanned = Asignaciones planificadas
+ master.menu.flightCrewMember.show-dashboard = Ver tablero
 
 # master.menu.user-account ####################################################
 
