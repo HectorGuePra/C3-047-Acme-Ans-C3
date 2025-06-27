@@ -1,1 +1,2 @@
-https://github.com/users/JoaquinBorjaLeon/projects/1/views/1?filterQuery=HectorGuePra
+https://github.com/users/JoaquinBorjaLeon/projects/1/views/1?filterQuery=HectorGuePra  -> C1.047-Acme-ANS
+https://github.com/users/HectorGuePra/projects/1/views/1?filterQuery=assignee%3AHectorGuePra -> C2.047-Acme-ANS-C2
