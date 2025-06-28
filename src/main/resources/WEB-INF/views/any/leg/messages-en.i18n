@@ -1,0 +1,17 @@
+any.leg.list.title = Leg list
+any.leg.form.title = Leg data
+
+any.leg.list.label.flightNumber = Flight number
+any.leg.list.label.scheduledDeparture = Scheduled departure
+any.leg.list.label.scheduledArrival = Scheduled arrival
+any.leg.list.label.departureAirport = Departure airport
+any.leg.list.label.arrivalAirport = Arrival airport
+any.leg.list.label.status = Status
+
+any.leg.form.label.flightNumber = Flight number
+any.leg.form.label.scheduledDeparture = Scheduled departure
+any.leg.form.label.scheduledArrival = Scheduled arrival
+any.leg.form.label.status = Status
+any.leg.form.label.departureAirport = Departure airport
+any.leg.form.label.arrivalAirport = Arrival airport
+any.leg.form.label.aircraft = Aircraft

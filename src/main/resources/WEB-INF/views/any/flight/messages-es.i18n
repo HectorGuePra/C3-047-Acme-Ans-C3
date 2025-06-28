@@ -1,0 +1,19 @@
+any.flight.list.title = Lista de vuelos
+any.flight.form.title = Datos de vuelo
+
+any.flight.list.label.tag = Tag
+any.flight.list.label.departureAirport = Origin
+any.flight.list.label.arrivalAirport = Destination
+
+any.flight.form.label.tag = Etiqueta
+any.flight.form.label.requiresSelfTransfer = Requiere traslado por cuenta propia
+any.flight.form.label.cost =  Coste
+any.flight.form.label.description = Descripción
+
+any.flight.form.label.scheduledDeparture = Salida programada
+any.flight.form.label.scheduledArrival = Llegada programada
+any.flight.form.label.departureAirport = Origen
+any.flight.form.label.arrivalAirport = Destino
+any.flight.form.label.layovers = Escalas
+
+any.leg.form.button.list = Tramos
