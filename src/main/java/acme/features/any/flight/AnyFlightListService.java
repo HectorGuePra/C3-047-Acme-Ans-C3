@@ -42,7 +42,7 @@ public class AnyFlightListService extends AbstractGuiService<Any, Flight> {
 
 		Dataset dataset;
 
-		dataset = super.unbindObject(object, "tag", "origin", "destination");
+		dataset = super.unbindObject(object, "tag", "departureAirport", "arrivalAirport");
 		super.getResponse().addData(dataset);
 	}
 
