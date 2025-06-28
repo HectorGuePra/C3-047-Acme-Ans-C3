@@ -1,0 +1,12 @@
+authenticated.manager.form.title= Perfil de gerente
+
+authenticated.manager.form.label.identifierNumber = Número de identificación
+authenticated.manager.form.label.experience = Años de experiencia
+authenticated.manager.form.label.birthDate = Fecha de nacimiento
+authenticated.manager.form.label.linkPicture = Enlace de imagen
+authenticated.manager.form.label.airline = Aerolínea
+
+authenticated.manager.form.button.create = Crear perfil
+authenticated.manager.form.button.update = Actualizar perfil
+
+authenticated.manager.form.error.duplicatedIdentifierNumber = Número de identificación duplicado
