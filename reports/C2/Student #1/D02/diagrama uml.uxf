@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>176</x>
+      <y>304</y>
+      <w>472</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>
+&lt;&lt;Entity&gt;&gt;
+Flight
+--
++tag: String {Mandatory, Size(min = 1, max = 50), Automapped}
++requiresSelfTransfer: Boolean {Mandatory, Valid, Automapped}
++cost: Money {Mandatory, ValidMoney(min = 0.01), Automapped}
++description: String {Optional, Size(max = 255), Automapped}
++draftMode: Boolean {Mandatory, Automapped}
++manager: Manager {Mandatory, Valid, ManyToOne(optional = false)}
+/getFlightDeparture(): Date {Transient}
+/getFlightArrival(): Date {Transient}
+/getDeparture(): Airport {Transient}
+/getArrival(): Airport {Transient}
+/getLayovers(): Integer {Transient}
+/getInfo(): String {Transient}
+bg=GRAY
+
+    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>80</x>
+      <y>560</y>
+      <w>88</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>
+&lt;&lt;Enum&gt;&gt;
+LegStatus
+--
++ON_TIME
++DELAYED
++CANCELLED
++LANDED
+bg=GREEN
+    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>176</x>
+      <y>536</y>
+      <w>472</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>
+&lt;&lt;Entity&gt;&gt;
+Leg
+--
++flightNumber: String {Mandatory, ValidLegCode, Column(unique = true)}
++scheduledDeparture: Date {Mandatory, ValidMoment, Temporal(TIMESTAMP)}
++scheduledArrival: Date {Mandatory, ValidMoment, Temporal(TIMESTAMP)}
++departureAirport: Airport {Mandatory, Valid, ManyToOne(optional = false)}
++arrivalAirport: Airport {Mandatory, Valid, ManyToOne(optional = false)}
++status: LegStatus {Mandatory, Valid, Automapped}
++aircraft: Aircraft {Mandatory, Valid, ManyToOne(optional = false)}
++flight: Flight {Mandatory, Valid, ManyToOne(optional = false)}
++draftMode: Boolean {Mandatory, Automapped}
+/durationInHours(): Integer {Transient}
+/getDescription(): String {Transient}
+bg=PINK
+    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>408</x>
+      <y>464</y>
+      <w>40</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>
+lt=&lt;-
+m1=1
+Has
+m2=0..n
+    </panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>192</x>
+      <y>136</y>
+      <w>408</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>
+&lt;&lt;Role&gt;&gt;
+Manager
+--
++identifierNumber: String {Mandatory, ValidIdentifierNumber, Column(unique = true)}
++experience: Integer {Mandatory, ValidNumber(min = 0, max = 120), Automapped}
++birthdate: Date {Mandatory, ValidMoment(past = true), Temporal}
++linkPicture: String {Optional, ValidUrl, Automapped}
+bg=YELLOW
+    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>408</x>
+      <y>232</y>
+      <w>72</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>
+lt=&lt;-
+m1=1
+Manages
+m2=0..n
+    </panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>736</x>
+      <y>160</y>
+      <w>120</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>
+&lt;&lt;Entity&gt;&gt;
+Airline
+--
+bg=MAGENTA
+    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>592</x>
+      <y>176</y>
+      <w>160</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>
+lt=&lt;-
+m1=1
+WorksFor
+m2=0..n
+    </panel_attributes>
+    <additional_attributes>180.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>56</x>
+      <y>424</y>
+      <w>88</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>
+&lt;&lt;Entity&gt;&gt;
+Aircraft
+--
+bg=RED
+    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>112</x>
+      <y>472</y>
+      <w>112</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>
+lt=&lt;-
+m1=1
+aircraft
+m2=0..n
+    </panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>704</x>
+      <y>424</y>
+      <w>136</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>
+&lt;&lt;Entity&gt;&gt;
+Airport
+--
+bg=CYAN
+    </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>544</x>
+      <y>464</y>
+      <w>176</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>
+lt=&lt;-
+m1=1
+departureAirport
+m2=0..n
+    </panel_attributes>
+    <additional_attributes>200.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>632</x>
+      <y>488</y>
+      <w>104</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>
+lt=&lt;-
+m1=1
+arrivalAirport
+m2=0..n
+    </panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+</diagram>
