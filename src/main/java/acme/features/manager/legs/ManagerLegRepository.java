@@ -1,6 +1,7 @@
 
 package acme.features.manager.legs;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,5 +48,8 @@ public interface ManagerLegRepository extends AbstractRepository {
 	public List<Leg> findAllLegsByFlightId(int id);
 
 	Optional<Flight> findByIdAndManagerId(Integer flightId, Integer managerId);
+
+	@Query("select l from Leg l where l.aircraft.airline.id = :id")
+	Collection<Leg> findLegsByAirlineId(int id);
 
 }

@@ -72,4 +72,4 @@
         <acme:menu-suboption code="master.menu.user-account.general-profile" action="/authenticated/user-account/update"/>
     </acme:menu-option>
 </acme:menu-right>
-</acme:menu-bar>
+</acme:menu-bar> 

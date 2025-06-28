@@ -22,4 +22,4 @@
 -
 - where [[component]] must be replaced by the name of the corresponding component and 
 - [[version]] by the corresponding version number.
---%>
+--%> 

@@ -24,4 +24,4 @@
   <span class="fas fa-map-marker"> &nbsp; </span><acme:print code="master.company.address"/> <br/>
   <span class="fa fa-phone"></span> &nbsp; <acme:print code="master.company.phone"/><br/>
   <span class="fa fa-at"></span> &nbsp; <a href="mailto:<acme:print code="master.company.email"/>"><acme:print code="master.company.email"/></a> <br/>
-</address>
+</address> 

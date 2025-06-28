@@ -18,4 +18,4 @@
 <div class="jumbotron">
 	<h1><acme:print code="master.welcome.title"/></h1>
 	<acme:print code="master.welcome.text"/>
-</div>
+</div> 

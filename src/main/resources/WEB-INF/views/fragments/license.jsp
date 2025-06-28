@@ -16,4 +16,4 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <h1><acme:print code="master.license.title"/></h1>
-<p><acme:print code="master.license.text"/></p>
+<p><acme:print code="master.license.text"/></p> 

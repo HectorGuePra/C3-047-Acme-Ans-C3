@@ -17,4 +17,4 @@
 
 <div class="rounded" style="background: <acme:print code='master.banner.background'/>">
 	<img src="images/banner.png" alt="<acme:print code='master.banner.alt'/>" class="img-fluid rounded"/>
-</div>
+</div> 
