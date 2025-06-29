@@ -1,0 +1,24 @@
+# messages-en.i18n
+#
+# Copyright (C) 2012-2025 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+authenticated.flight-crew-member.form.title = Flight Crew Member Registration
+
+authenticated.flight-crew-member.form.label.employeeCode = Employee Code:
+authenticated.flight-crew-member.form.label.phoneNumber = Phone Number:
+authenticated.flight-crew-member.form.label.languageSkills = Language Skills:
+authenticated.flight-crew-member.form.label.availabilityStatus = Availability Status:
+authenticated.flight-crew-member.form.label.airline = Airline:
+authenticated.flight-crew-member.form.label.salary = Salary:
+authenticated.flight-crew-member.form.label.yearsOfExperience = Years of Experience:
+
+authenticated.flight-crew-member.form.button.create = Register as Flight Crew Member
+authenticated.flight-crew-member.form.button.update = Update
+
+authenticated.flight-crew-member.form.error.duplicatedEmployeeCode = The employee code must be unique
