@@ -33,6 +33,35 @@ javax.validation.constraints.NotBlank.message = El valor no puede estar en blanc
 acme.validation.flightcrewmember.identifier.message = El identificador debe contener 2 o 3 letras siendo tus iniciales y 6 dígitos.
 acme.validation.flightCrewMember.duplicated-employeeCode.message = El "employeeCode" debe ser único.
 
+# Validaciones específicas para FlightCrewMember
+acme.validation.flightcrewmember.employeeCode.null.message = El código de empleado es obligatorio.
+acme.validation.flightcrewmember.employeeCode.blank.message = El código de empleado no puede estar vacío.
+acme.validation.flightcrewmember.employeeCode.pattern.message = El código de empleado debe tener 2-3 letras mayúsculas seguidas de 6 dígitos (ej: AB123456 o ABC123456).
+acme.validation.flightcrewmember.employeeCode.length.message = El código de empleado debe tener entre 8 y 9 caracteres.
+acme.validation.flightcrewmember.employeeCode.initials.message = Las primeras letras del código deben coincidir con las iniciales de tu nombre y apellido.
+acme.validation.flightcrewmember.employeeCode.duplicate.message = Este código de empleado ya está en uso por otro miembro de la tripulación.
+
+acme.validation.flightcrewmember.salary.null.message = El salario es obligatorio.
+acme.validation.flightcrewmember.salary.format.message = El salario debe incluir la moneda y el importe (ej: EUR 45000.00, USD 50000.00).
+acme.validation.flightcrewmember.salary.currency.message = La moneda del salario debe ser válida (EUR, USD, GBP).
+acme.validation.flightcrewmember.salary.amount.message = El salario debe estar entre 0.00 y 1,000,000.00.
+
+acme.validation.flightcrewmember.phoneNumber.null.message = El número de teléfono es obligatorio.
+acme.validation.flightcrewmember.phoneNumber.format.message = El número de teléfono debe tener entre 6 y 15 dígitos, opcionalmente precedido por +.
+
+acme.validation.flightcrewmember.languageSkills.null.message = Las habilidades lingüísticas son obligatorias.
+acme.validation.flightcrewmember.languageSkills.length.message = Las habilidades lingüísticas deben tener entre 1 y 255 caracteres.
+
+acme.validation.flightcrewmember.availabilityStatus.null.message = El estado de disponibilidad es obligatorio.
+acme.validation.flightcrewmember.airline.null.message = La aerolínea es obligatoria.
+
+acme.validation.flightcrewmember.yearsOfExperience.null.message = Los años de experiencia son obligatorios.
+acme.validation.flightcrewmember.yearsOfExperience.range.message = Los años de experiencia deben estar entre 0 y 120.
+
+# Validaciones de autorización
+acme.validation.flightcrewmember.unauthorised.update = No tienes permisos para modificar este perfil.
+acme.validation.flightcrewmember.unauthorised.invalid-values = Los valores enviados no son válidos.
+
 acme.validation.activityLog.statusLeg.message = El estado del tramo debe ser LANDED
 
 acme.validation.member.pilot.message = La escala ya tiene un piloto

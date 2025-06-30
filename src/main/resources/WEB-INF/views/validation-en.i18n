@@ -34,6 +34,35 @@ javax.validation.constraints.NotBlank.message = The value cannot be blank.
 acme.validation.flightcrewmember.identifier.message = The identifier must have 2 or 3 letters correspond to your initials and 6 digits.
 acme.validation.flightCrewMember.duplicated-employeeCode.message = The employeeCode must be unique.
 
+# Specific validations for FlightCrewMember
+acme.validation.flightcrewmember.employeeCode.null.message = Employee code is required.
+acme.validation.flightcrewmember.employeeCode.blank.message = Employee code cannot be empty.
+acme.validation.flightcrewmember.employeeCode.pattern.message = Employee code must have 2-3 uppercase letters followed by 6 digits (e.g., AB123456 or ABC123456).
+acme.validation.flightcrewmember.employeeCode.length.message = Employee code must be between 8 and 9 characters.
+acme.validation.flightcrewmember.employeeCode.initials.message = The first letters of the code must match your name and surname initials.
+acme.validation.flightcrewmember.employeeCode.duplicate.message = This employee code is already in use by another crew member.
+
+acme.validation.flightcrewmember.salary.null.message = Salary is required.
+acme.validation.flightcrewmember.salary.format.message = Salary must include currency and amount (e.g., EUR 45000.00, USD 50000.00).
+acme.validation.flightcrewmember.salary.currency.message = Salary currency must be valid (EUR, USD, GBP).
+acme.validation.flightcrewmember.salary.amount.message = Salary must be between 0.00 and 1,000,000.00.
+
+acme.validation.flightcrewmember.phoneNumber.null.message = Phone number is required.
+acme.validation.flightcrewmember.phoneNumber.format.message = Phone number must have 6 to 15 digits, optionally preceded by +.
+
+acme.validation.flightcrewmember.languageSkills.null.message = Language skills are required.
+acme.validation.flightcrewmember.languageSkills.length.message = Language skills must be between 1 and 255 characters.
+
+acme.validation.flightcrewmember.availabilityStatus.null.message = Availability status is required.
+acme.validation.flightcrewmember.airline.null.message = Airline is required.
+
+acme.validation.flightcrewmember.yearsOfExperience.null.message = Years of experience are required.
+acme.validation.flightcrewmember.yearsOfExperience.range.message = Years of experience must be between 0 and 120.
+
+# Authorization validations
+acme.validation.flightcrewmember.unauthorised.update = You do not have permission to modify this profile.
+acme.validation.flightcrewmember.unauthorised.invalid-values = The submitted values are not valid.
+
 acme.validation.activityLog.statusLeg.message = The leg must be in LANDED status
 
 acme.validation.member.pilot.message = Only one pilot per Leg

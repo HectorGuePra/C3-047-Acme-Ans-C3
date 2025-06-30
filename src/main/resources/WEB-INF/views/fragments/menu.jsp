@@ -76,6 +76,8 @@
         <acme:menu-suboption code="master.menu.user-account.general-profile" action="/authenticated/user-account/update"/>
         <acme:menu-suboption code="master.menu.user-account.manager-profile" action="/authenticated/manager/update" access="hasRealm('Manager')"/>
         	<acme:menu-suboption code="master.menu.user-account.become-manager" action="/authenticated/manager/create" access="!hasRealm('Manager')"/>
+        <acme:menu-suboption code="master.menu.user-account.become-member" action="/authenticated/flight-crew-member/create" access="!hasRealm('FlightCrewMember') && !hasRealm('Manager') && !hasRealm('Consumer') && !hasRealm('Provider') && !hasRealm('Customer') && !hasRealm('Technician')"/>
+        <acme:menu-suboption code="master.menu.user-account.flight-crew-member" action="/authenticated/flight-crew-member/update" access="hasRealm('FlightCrewMember')"/>
     </acme:menu-option>
 </acme:menu-right>
 </acme:menu-bar> 
