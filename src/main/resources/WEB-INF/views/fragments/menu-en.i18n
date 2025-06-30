@@ -73,3 +73,27 @@ master.menu.manager.show-dashboard = Show dashboard
 #master.menu.any ####################################################
 master.menu.any = Any
 master.menu.any.flights = Flights
+master.menu.any.flight-assignments = Flight Assignments
+
+# anonymous.flight-assignment #################################################
+
+anonymous.flight-assignment.list.label.duty = Duty
+anonymous.flight-assignment.list.label.status = Status
+anonymous.flight-assignment.list.label.lastUpdate = Last Update
+anonymous.flight-assignment.list.label.leg = Leg
+
+anonymous.flight-assignment.form.label.duty = Duty
+anonymous.flight-assignment.form.label.status = Status
+anonymous.flight-assignment.form.label.lastUpdate = Last Update
+anonymous.flight-assignment.form.label.remarks = Remarks
+anonymous.flight-assignment.form.label.leg-details = Leg Details
+anonymous.flight-assignment.form.label.leg = Leg Description
+anonymous.flight-assignment.form.label.leg-status = Leg Status
+anonymous.flight-assignment.form.label.scheduled-departure = Scheduled Departure
+anonymous.flight-assignment.form.label.scheduled-arrival = Scheduled Arrival
+anonymous.flight-assignment.form.label.departure-airport = Departure Airport
+anonymous.flight-assignment.form.label.arrival-airport = Arrival Airport
+anonymous.flight-assignment.form.label.crew-details = Crew Details
+anonymous.flight-assignment.form.label.crew-member = Crew Member
+anonymous.flight-assignment.form.label.crew-member-code = Employee Code
+anonymous.flight-assignment.form.button.return = Return

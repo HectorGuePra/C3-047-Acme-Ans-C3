@@ -74,3 +74,27 @@ master.menu.manager.show-dashboard = Mostrar panel
 #master.menu.any ####################################################
 master.menu.any = Cualquiera
 master.menu.any.flights = Vuelos
+master.menu.any.flight-assignments = Asignaciones de Vuelo
+
+# anonymous.flight-assignment #################################################
+
+anonymous.flight-assignment.list.label.duty = Función
+anonymous.flight-assignment.list.label.status = Estado
+anonymous.flight-assignment.list.label.lastUpdate = Última Actualización
+anonymous.flight-assignment.list.label.leg = Tramo
+
+anonymous.flight-assignment.form.label.duty = Función
+anonymous.flight-assignment.form.label.status = Estado
+anonymous.flight-assignment.form.label.lastUpdate = Última Actualización
+anonymous.flight-assignment.form.label.remarks = Comentarios
+anonymous.flight-assignment.form.label.leg-details = Detalles del Tramo
+anonymous.flight-assignment.form.label.leg = Descripción del Tramo
+anonymous.flight-assignment.form.label.leg-status = Estado del Tramo
+anonymous.flight-assignment.form.label.scheduled-departure = Salida Programada
+anonymous.flight-assignment.form.label.scheduled-arrival = Llegada Programada
+anonymous.flight-assignment.form.label.departure-airport = Aeropuerto de Salida
+anonymous.flight-assignment.form.label.arrival-airport = Aeropuerto de Llegada
+anonymous.flight-assignment.form.label.crew-details = Detalles de la Tripulación
+anonymous.flight-assignment.form.label.crew-member = Miembro de la Tripulación
+anonymous.flight-assignment.form.label.crew-member-code = Código de Empleado
+anonymous.flight-assignment.form.button.return = Volver

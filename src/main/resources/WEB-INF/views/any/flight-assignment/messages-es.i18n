@@ -1,0 +1,30 @@
+# messages-es.i18n
+#
+# Copyright (C) 2012-2025 Rafael Corchuelo.
+#
+# In keeping with the traditional purpose of furthering education and research, it is
+# the policy of the copyright owner to permit non-commercial use and redistribution of
+# this software. It has been tested carefully, but it is not guaranteed for any particular
+# purposes.  The copyright owner does not offer any warranties or representations, nor do
+# they accept any liabilities with respect to them.
+
+any.flight-assignment.list.title = Lista de asignaciones de vuelo
+
+any.flight-assignment.list.label.duty = Función
+any.flight-assignment.list.label.status = Estado
+any.flight-assignment.list.label.lastUpdate = Última Actualización  
+any.flight-assignment.list.label.crewMember = Tripulante
+
+any.flight-assignment.form.title = Detalles de asignación
+
+any.flight-assignment.form.label.duty = Función
+any.flight-assignment.form.label.status = Estado
+any.flight-assignment.form.label.lastUpdate = Última Actualización
+any.flight-assignment.form.label.remarks = Observaciones
+any.flight-assignment.form.label.leg = Descripción del Tramo
+any.flight-assignment.form.label.legStatus = Estado del Tramo
+any.flight-assignment.form.label.scheduledDeparture = Salida Programada
+any.flight-assignment.form.label.scheduledArrival = Llegada Programada
+any.flight-assignment.form.label.departureAirport = Aeropuerto de Salida
+any.flight-assignment.form.label.arrivalAirport = Aeropuerto de Llegada
+any.flight-assignment.form.label.crewMember = Tripulante
