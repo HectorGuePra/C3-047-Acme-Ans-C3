@@ -59,9 +59,15 @@ master.menu.user-account.become-provider = Become a provider
 master.menu.user-account.provider-profile = Provider profile
 master.menu.user-account.become-consumer = Become a consumer
 master.menu.user-account.consumer-profile = Consumer profile
+master.menu.user-account.become-manager = Become a manager
+master.menu.user-account.consumer-manager = Manager profile
 
 # master.menu.manager ####################################################
 master.menu.manager = Manager
 master.menu.manager.legs = Legs
 master.menu.manager.flights = Flights
 master.menu.manager.show-dashboard = Show dashboard
+
+#master.menu.any ####################################################
+master.menu.any = Any
+master.menu.any.flights = Flights

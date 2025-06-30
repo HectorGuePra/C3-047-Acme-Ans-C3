@@ -38,11 +38,9 @@ public class AnyFlightListService extends AbstractGuiService<Any, Flight> {
 
 	@Override
 	public void unbind(final Flight object) {
-		assert object != null;
-
 		Dataset dataset;
 
-		dataset = super.unbindObject(object, "tag", "departureAirport", "arrivalAirport");
+		dataset = super.unbindObject(object, "tag", "departure", "arrival");
 		super.getResponse().addData(dataset);
 	}
 

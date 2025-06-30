@@ -13,7 +13,7 @@ any.flight.form.label.description = Descripción
 any.flight.form.label.scheduledDeparture = Salida programada
 any.flight.form.label.scheduledArrival = Llegada programada
 any.flight.form.label.departureAirport = Origen
-any.flight.form.label.arrivalAirport = Destino
-any.flight.form.label.layovers = Escalas
+any.flight.form.label.origin = Origen
+any.flight.form.label.destination = Destino
 
 any.leg.form.button.list = Tramos
