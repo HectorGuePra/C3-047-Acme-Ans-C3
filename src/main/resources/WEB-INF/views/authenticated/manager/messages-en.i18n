@@ -10,3 +10,26 @@ authenticated.manager.form.button.create = Create profile
 authenticated.manager.form.button.update = Update profile
 
 authenticated.manager.form.error.duplicatedIdentifierNumber = Duplicated identifier number
+
+# Form validation messages
+authenticated.manager.form.error.identifierNumber.blank = Identifier number is required
+authenticated.manager.form.error.identifierNumber.pattern = Identifier number must have 2-3 uppercase letters followed by 6 digits (e.g., AB123456)
+authenticated.manager.form.error.identifierNumber.length = Identifier number must be between 8 and 9 characters
+authenticated.manager.form.error.identifierNumber.duplicate = This identifier number is already in use
+
+authenticated.manager.form.error.experience.null = Experience is required
+authenticated.manager.form.error.experience.range = Experience must be between 0 and 120 years
+
+authenticated.manager.form.error.birthdate.null = Birth date is required
+authenticated.manager.form.error.birthdate.future = Birth date must be in the past
+
+authenticated.manager.form.error.airline.null = Please select an airline
+
+authenticated.manager.form.error.linkPicture.format = Picture link must be a valid URL (http:// or https://)
+
+# Help text
+authenticated.manager.form.help.identifierNumber = Enter 2-3 letters matching your name initials followed by 6 digits
+authenticated.manager.form.help.experience = Enter your years of experience in aviation management
+authenticated.manager.form.help.birthdate = Select your birth date
+authenticated.manager.form.help.linkPicture = Optional: Enter a link to your profile picture
+authenticated.manager.form.help.airline = Select the airline you will manage

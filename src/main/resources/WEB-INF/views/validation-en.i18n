@@ -22,6 +22,28 @@ acme.validation.leg.past-date.message = Date must be in the future.
 acme.validation.manager.identifier.message = The identifier must have 2 or 3 letters correspond to your initials and 6 digits.
 acme.validation.manager.identifier-number.message = The identifier number must be unique.
 
+# Specific validations for Manager
+acme.validation.manager.identifierNumber.null.message = Identifier number is required.
+acme.validation.manager.identifierNumber.blank.message = Identifier number cannot be empty.
+acme.validation.manager.identifierNumber.pattern.message = Identifier number must have 2-3 uppercase letters followed by 6 digits (e.g., AB123456 or ABC123456).
+acme.validation.manager.identifierNumber.length.message = Identifier number must be between 8 and 9 characters.
+acme.validation.manager.identifierNumber.initials.message = The first letters must match your name and surname initials.
+acme.validation.manager.identifierNumber.duplicate.message = This identifier number is already in use by another manager.
+
+acme.validation.manager.experience.null.message = Experience is required.
+acme.validation.manager.experience.range.message = Experience must be between 0 and 120 years.
+
+acme.validation.manager.birthdate.null.message = Birthdate is required.
+acme.validation.manager.birthdate.past.message = Birthdate must be in the past.
+
+acme.validation.manager.airline.null.message = Airline is required.
+
+acme.validation.manager.linkPicture.format.message = Link picture must be a valid URL (http:// or https://).
+
+# Authorization validations for Manager
+acme.validation.manager.unauthorised.update = You do not have permission to modify this manager profile.
+acme.validation.manager.unauthorised.invalid-values = The submitted values are not valid.
+
 acme.validation.flight.not-null = The flight cannot be null.
 acme.validation.flight.cant-be-publish.message= All legs must be published.
 acme.validation.flight.zero-legs.message = For publishing must have at least one leg.

@@ -1,6 +1,8 @@
 
 package acme.features.authenticated.manager;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acme.client.components.models.Dataset;
@@ -10,7 +12,13 @@ import acme.client.components.views.SelectChoices;
 import acme.client.helpers.PrincipalHelper;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
+import acme.entities.airline.Airline;
+import acme.realms.Consumer;
+import acme.realms.Customer;
+import acme.realms.Provider;
+import acme.realms.flightcrewmember.FlightCrewMember;
 import acme.realms.manager.Manager;
+import acme.realms.technician.Technician;
 
 @GuiService
 public class AuthenticatedManagerCreateService extends AbstractGuiService<Authenticated, Manager> {
@@ -25,7 +33,26 @@ public class AuthenticatedManagerCreateService extends AbstractGuiService<Authen
 	public void authorise() {
 		boolean status;
 
-		status = !super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
+		// Check that the user doesn't already have the Manager role
+		status = !super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && 
+				!super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && 
+				!super.getRequest().getPrincipal().hasRealmOfType(Consumer.class) &&
+				!super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && 
+				!super.getRequest().getPrincipal().hasRealmOfType(Provider.class) && 
+				!super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+
+		if (status && super.getRequest().getMethod().equals("POST")) {
+			// Additional validation for POST requests
+			if (super.getRequest().hasData("airline")) {
+				Integer airlineId = super.getRequest().getData("airline", int.class);
+				if (airlineId != 0) {
+					Collection<Airline> availableAirlines = this.repository.findAirlines();
+					Airline airline = this.repository.findAirlineById(airlineId);
+					boolean airlineIsValid = availableAirlines.contains(airline);
+					status = airlineIsValid;
+				}
+			}
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -54,14 +81,19 @@ public class AuthenticatedManagerCreateService extends AbstractGuiService<Authen
 	public void validate(final Manager object) {
 		assert object != null;
 
-		boolean duplicatedNumber = this.repository.findManagers().stream().anyMatch(manager -> manager.getIdentifierNumber().equals(object.getIdentifierNumber()) && manager.getId() != object.getId());
-		super.state(!duplicatedNumber, "identifierNumber", "authenticated.airline-manager.form.error.duplicatedIdentifierNumber");
+		// Only check for duplicate identifier numbers
+		// Let the framework handle the rest through annotations (@Mandatory, @ValidIdentifierNumber, @ValidManager, etc.)
+		if (object.getIdentifierNumber() != null && !object.getIdentifierNumber().trim().isEmpty()) {
+			String identifierNumber = object.getIdentifierNumber().trim();
+			boolean duplicatedNumber = this.repository.findManagers().stream()
+					.anyMatch(manager -> manager.getIdentifierNumber().equals(identifierNumber));
+			super.state(!duplicatedNumber, "identifierNumber", "acme.validation.manager.identifierNumber.duplicate.message");
+		}
 	}
 
 	@Override
 	public void perform(final Manager object) {
 		assert object != null;
-		object.setId(0);
 		this.repository.save(object);
 	}
 

@@ -23,8 +23,30 @@ public class AuthenticatedManagerUpdateService extends AbstractGuiService<Authen
 	@Override
 	public void authorise() {
 		boolean status;
+		Manager currentManager;
+		int currentUserId;
 
 		status = super.getRequest().getPrincipal().hasRealmOfType(Manager.class);
+
+		if (status) {
+			currentUserId = super.getRequest().getPrincipal().getAccountId();
+			currentManager = this.repository.findManagerByUserAccountId(currentUserId);
+
+			// The user can only edit their own profile
+			status = currentManager != null;
+		}
+
+		if (status && super.getRequest().getMethod().equals("POST")) {
+			// Validate airline selection
+			if (super.getRequest().hasData("airline")) {
+				Integer airlineId = super.getRequest().getData("airline", int.class);
+				if (airlineId != 0) {
+					java.util.Collection<acme.entities.airline.Airline> availableAirlines = this.repository.findAirlines();
+					boolean airlineIsValid = availableAirlines.stream().anyMatch(airline -> airline.getId() == airlineId);
+					status = airlineIsValid;
+				}
+			}
+		}
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -49,7 +71,10 @@ public class AuthenticatedManagerUpdateService extends AbstractGuiService<Authen
 	public void validate(final Manager object) {
 		assert object != null;
 
-		boolean duplicatedNumber = this.repository.findManagers().stream().anyMatch(manager -> manager.getIdentifierNumber().equals(object.getIdentifierNumber()) && manager.getId() != object.getId());
+		Manager currentManager = this.repository.findManagerByUserAccountId(super.getRequest().getPrincipal().getAccountId());
+		boolean duplicatedNumber = this.repository.findManagers().stream().anyMatch(manager -> 
+			manager.getIdentifierNumber().equals(object.getIdentifierNumber()) && 
+			!manager.equals(currentManager));
 		super.state(!duplicatedNumber, "identifierNumber", "authenticated.airline-manager.form.error.duplicatedIdentifierNumber");
 	}
 

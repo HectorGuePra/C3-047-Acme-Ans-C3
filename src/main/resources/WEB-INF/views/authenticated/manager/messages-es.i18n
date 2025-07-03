@@ -10,3 +10,26 @@ authenticated.manager.form.button.create = Crear perfil
 authenticated.manager.form.button.update = Actualizar perfil
 
 authenticated.manager.form.error.duplicatedIdentifierNumber = Número de identificación duplicado
+
+# Mensajes de validación del formulario
+authenticated.manager.form.error.identifierNumber.blank = El número de identificación es obligatorio
+authenticated.manager.form.error.identifierNumber.pattern = El número de identificación debe tener 2-3 letras mayúsculas seguidas de 6 dígitos (ej: AB123456)
+authenticated.manager.form.error.identifierNumber.length = El número de identificación debe tener entre 8 y 9 caracteres
+authenticated.manager.form.error.identifierNumber.duplicate = Este número de identificación ya está en uso
+
+authenticated.manager.form.error.experience.null = La experiencia es obligatoria
+authenticated.manager.form.error.experience.range = La experiencia debe estar entre 0 y 120 años
+
+authenticated.manager.form.error.birthdate.null = La fecha de nacimiento es obligatoria
+authenticated.manager.form.error.birthdate.future = La fecha de nacimiento debe ser anterior a la fecha actual
+
+authenticated.manager.form.error.airline.null = Por favor seleccione una aerolínea
+
+authenticated.manager.form.error.linkPicture.format = El enlace de imagen debe ser una URL válida (http:// o https://)
+
+# Texto de ayuda
+authenticated.manager.form.help.identifierNumber = Ingrese 2-3 letras que coincidan con las iniciales de su nombre seguidas de 6 dígitos
+authenticated.manager.form.help.experience = Ingrese sus años de experiencia en gestión aeronáutica
+authenticated.manager.form.help.birthdate = Seleccione su fecha de nacimiento
+authenticated.manager.form.help.linkPicture = Opcional: Ingrese un enlace a su foto de perfil
+authenticated.manager.form.help.airline = Seleccione la aerolínea que gestionará

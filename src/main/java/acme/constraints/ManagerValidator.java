@@ -4,7 +4,6 @@ package acme.constraints;
 import javax.validation.ConstraintValidatorContext;
 
 import acme.client.components.validation.AbstractValidator;
-import acme.client.helpers.StringHelper;
 import acme.realms.manager.Manager;
 
 public class ManagerValidator extends AbstractValidator<ValidManager, Manager> {
@@ -17,38 +16,34 @@ public class ManagerValidator extends AbstractValidator<ValidManager, Manager> {
 	@Override
 	public boolean isValid(final Manager manager, final ConstraintValidatorContext context) {
 		assert context != null;
-		String initials = "";
 
-		boolean result;
+		boolean result = true;
 
-		if (manager == null)
+		if (manager == null) {
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
-		else {
-			String fullName = manager.getUserAccount().getIdentity().getFullName();
-			String[] nameParts = fullName.split(", ");
-
-			String[] surnameParts = nameParts[0].split(" ");
-			initials = nameParts[1].substring(0, 1);
-			initials += surnameParts[0].substring(0, 1);
-
-			if (surnameParts.length > 1)
-				initials += surnameParts[1].substring(0, 1);
-
-			boolean validIdentifier;
+			result = false;
+		} else {
 
 			String managerIdentifier = manager.getIdentifierNumber();
+			if (managerIdentifier == null || managerIdentifier.trim().isEmpty())
+				return true;
 
-			boolean validLength = managerIdentifier.length() >= 8 && managerIdentifier.length() <= 9;
-			String initialsFromIdentifier = managerIdentifier.subSequence(0, initials.length()).toString();
-			boolean validPattern = StringHelper.isEqual(initialsFromIdentifier, initials, true) && managerIdentifier.matches("^[A-Z]{2,3}\\d{6}$");
+			if (manager.getUserAccount() != null && manager.getUserAccount().getIdentity() != null) {
+				String name = manager.getUserAccount().getIdentity().getName();
+				String surname = manager.getUserAccount().getIdentity().getSurname();
 
-			validIdentifier = validLength && validPattern;
+				if (name != null && surname != null && name.length() > 0 && surname.length() > 0) {
+					char firstInitial = Character.toUpperCase(name.charAt(0));
+					char secondInitial = Character.toUpperCase(surname.charAt(0));
 
-			super.state(context, validIdentifier, "managerIdentifier", "acme.validation.manager.identifier.message");
+					boolean correctInitials = managerIdentifier.charAt(0) == firstInitial && managerIdentifier.charAt(1) == secondInitial;
+					if (!correctInitials) {
+						super.state(context, false, "identifierNumber", "acme.validation.manager.identifier.message");
+						result = false;
+					}
+				}
+			}
 		}
-
-		result = !super.hasErrors(context);
-
 		return result;
 	}
 

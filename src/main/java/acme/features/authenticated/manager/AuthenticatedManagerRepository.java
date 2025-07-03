@@ -17,6 +17,9 @@ public interface AuthenticatedManagerRepository extends AbstractRepository {
 	@Query("select a from Airline a")
 	Collection<Airline> findAirlines();
 
+	@Query("select a from Airline a where a.id = :id")
+	Airline findAirlineById(int id);
+
 	@Query("select u from UserAccount u where u.id = :id")
 	UserAccount findUserAccountById(int id);
 

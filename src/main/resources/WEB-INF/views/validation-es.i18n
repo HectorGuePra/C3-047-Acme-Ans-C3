@@ -22,6 +22,28 @@ acme.validation.leg.past-date.message = La fecha tiene que ser futura.
 acme.validation.manager.identifier.message = El identificador debe contener 2 o 3 letras siendo tus iniciales y 6 dígitos.
 acme.validation.manager.identifier-number.message = El número de identificador debe ser único.
 
+# Validaciones específicas para Manager
+acme.validation.manager.identifierNumber.null.message = El número de identificador es obligatorio.
+acme.validation.manager.identifierNumber.blank.message = El número de identificador no puede estar vacío.
+acme.validation.manager.identifierNumber.pattern.message = El número de identificador debe tener 2-3 letras mayúsculas seguidas de 6 dígitos (ej: AB123456 o ABC123456).
+acme.validation.manager.identifierNumber.length.message = El número de identificador debe tener entre 8 y 9 caracteres.
+acme.validation.manager.identifierNumber.initials.message = Las primeras letras deben coincidir con las iniciales de tu nombre y apellido.
+acme.validation.manager.identifierNumber.duplicate.message = Este número de identificador ya está en uso por otro gerente.
+
+acme.validation.manager.experience.null.message = La experiencia es obligatoria.
+acme.validation.manager.experience.range.message = La experiencia debe estar entre 0 y 120 años.
+
+acme.validation.manager.birthdate.null.message = La fecha de nacimiento es obligatoria.
+acme.validation.manager.birthdate.past.message = La fecha de nacimiento debe ser anterior a la fecha actual.
+
+acme.validation.manager.airline.null.message = La aerolínea es obligatoria.
+
+acme.validation.manager.linkPicture.format.message = El enlace de la imagen debe ser una URL válida (http:// o https://).
+
+# Validaciones de autorización para Manager
+acme.validation.manager.unauthorised.update = No tienes permisos para modificar este perfil de gerente.
+acme.validation.manager.unauthorised.invalid-values = Los valores enviados no son válidos.
+
 acme.validation.flight.not-null = El vuelo no puede ser nulo.
 acme.validation.flight.cant-be-publish.message = Todas las escalas deben estar publicadas.
 acme.validation.flight.zero-legs.message = Debe haber al menos una escala para poder publicar.
