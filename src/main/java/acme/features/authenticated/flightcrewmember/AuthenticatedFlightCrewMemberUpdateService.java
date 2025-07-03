@@ -36,19 +36,16 @@ public class AuthenticatedFlightCrewMemberUpdateService extends AbstractGuiServi
 			currentUserId = super.getRequest().getPrincipal().getAccountId();
 			currentMember = this.repository.findFlightCrewMemberByUserAccountId(currentUserId);
 
-			// El usuario solo puede editar su propio perfil
 			status = currentMember != null;
 		}
 
 		if (status && super.getRequest().getMethod().equals("POST")) {
 
-			// Validar AvailabilityStatus
 			if (super.getRequest().hasData("availabilityStatus")) {
 				String availabilityStatus = super.getRequest().getData("availabilityStatus", String.class);
-				status = availabilityStatus.equals("AVAILABLE") || availabilityStatus.equals("ON_VACATION") || availabilityStatus.equals("ON_LEAVE");
+				status = availabilityStatus.equals("0") || availabilityStatus.equals("AVAILABLE") || availabilityStatus.equals("ON_VACATION") || availabilityStatus.equals("ON_LEAVE");
 			}
 
-			// Validar Airline ID
 			if (status && super.getRequest().hasData("airline")) {
 				Integer airlineId = super.getRequest().getData("airline", int.class);
 				if (airlineId != 0) {
@@ -83,7 +80,6 @@ public class AuthenticatedFlightCrewMemberUpdateService extends AbstractGuiServi
 	public void validate(final FlightCrewMember object) {
 		assert object != null;
 
-		// Employee Code validation
 		if (object.getEmployeeCode() == null || object.getEmployeeCode().trim().isEmpty())
 			super.state(false, "employeeCode", "acme.validation.flightcrewmember.employeeCode.blank.message");
 		else {
@@ -99,7 +95,6 @@ public class AuthenticatedFlightCrewMemberUpdateService extends AbstractGuiServi
 			}
 		}
 
-		// Phone Number validation
 		if (object.getPhoneNumber() == null || object.getPhoneNumber().trim().isEmpty())
 			super.state(false, "phoneNumber", "acme.validation.flightcrewmember.phoneNumber.null.message");
 		else {
@@ -108,7 +103,6 @@ public class AuthenticatedFlightCrewMemberUpdateService extends AbstractGuiServi
 				super.state(false, "phoneNumber", "acme.validation.flightcrewmember.phoneNumber.format.message");
 		}
 
-		// Language Skills validation
 		if (object.getLanguageSkills() == null || object.getLanguageSkills().trim().isEmpty())
 			super.state(false, "languageSkills", "acme.validation.flightcrewmember.languageSkills.null.message");
 		else {
@@ -117,15 +111,12 @@ public class AuthenticatedFlightCrewMemberUpdateService extends AbstractGuiServi
 				super.state(false, "languageSkills", "acme.validation.flightcrewmember.languageSkills.length.message");
 		}
 
-		// Availability Status validation
 		if (object.getAvailabilityStatus() == null)
 			super.state(false, "availabilityStatus", "acme.validation.flightcrewmember.availabilityStatus.null.message");
 
-		// Airline validation
 		if (object.getAirline() == null)
 			super.state(false, "airline", "acme.validation.flightcrewmember.airline.null.message");
 
-		// Salary validation - handle the case when input is just a number without currency
 		if (object.getSalary() == null)
 			super.state(false, "salary", "acme.validation.flightcrewmember.salary.null.message");
 		else {
@@ -141,7 +132,6 @@ public class AuthenticatedFlightCrewMemberUpdateService extends AbstractGuiServi
 			}
 		}
 
-		// Years of Experience validation
 		if (object.getYearsOfExperience() != null) {
 			int years = object.getYearsOfExperience();
 			if (years < 0 || years > 120)
