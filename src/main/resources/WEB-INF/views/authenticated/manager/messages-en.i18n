@@ -2,7 +2,7 @@ authenticated.manager.form.title= Manager profile
 
 authenticated.manager.form.label.identifierNumber = Identifier number
 authenticated.manager.form.label.experience = Years of experience
-authenticated.manager.form.label.birthDate = Birth date
+authenticated.manager.form.label.birthdate = Birth date
 authenticated.manager.form.label.linkPicture = Picture link
 authenticated.manager.form.label.airline = Airline
 

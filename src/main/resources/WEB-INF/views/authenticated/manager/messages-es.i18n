@@ -2,7 +2,7 @@ authenticated.manager.form.title= Perfil de gerente
 
 authenticated.manager.form.label.identifierNumber = Número de identificación
 authenticated.manager.form.label.experience = Años de experiencia
-authenticated.manager.form.label.birthDate = Fecha de nacimiento
+authenticated.manager.form.label.birthdate = Fecha de nacimiento
 authenticated.manager.form.label.linkPicture = Enlace de imagen
 authenticated.manager.form.label.airline = Aerolínea
 

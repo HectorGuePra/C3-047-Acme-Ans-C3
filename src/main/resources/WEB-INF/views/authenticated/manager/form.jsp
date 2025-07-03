@@ -18,7 +18,7 @@
 <acme:form>
 	<acme:input-textbox code="authenticated.manager.form.label.identifierNumber" path="identifierNumber"/>
 	<acme:input-integer code="authenticated.manager.form.label.experience" path="experience"/>
-	<acme:input-moment code="authenticated.manager.form.label.birthDate" path="birthDate"/>
+	<acme:input-moment code="authenticated.manager.form.label.birthdate" path="birthdate"/>
 	<acme:input-textbox code="authenticated.manager.form.label.linkPicture" path="linkPicture"/>
 	
 	<jstl:if test="${_command == 'create'}" >

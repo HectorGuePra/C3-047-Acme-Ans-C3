@@ -47,7 +47,7 @@ public class AuthenticatedManagerCreateService extends AbstractGuiService<Authen
 	public void bind(final Manager object) {
 		assert object != null;
 
-		super.bindObject(object, "identifierNumber", "experience", "birthDate", "linkPicture", "airline");
+		super.bindObject(object, "identifierNumber", "experience", "birthdate", "linkPicture", "airline");
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class AuthenticatedManagerCreateService extends AbstractGuiService<Authen
 	public void unbind(final Manager object) {
 		assert object != null;
 		Dataset dataset;
-		dataset = super.unbindObject(object, "identifierNumber", "experience", "birthDate", "linkPicture");
+		dataset = super.unbindObject(object, "identifierNumber", "experience", "birthdate", "linkPicture");
 		SelectChoices airlineChoices;
 		airlineChoices = SelectChoices.from(this.repository.findAirlines(), "iataCode", object.getAirline());
 		dataset.put("airlineChoices", airlineChoices);
