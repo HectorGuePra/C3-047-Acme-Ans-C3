@@ -19,7 +19,6 @@ import acme.realms.Provider;
 import acme.realms.flightcrewmember.FlightCrewMember;
 import acme.realms.manager.Manager;
 import acme.realms.technician.Technician;
-import acme.realms.flightcrewmember.FlightCrewMember;
 
 @GuiService
 public class AuthenticatedFlightCrewMemberCreateService extends AbstractGuiService<Authenticated, FlightCrewMember> {
@@ -32,26 +31,22 @@ public class AuthenticatedFlightCrewMemberCreateService extends AbstractGuiServi
 	public void authorise() {
 		boolean status;
 
-		// Solo usuarios sin ningún rol pueden registrarse como FlightCrewMember
-		status = !super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) &&
-				 !super.getRequest().getPrincipal().hasRealmOfType(Manager.class) &&
-				 !super.getRequest().getPrincipal().hasRealmOfType(Consumer.class) &&
-				 !super.getRequest().getPrincipal().hasRealmOfType(Provider.class) &&
-				 !super.getRequest().getPrincipal().hasRealmOfType(Customer.class) &&
-				 !super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
+		status = !super.getRequest().getPrincipal().hasRealmOfType(FlightCrewMember.class) && !super.getRequest().getPrincipal().hasRealmOfType(Manager.class) && !super.getRequest().getPrincipal().hasRealmOfType(Consumer.class)
+			&& !super.getRequest().getPrincipal().hasRealmOfType(Provider.class) && !super.getRequest().getPrincipal().hasRealmOfType(Customer.class) && !super.getRequest().getPrincipal().hasRealmOfType(Technician.class);
 
 		if (status && super.getRequest().getMethod().equals("POST")) {
 
 			if (super.getRequest().hasData("availabilityStatus")) {
 				String availabilityStatus = super.getRequest().getData("availabilityStatus", String.class);
-				status = availabilityStatus.equals("AVAILABLE") || availabilityStatus.equals("ON_VACATION") || availabilityStatus.equals("ON_LEAVE");
+				status = availabilityStatus.equals("0") || availabilityStatus.equals("AVAILABLE") || availabilityStatus.equals("ON_VACATION") || availabilityStatus.equals("ON_LEAVE");
 			}
 
 			if (status && super.getRequest().hasData("airline")) {
 				Integer airlineId = super.getRequest().getData("airline", int.class);
 				if (airlineId != 0) {
 					Collection<Airline> availableAirlines = this.repository.findAllAirlines();
-					boolean airlineIsValid = availableAirlines.stream().anyMatch(airline -> airline.getId() == airlineId);
+					Airline airline = this.repository.findAirlineById(airlineId);
+					boolean airlineIsValid = availableAirlines.contains(airline);
 					status = airlineIsValid;
 				}
 			}
