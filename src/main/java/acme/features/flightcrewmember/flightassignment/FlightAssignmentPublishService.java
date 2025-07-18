@@ -93,7 +93,7 @@ public class FlightAssignmentPublishService extends AbstractGuiService<FlightCre
 		leg = flightAssignment.getLeg();
 
 		availableMember = member.getAvailabilityStatus().equals(AvailabilityStatus.AVAILABLE);
-		super.state(availableMember, "flightCrewMember", "acme.validation.member.member-available.message");
+		super.state(availableMember, "*", "acme.validation.member.member-available.message");
 
 		if (flightAssignment.getDuty() == CrewsDuty.PILOT && leg != null) {
 			boolean alreadyHasPilot = !this.repository.findFlightAssignmentByLegAndPilotDuty(leg.getId(), CrewsDuty.PILOT).isEmpty();
