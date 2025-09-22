@@ -10,8 +10,7 @@ acme.validation.customer.invalid-city.message=Invalid city. It must be between 1
 acme.validation.customer.invalid-country.message=Invalid country. It must be between 1 and 50 characters.
 acme.validation.customer.invalid-points.message=Invalid points. It must be between 0 and 500,000.
 
-acme.validation.leg.flight-number.message = The flight number must be composed by the airline IATA code followed by four digits.
-acme.validation.leg.flight-number-in-use.message = The flight number is already in use.
+acme.validation.leg.unique-flight-number.message = Invalid flight number, IATA code + Flight Number Digits must be unique.
 acme.validation.leg.date.message = The flight departure date must be before than the arrival date.
 acme.validation.leg.flight-number-incorrect.message = Incorrect Iata Code.
 acme.validation.leg.overlapping-legs.message = This leg overlapps other legs.

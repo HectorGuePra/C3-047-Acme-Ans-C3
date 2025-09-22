@@ -106,7 +106,7 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		arrivalId = super.getRequest().getData("arrivalAirport", int.class);
 		arrival = this.repository.findAirportByAirportId(arrivalId);
 
-		super.bindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status");
+		super.bindObject(leg, "flightNumberDigits", "scheduledDeparture", "scheduledArrival", "status");
 		leg.setAircraft(aircraft);
 		leg.setDepartureAirport(departure);
 		leg.setArrivalAirport(arrival);
@@ -114,15 +114,6 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 
 	@Override
 	public void validate(final Leg leg) {
-
-		if (leg.getAircraft() != null) {
-			boolean res;
-			String flightNumber = leg.getAircraft().getAirline().getIataCode();
-			res = leg.getFlightNumber().startsWith(flightNumber);
-			super.state(res, "flightNumber", "manager.leg.form.error.flightNumberNotStartingWithAirlineIATACode");
-			boolean duplicatedNumber = this.repository.findLegsByAirlineId(leg.getFlight().getManager().getAirline().getId()).stream().anyMatch(leg1 -> leg.getFlightNumber().equals(leg.getFlightNumber()) && leg.getId() != leg.getId());
-			super.state(!duplicatedNumber, "flightNumber", "airline-manager.leg.form.error.duplicatedFlightNumber");
-		}
 
 		if (leg.getAircraft() != null) {
 			boolean isAircraftActive = leg.getAircraft().getStatus().equals(AircraftStatus.IN_SERVICE);
@@ -172,7 +163,8 @@ public class ManagerLegCreateService extends AbstractGuiService<Manager, Leg> {
 		departureChoices = SelectChoices.from(airports, "name", leg.getDepartureAirport());
 		arrivalChoices = SelectChoices.from(airports, "name", leg.getArrivalAirport());
 
-		dataset = super.unbindObject(leg, "flightNumber", "scheduledDeparture", "scheduledArrival", "status", "draftMode");
+		dataset = super.unbindObject(leg, "flightNumberDigits", "scheduledDeparture", "scheduledArrival", "status", "draftMode");
+		dataset.put("flightNumber", null);
 		dataset.put("statuses", statusChoices);
 		dataset.put("aircraft", aircraftChoices.getSelected().getKey());
 		dataset.put("aircrafts", aircraftChoices);

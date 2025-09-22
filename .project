@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Acme-ANS-C3</name>
+	<name>Acme-Ans-C3</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -34,18 +34,6 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>acme-framework</name>
-			<type>2</type>
-			<locationURI>WORKSPACE_LOC/Frameworks/Acme-Framework-25.7.0/target/classes</locationURI>
-		</link>
-		<link>
-			<name>target/classes</name>
-			<type>2</type>
-			<location>//C:/Workspace-25/Projects/Acme-ANS-C3/target/classes/</location>
-		</link>
-	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1739962760624</id>
