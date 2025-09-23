@@ -34,6 +34,13 @@
 		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>target/classes</name>
+			<type>2</type>
+			<location>C:/Workspace-25/Projects/Acme-Ans-C3/target/classes</location>
+		</link>
+	</linkedResources>
 	<filteredResources>
 		<filter>
 			<id>1739962760624</id>
