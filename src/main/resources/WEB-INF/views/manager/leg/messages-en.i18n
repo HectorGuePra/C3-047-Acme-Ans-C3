@@ -18,6 +18,7 @@ manager.leg.form.label.flight = Flight:
 manager.leg.form.label.aircraft = Aircraft:
 manager.leg.form.label.departureAirport = Departure:
 manager.leg.form.label.arrivalAirport = Arrival:
+manager.leg.form.label.flightNumberDigits = Flight Number Digits:
 
 manager.leg.form.button.create = Create
 manager.leg.list.button.create = Create
