@@ -31,12 +31,10 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 		boolean result = true;
 
-		if (leg.getFlightNumber() != null) {
-			boolean uniqueLeg;
-			Leg existingLeg;
-			existingLeg = this.repository.getLegFromFlightNumber(leg.getFlightNumber());
-			uniqueLeg = existingLeg == null || existingLeg.equals(leg);
-			super.state(context, uniqueLeg, "flightNumber", "acme.validation.leg.flight-number-in-use.message");
+		if (leg.getAircraft().getAirline() != null) {
+
+			boolean isFlightNumberUsed = this.repository.isFlightNumberUsed(leg.getId(), leg.getAircraft().getAirline().getId(), leg.getFlightNumberDigits());
+			super.state(context, !isFlightNumberUsed, "flightNumberDigits", "acme.validation.leg.unique-flight-number.message");
 		}
 
 		if (leg.getScheduledDeparture() != null && leg.getScheduledArrival() != null)

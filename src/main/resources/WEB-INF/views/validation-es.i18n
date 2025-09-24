@@ -10,8 +10,7 @@ acme.validation.customer.invalid-city.message = Ciudad no válida. Debe tener en
 acme.validation.customer.invalid-country.message = País no válido. Debe tener entre 1 y 50 caracteres.
 acme.validation.customer.invalid-points.message = Puntos no válidos. Debe ser un valor entre 0 y 500,000.
 
-acme.validation.leg.flight-number.message = El número de vuelo debe estar compuesto por el código IATA de la aerolínea seguido de cuatro dígitos.
-acme.validation.leg.flight-number-in-use.message = El número de vuelo está en uso.
+acme.validation.leg.unique-flight-number.message = Número de vuelo no válido, codigo IATA + Digitos del número de vuelo deben ser únicos
 acme.validation.leg.date.message = La fecha de salida del vuelo debe ser anterior a la de llegada.
 acme.validation.leg.flight-number-incorrect.message = Incorrecto Iata Code.
 acme.validation.leg.overlapping-legs.message = Este tramo solapa a otro tramo.

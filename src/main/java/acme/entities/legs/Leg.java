@@ -18,8 +18,8 @@ import acme.client.components.basis.AbstractEntity;
 import acme.client.components.mappings.Automapped;
 import acme.client.components.validation.Mandatory;
 import acme.client.components.validation.ValidMoment;
+import acme.client.components.validation.ValidString;
 import acme.client.helpers.MomentHelper;
-import acme.constraints.ValidFlightNumber;
 import acme.constraints.ValidLeg;
 import acme.entities.aircraft.Aircraft;
 import acme.entities.airport.Airport;
@@ -31,7 +31,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(indexes = {
-	@Index(columnList = "flightNumber", unique = true), @Index(columnList = "flight_id, scheduledDeparture, scheduledArrival"), // 
+	@Index(columnList = "flightNumberDigits", unique = true), @Index(columnList = "flight_id, scheduledDeparture, scheduledArrival"), // 
 	@Index(columnList = "scheduledDeparture"), @Index(columnList = "flight_id"), @Index(columnList = "aircraft_id"),//
 	@Index(columnList = "status"), @Index(columnList = "scheduledArrival") //Esta ultima linea de indices ha sido incluida para el S03
 })
@@ -41,9 +41,9 @@ public class Leg extends AbstractEntity {
 	private static final long	serialVersionUID	= 1L;
 
 	@Mandatory
-	@ValidFlightNumber
+	@ValidString(pattern = "^[0-9]{4}$")
 	@Column(unique = true)
-	private String				flightNumber;
+	private String				flightNumberDigits;
 
 	@Mandatory
 	@ValidMoment
@@ -92,6 +92,21 @@ public class Leg extends AbstractEntity {
 			return (int) duration.toHours();
 		}
 		return 0;
+	}
+
+	@Transient
+	public String flightNumber() {
+
+		if (this.aircraft != null)
+			return this.aircraft.getAirline().getIataCode() + this.flightNumberDigits;
+		return "No Data";
+	}
+
+	@Transient
+	public String getFlightNumber() {
+		if (this.aircraft != null)
+			return this.aircraft.getAirline().getIataCode() + this.flightNumberDigits;
+		return "No Data";
 	}
 
 	@Transient
