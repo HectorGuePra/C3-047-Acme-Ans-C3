@@ -8,15 +8,17 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.ReportAsSingleViolation;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = AssistanceAgentValidator.class)
-@ReportAsSingleViolation
+
 public @interface ValidAssistanceAgent {
 
-	String message() default "{acme.validation.assistanceagent.code.message}";
+	// Standard validation properties -----------------------------------------
+
+	String message() default "";
+
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 

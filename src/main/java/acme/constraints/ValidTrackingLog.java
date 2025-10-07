@@ -8,15 +8,17 @@ import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import javax.validation.ReportAsSingleViolation;
 
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = TrackingLogValidator.class)
-@ReportAsSingleViolation
+
 public @interface ValidTrackingLog {
 
-	String message() default "{acme.validation.trackinglog.message}";
+	// Standard validation properties -----------------------------------------
+
+	String message() default "";
+
 	Class<?>[] groups() default {};
 	Class<? extends Payload>[] payload() default {};
 

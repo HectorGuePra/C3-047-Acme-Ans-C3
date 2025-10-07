@@ -5,23 +5,27 @@ import java.util.List;
 
 import javax.validation.ConstraintValidatorContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import acme.client.components.validation.AbstractValidator;
-import acme.client.helpers.SpringHelper;
-import acme.entities.trackinglog.TrackingLog;
-import acme.entities.trackinglog.TrackingLogRepository;
-import acme.entities.trackinglog.TrackingLogStatus;
+import acme.client.components.validation.Validator;
+import acme.client.helpers.MomentHelper;
+import acme.entities.trackingLogs.AcceptanceStatus;
+import acme.entities.trackingLogs.TrackingLog;
+import acme.entities.trackingLogs.TrackingLogRepository;
 
+@Validator
 public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, TrackingLog> {
+	// Internal state ---------------------------------------------------------
 
-	private TrackingLogRepository trackingLogRepository;
+	@Autowired
+	private TrackingLogRepository repository;
 
+	// ConstraintValidator interface ------------------------------------------
 
-	public TrackingLogValidator() {
-		this.trackingLogRepository = SpringHelper.getBean(TrackingLogRepository.class);
-	}
 
 	@Override
-	public void initialise(final ValidTrackingLog annotation) {
+	protected void initialise(final ValidTrackingLog annotation) {
 		assert annotation != null;
 	}
 
@@ -29,32 +33,119 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 	public boolean isValid(final TrackingLog trackingLog, final ConstraintValidatorContext context) {
 		assert context != null;
 
-		// The intermediate tracking logs can keep in state “PENDING”,
-		// whereas the last one (when the resolution percentage is 100%),
-		// must set state to either “ACCEPTED” or “REJECTED”.
-		// The status can be “ACCEPTED” or “REJECTED” only when the resolution percentage gets to 100%.
-		boolean validStatus = true;
+		boolean result;
+		if (trackingLog == null)
+			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
+		else {
+			AcceptanceStatus indicator = trackingLog.getStatus();
 
-		if (trackingLog.getResolutionPercentage() == 100.00)
-			validStatus &= trackingLog.getStatus() == TrackingLogStatus.ACCEPTED || trackingLog.getStatus() == TrackingLogStatus.REJECTED;
-		else
-			validStatus &= trackingLog.getStatus() == TrackingLogStatus.PENDING;
+			Double resolutionPercentage = trackingLog.getResolutionPercentage();
+			boolean correctResolutionPercentage;
 
-		// The resolution percentage must be monotonically increasing.
-		List<TrackingLog> trackingLogs = this.trackingLogRepository.findByClaimIdOrderByLastUpdateMomentAsc(trackingLog.getClaim().getId());
+			String resolution = trackingLog.getResolution();
+			boolean correctResolution;
 
-		for (int i = 1; i < trackingLogs.size(); i++)
-			if (trackingLogs.get(i).getResolutionPercentage() < trackingLogs.get(i - 1).getResolutionPercentage()) {
-				validStatus &= false;
-				break;
+			if (indicator != AcceptanceStatus.PENDING) {
+				if (indicator == AcceptanceStatus.ACCEPTED || indicator == AcceptanceStatus.REJECTED) {
+					{
+						correctResolutionPercentage = resolutionPercentage != null && resolutionPercentage >= 0. && resolutionPercentage <= 100. ? resolutionPercentage == 100. : true;
+						super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-mustBe100.message");
+					}
+
+					{
+						correctResolution = resolution != null;
+						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notNull.message");
+						correctResolution = !resolution.trim().equals("");
+						super.state(context, correctResolution, "resolution", "acme.validation.trackingLog.resolution-notBlanck.message");
+					}
+				}
+			} else {
+				correctResolutionPercentage = resolutionPercentage != null && resolutionPercentage <= 100. ? resolutionPercentage < 100. : true;
+				super.state(context, correctResolutionPercentage, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-cannotBe100.message");
 			}
 
-		// If the status is not “PENDING”, then the resolution is mandatory; otherwise, it’s optional.
-		if (trackingLog.getStatus() != TrackingLogStatus.PENDING)
-			validStatus &= trackingLog.getResolution() != null;
+			{
+				boolean claimAssociatedIsPublic;
+				claimAssociatedIsPublic = !trackingLog.getClaim().getDraftMode();
+				super.state(context, claimAssociatedIsPublic, "claim", "acme.validation.trackingLog.claimMustBePublished.message");
+			}
 
-		super.state(context, validStatus, "status", "acme.validation.trackinglog.status.message");
+			{
+				boolean creationBeforeOrEqualUpdate;
+				creationBeforeOrEqualUpdate = !MomentHelper.isAfter(trackingLog.getCreationMoment(), trackingLog.getLastUpdateMoment());
+				super.state(context, creationBeforeOrEqualUpdate, "lastUpdateMoment", "acme.validation.trackingLog.creationBeforeOrEqualUpdateMoment.message");
+			}
 
-		return !super.hasErrors(context);
+			{
+				boolean correctMonotony;
+				int claimId = trackingLog.getClaim().getId();
+				List<TrackingLog> trackingLogsOrdered = this.repository.getTrackingLogsBycreationMomentOrderAsc(claimId);
+
+				if (trackingLogsOrdered.contains(trackingLog) && !trackingLog.getReclaimed() && trackingLog.getResolutionPercentage() != null && trackingLog.getResolutionPercentage() <= 100. && trackingLog.getResolutionPercentage() >= 0.) {
+					TrackingLog trackingLogActual = trackingLogsOrdered.stream().filter(tl -> tl.getId() == trackingLog.getId()).findFirst().get();
+
+					int indiceActual = trackingLogsOrdered.indexOf(trackingLogActual);
+
+					if (indiceActual == 0 && trackingLogsOrdered.size() > 1) {
+						TrackingLog nextTrackingLog = trackingLogsOrdered.get(indiceActual + 1);
+						if (!nextTrackingLog.getReclaimed()) {
+							correctMonotony = nextTrackingLog.getResolutionPercentage() > trackingLog.getResolutionPercentage();
+							super.state(context, correctMonotony, "resolutionPercentage", "acme.validation.trackingLog.monotony.message");
+						}
+					}
+
+					if (indiceActual > 0 && indiceActual < trackingLogsOrdered.size() - 1) {
+						TrackingLog previousTrackingLog = trackingLogsOrdered.get(indiceActual - 1);
+						TrackingLog nextTrackingLog = trackingLogsOrdered.get(indiceActual + 1);
+						if (!nextTrackingLog.getReclaimed()) {
+							correctMonotony = trackingLog.getResolutionPercentage() > previousTrackingLog.getResolutionPercentage() && nextTrackingLog.getResolutionPercentage() > trackingLog.getResolutionPercentage();
+							super.state(context, correctMonotony, "resolutionPercentage", "acme.validation.trackingLog.monotony.message");
+						}
+					}
+
+					if (indiceActual == trackingLogsOrdered.size() - 1 && indiceActual > 0) {
+						TrackingLog previousTrackingLog = trackingLogsOrdered.get(indiceActual - 1);
+						correctMonotony = trackingLog.getResolutionPercentage() > previousTrackingLog.getResolutionPercentage();
+						super.state(context, correctMonotony, "resolutionPercentage", "acme.validation.trackingLog.monotony.message");
+					}
+				}
+			}
+
+			{
+				boolean claimCreationBeforeTrackingLogUpdate;
+				boolean claimCreationBeforeTrackingLogCreation;
+
+				claimCreationBeforeTrackingLogUpdate = !MomentHelper.isAfter(trackingLog.getClaim().getRegistrationMoment(), trackingLog.getLastUpdateMoment());
+				claimCreationBeforeTrackingLogCreation = !MomentHelper.isAfter(trackingLog.getClaim().getRegistrationMoment(), trackingLog.getLastUpdateMoment());
+				if (!claimCreationBeforeTrackingLogCreation || !claimCreationBeforeTrackingLogUpdate) {
+					super.state(context, claimCreationBeforeTrackingLogCreation, "creationMoment", "acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message");
+					super.state(context, claimCreationBeforeTrackingLogUpdate, "lastUpdateMoment", "acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message");
+				}
+			}
+
+			{
+				boolean previosTlPublishedToCreate;
+				int claimAssociatedId;
+				List<TrackingLog> trackingLogsRelatedToClaimOrdered;
+				int actualTrackingLogIndex;
+				List<TrackingLog> previousTrackingLogs;
+
+				claimAssociatedId = trackingLog.getClaim().getId();
+				trackingLogsRelatedToClaimOrdered = this.repository.getTrackingLogsBycreationMomentOrderAsc(claimAssociatedId);
+
+				actualTrackingLogIndex = trackingLogsRelatedToClaimOrdered.indexOf(trackingLog);
+
+				if (actualTrackingLogIndex != -1) { // para que no me lo tenga en cuenta en el create
+					previousTrackingLogs = trackingLogsRelatedToClaimOrdered.subList(0, actualTrackingLogIndex); // tener en cuenta que es hasta actualTrackingLogIndex - 1
+
+					previosTlPublishedToCreate = previousTrackingLogs.stream().allMatch(tl -> tl.getDraftMode() == false);
+					super.state(context, previosTlPublishedToCreate, "draftMode", "acme.validation.trackingLog.previousTlMustBePublished.message");
+				}
+			}
+		}
+
+		result = !super.hasErrors(context);
+
+		return result;
 	}
 }
