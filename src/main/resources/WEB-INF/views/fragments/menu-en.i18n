@@ -50,6 +50,14 @@ master.menu.customer.passenger = Passengers
  master.menu.flightCrewMember.listLanded = Completed assignments
  master.menu.flightCrewMember.listPlanned = Planned assignments
  master.menu.flightCrewMember.show-dashboard = Show dashboard
+ 
+# master.menu.assistanceAgent ##########################################################
+
+master.menu.assistance-agent = AssistanceAgent
+master.menu.assistance-agent.list-public-claims-undergoing = List public undergoing claims
+master.menu.assistance-agent.list-public-claims-completed = List public completed claims
+master.menu.assistance-agent.list-claims-undergoing = List unpublished undergoing claims
+master.menu.assistance-agent.create-claim = Create claim
 
 # master.menu.user-account ####################################################
 
