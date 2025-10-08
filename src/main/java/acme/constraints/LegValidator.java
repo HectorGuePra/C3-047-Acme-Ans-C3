@@ -50,7 +50,7 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 		if (leg.getScheduledDeparture() != null && leg.getScheduledArrival() != null)
 			if (MomentHelper.isAfterOrEqual(leg.getScheduledDeparture(), leg.getScheduledArrival()))
-				super.state(context, false, "scheduledDeparture", "acme.validation.leg.date.message");
+				super.state(context, false, "scheduledArrival", "acme.validation.leg.date.message");
 
 		if (leg.getAircraft() != null && leg.getFlightNumber() != null && leg.getFlightNumber().length() >= 3) {
 			String legFlightNumber = leg.getFlightNumber();
