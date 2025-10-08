@@ -29,6 +29,17 @@ public class LegValidator extends AbstractValidator<ValidLeg, Leg> {
 
 		assert context != null;
 
+		if (leg == null)
+			return true;
+
+		boolean ok = true;
+
+		if (leg.getAircraft() == null)
+			ok = false;
+
+		if (!ok)
+			return !super.hasErrors(context);
+
 		boolean result = true;
 
 		if (leg.getAircraft().getAirline() != null) {
