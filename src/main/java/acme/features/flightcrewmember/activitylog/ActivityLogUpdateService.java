@@ -32,9 +32,9 @@ public class ActivityLogUpdateService extends AbstractGuiService<FlightCrewMembe
 		assignment = log.getFlightAssignment();
 		memberId = assignment.getAllocatedFlightCrewMember().getId();
 
-		isLegLanded = assignment.getLeg().getStatus().equals(LegStatus.LANDED);
+		isLegLanded = assignment.getLeg().equals(LegStatus.LANDED);
 
-		status = log.getDraftMode() && memberId == super.getRequest().getPrincipal().getActiveRealm().getId() && isLegLanded && !assignment.getDraftMode();
+		status = log.getDraftMode() && memberId == super.getRequest().getPrincipal().getActiveRealm().getId() && !isLegLanded && !assignment.getDraftMode();
 		;
 		super.getResponse().setAuthorised(status);
 	}
