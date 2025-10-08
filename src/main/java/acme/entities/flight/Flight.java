@@ -152,9 +152,4 @@ public class Flight extends AbstractEntity {
 		return res;
 	}
 
-	public Flight orElseThrow(Object object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
