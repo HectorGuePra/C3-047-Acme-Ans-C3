@@ -30,9 +30,9 @@ public class ActivityLogCreateService extends AbstractGuiService<FlightCrewMembe
 		FlightAssignment assignment = this.repository.findFlightAssignmentById(masterId);
 		memberId = assignment.getAllocatedFlightCrewMember().getId();
 
-		isLegLanded = assignment.getLeg().equals(LegStatus.LANDED);
+		isLegLanded = assignment.getLeg().getStatus().equals(LegStatus.LANDED);
 
-		status = memberId == super.getRequest().getPrincipal().getActiveRealm().getId() && !isLegLanded && !assignment.getDraftMode();
+		status = memberId == super.getRequest().getPrincipal().getActiveRealm().getId() && isLegLanded && !assignment.getDraftMode();
 		super.getResponse().setAuthorised(status);
 
 	}
