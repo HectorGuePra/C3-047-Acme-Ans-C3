@@ -5,7 +5,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>176</x>
-      <y>304</y>
+      <y>296</y>
       <w>472</w>
       <h>200</h>
     </coordinates>
@@ -34,7 +34,7 @@ bg=GRAY
     <id>UMLClass</id>
     <coordinates>
       <x>80</x>
-      <y>560</y>
+      <y>552</y>
       <w>88</w>
       <h>104</h>
     </coordinates>
@@ -54,7 +54,7 @@ bg=GREEN
     <id>UMLClass</id>
     <coordinates>
       <x>176</x>
-      <y>536</y>
+      <y>528</y>
       <w>472</w>
       <h>200</h>
     </coordinates>
@@ -62,7 +62,7 @@ bg=GREEN
 &lt;&lt;Entity&gt;&gt;
 Leg
 --
-+flightNumber: String {Mandatory, ValidLegCode, Column(unique = true)}
++flightNumberDigits: String {Mandatory, @ValidString(pattern = "^[0-9]{4}$"), Column(unique = true)}
 +scheduledDeparture: Date {Mandatory, ValidMoment, Temporal(TIMESTAMP)}
 +scheduledArrival: Date {Mandatory, ValidMoment, Temporal(TIMESTAMP)}
 +departureAirport: Airport {Mandatory, Valid, ManyToOne(optional = false)}
@@ -73,6 +73,8 @@ Leg
 +draftMode: Boolean {Mandatory, Automapped}
 /durationInHours(): Integer {Transient}
 /getDescription(): String {Transient}
+/flightNumber(): String {Transient}
+/getFlightNumber(): String {Transient}
 bg=PINK
     </panel_attributes>
     <additional_attributes/>
@@ -81,7 +83,7 @@ bg=PINK
     <id>Relation</id>
     <coordinates>
       <x>408</x>
-      <y>464</y>
+      <y>456</y>
       <w>40</w>
       <h>88</h>
     </coordinates>
@@ -97,7 +99,7 @@ m2=0..n
     <id>UMLClass</id>
     <coordinates>
       <x>192</x>
-      <y>136</y>
+      <y>128</y>
       <w>408</w>
       <h>120</h>
     </coordinates>
@@ -117,7 +119,7 @@ bg=YELLOW
     <id>Relation</id>
     <coordinates>
       <x>408</x>
-      <y>232</y>
+      <y>224</y>
       <w>72</w>
       <h>88</h>
     </coordinates>
@@ -133,7 +135,7 @@ m2=0..n
     <id>UMLClass</id>
     <coordinates>
       <x>736</x>
-      <y>160</y>
+      <y>152</y>
       <w>120</w>
       <h>80</h>
     </coordinates>
@@ -149,7 +151,7 @@ bg=MAGENTA
     <id>Relation</id>
     <coordinates>
       <x>592</x>
-      <y>176</y>
+      <y>168</y>
       <w>160</w>
       <h>48</h>
     </coordinates>
@@ -165,7 +167,7 @@ m2=0..n
     <id>UMLClass</id>
     <coordinates>
       <x>56</x>
-      <y>424</y>
+      <y>416</y>
       <w>88</w>
       <h>56</h>
     </coordinates>
@@ -181,7 +183,7 @@ bg=RED
     <id>Relation</id>
     <coordinates>
       <x>112</x>
-      <y>472</y>
+      <y>464</y>
       <w>112</w>
       <h>80</h>
     </coordinates>
@@ -197,7 +199,7 @@ m2=0..n
     <id>UMLClass</id>
     <coordinates>
       <x>704</x>
-      <y>424</y>
+      <y>416</y>
       <w>136</w>
       <h>72</h>
     </coordinates>
@@ -213,7 +215,7 @@ bg=CYAN
     <id>Relation</id>
     <coordinates>
       <x>544</x>
-      <y>464</y>
+      <y>456</y>
       <w>176</w>
       <h>88</h>
     </coordinates>
@@ -229,7 +231,7 @@ m2=0..n
     <id>Relation</id>
     <coordinates>
       <x>632</x>
-      <y>488</y>
+      <y>480</y>
       <w>104</w>
       <h>80</h>
     </coordinates>
