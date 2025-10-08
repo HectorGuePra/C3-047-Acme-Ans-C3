@@ -37,11 +37,9 @@ public class ManagerFlightUpdateService extends AbstractGuiService<Manager, Flig
 
 	@Override
 	public void load() {
-		Flight flight;
-		int id;
 
-		id = super.getRequest().getData("id", int.class);
-		flight = this.repository.findFlightById(id);
+		int id = super.getRequest().getData("id", int.class);
+		Flight flight = this.repository.findFlightById(id);
 
 		super.getBuffer().addData(flight);
 	}
