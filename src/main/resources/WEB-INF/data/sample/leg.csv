@@ -36,7 +36,3 @@ leg-30,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-06,ON_TIME,aircraft-
 leg-31,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-05,ON_TIME,aircraft-00,flight-29,2900,false
 leg-32,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-04,ON_TIME,aircraft-00,flight-30,3000,false
 leg-33,2026/07/02 12:01,2026/07/02 14:01,airport-01,airport-02,ON_TIME,aircraft-00,flight-31,3100,false
-leg-34,2020/02/10 10:00,2020/02/10 12:30,airport-01,airport-03,LANDED,aircraft-01,flight-29,7701,false
-leg-35,2021/05/20 15:00,2021/05/20 17:00,airport-02,airport-04,LANDED,aircraft-02,flight-29,7702,false
-leg-36,2022/08/01 08:00,2022/08/01 10:00,airport-03,airport-05,LANDED,aircraft-03,flight-29,7703,false
-leg-37,2023/11/15 18:00,2023/11/15 20:30,airport-04,airport-06,LANDED,aircraft-04,flight-29,7704,false
