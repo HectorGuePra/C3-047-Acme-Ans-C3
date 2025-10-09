@@ -14,6 +14,7 @@ acme.validation.leg.unique-flight-number.message = Invalid flight number, IATA c
 acme.validation.leg.date.message = The flight departure date must be before than the arrival date.
 acme.validation.leg.flight-number-incorrect.message = Incorrect Iata Code.
 acme.validation.leg.overlapping-legs.message = This leg overlapps other legs.
+acme.validation.leg.scheduledArrival = The arrival date must be after the date of departure. 
 acme.validation.leg.same-airport.error = The flight cannot have the same origin and destination airport.
 acme.validation.flight.aircraft-under-maintenance.message = Aircraft under maintenance.
 acme.validation.leg.past-date.message = Date must be in the future.
