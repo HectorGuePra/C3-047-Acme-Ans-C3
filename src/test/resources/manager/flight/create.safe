@@ -1,6 +1,6 @@
 request-id,request-method,request-path,request-query,request-payload,response-status,response-content-type,response-payload,response-oops,pre-handle-timestamp,post-handle-timestamp,"after-completion-timestamp"
 "dafa2aa2-7f3e-4351-a27f-0b2597af434a",GET,/,"debug=true&locale=en",,302,,,,185837511804100,185837558144700,185837561697000
-"9361f866-d4e8-4565-ac0d-600002014199",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=700,,185837584469400,185837592503000,185840272600500
+"9361f866-d4e8-4565-ac0d-600002014199",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=723,,185837584469400,185837592503000,185840272600500
 "25e03947-51e0-4d1e-8af8-1e5afa33828d",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185840408367800,185840415130900,185840416445300
 "9cdfa4dd-caac-4b88-b358-f64dd58396be",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185840422303400,185840424720600,185840425447300
 "3f4f5285-4716-45af-b11d-9031d7354d25",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,185840431797800,185840433994300,185840435048800
@@ -18,7 +18,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "fa537e01-c68b-4e49-b2c6-9004fb80e237",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-solid-900.woff2",,,200,application/font-woff2,,,185840535768400,185840538594600,185840539315300
 "31b5f14a-4b5d-4734-9714-6c716d659b74",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-brands-400.woff2",,,200,application/font-woff2,,,185840545558300,185840548102100,185840549060800
 "36af39c4-af05-4845-b5e5-7c885b3bfe5c",GET,/images/favicon.ico,,,200,image/x-icon,,,185840611367900,185840619515200,185840620738500
-"20333967-c039-44d9-9303-12bf8041d7cd",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&advertisement=700&username=",,185847828638100,185847833315600,185848815568300
+"20333967-c039-44d9-9303-12bf8041d7cd",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&advertisement=723&username=",,185847828638100,185847833315600,185848815568300
 "be95031d-1b20-4127-9d11-61cf6601c7a8",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185848858147600,185848861166600,185848862039300
 "a64ac7de-577b-4db0-bee0-2f9ccf487e26",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185848865501400,185848867112100,185848867852200
 "6811e273-36f7-4eab-a41d-52db7f883d3d",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,185848871210700,185848872854800,185848873495100
@@ -35,7 +35,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "753c34b0-5dae-4c79-b75b-a806446f1335",GET,/images/logo.png,,,200,image/png,,,185848934056900,185848936162000,185848937045600
 "d2d01ba6-ebd4-4147-8f93-7f403c4eeb04",POST,"/anonymous/system/sign-in",,"id=&version=&username=manager0&password=manager0&remember=false",302,,,,185854749605800,185854760219500,185854760815500
 "05390db7-4abf-4de5-b174-d1315c9e7586",GET,/,,,302,,,,185854765539100,185854768029400,185854768817000
-"9b47927d-bbdb-4734-93a7-b48ef72d8bf4",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=695,,185854773581200,185854776092800,185854931263300
+"9b47927d-bbdb-4734-93a7-b48ef72d8bf4",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=718,,185854773581200,185854776092800,185854931263300
 "831f73ab-f25a-406d-8c34-1b05a0b91719",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185854946431900,185854948067200,185854948592300
 "dd78d87c-1344-4f95-8674-4a2b84106744",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185854951990500,185854953925700,185854954385700
 "4ed8816e-563a-46e5-8008-94261f833552",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,185854957051800,185854958644000,185854959174300
@@ -50,7 +50,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "7b746258-9234-4057-b22d-19c7f6fb2ef6",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,185855000811900,185855002216800,185855002765400
 "54c539d2-5ff9-494e-958f-088d79f7d4ea",GET,/images/banner.png,,,200,image/png,,,185855008425600,185855009828700,185855010181600
 "4bc32cda-6020-4a4f-a87a-97198bd7bcd3",GET,/images/logo.png,,,200,image/png,,,185855012573400,185855014022400,185855014430100
-"76337b24-dd95-4281-b708-89e9d26b9332",GET,/manager/flight/list,,,200,text/html;charset=utf-8,"version%5B1%5D=0&arrival%5B2%5D=L&tag%5B0%5D=Lorem+ipsum+dolor+sit+ame&departure%5B1%5D=Lorem+ipsum+dolor+sit+ame&id%5B1%5D=281&version%5B2%5D=0&arrival%5B1%5D=L&departure%5B0%5D=Lorem+ipsum+dolor+sit+ame&id%5B0%5D=278&arrival%5B0%5D=L&tag%5B2%5D=Lorem+ipsum+dolor+sit+ame&advertisement=704&tag%5B1%5D=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscin&departure%5B2%5D=Lorem+ipsum+dolor+sit+ame&version%5B0%5D=0&id%5B2%5D=310",,185858782477800,185858800306500,185859316489200
+"76337b24-dd95-4281-b708-89e9d26b9332",GET,/manager/flight/list,,,200,text/html;charset=utf-8,"version%5B1%5D=0&arrival%5B2%5D=L&tag%5B0%5D=Lorem+ipsum+dolor+sit+ame&departure%5B1%5D=Lorem+ipsum+dolor+sit+ame&id%5B1%5D=281&version%5B2%5D=0&arrival%5B1%5D=L&departure%5B0%5D=Lorem+ipsum+dolor+sit+ame&id%5B0%5D=278&arrival%5B0%5D=L&tag%5B2%5D=Lorem+ipsum+dolor+sit+ame&advertisement=727&tag%5B1%5D=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscin&departure%5B2%5D=Lorem+ipsum+dolor+sit+ame&version%5B0%5D=0&id%5B2%5D=310",,185858782477800,185858800306500,185859316489200
 "276f74b0-1bf0-46aa-8bf7-d65ad3370717",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185859340137900,185859342523600,185859343195300
 "685bac64-4620-475e-b42a-8604427da14e",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185859346226500,185859347836600,185859348237400
 "2673170f-02c9-481f-b8fd-68244c93259a",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,185859351248900,185859352880600,185859354511500
@@ -66,7 +66,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "e3c713a5-bb2d-49cc-a117-be3ce155a14d",GET,/images/banner.png,,,200,image/png,,,185859404934900,185859406437800,185859406857700
 "a01f99e9-39d3-4de5-9f8d-e0bb991c40ab",GET,/images/logo.png,,,200,image/png,,,185859409569000,185859410989700,185859411368900
 "4977d007-97ba-410f-8b05-0e9595948613",GET,"/libraries/datatables/1.10.18/config/i18n-en.json",,,200,application/json,"sProcessing=Processing...&sSearch=Search:&sLengthMenu=Show%20_MENU_%20items&sInfo=Showing%20data%20_START_%20-%20_END_%20out%20of%20_TOTAL_%20data&sInfoEmpty=No%20items%20found&sInfoFiltered=(filtered%20from%20_MAX_%20data)&sInfoPostFix=&sLoadingRecords=Loading...&sZeroRecords=No%20data&sEmptyTable=No%20data&oPaginate.sFirst=First&oPaginate.sPrevious=Previous&oPaginate.sNext=Next&oPaginate.sLast=Last",,185859423276700,185859424814500,185859438542200
-"afd04871-7d44-47ce-ad39-34b51f1de303",GET,/manager/flight/create,,,200,text/html;charset=utf-8,"id=0&version=0&draftMode=true&advertisement=701&layovers=0",,185861008254800,185861015073500,185861508725300
+"afd04871-7d44-47ce-ad39-34b51f1de303",GET,/manager/flight/create,,,200,text/html;charset=utf-8,"id=0&version=0&draftMode=true&advertisement=724&layovers=0",,185861008254800,185861015073500,185861508725300
 "f6345a30-a694-4e21-b34a-72693b6c08c5",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185861526626400,185861528247700,185861528736300
 "9d65c4af-4cff-43a2-820e-1c9aa169e5d7",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185861531603600,185861533167000,185861533547100
 "b22484ce-acd6-4eca-9757-e6e57e3b741a",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,185861536201300,185861537476800,185861537733400
@@ -81,7 +81,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "d30b4c42-8d56-46e9-b391-3456261af984",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,185861579316300,185861580905200,185861581307100
 "263f5321-670b-438b-ad3f-25a5108ab2b0",GET,/images/banner.png,,,200,image/png,,,185861587562200,185861590239900,185861590886700
 "6eb62be2-feef-4528-a46c-d8508d2564d8",GET,/images/logo.png,,,200,image/png,,,185861594190300,185861595785800,185861596357600
-"8e2a30d0-8262-4762-bd47-4ecf2b5af513",POST,/manager/flight/create,,"id=0&version=0&tag=&requiresSelfTransfer=false&cost=&description=&scheduledDeparture=&scheduledArrival=&layovers=0&departure=&arrival=",200,text/html;charset=utf-8,"tag=&id=0&version=0&cost%24error=The+value+cannot+be+null..+Unsupported+currency.&draftMode=true&description=&tag%24error=Must+have+between+1+and+50+items.+The+value+cannot+be+null..&advertisement=700&requiresSelfTransfer=false&cost=&layovers=0",,185863108634600,185863167606700,185863331923800
+"8e2a30d0-8262-4762-bd47-4ecf2b5af513",POST,/manager/flight/create,,"id=0&version=0&tag=&requiresSelfTransfer=false&cost=&description=&scheduledDeparture=&scheduledArrival=&layovers=0&departure=&arrival=",200,text/html;charset=utf-8,"tag=&id=0&version=0&cost%24error=The+value+cannot+be+null..+Unsupported+currency.&draftMode=true&description=&tag%24error=Must+have+between+1+and+50+items.+The+value+cannot+be+null..&advertisement=723&requiresSelfTransfer=false&cost=&layovers=0",,185863108634600,185863167606700,185863331923800
 "e21eec7e-07df-48cb-bb00-0cf76bf4373b",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185863348331900,185863350232500,185863350581400
 "bfb68b11-b900-4cdb-8444-1b4a3e0a7d34",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,185863353138000,185863354635100,185863354986200
 "e39f077b-2db6-435a-a166-c212996c416f",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,185863357518000,185863359001900,185863359391300
@@ -96,7 +96,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "d3e37335-e57c-4ea9-bc55-7a945726d6e3",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,185863394430100,185863395726200,185863395992900
 "037a2373-5c65-4d2e-ae6c-5d83bcf72342",GET,/images/banner.png,,,200,image/png,,,185863400827200,185863402187900,185863402597400
 "6ed3d69c-e39f-44cb-bcba-8776cdfabfb2",GET,/images/logo.png,,,200,image/png,,,185863405812900,185863407460600,185863408000600
-"9799a073-5e5c-4af6-96f2-5d809414a24c",POST,/manager/flight/create,,"id=0&version=0&tag=AA&requiresSelfTransfer=false&cost=&description=&scheduledDeparture=&scheduledArrival=&layovers=0&departure=&arrival=",200,text/html;charset=utf-8,"tag=AA&id=0&version=0&cost%24error=The+value+cannot+be+null..+Unsupported+currency.&draftMode=true&description=&advertisement=697&requiresSelfTransfer=false&cost=&layovers=0",,185870522142100,185870543837500,185870750319700
+"9799a073-5e5c-4af6-96f2-5d809414a24c",POST,/manager/flight/create,,"id=0&version=0&tag=AA&requiresSelfTransfer=false&cost=&description=&scheduledDeparture=&scheduledArrival=&layovers=0&departure=&arrival=",200,text/html;charset=utf-8,"tag=AA&id=0&version=0&cost%24error=The+value+cannot+be+null..+Unsupported+currency.&draftMode=true&description=&advertisement=720&requiresSelfTransfer=false&cost=&layovers=0",,185870522142100,185870543837500,185870750319700
 "e62e1515-bb66-4083-9f29-1c6f0783c098",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185870764680600,185870766106400,185870766484800
 "262e51b1-aea9-4bdf-8902-65a8791844d2",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,185870769291600,185870770927300,185870771273100
 "e1e58444-40d0-406e-9808-66b51da0e685",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185870773636100,185870775475600,185870775909700
@@ -111,7 +111,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "8ce26a26-3859-4662-8d84-9a4d44620d82",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,185870813753400,185870815150300,185870815475300
 "9d6c01c7-92ce-48e7-9ffd-dc5b29aca457",GET,/images/banner.png,,,200,image/png,,,185870820562000,185870822014100,185870822390400
 "a82c5bb9-8a27-42af-be59-b426c54e8e38",GET,/images/logo.png,,,200,image/png,,,185870824624600,185870825946500,185870826469000
-"7698efad-2c02-43c3-b0c5-2d2dca720f4c",POST,/manager/flight/create,,"id=0&version=0&tag=AA&requiresSelfTransfer=false&cost=EUR+1250&description=&scheduledDeparture=&scheduledArrival=&layovers=0&departure=&arrival=",200,text/html;charset=utf-8,advertisement=704,,185881729752400,185881748776600,185881936449400
+"7698efad-2c02-43c3-b0c5-2d2dca720f4c",POST,/manager/flight/create,,"id=0&version=0&tag=AA&requiresSelfTransfer=false&cost=EUR+1250&description=&scheduledDeparture=&scheduledArrival=&layovers=0&departure=&arrival=",200,text/html;charset=utf-8,advertisement=727,,185881729752400,185881748776600,185881936449400
 "4d265c74-7b77-4e93-a4b6-2ce36c4b0749",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185881948549100,185881950208500,185881950558900
 "34f22e77-7083-4035-bf89-60ea4cac78a8",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185881953051700,185881954645900,185881954975000
 "056bebdd-129e-4184-ab2a-99cb51cc4b89",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,185881957361600,185881959099000,185881959474600
@@ -125,7 +125,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "8270416f-ae06-4797-a9bd-6114e4b5b224",GET,"/libraries/acme/css/acme.css",,,200,text/css,,,185881993235300,185881995925700,185881996279600
 "fba2f263-749d-4a0c-a79a-50b0e1b2a736",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,185881998433600,185881999851500,185882000215700
 "cb4e0d57-83fd-4873-9fbd-d0e2b64e16cc",GET,/images/banner.png,,,200,image/png,,,185882005578200,185882006940700,185882007309200
-"a28ecb7e-e71e-4e09-b023-bc33d8d73c2c",GET,/manager/flight/list,,,200,text/html;charset=utf-8,"version%5B1%5D=0&arrival%5B2%5D=L&tag%5B0%5D=Lorem+ipsum+dolor+sit+ame&departure%5B1%5D=Lorem+ipsum+dolor+sit+ame&id%5B1%5D=281&version%5B2%5D=0&arrival%5B1%5D=L&departure%5B0%5D=Lorem+ipsum+dolor+sit+ame&tag%5B3%5D=AA&id%5B0%5D=278&version%5B3%5D=0&arrival%5B0%5D=L&tag%5B2%5D=Lorem+ipsum+dolor+sit+ame&advertisement=702&id%5B3%5D=705&tag%5B1%5D=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscin&departure%5B2%5D=Lorem+ipsum+dolor+sit+ame&version%5B0%5D=0&id%5B2%5D=310",,185882012480900,185882029827300,185882198183300
+"a28ecb7e-e71e-4e09-b023-bc33d8d73c2c",GET,/manager/flight/list,,,200,text/html;charset=utf-8,"version%5B1%5D=0&arrival%5B2%5D=L&tag%5B0%5D=Lorem+ipsum+dolor+sit+ame&departure%5B1%5D=Lorem+ipsum+dolor+sit+ame&id%5B1%5D=281&version%5B2%5D=0&arrival%5B1%5D=L&departure%5B0%5D=Lorem+ipsum+dolor+sit+ame&tag%5B3%5D=AA&id%5B0%5D=278&version%5B3%5D=0&arrival%5B0%5D=L&tag%5B2%5D=Lorem+ipsum+dolor+sit+ame&advertisement=725&id%5B3%5D=705&tag%5B1%5D=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscin&departure%5B2%5D=Lorem+ipsum+dolor+sit+ame&version%5B0%5D=0&id%5B2%5D=310",,185882012480900,185882029827300,185882198183300
 "103b99bb-4a01-463c-9109-921f9da95d5d",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185882211752500,185882213339500,185882213779100
 "413df0ab-3236-414f-86b4-09ef765b377d",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185882217363200,185882219415900,185882219908600
 "87180ceb-5b41-4b93-a791-1c240d547bda",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,185882223047100,185882224580100,185882224933200
@@ -142,7 +142,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "265efd1a-02e5-463c-a34f-e1c0875ec2e3",GET,/images/logo.png,,,200,image/png,,,185882269377400,185882271547300,185882272060700
 "05ea9433-58ed-4617-8647-913d86c6206b",GET,"/libraries/datatables/1.10.18/config/i18n-en.json",,,200,application/json,"sProcessing=Processing...&sSearch=Search:&sLengthMenu=Show%20_MENU_%20items&sInfo=Showing%20data%20_START_%20-%20_END_%20out%20of%20_TOTAL_%20data&sInfoEmpty=No%20items%20found&sInfoFiltered=(filtered%20from%20_MAX_%20data)&sInfoPostFix=&sLoadingRecords=Loading...&sZeroRecords=No%20data&sEmptyTable=No%20data&oPaginate.sFirst=First&oPaginate.sPrevious=Previous&oPaginate.sNext=Next&oPaginate.sLast=Last",,185882279592800,185882281200500,185882282596700
 "509238be-acba-447e-bc0b-6474b22d283e",GET,"/authenticated/system/sign-out",,,302,,,,185886197985500,185886200512300,185886200789000
-"2534a944-e5f9-4fd5-b3ec-5a77eb57bc49",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=702,,185886204285400,185886206214500,185886280162800
+"2534a944-e5f9-4fd5-b3ec-5a77eb57bc49",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=725,,185886204285400,185886206214500,185886280162800
 "cb5c5a46-d13a-4985-9840-c7b5e3b57177",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185886292450800,185886293866300,185886294223600
 "41c8749b-4932-4066-bfdb-b86556adee43",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185886295990200,185886297358300,185886297732700
 "08733518-e421-4de1-8ee6-d31682ecf0ea",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,185886299951700,185886301239900,185886301492400
@@ -157,7 +157,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "a3113416-45d1-48c5-91df-f4d6d705fef7",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,185886333444200,185886334739900,185886335038100
 "b88bb4d6-e187-4309-ac42-f6d010b51750",GET,/images/banner.png,,,200,image/png,,,185886341544000,185886343406600,185886343972900
 "433d780a-5e86-4744-a35e-2ece91ec8068",GET,/images/logo.png,,,200,image/png,,,185886346566200,185886348075500,185886348574200
-"3a71f96a-3fa7-4d90-a2e6-884352edce7e",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&advertisement=696&username=",,185887547018400,185887549279800,185887683958200
+"3a71f96a-3fa7-4d90-a2e6-884352edce7e",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&advertisement=719&username=",,185887547018400,185887549279800,185887683958200
 "f8d026f8-d0e5-4123-bc45-37e86cc2ab8b",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185887697004300,185887698323000,185887698607300
 "1d8f5f3f-3a9f-4c53-ad15-b4780fb8cbd8",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185887701750900,185887704455000,185887705080000
 "ad05e6b7-e08b-48fa-8abd-b5ff33d0cf4b",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,185887707363700,185887708868500,185887709217000
@@ -174,7 +174,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "16ebd108-644f-42a6-bd3a-061937346e55",GET,/images/logo.png,,,200,image/png,,,185887755425100,185887756701900,185887757022500
 "4f5a8032-c384-4058-98e0-69fd620f7f0f",POST,"/anonymous/system/sign-in",,"id=&version=&username=administrator1&password=administrator1&remember=false",302,,,,185900872330000,185900877616800,185900878003800
 "ef17db29-5a91-420b-82f8-03d60901187b",GET,/,,,302,,,,185900881865600,185900883716300,185900884035600
-"d6e73a37-928c-4502-a22f-dc336b0a6e14",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=696,,185900886984200,185900888808700,185900998030400
+"d6e73a37-928c-4502-a22f-dc336b0a6e14",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=719,,185900886984200,185900888808700,185900998030400
 "73c0680a-8c7b-4146-9591-73121e8f26b2",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,185901008521600,185901010459900,185901010770500
 "9a2b6d00-4098-4d23-b663-28deae259d82",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,185901012451000,185901014461000,185901014751500
 "c090814e-6d8c-4ffd-8301-2e1e9e021a46",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,185901016838100,185901018257800,185901018738900
