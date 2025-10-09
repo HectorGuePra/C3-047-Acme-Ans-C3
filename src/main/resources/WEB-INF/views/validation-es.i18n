@@ -99,7 +99,20 @@ acme.validation.member.assignment.incidentType.message = La longitud del tipo de
 acme.validation.member.assignment.description.message = La longitud de la descripción debe estar entre 1 y 255 caracteres
 acme.validation.member.assignment.severityLevel.message = El nivel de severidad debe estar entre 0 y 10
 
-
+acme.validation.trackingLog.resolutionPercentage-mustBe100.message = Para los estados ACEPTADO o RECHAZADO, el porcentaje de resolución debe ser del 100%.
+acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = Si el estado es PENDIENTE, el porcentaje de resolución no puede alcanzar el 100%.
+acme.validation.trackingLog.resolutionPercentage-monotony.message = El nuevo porcentaje de resolución debe superar al valor previo más alto.
+acme.validation.trackingLog.resolution-notNull.message = Se requiere un valor de resolución para los estados ACEPTADO o RECHAZADO.
+acme.validation.trackingLog.resolution-notBlanck.message = La resolución no puede estar en blanco si el estado es ACEPTADO o RECHAZADO.
+acme.validation.trackingLog.resolution-nullOrBlanck.message = Para el estado PENDIENTE, el campo de resolución debe permanecer vacío.
+acme.validation.trackingLog.trackingLogPercentageIs100ToPublish.message = Se necesita un porcentaje de resolución del 100% para poder publicar.
+acme.validation.trackingLog.claimMustBePublished.message = La reclamación asociada debe estar publicada antes de añadir o publicar este registro de seguimiento.
+acme.validation.trackingLog.creationBeforeOrEqualUpdateMoment.message = La fecha de creación no puede ser posterior a la fecha de la última modificación.
+acme.validation.trackingLog.monotony.message = El valor del porcentaje de resolución debe ser siempre creciente.
+acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message = La fecha de la reclamación debe ser anterior a cualquier fecha del registro de seguimiento.
+acme.validation.trackingLog.previousTlMustBePublished.message = Todos los registros de seguimiento precedentes deben estar en estado publicado.
+acme.validation.claim.draftMode-update = Las reclamaciones publicadas no admiten modificaciones.
+acme.validation.claim.draftMode-delete = Las reclamaciones que ya son públicas no pueden ser eliminadas.
 
 acme.validation.airport.iata-code.message = El código IATA debe ser único.
 acme.validation.length = Longitud de cadena inválida

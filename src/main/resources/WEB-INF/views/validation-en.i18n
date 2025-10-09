@@ -39,6 +39,14 @@ acme.validation.manager.airline.null.message = Airline is required.
 
 acme.validation.manager.linkPicture.format.message = Link picture must be a valid URL (http:// or https://).
 
+acme.validation.assistanceAgent.employeeCode.message = El código de empleado no corresponde con sus iniciales
+acme.validation.assistanceAgent.pattern-employeeCode.message = El código de empleado no sigue el patrón requerido: "^[A-Z]{2-3}\d{6}$"
+acme.validation.assistanceAgent.uniqueEmployeeCode.message = El código de empleado debe ser único para cada agente de asistencia
+
+acme.validation.assistanceAgent.employeeCode.message = The employee code does not correspond to their initials
+acme.validation.assistanceAgent.pattern-employeeCode.message = The employee code does not follow the pattern required: "^[A-Z]{2-3}\d{6}$"
+acme.validation.assistanceAgent.uniqueEmployeeCode.message = Employee code must be unique for each assistance agent
+
 # Authorization validations for Manager
 acme.validation.manager.unauthorised.update = You do not have permission to modify this manager profile.
 acme.validation.manager.unauthorised.invalid-values = The submitted values are not valid.
@@ -101,6 +109,20 @@ acme.validation.member.assignment.incidentType.message = The length of the incid
 acme.validation.member.assignment.description.message = The length of the description must be between 1 and 255 characters
 acme.validation.member.assignment.severityLevel.message = Severity level must be between 0 and 10
 
+acme.validation.trackingLog.resolutionPercentage-mustBe100.message = For ACCEPTED or REJECTED states, the resolution percentage must be 100%.
+acme.validation.trackingLog.resolutionPercentage-cannotBe100.message = If the status is PENDING, the resolution percentage cannot be 100%.
+acme.validation.trackingLog.resolutionPercentage-monotony.message = The new resolution percentage must be greater than the previous highest value.
+acme.validation.trackingLog.resolution-notNull.message = A resolution value is required for ACCEPTED or REJECTED states.
+acme.validation.trackingLog.resolution-notBlanck.message = The resolution cannot be blank if the status is ACCEPTED or REJECTED.
+acme.validation.trackingLog.resolution-nullOrBlanck.message = For PENDING status, the resolution field must be empty.
+acme.validation.trackingLog.trackingLogPercentageIs100ToPublish.message = A 100% resolution percentage is required to publish.
+acme.validation.trackingLog.claimMustBePublished.message = The associated claim must be published before creating or publishing this tracking log.
+acme.validation.trackingLog.creationBeforeOrEqualUpdateMoment.message = The creation date cannot be later than the last update date.
+acme.validation.trackingLog.monotony.message = The resolution percentage value must always be increasing.
+acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message = The claim's date must be earlier than any tracking log date.
+acme.validation.trackingLog.previousTlMustBePublished.message = All preceding tracking logs must be in a published state.
+acme.validation.claim.draftMode-update = Published claims cannot be updated.
+acme.validation.claim.draftMode-delete = Claims that are already public cannot be deleted.
 
 acme.validation.airport.iata-code.message = The Iata Code must be unique.
 acme.validation.length = Invalid string length
