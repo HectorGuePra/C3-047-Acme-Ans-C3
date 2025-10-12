@@ -84,27 +84,27 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 				if (trackingLogsOrdered.contains(trackingLog) && !trackingLog.getReclaimed() && trackingLog.getResolutionPercentage() != null && trackingLog.getResolutionPercentage() <= 100. && trackingLog.getResolutionPercentage() >= 0.) {
 					TrackingLog trackingLogActual = trackingLogsOrdered.stream().filter(tl -> tl.getId() == trackingLog.getId()).findFirst().get();
 
-					int indiceActual = trackingLogsOrdered.indexOf(trackingLogActual);
+					int currentIndex = trackingLogsOrdered.indexOf(trackingLogActual);
 
-					if (indiceActual == 0 && trackingLogsOrdered.size() > 1) {
-						TrackingLog nextTrackingLog = trackingLogsOrdered.get(indiceActual + 1);
+					if (currentIndex == 0 && trackingLogsOrdered.size() > 1) {
+						TrackingLog nextTrackingLog = trackingLogsOrdered.get(currentIndex + 1);
 						if (!nextTrackingLog.getReclaimed()) {
 							correctMonotony = nextTrackingLog.getResolutionPercentage() > trackingLog.getResolutionPercentage();
 							super.state(context, correctMonotony, "resolutionPercentage", "acme.validation.trackingLog.monotony.message");
 						}
 					}
 
-					if (indiceActual > 0 && indiceActual < trackingLogsOrdered.size() - 1) {
-						TrackingLog previousTrackingLog = trackingLogsOrdered.get(indiceActual - 1);
-						TrackingLog nextTrackingLog = trackingLogsOrdered.get(indiceActual + 1);
+					if (currentIndex > 0 && currentIndex < trackingLogsOrdered.size() - 1) {
+						TrackingLog previousTrackingLog = trackingLogsOrdered.get(currentIndex - 1);
+						TrackingLog nextTrackingLog = trackingLogsOrdered.get(currentIndex + 1);
 						if (!nextTrackingLog.getReclaimed()) {
 							correctMonotony = trackingLog.getResolutionPercentage() > previousTrackingLog.getResolutionPercentage() && nextTrackingLog.getResolutionPercentage() > trackingLog.getResolutionPercentage();
 							super.state(context, correctMonotony, "resolutionPercentage", "acme.validation.trackingLog.monotony.message");
 						}
 					}
 
-					if (indiceActual == trackingLogsOrdered.size() - 1 && indiceActual > 0) {
-						TrackingLog previousTrackingLog = trackingLogsOrdered.get(indiceActual - 1);
+					if (currentIndex == trackingLogsOrdered.size() - 1 && currentIndex > 0) {
+						TrackingLog previousTrackingLog = trackingLogsOrdered.get(currentIndex - 1);
 						correctMonotony = trackingLog.getResolutionPercentage() > previousTrackingLog.getResolutionPercentage();
 						super.state(context, correctMonotony, "resolutionPercentage", "acme.validation.trackingLog.monotony.message");
 					}
@@ -112,34 +112,34 @@ public class TrackingLogValidator extends AbstractValidator<ValidTrackingLog, Tr
 			}
 
 			{
-				boolean claimCreationBeforeTrackingLogUpdate;
+				boolean claimBeforeTlUpdate;
 				boolean claimCreationBeforeTrackingLogCreation;
 
-				claimCreationBeforeTrackingLogUpdate = !MomentHelper.isAfter(trackingLog.getClaim().getRegistrationMoment(), trackingLog.getLastUpdateMoment());
+				claimBeforeTlUpdate = !MomentHelper.isAfter(trackingLog.getClaim().getRegistrationMoment(), trackingLog.getLastUpdateMoment());
 				claimCreationBeforeTrackingLogCreation = !MomentHelper.isAfter(trackingLog.getClaim().getRegistrationMoment(), trackingLog.getLastUpdateMoment());
-				if (!claimCreationBeforeTrackingLogCreation || !claimCreationBeforeTrackingLogUpdate) {
+				if (!claimCreationBeforeTrackingLogCreation || !claimBeforeTlUpdate) {
 					super.state(context, claimCreationBeforeTrackingLogCreation, "creationMoment", "acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message");
-					super.state(context, claimCreationBeforeTrackingLogUpdate, "lastUpdateMoment", "acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message");
+					super.state(context, claimBeforeTlUpdate, "lastUpdateMoment", "acme.validation.trackingLog.claimDateBeforeTrackingLogDates.message");
 				}
 			}
 
 			{
-				boolean previosTlPublishedToCreate;
+				boolean prevTlPubToCreate;
 				int claimAssociatedId;
-				List<TrackingLog> trackingLogsRelatedToClaimOrdered;
+				List<TrackingLog> tlClaimOrdered;
 				int actualTrackingLogIndex;
-				List<TrackingLog> previousTrackingLogs;
+				List<TrackingLog> prevTls;
 
 				claimAssociatedId = trackingLog.getClaim().getId();
-				trackingLogsRelatedToClaimOrdered = this.repository.getTrackingLogsBycreationMomentOrderAsc(claimAssociatedId);
+				tlClaimOrdered = this.repository.getTrackingLogsBycreationMomentOrderAsc(claimAssociatedId);
 
-				actualTrackingLogIndex = trackingLogsRelatedToClaimOrdered.indexOf(trackingLog);
+				actualTrackingLogIndex = tlClaimOrdered.indexOf(trackingLog);
 
-				if (actualTrackingLogIndex != -1) { // para que no me lo tenga en cuenta en el create
-					previousTrackingLogs = trackingLogsRelatedToClaimOrdered.subList(0, actualTrackingLogIndex); // tener en cuenta que es hasta actualTrackingLogIndex - 1
+				if (actualTrackingLogIndex != -1) {
+					prevTls = tlClaimOrdered.subList(0, actualTrackingLogIndex);
 
-					previosTlPublishedToCreate = previousTrackingLogs.stream().allMatch(tl -> tl.getDraftMode() == false);
-					super.state(context, previosTlPublishedToCreate, "draftMode", "acme.validation.trackingLog.previousTlMustBePublished.message");
+					prevTlPubToCreate = prevTls.stream().allMatch(tl -> tl.getDraftMode() == false);
+					super.state(context, prevTlPubToCreate, "draftMode", "acme.validation.trackingLog.previousTlMustBePublished.message");
 				}
 			}
 		}

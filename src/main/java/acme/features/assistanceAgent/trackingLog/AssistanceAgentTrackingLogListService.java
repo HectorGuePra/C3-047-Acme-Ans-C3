@@ -21,18 +21,13 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 
 	@Override
 	public void authorise() {
-		boolean status;
-		AssistanceAgent currentAgent;
-		int claimId;
-		Claim claim;
+		final int masterClaimId = super.getRequest().getData("masterId", int.class);
+		final Claim claim = this.repository.findClaimById(masterClaimId);
+		final AssistanceAgent agent = claim != null ? claim.getAssistanceAgent() : null;
 
-		claimId = super.getRequest().getData("masterId", int.class);
-		claim = this.repository.findClaimById(claimId);
-		currentAgent = claim == null ? null : claim.getAssistanceAgent();
+		final boolean isAuthorised = claim != null && super.getRequest().getPrincipal().hasRealm(agent) && !claim.getDraftMode();
 
-		status = claim != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && !claim.getDraftMode();
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(isAuthorised);
 	}
 
 	@Override
@@ -58,25 +53,19 @@ public class AssistanceAgentTrackingLogListService extends AbstractGuiService<As
 	}
 
 	@Override
-	public void unbind(final Collection<TrackingLog> trackingLog) {
-		int masterId;
-		Collection<TrackingLog> trackingLogs;
-		boolean existsTl100Percentage;
-		boolean previosTlPublishedToCreate;
-		boolean couldReclaim;
-		boolean couldCreate;
+	public void unbind(final Collection<TrackingLog> trackingLogsInput) {
+		final int masterClaimId = super.getRequest().getData("masterId", int.class);
+		final Collection<TrackingLog> allLogs = this.repository.findAllTrackingLogsByClaimId(masterClaimId);
 
-		masterId = super.getRequest().getData("masterId", int.class);
+		final boolean noLogAt100Percent = allLogs.stream().noneMatch(tl -> tl.getResolutionPercentage() == 100.0);
+		final boolean allPreviousLogsPublished = allLogs.stream().allMatch(tl -> !tl.getDraftMode());
 
-		trackingLogs = this.repository.findAllTrackingLogsByClaimId(masterId);
-		existsTl100Percentage = trackingLogs.stream().anyMatch(tl -> tl.getResolutionPercentage() == 100.) ? false : true; // Al revés ya que busco que no haya uno al 100% para crear
-		previosTlPublishedToCreate = trackingLogs.stream().allMatch(tl -> tl.getDraftMode() == false);
+		final boolean canCreate = noLogAt100Percent && allPreviousLogsPublished;
+		final boolean canReclaim = allLogs.stream().anyMatch(TrackingLog::getReclaim);
 
-		couldCreate = existsTl100Percentage && previosTlPublishedToCreate;
-		couldReclaim = trackingLogs.stream().anyMatch(tl -> tl.getReclaim());
-
-		super.getResponse().addGlobal("masterId", masterId);
-		super.getResponse().addGlobal("couldCreate", couldCreate);
-		super.getResponse().addGlobal("couldReclaim", couldReclaim);
+		super.getResponse().addGlobal("masterId", masterClaimId);
+		super.getResponse().addGlobal("couldCreate", canCreate);
+		super.getResponse().addGlobal("couldReclaim", canReclaim);
 	}
+
 }

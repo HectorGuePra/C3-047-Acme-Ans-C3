@@ -9,11 +9,11 @@ import acme.client.components.models.Dataset;
 import acme.client.components.views.SelectChoices;
 import acme.client.services.AbstractGuiService;
 import acme.client.services.GuiService;
-
 import acme.entities.claims.Claim;
 import acme.entities.claims.ClaimType;
 import acme.entities.legs.Leg;
 import acme.realms.assistanceAgents.AssistanceAgent;
+
 @GuiService
 public class AssistanceAgentClaimShowService extends AbstractGuiService<AssistanceAgent, Claim> {
 
@@ -23,15 +23,13 @@ public class AssistanceAgentClaimShowService extends AbstractGuiService<Assistan
 
 	@Override
 	public void authorise() {
-		int id = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(id);
-		AssistanceAgent currentAgent;
+		final int claimId = super.getRequest().getData("id", int.class);
+		final Claim claim = this.repository.findClaimById(claimId);
 
-		currentAgent = claim == null ? null : claim.getAssistanceAgent();
+		final AssistanceAgent agent = claim != null ? claim.getAssistanceAgent() : null;
+		final boolean isAuthorised = claim != null && super.getRequest().getPrincipal().hasRealm(agent);
 
-		boolean authorised = claim != null && super.getRequest().getPrincipal().hasRealm(currentAgent);
-
-		super.getResponse().setAuthorised(authorised);
+		super.getResponse().setAuthorised(isAuthorised);
 	}
 
 	@Override

@@ -5,7 +5,6 @@
 
 <acme:form>
 
-	<%-- Claim Details --%>
 	<acme:input-moment code="assistance-agent.claim.form.label.registrationMoment" path="registrationMoment" readonly="true"/>
 	<acme:input-email code="assistance-agent.claim.form.label.passengerEmail" path="passengerEmail" readonly="true"/>
 	<acme:input-textarea code="assistance-agent.claim.form.label.description" path="description" readonly="true"/>
@@ -14,7 +13,6 @@
 	<acme:input-checkbox code="assistance-agent.claim.form.label.draftMode" path="draftMode" readonly="true"/>
 	<acme:input-textbox code="assistance-agent.claim.form.label.leg" path="legFlightNumber" readonly="true"/>	
 
-	<%-- AÑADIDO: Sección para listar los Tracking Logs --%>
 	<hr />
 	<h4><acme:print code="assistance-agent.tracking-log.list.title" /></h4>
 	

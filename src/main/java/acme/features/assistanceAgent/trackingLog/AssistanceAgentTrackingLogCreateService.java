@@ -25,39 +25,34 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int claimId;
-		Claim claim;
-		Collection<TrackingLog> trackingLogs;
-		boolean existsTl100Percentage;
-		boolean previosTlPublishedToCreate;
+		final int masterClaimId = super.getRequest().getData("masterId", int.class);
+		final Claim claim = this.repository.findClaimById(masterClaimId);
 
-		claimId = super.getRequest().getData("masterId", int.class);
-		claim = this.repository.findClaimById(claimId);
-		trackingLogs = this.repository.findAllTrackingLogsByClaimId(claimId);
-		previosTlPublishedToCreate = trackingLogs.stream().allMatch(tl -> tl.getDraftMode() == false);
-		existsTl100Percentage = trackingLogs.stream().anyMatch(tl -> tl.getResolutionPercentage() == 100.);
+		final Collection<TrackingLog> logs = this.repository.findAllTrackingLogsByClaimId(masterClaimId);
+		final boolean allPreviousLogsPublished = logs.stream().allMatch(tl -> !tl.getDraftMode());
+		final boolean anyLogAt100Percent = logs.stream().anyMatch(tl -> tl.getResolutionPercentage() == 100.0);
 
 		if (super.getRequest().hasData("id"))
 			super.getRequest().getData("status", AcceptanceStatus.class);
-		status = claim != null && !claim.getDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent()) && !existsTl100Percentage && previosTlPublishedToCreate;
 
-		super.getResponse().setAuthorised(status);
+		final boolean isAuthorised = claim != null && !claim.getDraftMode() && super.getRequest().getPrincipal().hasRealm(claim.getAssistanceAgent()) && !anyLogAt100Percent && allPreviousLogsPublished;
+
+		super.getResponse().setAuthorised(isAuthorised);
 	}
 
 	@Override
 	public void load() {
-		TrackingLog trackingLog;
-		int claimId = super.getRequest().getData("masterId", int.class);
-		Claim claim = this.repository.findClaimById(claimId);
+		final int masterClaimId = super.getRequest().getData("masterId", int.class);
+		final Claim claim = this.repository.findClaimById(masterClaimId);
 
-		trackingLog = new TrackingLog();
-		trackingLog.setDraftMode(true);
-		trackingLog.setCreationMoment(MomentHelper.getCurrentMoment());
-		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
-		trackingLog.setClaim(claim);
-		trackingLog.setReclaimed(false);
-		super.getBuffer().addData(trackingLog);
+		final TrackingLog newTrackingLog = new TrackingLog();
+		newTrackingLog.setDraftMode(true);
+		newTrackingLog.setCreationMoment(MomentHelper.getCurrentMoment());
+		newTrackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+		newTrackingLog.setClaim(claim);
+		newTrackingLog.setReclaimed(false);
+
+		super.getBuffer().addData(newTrackingLog);
 	}
 
 	@Override
@@ -67,24 +62,21 @@ public class AssistanceAgentTrackingLogCreateService extends AbstractGuiService<
 
 	@Override
 	public void validate(final TrackingLog trackingLog) {
-		boolean confirmation;
-		boolean resolutionPercentageMonotony;
+		final int claimId = trackingLog.getClaim().getId();
+		final List<TrackingLog> logsByResolution = this.repository.findTrackingLogsByResolutionPercentageOrder(claimId);
 
-		int claimId = trackingLog.getClaim().getId();
+		if (logsByResolution != null && !logsByResolution.isEmpty()) {
+			final TrackingLog highestLog = logsByResolution.get(0);
 
-		List<TrackingLog> trackingLogsOrderedByPercentage = this.repository.findTrackingLogsByResolutionPercentageOrder(claimId);
-
-		if (trackingLogsOrderedByPercentage != null && !trackingLogsOrderedByPercentage.isEmpty()) {
-			TrackingLog trackingLogHighestPercentage = trackingLogsOrderedByPercentage.get(0);
-
-			if (trackingLog.getResolutionPercentage() != null && trackingLog.getResolutionPercentage() >= 0. && trackingLog.getResolutionPercentage() <= 100.) {
-				resolutionPercentageMonotony = trackingLog.getResolutionPercentage() > trackingLogHighestPercentage.getResolutionPercentage();
-				super.state(resolutionPercentageMonotony, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-monotony.message");
+			final Double currentResolution = trackingLog.getResolutionPercentage();
+			if (currentResolution != null && currentResolution >= 0.0 && currentResolution <= 100.0) {
+				final boolean isMonotonic = currentResolution > highestLog.getResolutionPercentage();
+				super.state(isMonotonic, "resolutionPercentage", "acme.validation.trackingLog.resolutionPercentage-monotony.message");
 			}
 		}
 
-		confirmation = super.getRequest().getData("confirmation", boolean.class);
-		super.state(confirmation, "confirmation", "acme.validation.confirmation.message");
+		final boolean confirmed = super.getRequest().getData("confirmation", boolean.class);
+		super.state(confirmed, "confirmation", "acme.validation.confirmation.message");
 	}
 
 	@Override

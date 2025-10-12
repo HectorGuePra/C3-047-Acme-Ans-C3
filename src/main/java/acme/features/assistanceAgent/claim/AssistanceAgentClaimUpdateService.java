@@ -23,35 +23,28 @@ public class AssistanceAgentClaimUpdateService extends AbstractGuiService<Assist
 
 	@Override
 	public void authorise() {
-		boolean status;
-		AssistanceAgent currentAgent;
-		int id = super.getRequest().getData("id", int.class);
-		Claim claim = this.repository.findClaimById(id);
+		final int claimId = super.getRequest().getData("id", int.class);
+		final Claim claim = this.repository.findClaimById(claimId);
+		final AssistanceAgent agent = claim != null ? claim.getAssistanceAgent() : null;
 
-		currentAgent = claim == null ? null : claim.getAssistanceAgent();
+		boolean isAuthorised = claim != null && claim.getDraftMode() && super.getRequest().getPrincipal().hasRealm(agent);
 
-		status = claim != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && claim.getDraftMode();
+		if (isAuthorised) {
+			final String requestMethod = super.getRequest().getMethod();
 
-		if (status) {
-			String method;
-			int legId;
-			Leg leg;
-
-			method = super.getRequest().getMethod();
-
-			if (method.equals("GET"))
-				status = true;
-			else {
+			if (!"GET".equals(requestMethod)) {
 				super.getRequest().getData("type", ClaimType.class);
-				legId = super.getRequest().getData("leg", int.class);
-				leg = super.getRequest().getData("leg", Leg.class);
 
-				Boolean statusDa = legId == 0 ? true : this.repository.findLegsWithDepartureBeforeClaimRegistration().contains(leg);
-				status = statusDa;
+				final int legId = super.getRequest().getData("leg", int.class);
+				final Leg leg = super.getRequest().getData("leg", Leg.class);
+
+				boolean hasValidDeparture = legId == 0 || this.repository.findLegsWithDepartureBeforeClaimRegistration().contains(leg);
+
+				isAuthorised = hasValidDeparture;
 			}
 		}
 
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(isAuthorised);
 	}
 
 	@Override

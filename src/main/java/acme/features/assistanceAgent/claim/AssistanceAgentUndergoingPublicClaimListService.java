@@ -30,18 +30,13 @@ public class AssistanceAgentUndergoingPublicClaimListService extends AbstractGui
 
 	@Override
 	public void load() {
-		int userAccountId = super.getRequest().getPrincipal().getAccountId();
-		AssistanceAgent currentAgent;
-		Collection<Claim> claimsRelatedToCurrentAgent;
-		Collection<Claim> completedClaims;
+		final int accountId = super.getRequest().getPrincipal().getAccountId();
+		final AssistanceAgent agent = this.repository.findAssistanceAgentByUserAccountId(accountId);
 
-		currentAgent = this.repository.findAssistanceAgentByUserAccountId(userAccountId);
+		final Collection<Claim> publicClaims = this.repository.findAllPublicClaimsByCurrentUser(agent.getId());
+		final Collection<Claim> pendingClaims = publicClaims.stream().filter(claim -> claim.getAccepted().equals(AcceptanceStatus.PENDING)).toList();
 
-		claimsRelatedToCurrentAgent = this.repository.findAllPublicClaimsByCurrentUser(currentAgent.getId());
-
-		completedClaims = claimsRelatedToCurrentAgent.stream().filter(c -> c.getAccepted().equals(AcceptanceStatus.PENDING)).toList();
-
-		super.getBuffer().addData(completedClaims);
+		super.getBuffer().addData(pendingClaims);
 	}
 
 	@Override

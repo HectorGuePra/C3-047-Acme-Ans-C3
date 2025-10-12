@@ -33,21 +33,17 @@ public class AssistanceAgentClaimPublishService extends AbstractGuiService<Assis
 		status = claim != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && claim.getDraftMode();
 
 		if (status) {
-			String method;
-			int legId;
-			Leg leg;
+			final String requestMethod = super.getRequest().getMethod();
 
-			method = super.getRequest().getMethod();
-
-			if (method.equals("GET"))
-				status = true;
-			else {
+			if (!"GET".equals(requestMethod)) {
 				super.getRequest().getData("type", ClaimType.class);
-				legId = super.getRequest().getData("leg", int.class);
-				leg = super.getRequest().getData("leg", Leg.class);
 
-				Boolean statusDa = legId == 0 ? true : this.repository.findLegsWithDepartureBeforeClaimRegistration().contains(leg);
-				status = statusDa;
+				final int legId = super.getRequest().getData("leg", int.class);
+				final Leg leg = super.getRequest().getData("leg", Leg.class);
+
+				boolean hasValidDeparture = legId == 0 || this.repository.findLegsWithDepartureBeforeClaimRegistration().contains(leg);
+
+				status = hasValidDeparture;
 			}
 		}
 

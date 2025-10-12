@@ -24,48 +24,36 @@ public class AssistanceAgentTrackingLogReclaimService extends AbstractGuiService
 
 	@Override
 	public void authorise() {
-		boolean status = false;
-		AssistanceAgent currentAgent;
-		int claimId;
-		List<TrackingLog> trackingLogs;
-		TrackingLog lastTrackingLog;
+		final int masterClaimId = super.getRequest().getData("masterId", int.class);
+		final List<TrackingLog> logsByResolution = this.repository.findTrackingLogsByResolutionPercentageOrder(masterClaimId);
+		final TrackingLog latestLog = !logsByResolution.isEmpty() ? logsByResolution.get(0) : null;
 
-		claimId = super.getRequest().getData("masterId", int.class);
-		trackingLogs = this.repository.findTrackingLogsByResolutionPercentageOrder(claimId);
-		lastTrackingLog = !trackingLogs.isEmpty() ? trackingLogs.get(0) : null;
+		final AssistanceAgent agent = latestLog != null ? latestLog.getClaim().getAssistanceAgent() : null;
 
-		currentAgent = lastTrackingLog == null ? null : lastTrackingLog.getClaim().getAssistanceAgent();
+		final boolean isAuthorised = latestLog != null && super.getRequest().getPrincipal().hasRealm(agent) && latestLog.getReclaim() && !latestLog.getDraftMode();
 
-		status = lastTrackingLog != null && super.getRequest().getPrincipal().hasRealm(currentAgent) && lastTrackingLog.getReclaim() == true && !lastTrackingLog.getDraftMode();
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(isAuthorised);
 	}
 
 	@Override
 	public void load() {
-		int claimId;
-		List<TrackingLog> trackingLogs;
-		TrackingLog lastTrackingLog;
-		Claim claimAssociated;
-		AcceptanceStatus statusAssociated;
-		TrackingLog trackingLog;
+		final int masterClaimId = super.getRequest().getData("masterId", int.class);
+		final List<TrackingLog> logsByResolution = this.repository.findTrackingLogsByResolutionPercentageOrder(masterClaimId);
+		final TrackingLog latestLog = logsByResolution.get(0);
 
-		claimId = super.getRequest().getData("masterId", int.class);
-		trackingLogs = this.repository.findTrackingLogsByResolutionPercentageOrder(claimId);
-		lastTrackingLog = trackingLogs.get(0);
+		final Claim associatedClaim = latestLog.getClaim();
+		final AcceptanceStatus associatedStatus = latestLog.getStatus();
 
-		claimAssociated = lastTrackingLog.getClaim();
-		statusAssociated = lastTrackingLog.getStatus();
+		final TrackingLog newTrackingLog = new TrackingLog();
+		newTrackingLog.setCreationMoment(MomentHelper.getCurrentMoment());
+		newTrackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
+		newTrackingLog.setDraftMode(true);
+		newTrackingLog.setStatus(associatedStatus);
+		newTrackingLog.setResolutionPercentage(100.0);
+		newTrackingLog.setClaim(associatedClaim);
+		newTrackingLog.setReclaimed(true);
 
-		trackingLog = new TrackingLog();
-		trackingLog.setCreationMoment(MomentHelper.getCurrentMoment());
-		trackingLog.setLastUpdateMoment(MomentHelper.getCurrentMoment());
-		trackingLog.setDraftMode(true);
-		trackingLog.setStatus(statusAssociated);
-		trackingLog.setResolutionPercentage(100.);
-		trackingLog.setClaim(claimAssociated);
-		trackingLog.setReclaimed(true);
-		super.getBuffer().addData(trackingLog);
+		super.getBuffer().addData(newTrackingLog);
 	}
 
 	@Override

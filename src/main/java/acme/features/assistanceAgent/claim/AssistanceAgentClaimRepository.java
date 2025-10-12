@@ -27,11 +27,11 @@ public interface AssistanceAgentClaimRepository extends AbstractRepository {
 	@Query("select c from Claim c where c.assistanceAgent.id = :agentId and c.draftMode = true")
 	Collection<Claim> findAllUnpublishedClaimsByCurrentUser(int agentId);
 
-	@Query("select c from Claim c where c.assistanceAgent.id = :agentId and c.draftMode = false")
-	Collection<Claim> findAllPublicClaimsByCurrentUser(int agentId);
-
 	@Query("select a from AssistanceAgent a where a.userAccount.id = :id")
 	AssistanceAgent findAssistanceAgentByUserAccountId(int id);
+
+	@Query("select c from Claim c where c.assistanceAgent.id = :agentId and c.draftMode = false")
+	Collection<Claim> findAllPublicClaimsByCurrentUser(int agentId);
 
 	@Query("select a from AssistanceAgent a")
 	Collection<AssistanceAgent> findAllAssistanceAgents();
@@ -39,10 +39,10 @@ public interface AssistanceAgentClaimRepository extends AbstractRepository {
 	@Query("SELECT DISTINCT l FROM Claim c JOIN c.leg l WHERE l.scheduledArrival <= c.registrationMoment AND l.draftMode = false")
 	Collection<Leg> findLegsWithDepartureBeforeClaimRegistration();
 
-	@Query("select t from TrackingLog t where t.claim.id = :claimId")
-	Collection<TrackingLog> findTrackingLogsByClaimId(int claimId);
-
 	@Query("select l from Leg l")
 	Collection<Leg> findAllLegs();
+
+	@Query("select t from TrackingLog t where t.claim.id = :claimId")
+	Collection<TrackingLog> findTrackingLogsByClaimId(int claimId);
 
 }
