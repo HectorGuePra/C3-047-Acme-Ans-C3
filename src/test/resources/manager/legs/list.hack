@@ -1,6 +1,6 @@
 request-id,request-method,request-path,request-query,request-payload,response-status,response-content-type,response-payload,response-oops,pre-handle-timestamp,post-handle-timestamp,"after-completion-timestamp"
 "f2fcad4d-96dd-49f7-bf28-ab4232fb89fa",GET,/,"debug=true&locale=en",,302,,,,63623851883700,63623894601400,63623898039800
-"2b7e372b-f30e-4d5d-9621-a8eedd02f57d",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=700,,63623918794800,63623926315200,63626463714600
+"2b7e372b-f30e-4d5d-9621-a8eedd02f57d",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=723,,63623918794800,63623926315200,63626463714600
 "4f26612e-59e0-405b-9d3d-fc0a5147ce8e",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63626570892400,63626580467500,63626581457300
 "81d27807-ec73-4783-b8d6-c1c619514e34",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63626586715900,63626588728400,63626589346800
 "0a9003c9-5c3d-4f39-8471-b4f70bcdb22f",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,63626594046500,63626595962400,63626596660300
@@ -18,7 +18,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "b20bb343-34bc-4fbf-9a7a-29502d9c2147",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-solid-900.woff2",,,200,application/font-woff2,,,63626670568800,63626672269000,63626672742300
 "3a139779-fd93-41be-b68c-65f5a8a64d3d",GET,"/libraries/fontawesome/5.2.0/webfonts/fa-brands-400.woff2",,,200,application/font-woff2,,,63626677972700,63626679748100,63626680259800
 "0ed00753-8b30-4d1c-991b-947d13ebbafc",GET,/images/favicon.ico,,,200,image/x-icon,,,63626687282900,63626696173300,63626696747800
-"bfe524ec-df1a-48f1-83f1-0598df2052bf",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&advertisement=700&username=",,63627442995100,63627451273500,63628610185700
+"bfe524ec-df1a-48f1-83f1-0598df2052bf",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&advertisement=723&username=",,63627442995100,63627451273500,63628610185700
 "a15f4a74-12f8-4ea3-8f39-1a0edba4615d",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63628637638100,63628655306800,63628657301900
 "19ea46fc-7263-40c9-ba33-d8655d9d8d02",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63628662528100,63628665800800,63628666312200
 "2b5051b7-0476-44db-a466-3a7a996b835e",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63628671161300,63628673669500,63628674693000
@@ -35,7 +35,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "42c600f6-8f25-4312-8b82-91dfef2eac50",GET,/images/logo.png,,,200,image/png,,,63628762017300,63628763731300,63628764142200
 "44a8f733-9cfb-462a-a7b9-88147659215b",POST,"/anonymous/system/sign-in",,"id=&version=&username=manager0&password=manager0&remember=false",302,,,,63633146403800,63633162950600,63633163951400
 "782a3558-eb8c-485d-9360-a5afcc0a8a9d",GET,/,,,302,,,,63633170861400,63633174811400,63633176462700
-"27fc3738-152c-405d-8a6f-c38acb93df83",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=695,,63633180907900,63633184235600,63633494425100
+"27fc3738-152c-405d-8a6f-c38acb93df83",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=718,,63633180907900,63633184235600,63633494425100
 "984e243e-07fc-4698-a324-6c12913aa110",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63633511764200,63633514132500,63633515008600
 "ad2320a5-5a05-43b8-b61d-3953ca45cddc",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63633518851800,63633521418200,63633521884600
 "527c800a-8abb-43ea-85fd-00eea7d61b97",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63633525543700,63633527806200,63633528403600
@@ -51,7 +51,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "b0f4dbb1-e388-4fb1-8d86-81cb60bf8bb9",GET,/images/banner.png,,,200,image/png,,,63633594190800,63633596687300,63633597158900
 "61689e93-af6f-482d-9300-4a1235b69343",GET,/images/logo.png,,,200,image/png,,,63633601888500,63633604808700,63633605321700
 "5e1a5fd0-81b7-4642-96aa-5cab383c06cd",GET,/images/favicon.ico,,,200,image/x-icon,,,63633610753900,63633612856100,63633613275000
-"e77fbcdb-5bf8-4c7e-a949-8cd56692ad20",GET,/manager/flight/list,,,200,text/html;charset=utf-8,"version%5B1%5D=0&arrival%5B2%5D=L&tag%5B0%5D=Lorem+ipsum+dolor+sit+ame&departure%5B1%5D=Lorem+ipsum+dolor+sit+ame&id%5B1%5D=281&version%5B2%5D=0&arrival%5B1%5D=L&departure%5B0%5D=Lorem+ipsum+dolor+sit+ame&id%5B0%5D=278&arrival%5B0%5D=L&tag%5B2%5D=Lorem+ipsum+dolor+sit+ame&advertisement=704&tag%5B1%5D=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscin&departure%5B2%5D=Lorem+ipsum+dolor+sit+ame&version%5B0%5D=0&id%5B2%5D=310",,63634818648800,63634847810900,63635559774600
+"e77fbcdb-5bf8-4c7e-a949-8cd56692ad20",GET,/manager/flight/list,,,200,text/html;charset=utf-8,"version%5B1%5D=0&arrival%5B2%5D=L&tag%5B0%5D=Lorem+ipsum+dolor+sit+ame&departure%5B1%5D=Lorem+ipsum+dolor+sit+ame&id%5B1%5D=281&version%5B2%5D=0&arrival%5B1%5D=L&departure%5B0%5D=Lorem+ipsum+dolor+sit+ame&id%5B0%5D=278&arrival%5B0%5D=L&tag%5B2%5D=Lorem+ipsum+dolor+sit+ame&advertisement=727&tag%5B1%5D=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscin&departure%5B2%5D=Lorem+ipsum+dolor+sit+ame&version%5B0%5D=0&id%5B2%5D=310",,63634818648800,63634847810900,63635559774600
 "9d778473-4ae5-40a5-b370-fab1108e9c92",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63635578626900,63635581008400,63635581572800
 "bb311c9e-0217-427b-a581-62b6c8a4841a",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63635584467100,63635586621200,63635587160200
 "0581a702-06ed-478c-83a1-6905a79eea57",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63635590767700,63635592864900,63635593270500
@@ -68,7 +68,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "4f56f6ab-6f53-496a-8b89-0e2769d1d043",GET,/images/logo.png,,,200,image/png,,,63635651842900,63635654275900,63635654765900
 "2dca4d29-5117-4b24-ba6c-052206f5aee0",GET,"/libraries/datatables/1.10.18/config/i18n-en.json",,,200,application/json,"sProcessing=Processing...&sSearch=Search:&sLengthMenu=Show%20_MENU_%20items&sInfo=Showing%20data%20_START_%20-%20_END_%20out%20of%20_TOTAL_%20data&sInfoEmpty=No%20items%20found&sInfoFiltered=(filtered%20from%20_MAX_%20data)&sInfoPostFix=&sLoadingRecords=Loading...&sZeroRecords=No%20data&sEmptyTable=No%20data&oPaginate.sFirst=First&oPaginate.sPrevious=Previous&oPaginate.sNext=Next&oPaginate.sLast=Last",,63635659158000,63635661881200,63635682881500
 "017f1db9-779d-4715-a05f-c8d654f2694a",GET,/images/favicon.ico,,,200,image/x-icon,,,63635689118200,63635691873100,63635692308900
-"4bd9f1a1-e68f-4707-9ee1-6ffb1cba894e",GET,/manager/flight/show,id=278,,200,text/html;charset=utf-8,"tag=Lorem+ipsum+dolor+sit+ame&id=278&version=0&draftMode=false&departure=Lorem+ipsum+dolor+sit+ame&arrival=L&description=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscing+elit.+Sed+do%3A+eiusmod+tempor+incididunt+ut+labore+et+dolore+magna+aliqua%21+Ut*&advertisement=701&requiresSelfTransfer=true&cost=EUR+1%2C000.00&scheduledDeparture=2026%2F07%2F02+12%3A01&scheduledArrival=2026%2F07%2F02+14%3A01&layovers=0",,63637729420400,63637745724800,63638544271200
+"4bd9f1a1-e68f-4707-9ee1-6ffb1cba894e",GET,/manager/flight/show,id=278,,200,text/html;charset=utf-8,"tag=Lorem+ipsum+dolor+sit+ame&id=278&version=0&draftMode=false&departure=Lorem+ipsum+dolor+sit+ame&arrival=L&description=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscing+elit.+Sed+do%3A+eiusmod+tempor+incididunt+ut+labore+et+dolore+magna+aliqua%21+Ut*&advertisement=724&requiresSelfTransfer=true&cost=EUR+1%2C000.00&scheduledDeparture=2026%2F07%2F02+12%3A01&scheduledArrival=2026%2F07%2F02+14%3A01&layovers=0",,63637729420400,63637745724800,63638544271200
 "094cb5b9-c0a4-4f4d-a59b-3414e50e1cdd",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63638619892900,63638621354500,63638621700900
 "e2fbf6f5-2a48-4726-a5fe-61ca0067a9ae",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63638624903500,63638626716000,63638627071200
 "4702905b-16a7-45e1-abda-fe66b44b9f8c",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,63638630662900,63638633927300,63638634407900
@@ -83,7 +83,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "6c801e4b-47fe-4f1a-8147-a9b6541e531c",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,63638679191000,63638681618500,63638682284400
 "edb38402-06dd-4915-a236-c4d138243d22",GET,/images/banner.png,,,200,image/png,,,63638688573400,63638690139500,63638690774400
 "3f1f605c-803d-4f08-badf-56037da2117b",GET,/images/logo.png,,,200,image/png,,,63638695145700,63638698730700,63638699470700
-"36451dd6-66bd-4e00-b821-dd9a284bec21",GET,/manager/leg/list,flightId=278,,200,text/html;charset=utf-8,"departureAirport%5B0%5D=Lorem+ipsum+dolor+sit+ame&scheduledDeparture%5B0%5D=2026%2F07%2F02+12%3A01&arrivalAirport%5B0%5D=L&id%5B0%5D=409&flight%5B0%5D=278&flightId=278&advertisement=700&flightNumber%5B0%5D=BBC1234&version%5B0%5D=0&flightDraftMode=false",,63641763704800,63641797931800,63642193866300
+"36451dd6-66bd-4e00-b821-dd9a284bec21",GET,/manager/leg/list,flightId=278,,200,text/html;charset=utf-8,"departureAirport%5B0%5D=Lorem+ipsum+dolor+sit+ame&scheduledDeparture%5B0%5D=2026%2F07%2F02+12%3A01&arrivalAirport%5B0%5D=L&id%5B0%5D=409&flight%5B0%5D=278&flightId=278&advertisement=723&flightNumber%5B0%5D=BBC1234&version%5B0%5D=0&flightDraftMode=false",,63641763704800,63641797931800,63642193866300
 "2c82813b-8926-469d-af01-bebd30d961b7",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63642231853700,63642234032600,63642234769300
 "df6cf65d-d112-466d-8317-9254aa1fe787",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63642238624200,63642240054300,63642240386500
 "d9962196-9ec1-428e-bc05-720f297ef2b3",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63642243701000,63642246052700,63642246519300
@@ -100,7 +100,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "b1b636fc-17c2-4c93-845a-fc08eb032a7f",GET,/images/logo.png,,,200,image/png,,,63642310218200,63642311457700,63642311718700
 "a6799682-6ddd-47ca-ac28-2173e46048e9",GET,/images/favicon.ico,,,200,image/x-icon,,,63642316432200,63642317923700,63642318426600
 "18e4260c-3e6d-4e62-8e27-99dda642642b",GET,"/libraries/datatables/1.10.18/config/i18n-en.json",,,200,application/json,"sProcessing=Processing...&sSearch=Search:&sLengthMenu=Show%20_MENU_%20items&sInfo=Showing%20data%20_START_%20-%20_END_%20out%20of%20_TOTAL_%20data&sInfoEmpty=No%20items%20found&sInfoFiltered=(filtered%20from%20_MAX_%20data)&sInfoPostFix=&sLoadingRecords=Loading...&sZeroRecords=No%20data&sEmptyTable=No%20data&oPaginate.sFirst=First&oPaginate.sPrevious=Previous&oPaginate.sNext=Next&oPaginate.sLast=Last",,63642321175700,63642323675800,63642324979300
-"346dfb25-c840-403e-b92f-7ca1d470bc1c",GET,/manager/flight/list,,,200,text/html;charset=utf-8,"version%5B1%5D=0&arrival%5B2%5D=L&tag%5B0%5D=Lorem+ipsum+dolor+sit+ame&departure%5B1%5D=Lorem+ipsum+dolor+sit+ame&id%5B1%5D=281&version%5B2%5D=0&arrival%5B1%5D=L&departure%5B0%5D=Lorem+ipsum+dolor+sit+ame&id%5B0%5D=278&arrival%5B0%5D=L&tag%5B2%5D=Lorem+ipsum+dolor+sit+ame&advertisement=697&tag%5B1%5D=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscin&departure%5B2%5D=Lorem+ipsum+dolor+sit+ame&version%5B0%5D=0&id%5B2%5D=310",,63647447025100,63647463529800,63647670874400
+"346dfb25-c840-403e-b92f-7ca1d470bc1c",GET,/manager/flight/list,,,200,text/html;charset=utf-8,"version%5B1%5D=0&arrival%5B2%5D=L&tag%5B0%5D=Lorem+ipsum+dolor+sit+ame&departure%5B1%5D=Lorem+ipsum+dolor+sit+ame&id%5B1%5D=281&version%5B2%5D=0&arrival%5B1%5D=L&departure%5B0%5D=Lorem+ipsum+dolor+sit+ame&id%5B0%5D=278&arrival%5B0%5D=L&tag%5B2%5D=Lorem+ipsum+dolor+sit+ame&advertisement=720&tag%5B1%5D=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscin&departure%5B2%5D=Lorem+ipsum+dolor+sit+ame&version%5B0%5D=0&id%5B2%5D=310",,63647447025100,63647463529800,63647670874400
 "5e215b8a-7d9f-405e-b301-b87a22e7e376",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63647686163800,63647688064500,63647688498900
 "1185bb86-1f2d-4aec-a4f7-be71c0ebb74c",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63647690954700,63647692954900,63647693338100
 "ec864d4a-ed5c-49c3-9746-beea121cc394",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63647696073500,63647697789700,63647698270100
@@ -116,7 +116,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "7f5243b3-a5b0-424d-90e9-52c80e0af275",GET,/images/banner.png,,,200,image/png,,,63647749338500,63647752015600,63647752823600
 "2a1c4032-f274-4d66-87e0-e70697895608",GET,/images/logo.png,,,200,image/png,,,63647755605600,63647757551900,63647757985300
 "f788969a-931c-41ad-8374-6b174115052c",GET,"/libraries/datatables/1.10.18/config/i18n-en.json",,,200,application/json,"sProcessing=Processing...&sSearch=Search:&sLengthMenu=Show%20_MENU_%20items&sInfo=Showing%20data%20_START_%20-%20_END_%20out%20of%20_TOTAL_%20data&sInfoEmpty=No%20items%20found&sInfoFiltered=(filtered%20from%20_MAX_%20data)&sInfoPostFix=&sLoadingRecords=Loading...&sZeroRecords=No%20data&sEmptyTable=No%20data&oPaginate.sFirst=First&oPaginate.sPrevious=Previous&oPaginate.sNext=Next&oPaginate.sLast=Last",,63647765462900,63647767138400,63647768669300
-"59e9ff83-bf31-484b-8861-6ff14d07c348",GET,/manager/flight/show,id=310,,200,text/html;charset=utf-8,"tag=Lorem+ipsum+dolor+sit+ame&id=310&version=0&draftMode=true&departure=Lorem+ipsum+dolor+sit+ame&arrival=L&description=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscing+elit.+Sed+do%3A+eiusmod+tempor+incididunt+ut+labore+et+dolore+magna+aliqua%21+Ut*&advertisement=704&requiresSelfTransfer=true&cost=USD+1%2C000.00&scheduledDeparture=2028%2F01%2F01+00%3A00&scheduledArrival=2028%2F01%2F01+02%3A00&layovers=0",,63648259033500,63648274518300,63648582838300
+"59e9ff83-bf31-484b-8861-6ff14d07c348",GET,/manager/flight/show,id=310,,200,text/html;charset=utf-8,"tag=Lorem+ipsum+dolor+sit+ame&id=310&version=0&draftMode=true&departure=Lorem+ipsum+dolor+sit+ame&arrival=L&description=Lorem+ipsum+dolor+sit+amet+consectetur+adipiscing+elit.+Sed+do%3A+eiusmod+tempor+incididunt+ut+labore+et+dolore+magna+aliqua%21+Ut*&advertisement=727&requiresSelfTransfer=true&cost=USD+1%2C000.00&scheduledDeparture=2028%2F01%2F01+00%3A00&scheduledArrival=2028%2F01%2F01+02%3A00&layovers=0",,63648259033500,63648274518300,63648582838300
 "e77bd410-fa9e-4b97-a957-fe3992654cf9",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63648628872300,63648631697900,63648632150200
 "e6654af7-3ff6-421f-a3fa-dc31c2e33fdf",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63648634902900,63648636598000,63648636930300
 "2614e191-bd91-477a-9f99-a3f6967fe1e6",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63648641562500,63648644035000,63648644478400
@@ -132,7 +132,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "155f24b8-d0d1-4989-95a2-617055adbb5c",GET,/images/banner.png,,,200,image/png,,,63648699570000,63648702126800,63648702834800
 "9fa54ad1-dd44-49a1-ba2e-74f0aaac410b",GET,/images/logo.png,,,200,image/png,,,63648705504400,63648707349600,63648707725900
 "1aa29647-c4a1-4666-82f3-d42036edd74f",GET,/images/favicon.ico,,,200,image/x-icon,,,63648711513800,63648712925800,63648713247100
-"88fe8424-b5df-4e10-bdd3-9f5d64058024",GET,/manager/leg/list,flightId=310,,200,text/html;charset=utf-8,"departureAirport%5B0%5D=Lorem+ipsum+dolor+sit+ame&scheduledDeparture%5B0%5D=2028%2F01%2F01+00%3A00&arrivalAirport%5B0%5D=L&id%5B0%5D=412&flight%5B0%5D=310&flightId=310&advertisement=702&flightNumber%5B0%5D=BBC1654&version%5B0%5D=0&flightDraftMode=true",,63650037212400,63650048805800,63650308300200
+"88fe8424-b5df-4e10-bdd3-9f5d64058024",GET,/manager/leg/list,flightId=310,,200,text/html;charset=utf-8,"departureAirport%5B0%5D=Lorem+ipsum+dolor+sit+ame&scheduledDeparture%5B0%5D=2028%2F01%2F01+00%3A00&arrivalAirport%5B0%5D=L&id%5B0%5D=412&flight%5B0%5D=310&flightId=310&advertisement=725&flightNumber%5B0%5D=BBC1654&version%5B0%5D=0&flightDraftMode=true",,63650037212400,63650048805800,63650308300200
 "6f1fc7cd-fe2b-4bbd-9f2f-bc27ae142a68",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63650337663400,63650339100400,63650341657900
 "784b4ca5-6101-4ac7-8b28-3219638b85f6",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63650344786600,63650346302300,63650346587100
 "8566fa6e-9ae6-40d2-9f0c-402374d2a64c",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63650350202200,63650352447900,63650352847600
@@ -149,7 +149,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "4e0079ef-e6c0-423d-b2b3-7737e5b35f50",GET,/images/logo.png,,,200,image/png,,,63650409342100,63650411033300,63650411449000
 "fbeb336e-991a-478e-acab-ab4628650211",GET,"/libraries/datatables/1.10.18/config/i18n-en.json",,,200,application/json,"sProcessing=Processing...&sSearch=Search:&sLengthMenu=Show%20_MENU_%20items&sInfo=Showing%20data%20_START_%20-%20_END_%20out%20of%20_TOTAL_%20data&sInfoEmpty=No%20items%20found&sInfoFiltered=(filtered%20from%20_MAX_%20data)&sInfoPostFix=&sLoadingRecords=Loading...&sZeroRecords=No%20data&sEmptyTable=No%20data&oPaginate.sFirst=First&oPaginate.sPrevious=Previous&oPaginate.sNext=Next&oPaginate.sLast=Last",,63650420334900,63650422250100,63650423641800
 "1e0d6e57-5490-4998-a12b-29fc1f5aa405",GET,"/authenticated/system/sign-out",,,302,,,,63652631390100,63652635803600,63652636264300
-"6f84c36d-3990-4340-9f70-19358beafe07",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=702,,63652640559800,63652642715200,63652875272400
+"6f84c36d-3990-4340-9f70-19358beafe07",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=725,,63652640559800,63652642715200,63652875272400
 "1229da7c-4a11-4e97-9492-70659d63f76a",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63652889920500,63652891326600,63652891694500
 "5014c31a-eada-4aac-92b1-113edc448000",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63652893715800,63652895210200,63652895520600
 "c6a5e2f5-d742-4c84-b25d-4e23be01cedc",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63652897964300,63652899322700,63652899724300
@@ -164,7 +164,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "b7431931-3cdb-4051-b1bf-8cdeac0e0881",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,63652938855200,63652940825000,63652941263100
 "63c2c09a-c207-4d23-8b61-5dd4c04f2235",GET,/images/banner.png,,,200,image/png,,,63652946610000,63652948111800,63652948431400
 "45485999-136e-4a75-aaa7-2b0ea627748d",GET,/images/logo.png,,,200,image/png,,,63652950482500,63652952262300,63652952599000
-"6bc38ace-6d3f-45d0-9827-4b530ca581fe",GET,/manager/leg/list,flightId=310,,500,text/html;charset=utf-8,advertisement=696,"Access is not authorised",63655283975900,63655321872800,63655603169400
+"6bc38ace-6d3f-45d0-9827-4b530ca581fe",GET,/manager/leg/list,flightId=310,,500,text/html;charset=utf-8,advertisement=719,"Access is not authorised",63655283975900,63655321872800,63655603169400
 "7ab1359a-cdb8-4403-b4c5-1177934cc6dd",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63655613557300,63655614884000,63655615261900
 "bbfdbcaf-aa5e-409f-a6c3-d457c0c77b56",GET,"/libraries/chart.js/2.7.2/js/chart.bundle.min.js",,,200,application/javascript,,,63655617917500,63655619711500,63655620032300
 "e94770ca-52e2-42ff-a1e2-235f51a04468",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63655622921200,63655624958800,63655625264400
@@ -180,7 +180,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "9b5d93f4-6dfb-47ed-80f8-ae406929695c",GET,/images/banner.png,,,200,image/png,,,63655666013200,63655667203800,63655667450900
 "58d11ce7-df27-4e25-87f3-cd3b0e9b69f4",GET,/images/logo.png,,,200,image/png,,,63655669809200,63655671924200,63655672485800
 "ace8e54f-2b49-4a07-acf4-0be3306b41bc",GET,/images/favicon.ico,,,200,image/x-icon,,,63655678454600,63655681493500,63655681919400
-"f0506017-229f-473d-b1e3-e683f89daf50",GET,/manager/leg/list,flightId=0,,500,text/html;charset=utf-8,advertisement=704,"Access is not authorised",63658218376300,63658258336300,63658450234400
+"f0506017-229f-473d-b1e3-e683f89daf50",GET,/manager/leg/list,flightId=0,,500,text/html;charset=utf-8,advertisement=727,"Access is not authorised",63658218376300,63658258336300,63658450234400
 "04889668-70db-4db3-81fb-f784474cce8c",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63658463670400,63658466179700,63658466508200
 "42f7fe29-6ce1-4e99-bf88-7eb8004c938d",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63658468531600,63658470699700,63658471070000
 "f9b96534-d3e0-4fd2-b49c-e6f423287d0f",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,63658474627600,63658476602800,63658477076300
@@ -195,7 +195,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "4cdea5e2-2a53-41d7-bf31-51aaa57ee45b",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,63658519310700,63658521463800,63658521828100
 "a59835e1-5f2f-4417-8ddc-79b2d28f96f3",GET,/images/banner.png,,,200,image/png,,,63658529158300,63658530728500,63658531043100
 "2b3f5ab1-0dd9-48d5-ac97-5fc9367f4284",GET,/images/logo.png,,,200,image/png,,,63658534479000,63658536657600,63658537031800
-"21802c2b-450e-4894-bcf6-f9ef5ad91fb1",GET,/manager/leg/list,flightId=-1,,500,text/html;charset=utf-8,advertisement=696,"Access is not authorised",63661451843400,63661488174800,63661601647800
+"21802c2b-450e-4894-bcf6-f9ef5ad91fb1",GET,/manager/leg/list,flightId=-1,,500,text/html;charset=utf-8,advertisement=719,"Access is not authorised",63661451843400,63661488174800,63661601647800
 "7480e511-dca7-4dd3-8452-57bf5e6ee4da",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63661614143000,63661615796300,63661616075500
 "5e9530e9-dac1-4541-8950-bdf5ae9e4af0",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63661617873300,63661619382200,63661619664200
 "c51c181c-60f6-42f6-918a-9e1819b06167",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,63661622698000,63661623916400,63661624104400
@@ -211,7 +211,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "343bfcfe-4e6c-45e8-9695-817e81c1ce1f",GET,/images/banner.png,,,200,image/png,,,63661664260200,63661665639300,63661665884500
 "0799c189-4061-4aa4-9d85-97a67fbded39",GET,/images/logo.png,,,200,image/png,,,63661668181500,63661670338500,63661670727100
 "efdfd808-cf12-4dab-b35c-9dd3df518863",GET,/images/favicon.ico,,,200,image/x-icon,,,63661674573600,63661675780100,63661676187800
-"ee6c81e7-583d-4f6a-ab10-7bd46c630d7a",GET,/manager/leg/list,flightId=278,,500,text/html;charset=utf-8,advertisement=700,"Access is not authorised",63665353662100,63665387877600,63665516963900
+"ee6c81e7-583d-4f6a-ab10-7bd46c630d7a",GET,/manager/leg/list,flightId=278,,500,text/html;charset=utf-8,advertisement=723,"Access is not authorised",63665353662100,63665387877600,63665516963900
 "0c6019bc-c710-402a-ae4b-35ad003e368e",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63665529642100,63665531620000,63665531958000
 "ac8ecee8-2d87-4dc3-ac56-c0a56c31529f",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63665533854300,63665534942700,63665535092800
 "ecbe0bc7-b988-4886-ac6c-37122506ec8d",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63665537745600,63665538938800,63665539144600
@@ -226,7 +226,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "28344eff-2304-48ca-8217-409eb528a900",GET,"/libraries/acme/js/acme.js",,,200,application/javascript,,,63665574037100,63665575352500,63665575600300
 "b78a5db3-01ce-4762-8fb9-b5996a9a137a",GET,/images/banner.png,,,200,image/png,,,63665580759500,63665582228300,63665582550900
 "4089c3c3-6f9e-4710-a147-075d8e5a48c3",GET,/images/logo.png,,,200,image/png,,,63665584947700,63665586621300,63665587030900
-"3e126d84-1c83-4715-91f0-c8a1e392a42e",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&advertisement=704&username=",,63667359352700,63667362109900,63667510697900
+"3e126d84-1c83-4715-91f0-c8a1e392a42e",GET,"/anonymous/system/sign-in",,,200,text/html;charset=utf-8,"password=&remember=false&advertisement=727&username=",,63667359352700,63667362109900,63667510697900
 "cdced238-ac6f-4839-8c21-1b393ce5eeb3",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63667524369500,63667526512900,63667526876100
 "80df6664-da09-4d70-b37b-cc87b7a36b83",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63667529200000,63667530677200,63667530945400
 "4ed7d6ff-b9ed-4ff9-ab26-867346aaacf3",GET,"/libraries/datatables/1.10.18/css/datatables.min.css",,,200,text/css,,,63667533382100,63667534631200,63667534856200
@@ -244,7 +244,7 @@ request-id,request-method,request-path,request-query,request-payload,response-st
 "d3dcffd8-ae28-4697-bec4-665f3c04c41f",GET,/images/favicon.ico,,,200,image/x-icon,,,63667589248700,63667591336300,63667591797300
 "289d8d2f-cb3f-434e-ba57-d69bda9609ce",POST,"/anonymous/system/sign-in",,"id=&version=&username=administrator1&password=administrator1&remember=false",302,,,,63672569176600,63672578336500,63672578961000
 "d419f740-1ce2-47cb-b075-69edb99c041e",GET,/,,,302,,,,63672583121400,63672586009800,63672586772500
-"460011ce-c8c4-4cb7-8dfa-540c0aaaac82",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=701,,63672590091500,63672593182400,63672808129400
+"460011ce-c8c4-4cb7-8dfa-540c0aaaac82",GET,/any/system/welcome,,,200,text/html;charset=utf-8,advertisement=724,,63672590091500,63672593182400,63672808129400
 "1b3960d1-cad3-45f4-90d5-bf7fd101ab33",GET,"/libraries/fontawesome/5.2.0/css/all.min.css",,,200,text/css,,,63672820570900,63672823282400,63672823627400
 "4ea1dde9-9b80-4857-b6ef-8a81543a92fa",GET,"/libraries/bootstrap/4.1.3/css/bootstrap.min.css",,,200,text/css,,,63672826906600,63672828540700,63672828833600
 "f6050efd-07bd-4276-92a3-499400741d5d",GET,"/libraries/areyousure/1.9.0/js/areyousure.min.js",,,200,application/javascript,,,63672832005800,63672834131900,63672834471500

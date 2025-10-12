@@ -22,6 +22,7 @@ master.menu.administrator.populate-db-sample = Populate DB (samples)
 master.menu.administrator.shut-system-down = Shut system down
 master.menu.administrator.aircraft = Aircrafts
 master.menu.administrator.list-airport = List airports
+master.menu.administrator.claim = List published claims
 
 # master.menu.provider ########################################################
 
@@ -50,6 +51,14 @@ master.menu.customer.passenger = Passengers
  master.menu.flightCrewMember.listLanded = Completed assignments
  master.menu.flightCrewMember.listPlanned = Planned assignments
  master.menu.flightCrewMember.show-dashboard = Show dashboard
+ 
+# master.menu.assistanceAgent ##########################################################
+
+master.menu.assistance-agent = AssistanceAgent
+master.menu.assistance-agent.list-public-claims-undergoing = List public undergoing claims
+master.menu.assistance-agent.list-public-claims-completed = List public completed claims
+master.menu.assistance-agent.list-claims-undergoing = List unpublished undergoing claims
+master.menu.assistance-agent.create-claim = Create claim
 
 # master.menu.user-account ####################################################
 
@@ -61,6 +70,8 @@ master.menu.user-account.become-consumer = Become a consumer
 master.menu.user-account.consumer-profile = Consumer profile
 master.menu.user-account.become-manager = Become a manager
 master.menu.user-account.manager-profile = Manager profile
+master.menu.user-account.become-agent = Become an assistance agent
+master.menu.user-account.agent-profile = Assistance agent profile
 master.menu.user-account.become-member = Become a Flight Crew Member
 master.menu.user-account.flight-crew-member = Flight Crew Member Profile
 

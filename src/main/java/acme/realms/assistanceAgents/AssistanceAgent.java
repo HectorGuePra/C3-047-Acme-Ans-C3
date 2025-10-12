@@ -1,10 +1,13 @@
 
-package acme.entities;
+package acme.realms.assistanceAgents;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
@@ -20,7 +23,6 @@ import acme.client.components.validation.ValidString;
 import acme.client.components.validation.ValidUrl;
 import acme.constraints.ValidAssistanceAgent;
 import acme.entities.airline.Airline;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,26 +30,25 @@ import lombok.Setter;
 @Getter
 @Setter
 @ValidAssistanceAgent
-@EqualsAndHashCode(callSuper = true)
+@Table(indexes = {
+	@Index(columnList = "employeeCode", unique = true), @Index(columnList = "user_account_id")
+})
 public class AssistanceAgent extends AbstractRole {
-	// Serialisation version --------------------------------------------------
 
 	private static final long	serialVersionUID	= 1L;
 
-	//Attributes-----------------------------------
-
 	@Mandatory
-	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$")
-	@Automapped
+	@ValidString(pattern = "^[A-Z]{2,3}\\d{6}$", message = "{acme.validation.assistanceAgent.pattern-employeeCode.message}")
+	@Column(unique = true)
 	private String				employeeCode;
 
 	@Mandatory
-	@ValidString(min = 1, max = 255)
+	@ValidString(max = 255)
 	@Automapped
 	private String				spokenLanguages;
 
 	@Mandatory
-	@ValidMoment(min = "2000/01/01 00:00", past = true)
+	@ValidMoment(past = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date				moment;
 
@@ -57,7 +58,7 @@ public class AssistanceAgent extends AbstractRole {
 	private String				briefBio;
 
 	@Optional
-	@ValidMoney(min = 0)
+	@ValidMoney(min = 0., max = 1000000.)
 	@Automapped
 	private Money				salary;
 
@@ -66,13 +67,10 @@ public class AssistanceAgent extends AbstractRole {
 	@Automapped
 	private String				photo;
 
-	// Derived attributes -----------------------------------------------------
-
-	// Relationships ----------------------------------------------------------
+	// Relationships -----------------------------------------------------
 
 	@Mandatory
 	@Valid
 	@ManyToOne(optional = false)
 	private Airline				airline;
-
 }

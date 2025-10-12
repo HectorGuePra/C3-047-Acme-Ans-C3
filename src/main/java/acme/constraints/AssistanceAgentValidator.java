@@ -3,37 +3,54 @@ package acme.constraints;
 
 import javax.validation.ConstraintValidatorContext;
 
-import acme.client.components.principals.DefaultUserIdentity;
-import acme.client.components.validation.AbstractValidator;
-import acme.client.helpers.StringHelper;
-import acme.entities.AssistanceAgent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
+import acme.client.components.validation.AbstractValidator;
+import acme.client.components.validation.Validator;
+import acme.realms.assistanceAgents.AssistanceAgent;
+import acme.realms.assistanceAgents.AssistanceAgentRepository;
+
+@Validator
 public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceAgent, AssistanceAgent> {
 
+	// Internal state ---------------------------------------------------------
+
+	@Autowired
+	private AssistanceAgentRepository repository;
+
+	// ConstraintValidator interface ------------------------------------------
+
+
 	@Override
-	public void initialise(final ValidAssistanceAgent annotation) {
+	protected void initialise(final ValidAssistanceAgent annotation) {
 		assert annotation != null;
 	}
 
 	@Override
-	public boolean isValid(final AssistanceAgent agent, final ConstraintValidatorContext context) {
+	public boolean isValid(final AssistanceAgent assistanceAgent, final ConstraintValidatorContext context) {
 		assert context != null;
 
-		if (agent == null || agent.getEmployeeCode() == null || agent.getIdentity() == null)
+		if (assistanceAgent == null) {
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
-		else if (StringHelper.isBlank(agent.getEmployeeCode()))
-			super.state(context, false, "employeeCode", "javax.validation.constraints.NotBlank.message");
-		else {
-			DefaultUserIdentity identity = agent.getIdentity();
-			char nameFirstLetter = identity.getName().charAt(0);
-			char surnameFirstLetter = identity.getSurname().charAt(0);
-			String requiredInitials = "" + nameFirstLetter + surnameFirstLetter;
+			return false;
+		}
 
-			String employeeCodeInitials = agent.getEmployeeCode().substring(0, 2);
+		String name = assistanceAgent.getIdentity().getName();
+		String surname = assistanceAgent.getIdentity().getSurname();
+		String employeeCode = assistanceAgent.getEmployeeCode();
 
-			boolean validInitials = employeeCodeInitials.equals(requiredInitials);
+		if (StringUtils.hasText(name) && StringUtils.hasText(surname) && StringUtils.hasText(employeeCode)) {
+			boolean correctInitials = employeeCode.toUpperCase().charAt(0) == name.toUpperCase().charAt(0) && employeeCode.toUpperCase().charAt(1) == surname.toUpperCase().charAt(0);
+			super.state(context, correctInitials, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
+		}
 
-			super.state(context, validInitials, "employeeCode", "acme.validation.assistanceagent.code.message");
+		if (StringUtils.hasText(employeeCode)) {
+			AssistanceAgent agentInDB = this.repository.findAssistanceAgentByEmployeeCode(employeeCode);
+
+			boolean isUnique = agentInDB == null || agentInDB.getId() == assistanceAgent.getId();
+
+			super.state(context, isUnique, "employeeCode", "acme.validation.assistanceAgent.employeeCode.unique.message");
 		}
 
 		return !super.hasErrors(context);

@@ -22,6 +22,7 @@ master.menu.administrator.populate-db-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-system-down = Parar el sistema
 master.menu.administrator.aircraft = Aeronaves
 master.menu.administrator.list-airport = Listado de aeropuertos
+master.menu.administrator.claim = List published claims = Listado de reclamaciones publicadas
 
 # master.menu.provider ########################################################
 
@@ -50,6 +51,14 @@ master.menu.customer.passenger = Pasajeros
  master.menu.flightCrewMember.listLanded = Asignaciones completadas
  master.menu.flightCrewMember.listPlanned = Asignaciones planificadas
  master.menu.flightCrewMember.show-dashboard = Ver tablero
+ 
+# master.menu.assistanceAgent ##########################################################
+
+master.menu.assistance-agent = Agente de asistencia
+master.menu.assistance-agent.list-public-claims-undergoing = Listar reclamaciones públicas en curso
+master.menu.assistance-agent.list-public-claims-completed = Listar reclamaciones públicas completadas
+master.menu.assistance-agent.list-claims-undergoing = Listar reclamaciones no públicas en curso
+master.menu.assistance-agent.create-claim = Crear reclamación
 
 # master.menu.user-account ####################################################
 
@@ -62,6 +71,8 @@ master.menu.user-account.consumer-profile = Perfil de consumidor
 master.menu.user-account.become-manager = Hazte gerente de aerolínea
 master.menu.user-account.manager-profile = Perfil de gerente de aerolínea
 master.menu.user-account.become-member = Hacerse Miembro de Tripulación
+master.menu.user-account.become-agent = Hacerme agente de asistencia
+master.menu.user-account.agent-profile = Perfil de agente de asistencia
 master.menu.user-account.flight-crew-member = Perfil de Tripulante
 
 # master.menu.manager ##########################################################
