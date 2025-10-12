@@ -28,8 +28,8 @@
 	</jstl:if>
 	
 	<jstl:if test="${_command == 'update'}" >
-		<acme:input-select code="authenticated.assistance-agent.form.label.airline" path="airline" choices="${airlineChoices}" readonly="true"/>
-		<acme:submit code="authenticated.assistance-agent.form.button.update" action="/authenticated/assistance-agent/update"/>
+	    <acme:input-select code="authenticated.assistance-agent.form.label.airline" path="airline" choices="${airlineChoices}"/>
+	    <acme:submit code="authenticated.assistance-agent.form.button.update" action="/authenticated/assistance-agent/update"/>
 	</jstl:if>
 	
 </acme:form>

@@ -37,7 +37,13 @@ public class AuthenticatedAssistanceAgentUpdateService extends AbstractGuiServic
 	@Override
 	public void bind(final AssistanceAgent object) {
 		assert object != null;
-		super.bindObject(object, "employeeCode", "spokenLanguages", "briefBio", "salary", "photo", "airline");
+		super.bindObject(object, "employeeCode", "spokenLanguages", "briefBio", "salary", "photo");
+
+		Integer airlineId = super.getRequest().getData("airline", int.class);
+		if (airlineId != null) {
+			Airline airline = this.repository.findAirlineById(airlineId);
+			object.setAirline(airline);
+		}
 	}
 
 	@Override
@@ -46,7 +52,7 @@ public class AuthenticatedAssistanceAgentUpdateService extends AbstractGuiServic
 
 		if (object.getEmployeeCode() != null && !object.getEmployeeCode().isBlank()) {
 			AssistanceAgent currentAgent = this.repository.findAssistanceAgentByUserAccountId(super.getRequest().getPrincipal().getAccountId());
-			boolean isDuplicate = this.repository.findAssistanceAgents().stream().anyMatch(agent -> agent.getEmployeeCode().equals(object.getEmployeeCode()) && !agent.equals(currentAgent));
+			boolean isDuplicate = this.repository.findAssistanceAgents().stream().anyMatch(agent -> agent.getEmployeeCode().equals(object.getEmployeeCode()) && agent.getId() != currentAgent.getId());
 			super.state(!isDuplicate, "employeeCode", "authenticated.assistance-agent.form.error.duplicated-employee-code");
 		}
 	}
@@ -54,6 +60,10 @@ public class AuthenticatedAssistanceAgentUpdateService extends AbstractGuiServic
 	@Override
 	public void perform(final AssistanceAgent object) {
 		assert object != null;
+
+		AssistanceAgent original = this.repository.findAssistanceAgentByUserAccountId(object.getUserAccount().getId());
+		object.setMoment(original.getMoment());
+
 		this.repository.save(object);
 	}
 
@@ -64,7 +74,7 @@ public class AuthenticatedAssistanceAgentUpdateService extends AbstractGuiServic
 		Dataset dataset = super.unbindObject(object, "employeeCode", "spokenLanguages", "briefBio", "salary", "photo");
 
 		Collection<Airline> airlines = this.repository.findAirlines();
-		SelectChoices airlineChoices = SelectChoices.from(airlines, "name", object.getAirline());
+		SelectChoices airlineChoices = SelectChoices.from(airlines, "iataCode", object.getAirline());
 
 		dataset.put("airlineChoices", airlineChoices);
 		dataset.put("airline", airlineChoices.getSelected().getKey());

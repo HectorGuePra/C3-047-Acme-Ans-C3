@@ -42,7 +42,7 @@ public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceA
 
 		if (StringUtils.hasText(name) && StringUtils.hasText(surname) && StringUtils.hasText(employeeCode)) {
 			boolean correctInitials = employeeCode.toUpperCase().charAt(0) == name.toUpperCase().charAt(0) && employeeCode.toUpperCase().charAt(1) == surname.toUpperCase().charAt(0);
-			super.state(context, correctInitials, "employeeCode", "acme.validation.assistanceAgent.employeeCode.initials.message");
+			super.state(context, correctInitials, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
 		}
 
 		if (StringUtils.hasText(employeeCode)) {
