@@ -1,0 +1,31 @@
+authenticated.assistance-agent.form.title= Assistance Agent profile
+
+authenticated.assistance-agent.form.label.employeeCode = Employee code
+authenticated.assistance-agent.form.label.spokenLanguages = Spoken languages
+authenticated.assistance-agent.form.label.briefBio = Brief biography
+authenticated.assistance-agent.form.label.salary = Salary
+authenticated.assistance-agent.form.label.photo = Photo link
+authenticated.assistance-agent.form.label.airline = Airline
+
+authenticated.assistance-agent.form.button.create = Create profile
+authenticated.assistance-agent.form.button.update = Update profile
+
+authenticated.assistance-agent.form.error.duplicated-employee-code = This employee code is already in use
+
+authenticated.assistance-agent.form.error.employeeCode.blank = Employee code is required
+authenticated.assistance-agent.form.error.employeeCode.pattern = Employee code must have 2-3 uppercase letters followed by 6 digits (e.g., AA123456)
+
+authenticated.assistance-agent.form.error.spokenLanguages.blank = Spoken languages are required
+
+authenticated.assistance-agent.form.error.salary.range = Salary must be a positive value
+
+authenticated.assistance-agent.form.error.photo.format = Photo link must be a valid URL
+
+authenticated.assistance-agent.form.error.airline.null = You must select an airline
+
+authenticated.assistance-agent.form.help.employeeCode = Enter 2-3 letters followed by 6 digits
+authenticated.assistance-agent.form.help.spokenLanguages = List the languages you speak, separated by commas
+authenticated.assistance-agent.form.help.briefBio = Optional: Write a short introduction about yourself
+authenticated.assistance-agent.form.help.salary = Optional: Enter your annual salary
+authenticated.assistance-agent.form.help.photo = Optional: Provide a link to a profile picture
+authenticated.assistance-agent.form.help.airline = Select the airline you work for

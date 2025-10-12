@@ -1,0 +1,31 @@
+authenticated.assistance-agent.form.title= Perfil de Agente de Asistencia
+
+authenticated.assistance-agent.form.label.employeeCode = Código de empleado
+authenticated.assistance-agent.form.label.spokenLanguages = Idiomas hablados
+authenticated.assistance-agent.form.label.briefBio = Biografía breve
+authenticated.assistance-agent.form.label.salary = Salario
+authenticated.assistance-agent.form.label.photo = Enlace a la foto
+authenticated.assistance-agent.form.label.airline = Aerolínea
+
+authenticated.assistance-agent.form.button.create = Crear perfil
+authenticated.assistance-agent.form.button.update = Actualizar perfil
+
+authenticated.assistance-agent.form.error.duplicated-employee-code = Este código de empleado ya está en uso
+
+authenticated.assistance-agent.form.error.employeeCode.blank = El código de empleado es obligatorio
+authenticated.assistance-agent.form.error.employeeCode.pattern = El código de empleado debe tener 2-3 letras mayúsculas seguidas de 6 dígitos (ej: AA123456)
+
+authenticated.assistance-agent.form.error.spokenLanguages.blank = Los idiomas hablados son obligatorios
+
+authenticated.assistance-agent.form.error.salary.range = El salario debe ser un valor positivo
+
+authenticated.assistance-agent.form.error.photo.format = El enlace de la foto debe ser una URL válida
+
+authenticated.assistance-agent.form.error.airline.null = Debe seleccionar una aerolínea
+
+authenticated.assistance-agent.form.help.employeeCode = Introduzca de 2 a 3 letras seguidas de 6 dígitos
+authenticated.assistance-agent.form.help.spokenLanguages = Enumere los idiomas que habla, separados por comas
+authenticated.assistance-agent.form.help.briefBio = Opcional: Escriba una breve introducción sobre usted
+authenticated.assistance-agent.form.help.salary = Opcional: Introduzca su salario anual
+authenticated.assistance-agent.form.help.photo = Opcional: Proporcione un enlace a una foto de perfil
+authenticated.assistance-agent.form.help.airline = Seleccione la aerolínea para la que trabaja

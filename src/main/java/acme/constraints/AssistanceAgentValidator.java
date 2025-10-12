@@ -1,11 +1,10 @@
 
 package acme.constraints;
 
-import java.util.Collection;
-
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 import acme.client.components.validation.AbstractValidator;
 import acme.client.components.validation.Validator;
@@ -32,35 +31,28 @@ public class AssistanceAgentValidator extends AbstractValidator<ValidAssistanceA
 	public boolean isValid(final AssistanceAgent assistanceAgent, final ConstraintValidatorContext context) {
 		assert context != null;
 
-		boolean result;
-		if (assistanceAgent == null)
+		if (assistanceAgent == null) {
 			super.state(context, false, "*", "javax.validation.constraints.NotNull.message");
-		else {
-			{
-				String name = assistanceAgent.getIdentity().getName();
-				String surname = assistanceAgent.getIdentity().getSurname();
-
-				boolean correctEmployeeCode = assistanceAgent.getEmployeeCode().charAt(0) == name.charAt(0) && assistanceAgent.getEmployeeCode().charAt(1) == surname.charAt(0);
-
-				super.state(context, correctEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.employeeCode.message");
-			}
-
-			{
-				boolean uniqueEmployeeCode;
-				Collection<String> allEmployeeCodes = this.repository.findAllEmployeeCodes();
-				String employeeCode = assistanceAgent.getEmployeeCode();
-
-				if (allEmployeeCodes != null && employeeCode != null) {
-					uniqueEmployeeCode = allEmployeeCodes.stream().filter(ec -> ec.equals(employeeCode)).toList().size() == 1;
-
-					super.state(context, uniqueEmployeeCode, "employeeCode", "acme.validation.assistanceAgent.uniqueEmployeeCode.message");
-				}
-			}
-
+			return false;
 		}
 
-		result = !super.hasErrors(context);
+		String name = assistanceAgent.getIdentity().getName();
+		String surname = assistanceAgent.getIdentity().getSurname();
+		String employeeCode = assistanceAgent.getEmployeeCode();
 
-		return result;
+		if (StringUtils.hasText(name) && StringUtils.hasText(surname) && StringUtils.hasText(employeeCode)) {
+			boolean correctInitials = employeeCode.toUpperCase().charAt(0) == name.toUpperCase().charAt(0) && employeeCode.toUpperCase().charAt(1) == surname.toUpperCase().charAt(0);
+			super.state(context, correctInitials, "employeeCode", "acme.validation.assistanceAgent.employeeCode.initials.message");
+		}
+
+		if (StringUtils.hasText(employeeCode)) {
+			AssistanceAgent agentInDB = this.repository.findAssistanceAgentByEmployeeCode(employeeCode);
+
+			boolean isUnique = agentInDB == null || agentInDB.getId() == assistanceAgent.getId();
+
+			super.state(context, isUnique, "employeeCode", "acme.validation.assistanceAgent.employeeCode.unique.message");
+		}
+
+		return !super.hasErrors(context);
 	}
 }

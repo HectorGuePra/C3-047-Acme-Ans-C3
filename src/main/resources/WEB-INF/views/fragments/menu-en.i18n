@@ -69,6 +69,8 @@ master.menu.user-account.become-consumer = Become a consumer
 master.menu.user-account.consumer-profile = Consumer profile
 master.menu.user-account.become-manager = Become a manager
 master.menu.user-account.manager-profile = Manager profile
+master.menu.user-account.become-agent = Become an assistance agent
+master.menu.user-account.agent-profile = Assistance agent profile
 master.menu.user-account.become-member = Become a Flight Crew Member
 master.menu.user-account.flight-crew-member = Flight Crew Member Profile
 
